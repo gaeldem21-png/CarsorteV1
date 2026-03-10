@@ -8,9 +8,7 @@
     :root{
       --bg:#060606;
       --panel:#111111;
-      --panel2:#161616;
       --gold:#f4c542;
-      --gold-soft:rgba(244,197,66,.12);
       --text:#ffffff;
       --muted:#b0b0b0;
       --line:rgba(255,255,255,.08);
@@ -22,7 +20,7 @@
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top, rgba(244,197,66,.14), transparent 28%),
+        radial-gradient(circle at top, rgba(244,197,66,.12), transparent 28%),
         radial-gradient(circle at bottom right, rgba(244,197,66,.08), transparent 22%),
         var(--bg);
       color:var(--text);
@@ -34,7 +32,7 @@
       background:linear-gradient(90deg,#7a5a00,#f4c542,#7a5a00);
       color:#000;
       text-align:center;
-      padding:11px 12px;
+      padding:10px 12px;
       font-size:14px;
       font-weight:900;
       letter-spacing:.02em;
@@ -46,7 +44,6 @@
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
-
     .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
@@ -59,113 +56,60 @@
     .navlinks{display:flex;gap:26px;color:#d7d7d7;font-size:14px}
     .navlinks a:hover{color:var(--gold)}
 
-    .hero{
-      padding:64px 0 40px;
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:36px;
-      align-items:center;
-    }
-
+    .hero{padding:64px 0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
     .pill{
-      display:inline-block;
-      padding:10px 16px;
-      border-radius:999px;
-      border:1px solid rgba(244,197,66,.22);
-      background:rgba(244,197,66,.10);
-      color:#ffe08a;
-      font-size:14px;
+      display:inline-block;padding:10px 16px;border-radius:999px;
+      border:1px solid rgba(244,197,66,.22);background:rgba(244,197,66,.10);
+      color:#ffe08a;font-size:14px
     }
-
     .hero h2{font-size:64px;line-height:1.05;margin:18px 0 0;font-weight:950}
     .gold{color:var(--gold)}
     .hero p{font-size:19px;line-height:1.8;color:#d0d0d0;max-width:700px}
-
     .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
     .btn{
-      display:inline-block;
-      padding:16px 22px;
-      border-radius:18px;
-      font-weight:800;
-      transition:.2s ease;
-      border:1px solid transparent;
+      display:inline-block;padding:16px 22px;border-radius:18px;font-weight:800;
+      transition:.2s ease;border:1px solid transparent
+    }
+    .btn.primary{
+      background:var(--gold);color:#000;
       box-shadow:var(--shadow);
     }
-    .btn.primary{background:var(--gold);color:#000}
     .btn.primary:hover{background:#ffd95f;transform:translateY(-1px)}
     .btn.secondary{
-      background:rgba(255,255,255,.05);
-      border-color:var(--line);
+      background:rgba(255,255,255,.05);border-color:var(--line);
       color:#fff;
-      box-shadow:none;
     }
     .btn.secondary:hover{background:rgba(255,255,255,.08)}
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-top:34px;
-    }
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
     .stat{
-      background:rgba(17,17,17,.86);
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:20px;
-      box-shadow:var(--shadow);
-      text-align:center;
+      background:rgba(17,17,17,.86);border:1px solid var(--line);border-radius:22px;padding:20px;
+      box-shadow:var(--shadow);text-align:center;
     }
     .stat strong{display:block;font-size:34px;color:var(--gold)}
     .stat span{color:#999;font-size:14px}
 
     .hero-card{
-      overflow:hidden;
-      border-radius:30px;
-      border:1px solid rgba(244,197,66,.12);
-      background:linear-gradient(180deg,#111,#090909);
-      box-shadow:var(--shadow);
+      overflow:hidden;border-radius:30px;border:1px solid rgba(244,197,66,.12);
+      background:linear-gradient(180deg,#111,#090909);box-shadow:var(--shadow);
     }
-    .hero-card img{
-      width:100%;height:100%;object-fit:cover;display:block;min-height:520px
-    }
+    .hero-card img{width:100%;height:100%;object-fit:cover;display:block;min-height:520px}
 
     .section{padding:70px 0}
-    .section-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:end;
-      gap:20px;
-      margin-bottom:28px;
-    }
-    .section-head p{
-      margin:0;
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:.2em;
-      font-size:13px
-    }
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}
+    .section-head p{margin:0;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:13px}
     .section-head h3{margin:8px 0 0;font-size:46px}
 
     .pack-grid{
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:16px;
-      margin-top:22px;
+      margin-top:6px;
     }
     .pack{
-      background:#101010;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:18px;
-      text-align:center;
+      background:#101010;border:1px solid var(--line);border-radius:22px;padding:18px;text-align:center;
       box-shadow:var(--shadow);
     }
-    .pack strong{
-      display:block;
-      font-size:30px;
-      color:var(--gold);
-      margin-bottom:4px;
-    }
+    .pack strong{display:block;font-size:30px;color:var(--gold);margin-bottom:4px}
     .pack small{display:block;color:#888;margin-bottom:8px}
     .pack span{font-weight:800}
 
@@ -176,68 +120,57 @@
       margin-top:24px;
     }
     .buy{
-      background:#101010;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-      text-align:center;
-      color:#ddd;
-      font-size:14px;
+      background:#101010;border:1px solid var(--line);border-radius:18px;padding:14px;
+      text-align:center;color:#ddd;font-size:14px;box-shadow:var(--shadow);
     }
 
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
     .card{
-      background:#101010;
-      border:1px solid var(--line);
-      border-radius:28px;
-      overflow:hidden;
+      background:#101010;border:1px solid var(--line);border-radius:28px;overflow:hidden;
       box-shadow:var(--shadow);
     }
     .card img{width:100%;height:240px;object-fit:cover}
     .card-body{padding:22px}
     .tag{
-      position:absolute;top:14px;left:14px;
-      background:rgba(0,0,0,.72);
-      border:1px solid rgba(244,197,66,.2);
-      color:#ffe08a;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700
+      position:absolute;top:14px;left:14px;background:rgba(0,0,0,.72);
+      border:1px solid rgba(244,197,66,.2);color:#ffe08a;padding:8px 12px;border-radius:999px;
+      font-size:12px;font-weight:700
     }
     .date{
-      position:absolute;top:14px;right:14px;
-      background:rgba(0,0,0,.72);
-      border:1px solid var(--line);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px
+      position:absolute;top:14px;right:14px;background:rgba(0,0,0,.72);
+      border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-size:12px
     }
     .img-wrap{position:relative}
     .card h4{margin:0;font-size:28px}
     .muted{color:#a2a2a2}
-    .progress{
-      height:8px;
-      background:#242424;
-      border-radius:999px;
-      overflow:hidden;
-      margin-top:10px
-    }
+    .progress{height:8px;background:#242424;border-radius:999px;overflow:hidden;margin-top:10px}
     .progress > div{height:100%;background:var(--gold)}
     .row{display:flex;justify-content:space-between;gap:10px}
-    .mini-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-top:18px
-    }
+    .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
     .mini{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      padding:16px;
-      border-radius:18px
+      border:1px solid var(--line);background:rgba(255,255,255,.02);padding:16px;border-radius:18px
     }
     .mini strong{display:block;color:var(--gold);font-size:22px;margin-top:6px}
+
+    .pack-mini-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-top:16px;
+    }
+    .pack-mini{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:10px;
+      text-align:center;
+      background:rgba(255,255,255,.02);
+    }
+    .pack-mini div:first-child{
+      font-size:12px;color:#999;
+    }
+    .pack-mini div:last-child{
+      font-weight:800;color:var(--gold);
+    }
 
     .timer{
       margin-top:14px;
@@ -260,11 +193,7 @@
     .qualif-title{font-weight:800;margin-bottom:8px}
     .answers{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
     .answer{
-      border:1px solid var(--line);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      color:#ddd;
+      border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-size:12px;color:#ddd;
     }
     .answer.good{
       border-color:rgba(244,197,66,.35);
@@ -276,23 +205,28 @@
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:16px;
-      margin-top:8px;
     }
     .trust{
+      background:#101010;border:1px solid var(--line);border-radius:22px;padding:18px;text-align:center;
+      box-shadow:var(--shadow);
+    }
+
+    .transparency-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+    .transparency-card{
       background:#101010;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:18px;
-      text-align:center;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:24px;
       box-shadow:var(--shadow);
     }
 
     .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
     .step,.winner,.upcoming,.premium-box,.faq-item{
-      background:#101010;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:26px;
+      background:#101010;border:1px solid var(--line);border-radius:28px;padding:26px;
       box-shadow:var(--shadow);
     }
     .step-num{
@@ -303,56 +237,39 @@
     .winners{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 
     .premium{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:24px;
-      background:#101010;
-      border:1px solid rgba(244,197,66,.15);
-      border-radius:30px;
-      padding:30px;
+      display:grid;grid-template-columns:1fr 1fr;gap:24px;
+      background:#101010;border:1px solid rgba(244,197,66,.15);border-radius:30px;padding:30px;
       box-shadow:var(--shadow);
     }
 
-    .upcoming-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px
-    }
+    .upcoming-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
-    .faq-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:18px;
+    .final-banner{
+      background:linear-gradient(135deg,#151515 0%,#090909 100%);
+      border:1px solid rgba(244,197,66,.18);
+      border-radius:30px;
+      padding:40px;
+      text-align:center;
+      box-shadow:var(--shadow);
     }
 
     .final-cta{text-align:center;max-width:900px;margin:0 auto}
     .final-cta h3{font-size:54px;margin:10px 0}
 
     .legal-links{
-      display:flex;
-      gap:20px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:24px;
-      color:#bdbdbd;
-      font-size:14px;
+      display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:24px;color:#bdbdbd;font-size:14px;
     }
 
     .floating-btn{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      background:var(--gold);
-      color:#000;
-      padding:16px 18px;
-      border-radius:18px;
-      font-weight:900;
-      box-shadow:0 10px 30px rgba(244,197,66,.28);
-      z-index:80;
+      position:fixed;right:18px;bottom:18px;background:var(--gold);color:#000;
+      padding:16px 18px;border-radius:18px;font-weight:900;
+      box-shadow:0 10px 30px rgba(244,197,66,.28);z-index:80;
     }
 
     @media (max-width: 980px){
-      .hero,.cards,.steps,.winners,.premium,.upcoming-grid,.stats,.pack-grid,.recent-buys,.trust-grid,.faq-grid{grid-template-columns:1fr}
+      .hero,.cards,.steps,.winners,.premium,.upcoming-grid,.stats,.pack-grid,.recent-buys,.trust-grid,.faq-grid,.transparency-grid{grid-template-columns:1fr}
+      .pack-mini-grid{grid-template-columns:repeat(2,1fr)}
       .navlinks{display:none}
       .hero h2,.section-head h3,.final-cta h3{font-size:40px}
       .hero-card img{min-height:320px}
@@ -390,8 +307,7 @@
       <h2>Realize o sonho de conduzir um <span class="gold">grande carro</span></h2>
       <p>
         Participe nos nossos sorteios exclusivos de veículos por apenas
-        <strong class="gold">2,50€ por bilhete</strong>.
-        Uma plataforma premium, clara e pensada para apaixonados por automóveis.
+        <strong class="gold">2,50€ por bilhete</strong>. Uma plataforma premium, clara e pensada para apaixonados por automóveis.
       </p>
 
       <div class="cta">
@@ -450,10 +366,7 @@
 
           <div class="row muted"><span>Progresso</span><span class="gold">75%</span></div>
           <div class="progress"><div style="width:75%"></div></div>
-          <div class="row" style="margin-top:8px;font-size:12px;color:#8d8d8d">
-            <span>11 257 vendidos</span>
-            <span>3 743 restantes</span>
-          </div>
+          <div class="row" style="margin-top:8px;font-size:12px;color:#8d8d8d"><span>11 257 vendidos</span><span>3 743 restantes</span></div>
 
           <div class="mini-grid">
             <div class="mini"><span class="muted">Por bilhete</span><strong>2,50€</strong></div>
@@ -463,6 +376,13 @@
           <div class="timer">
             <small>Sorteio em</small>
             <strong>04 dias · 12h · 18m</strong>
+          </div>
+
+          <div class="pack-mini-grid">
+            <div class="pack-mini"><div>1</div><div>2,50€</div></div>
+            <div class="pack-mini"><div>5</div><div>10€</div></div>
+            <div class="pack-mini"><div>10</div><div>20€</div></div>
+            <div class="pack-mini"><div>25</div><div>50€</div></div>
           </div>
 
           <div class="qualif">
@@ -491,10 +411,7 @@
 
           <div class="row muted"><span>Progresso</span><span class="gold">64%</span></div>
           <div class="progress"><div style="width:64%"></div></div>
-          <div class="row" style="margin-top:8px;font-size:12px;color:#8d8d8d">
-            <span>8 950 vendidos</span>
-            <span>5 050 restantes</span>
-          </div>
+          <div class="row" style="margin-top:8px;font-size:12px;color:#8d8d8d"><span>8 950 vendidos</span><span>5 050 restantes</span></div>
 
           <div class="mini-grid">
             <div class="mini"><span class="muted">Por bilhete</span><strong>2,50€</strong></div>
@@ -504,6 +421,13 @@
           <div class="timer">
             <small>Sorteio em</small>
             <strong>11 dias · 03h · 42m</strong>
+          </div>
+
+          <div class="pack-mini-grid">
+            <div class="pack-mini"><div>1</div><div>2,50€</div></div>
+            <div class="pack-mini"><div>5</div><div>10€</div></div>
+            <div class="pack-mini"><div>10</div><div>20€</div></div>
+            <div class="pack-mini"><div>25</div><div>50€</div></div>
           </div>
 
           <div class="qualif">
@@ -532,10 +456,7 @@
 
           <div class="row muted"><span>Progresso</span><span class="gold">56%</span></div>
           <div class="progress"><div style="width:56%"></div></div>
-          <div class="row" style="margin-top:8px;font-size:12px;color:#8d8d8d">
-            <span>7 340 vendidos</span>
-            <span>5 660 restantes</span>
-          </div>
+          <div class="row" style="margin-top:8px;font-size:12px;color:#8d8d8d"><span>7 340 vendidos</span><span>5 660 restantes</span></div>
 
           <div class="mini-grid">
             <div class="mini"><span class="muted">Por bilhete</span><strong>2,50€</strong></div>
@@ -545,6 +466,13 @@
           <div class="timer">
             <small>Sorteio em</small>
             <strong>18 dias · 07h · 10m</strong>
+          </div>
+
+          <div class="pack-mini-grid">
+            <div class="pack-mini"><div>1</div><div>2,50€</div></div>
+            <div class="pack-mini"><div>5</div><div>10€</div></div>
+            <div class="pack-mini"><div>10</div><div>20€</div></div>
+            <div class="pack-mini"><div>25</div><div>50€</div></div>
           </div>
 
           <div class="qualif">
@@ -559,6 +487,28 @@
 
           <a class="btn primary" style="display:block;text-align:center;margin-top:18px" href="#">Comprar bilhetes</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section" style="padding-top:10px">
+    <div class="section-head" style="justify-content:center;text-align:center;display:block">
+      <p>Transparência</p>
+      <h3>Confiança antes de tudo</h3>
+    </div>
+
+    <div class="transparency-grid">
+      <div class="transparency-card">
+        <h4 style="margin-top:0">Resultados publicados</h4>
+        <p class="muted">Os vencedores e resultados dos sorteios são apresentados de forma clara e acessível.</p>
+      </div>
+      <div class="transparency-card">
+        <h4 style="margin-top:0">Processo transparente</h4>
+        <p class="muted">Cada sorteio segue um processo previamente definido e comunicado aos participantes.</p>
+      </div>
+      <div class="transparency-card">
+        <h4 style="margin-top:0">Participação qualificada</h4>
+        <p class="muted">A validação da participação poderá incluir uma pergunta simples de qualificação.</p>
       </div>
     </div>
   </section>
@@ -674,6 +624,17 @@
     </div>
   </section>
 
+  <section class="container section" style="padding-top:10px">
+    <div class="final-banner">
+      <p style="color:#f4c542;text-transform:uppercase;letter-spacing:.2em;font-size:13px;margin:0">Última oportunidade</p>
+      <h3 style="font-size:46px;margin:14px 0 10px">Entre agora e acompanhe os sorteios mais desejados</h3>
+      <p class="muted" style="max-width:760px;margin:0 auto 22px;line-height:1.9">
+        Acompanhe os bilhetes vendidos, participe nos sorteios ativos e descubra uma nova forma premium de viver o universo automóvel.
+      </p>
+      <a class="btn primary" href="#sorteios">Entrar nos sorteios</a>
+    </div>
+  </section>
+
   <section class="container section">
     <div class="final-cta">
       <p style="color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:13px;margin:0">Pronto para participar?</p>
@@ -694,4 +655,4 @@
 
   <a class="floating-btn" href="#sorteios">Comprar bilhetes</a>
 </body>
-            </html>
+</html>
