@@ -1,6 +1,4 @@
-export default function CarSorteV3() {
-
-const raffles = [ { id: 1, title: "BMW Série 1 Pack M", sold: 11257, total: 15000, date: "28/03", tag: "Quase cheio", countdown: "04 dias · 12h · 18m", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80", }, { id: 2, title: "Mercedes Classe A", sold: 8950, total: 14000, date: "04/04", tag: "Em destaque", countdown: "11 dias · 03h · 42m", image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80", }, { id: 3, title: "Citroën Jumpy Business", sold: 7340, total: 13000, date: "11/04", tag: "Novo", countdown: "18 dias · 07h · 10m", image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80", }, ];
+export default function CarSorteV3() { const raffles = [ { id: 1, title: "BMW Série 1 Pack M", sold: 11257, total: 15000, date: "28/03", tag: "Quase cheio", countdown: "04 dias · 12h · 18m", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80", }, { id: 2, title: "Mercedes Classe A", sold: 8950, total: 14000, date: "04/04", tag: "Em destaque", countdown: "11 dias · 03h · 42m", image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80", }, { id: 3, title: "Citroën Jumpy Business", sold: 7340, total: 13000, date: "11/04", tag: "Novo", countdown: "18 dias · 07h · 10m", image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80", }, ];
 
 const ticketPacks = [ { qty: 1, price: "2,50€" }, { qty: 5, price: "10€" }, { qty: 10, price: "20€" }, { qty: 25, price: "50€" }, ];
 
@@ -12,53 +10,37 @@ const trust = [ "Sorteios transparentes", "Resultados publicados", "Plataforma s
 
 const totalSold = raffles.reduce((sum, r) => sum + r.sold, 0); const totalTickets = raffles.reduce((sum, r) => sum + r.total, 0);
 
-return (
+return ( <div className="min-h-screen bg-black text-white"> <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(234,179,8,0.12),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(234,179,8,0.10),transparent_28%)]" />
 
-<div className="min-h-screen bg-black text-white">
-
-  {/* BACKGROUND */}
-  <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(234,179,8,0.12),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(234,179,8,0.10),transparent_28%)]" />
-
-  {/* URGENCY BAR */}
+{/* URGENCY BAR */}
   <div className="bg-yellow-500 text-black text-center py-2 text-sm font-bold">
     🔥 BMW Série 1 quase completo · procura muito forte
   </div>
 
   {/* HEADER */}
   <header className="sticky top-0 z-50 border-b border-yellow-500/10 bg-black/80 backdrop-blur-xl">
-
     <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-
       <div className="flex items-center gap-3">
-
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-500 text-black text-2xl">
           🚗
         </div>
-
         <div>
           <p className="text-3xl font-black text-yellow-400">CarSorte</p>
           <p className="text-sm text-zinc-400">by DEM Automóveis</p>
         </div>
-
       </div>
 
-      <div className="hidden md:flex gap-6 text-sm text-zinc-300">
-        <a href="#sorteios">Sorteios</a>
-        <a href="#como">Como funciona</a>
-        <a href="#vencedores">Vencedores</a>
-        <a href="#premium">Premium</a>
-      </div>
-
+      <nav className="hidden md:flex gap-6 text-sm text-zinc-300">
+        <a href="#sorteios" className="hover:text-yellow-400">Sorteios</a>
+        <a href="#como" className="hover:text-yellow-400">Como funciona</a>
+        <a href="#vencedores" className="hover:text-yellow-400">Vencedores</a>
+      </nav>
     </div>
-
   </header>
-
 
   {/* HERO */}
   <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 md:px-6 lg:grid-cols-2">
-
     <div>
-
       <p className="text-yellow-400 uppercase text-sm tracking-widest">
         Sorteios automóveis · Portugal
       </p>
@@ -73,13 +55,16 @@ return (
       </p>
 
       <div className="flex gap-4 mt-8">
-        <a href="#sorteios" className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-bold">Ver sorteios</a>
-        <a href="#como" className="border border-white/10 px-6 py-3 rounded-xl">Como funciona</a>
+        <a href="#sorteios" className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-bold">
+          Ver sorteios
+        </a>
+        <a href="#como" className="border border-white/10 px-6 py-3 rounded-xl">
+          Como funciona
+        </a>
       </div>
 
-      {/* GLOBAL COUNTERS */}
-      <div className="grid grid-cols-4 gap-4 mt-10">
-
+      {/* GLOBAL STATS */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
         <div className="bg-zinc-900 p-4 rounded-xl text-center">
           <p className="text-yellow-400 text-3xl font-black">2,50€</p>
           <p className="text-zinc-400 text-sm">Por bilhete</p>
@@ -99,227 +84,118 @@ return (
           <p className="text-yellow-400 text-3xl font-black">3</p>
           <p className="text-zinc-400 text-sm">Sorteios ativos</p>
         </div>
-
       </div>
-
     </div>
 
     <img
       src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80"
       className="rounded-3xl"
     />
-
   </section>
-
 
   {/* TICKET PACKS */}
   <section className="max-w-7xl mx-auto px-4 pb-10">
-
     <h2 className="text-3xl font-black mb-6 text-yellow-400">Packs de bilhetes</h2>
 
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-
       {ticketPacks.map((pack) => (
-
         <div key={pack.qty} className="bg-zinc-900 p-6 rounded-xl border border-white/10 text-center">
-
           <p className="text-3xl font-black">{pack.qty}</p>
-
           <p className="text-yellow-400 font-bold">{pack.price}</p>
-
         </div>
-
       ))}
-
     </div>
-
   </section>
-
 
   {/* RECENT BUYS */}
   <section className="max-w-7xl mx-auto px-4 pb-10">
-
     <div className="grid md:grid-cols-4 gap-4">
-
       {recentBuys.map((item) => (
-
         <div key={item} className="bg-zinc-900 p-4 rounded-xl border border-white/10 text-sm text-center">
-
           ⚡ {item}
-
         </div>
-
       ))}
-
     </div>
-
   </section>
-
 
   {/* RAFFLES */}
   <section id="sorteios" className="max-w-7xl mx-auto px-4 py-16">
-
     <h2 className="text-4xl font-black mb-10">Sorteios ativos</h2>
 
     <div className="grid lg:grid-cols-3 gap-8">
-
       {raffles.map((raffle) => {
-
         const progress = Math.round((raffle.sold / raffle.total) * 100);
 
         return (
-
           <div key={raffle.id} className="bg-zinc-900 rounded-2xl overflow-hidden border border-white/10">
-
             <img src={raffle.image} className="h-64 w-full object-cover" />
 
             <div className="p-6">
-
               <p className="text-yellow-400 text-xs">{raffle.tag}</p>
 
               <h3 className="text-2xl font-black">{raffle.title}</h3>
 
-
-              {/* PROGRESS */}
               <div className="mt-4">
-
                 <div className="flex justify-between text-sm text-zinc-400">
-
                   <span>Progresso</span>
-
                   <span>{progress}%</span>
-
                 </div>
 
                 <div className="h-2 bg-zinc-800 rounded-full mt-2">
-
                   <div
                     className="bg-yellow-500 h-2 rounded-full"
                     style={{ width: `${progress}%` }}
                   />
-
                 </div>
-
               </div>
 
-
-              {/* TIMER */}
               <div className="mt-4 bg-black/30 border border-white/10 rounded-xl p-3 text-center">
-
                 <p className="text-xs text-zinc-400">Sorteio em</p>
-
                 <p className="text-yellow-400 font-bold">{raffle.countdown}</p>
-
               </div>
-
-
-              {/* PACKS */}
-              <div className="mt-4 grid grid-cols-4 gap-2 text-center text-xs">
-
-                {ticketPacks.map((pack) => (
-
-                  <div key={pack.qty} className="rounded-xl border border-white/10 bg-black/30 p-2">
-
-                    <p className="text-zinc-400">{pack.qty}</p>
-
-                    <p className="font-bold text-yellow-400">{pack.price}</p>
-
-                  </div>
-
-                ))}
-
-              </div>
-
-
-              {/* QUALIFICATION QUESTION */}
-              <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-zinc-300">
-
-                <p className="font-bold text-white">Pergunta de qualificação</p>
-
-                <p className="mt-1">Quanto é 4 + 3 ?</p>
-
-                <div className="mt-3 flex gap-2 text-xs">
-
-                  <span className="rounded-full border border-white/10 px-3 py-1">5</span>
-
-                  <span className="rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-yellow-300">7</span>
-
-                  <span className="rounded-full border border-white/10 px-3 py-1">9</span>
-
-                </div>
-
-              </div>
-
 
               <button className="mt-6 w-full bg-yellow-500 text-black py-3 rounded-xl font-bold">
                 Comprar bilhetes
               </button>
-
             </div>
-
           </div>
-
         );
-
       })}
-
     </div>
-
   </section>
-
 
   {/* TRUST */}
   <section className="max-w-7xl mx-auto px-4 py-10">
-
     <div className="grid md:grid-cols-4 gap-4">
-
       {trust.map((t) => (
-
         <div key={t} className="bg-zinc-900 border border-white/10 p-6 rounded-xl text-center">
-
           ✅ {t}
-
         </div>
-
       ))}
-
     </div>
-
   </section>
-
 
   {/* WINNERS */}
   <section id="vencedores" className="max-w-7xl mx-auto px-4 py-20">
-
     <h2 className="text-4xl font-black mb-10">Últimos vencedores</h2>
 
     <div className="grid md:grid-cols-3 gap-6">
-
       {winners.map((winner) => (
-
         <div key={winner.name} className="bg-zinc-900 p-6 rounded-xl border border-white/10">
-
           <div className="text-3xl mb-4">🏆</div>
 
           <h3 className="font-black text-xl">{winner.name}</h3>
 
           <p className="text-zinc-400 mt-2">Ganhou: {winner.prize}</p>
-
         </div>
-
       ))}
-
     </div>
-
   </section>
 
-
-  {/* FLOATING CTA */}
+  {/* FLOATING BUTTON */}
   <a className="fixed bottom-6 right-6 bg-yellow-500 text-black px-6 py-3 rounded-xl font-bold shadow-xl">
     Comprar bilhetes
   </a>
-
-
 </div>
 
 ); }
