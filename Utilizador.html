@@ -180,17 +180,17 @@
         <div class="premium-badge">Premium Club ativo</div>
       </div>
       <div>
-        <p class="small">Próximo sorteio</p>
-        <h3 style="margin:0 0 8px 0;color:#f4c542;font-size:30px">BMW Série 1 Pack M</h3>
-        <p class="muted" style="margin:0">Sorteio em 04 dias · 12h · 18m</p>
+        <p class="small">Última participação confirmada</p>
+        <h3 id="hero-pack-title" style="margin:0 0 8px 0;color:#f4c542;font-size:30px">5 bilhetes · BMW Série 1 Pack M</h3>
+        <p class="muted" id="hero-pack-total" style="margin:0">Total pago: 10€</p>
       </div>
     </div>
 
     <div class="stats">
-      <div class="stat"><strong>42</strong><span>Bilhetes totais</span></div>
+      <div class="stat"><strong id="stat-total-tickets">42</strong><span>Bilhetes totais</span></div>
       <div class="stat"><strong>3</strong><span>Sorteios ativos</span></div>
       <div class="stat"><strong>1</strong><span>Conta Premium</span></div>
-      <div class="stat"><strong>32,50€</strong><span>Total investido</span></div>
+      <div class="stat"><strong id="stat-total-spent">32,50€</strong><span>Total investido</span></div>
     </div>
   </section>
 
@@ -204,7 +204,7 @@
               <strong>BMW Série 1 Pack M</strong>
               <span class="status">Ativo</span>
             </div>
-            <p class="small">5 bilhetes · Tiragem a 28/03 · Sorteio quase completo</p>
+            <p class="small" id="active-raffle-line">5 bilhetes · Tiragem a 28/03 · Sorteio quase completo</p>
           </div>
 
           <div class="raffle-item">
@@ -232,15 +232,9 @@
           <div class="ticket">
             <div class="row">
               <strong>BMW Série 1 Pack M</strong>
-              <span class="status">5 bilhetes</span>
+              <span class="status" id="main-ticket-count">5 bilhetes</span>
             </div>
-            <div class="ticket-numbers">
-              <span class="ticket-badge">#CS-A1032</span>
-              <span class="ticket-badge">#CS-A1033</span>
-              <span class="ticket-badge">#CS-A1034</span>
-              <span class="ticket-badge">#CS-A1035</span>
-              <span class="ticket-badge">#CS-A1036</span>
-            </div>
+            <div class="ticket-numbers" id="main-ticket-list"></div>
           </div>
 
           <div class="ticket">
@@ -274,8 +268,8 @@
         <div class="history-list">
           <div class="history-item">
             <div class="row">
-              <strong>Pack 5 bilhetes · BMW Série 1</strong>
-              <span class="small">10€</span>
+              <strong id="history-main-title">Pack 5 bilhetes · BMW Série 1</strong>
+              <span class="small" id="history-main-price">10€</span>
             </div>
             <p class="small">Data: 05/03/2026</p>
           </div>
@@ -351,6 +345,58 @@
       </div>
     </div>
   </section>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const selectedPack = params.get("pack") || "5";
+
+    const packData = {
+      "1": { qty: 1, total: "2,50€", prefix: "A" },
+      "5": { qty: 5, total: "10€", prefix: "A" },
+      "10": { qty: 10, total: "20€", prefix: "M" },
+      "25": { qty: 25, total: "50€", prefix: "X" }
+    };
+
+    const active = packData[selectedPack] || packData["5"];
+
+    function generateTickets(qty, prefix) {
+      const base = 1032;
+      const tickets = [];
+      for (let i = 0; i < qty; i++) {
+        tickets.push(`#CS-${prefix}${base + i}`);
+      }
+      return tickets;
+    }
+
+    const tickets = generateTickets(active.qty, active.prefix);
+
+    document.getElementById("hero-pack-title").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""} · BMW Série 1 Pack M`;
+    document.getElementById("hero-pack-total").textContent = `Total pago: ${active.total}`;
+    document.getElementById("main-ticket-count").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
+    document.getElementById("history-main-title").textContent = `Pack ${active.qty} bilhete${active.qty > 1 ? "s" : ""} · BMW Série 1`;
+    document.getElementById("history-main-price").textContent = active.total;
+    document.getElementById("active-raffle-line").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""} · Tiragem a 28/03 · Sorteio quase completo`;
+
+    const list = document.getElementById("main-ticket-list");
+    list.innerHTML = "";
+    tickets.forEach(ticket => {
+      const span = document.createElement("span");
+      span.className = "ticket-badge";
+      span.textContent = ticket;
+      list.appendChild(span);
+    });
+
+    const baseOtherTickets = 11; // Mercedes 10 + Jumpy 1
+    document.getElementById("stat-total-tickets").textContent = active.qty + baseOtherTickets;
+
+    const spentMap = {
+      "1": "24,50€",
+      "5": "32,50€",
+      "10": "42,50€",
+      "25": "72,50€"
+    };
+    document.getElementById("stat-total-spent").textContent = spentMap[selectedPack] || "32,50€";
+  </script>
 
 </body>
 </html>
