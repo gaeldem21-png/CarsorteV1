@@ -3,142 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Participação confirmada</title>
+<title>Participação confirmada - CarSorte</title>
 
 <style>
+:root{
+  --bg:#050505;
+  --panel:#101010;
+  --panel-2:#0b0b0b;
+  --gold:#d4a017;
+  --gold-soft:#f4c542;
+  --text:#ffffff;
+  --muted:#b8b8b8;
+  --line:rgba(255,255,255,.08);
+  --shadow:0 14px 34px rgba(0,0,0,.32);
+  --green:#29c46d;
+}
+
+*{
+  box-sizing:border-box;
+}
 
 body{
-font-family:Arial;
-background:#050505;
-color:white;
-margin:0;
-padding:40px;
-text-align:center;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.container{
+  max-width:960px;
+  margin:auto;
+  padding:40px 20px 60px;
 }
 
 .card{
-background:#101010;
-padding:40px;
-border-radius:20px;
-max-width:600px;
-margin:auto;
+  background:linear-gradient(180deg,#111,#090909);
+  border:1px solid rgba(212,160,23,.14);
+  border-radius:28px;
+  padding:34px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.check{
+  width:86px;
+  height:86px;
+  margin:0 auto 18px;
+  border-radius:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  font-weight:900;
+  background:var(--green);
+  color:#03180b;
 }
 
 h1{
-color:#f4c542;
+  margin:0 0 12px;
+  font-size:44px;
+  color:var(--gold-soft);
+}
+
+p{
+  margin:0 auto 24px;
+  max-width:700px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:18px;
+}
+
+#tickets{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  margin-top:18px;
 }
 
 .ticket{
-background:#1b1b1b;
-padding:10px;
-margin:6px;
-border-radius:10px;
-display:inline-block;
+  background:#161616;
+  border:1px solid rgba(255,255,255,.06);
+  padding:12px 16px;
+  border-radius:12px;
+  display:inline-block;
+  font-weight:700;
 }
 
-button{
-margin-top:20px;
-padding:15px 25px;
-border:none;
-border-radius:10px;
-background:#d4a017;
-color:black;
-font-weight:bold;
-cursor:pointer;
+.actions{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:28px;
 }
 
+.btn{
+  display:inline-block;
+  padding:16px 22px;
+  border-radius:14px;
+  font-weight:800;
+}
+
+.btn-primary{
+  background:var(--gold);
+  color:#000;
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  color:#fff;
+}
+
+@media(max-width:700px){
+  .card{
+    padding:24px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  p{
+    font-size:16px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+}
 </style>
 </head>
-
 <body>
 
-<div class="card">
+<div class="container">
+  <div class="card">
+    <div class="check">✓</div>
 
-<h1>Participation confirmée 🎉</h1>
+    <h1>Participação confirmada 🎉</h1>
 
-<p>Vos billets pour le tirage :</p>
+    <p>
+      A sua participação foi registada com sucesso. Os seus bilhetes foram gerados e já estão associados ao sorteio.
+    </p>
 
-<div id="tickets"></div>
+    <h2 style="color:#fff;margin-top:10px;">Os seus bilhetes</h2>
+    <div id="tickets"></div>
 
-<button onclick="goUser()">Voir mes billets</button>
-
+    <div class="actions">
+      <a class="btn btn-primary" href="utilizador.html">Ver os meus bilhetes</a>
+      <a class="btn btn-secondary" href="index.html">Voltar ao site</a>
+    </div>
+  </div>
 </div>
 
-
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 import {
-getFirestore,
-collection,
-query,
-orderBy,
-limit,
-getDocs
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
 const firebaseConfig = {
-
-apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
-
-authDomain: "carsorte.firebaseapp.com",
-
-projectId: "carsorte",
-
-storageBucket: "carsorte.firebasestorage.app",
-
-messagingSenderId: "995392174657",
-
-appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
-
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
 };
 
-
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 
-
-
 async function loadTickets(){
+  const container = document.getElementById("tickets");
+  container.innerHTML = "";
 
-const q = query(
-collection(db,"tickets"),
-orderBy("created","desc"),
-limit(5)
-);
+  try{
+    const q = query(
+      collection(db, "tickets"),
+      orderBy("created", "desc"),
+      limit(5)
+    );
 
-const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(q);
 
-const container = document.getElementById("tickets");
+    querySnapshot.forEach((docSnap) => {
+      const ticket = docSnap.data();
+      const div = document.createElement("div");
+      div.className = "ticket";
+      div.textContent = "Ticket #" + ticket.ticket_number;
+      container.appendChild(div);
+    });
 
-querySnapshot.forEach((doc)=>{
-
-const ticket = doc.data();
-
-const div = document.createElement("div");
-
-div.className="ticket";
-
-div.innerText="Ticket #"+ticket.ticket_number;
-
-container.appendChild(div);
-
-});
-
+    if(container.innerHTML === ""){
+      container.innerHTML = '<div class="ticket">Nenhum bilhete encontrado</div>';
+    }
+  }catch(error){
+    console.error(error);
+    container.innerHTML = '<div class="ticket">Erro ao carregar os bilhetes</div>';
+  }
 }
 
 loadTickets();
-
-
-window.goUser = function(){
-
-window.location.href="utilisateur.html";
-
-}
-
 </script>
 
 </body>
