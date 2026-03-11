@@ -280,6 +280,7 @@
       color:#fff;
       font-size:15px;
       margin:0;
+      text-align:right;
     }
 
     .progress-wrap{
@@ -452,7 +453,7 @@
       <div class="card">
         <h2>Sorteio ativo</h2>
         <p class="sub">
-          Esta área mostra o documento atualmente selecionado como principal. O sorteio será fechado automaticamente quando todos os bilhetes forem vendidos.
+          Esta área mostra o documento atualmente selecionado como principal. O sorteio será fechado automaticamente quando todos os bilhetes forem vendidos ou quando o vencedor for sorteado.
         </p>
 
         <div class="toolbar">
@@ -486,6 +487,14 @@
             <span>Estado</span>
             <strong id="raffleStatus">-</strong>
           </div>
+          <div class="meta-row">
+            <span>Vencedor sorteado</span>
+            <strong id="raffleWinnerDrawn">-</strong>
+          </div>
+          <div class="meta-row">
+            <span>Motivo de fecho</span>
+            <strong id="raffleEndedReason">-</strong>
+          </div>
         </div>
 
         <div class="progress-wrap">
@@ -514,7 +523,7 @@
       <div class="card">
         <h2>Últimos bilhetes</h2>
         <p class="sub">
-          Cada registo abaixo representa um bilhete individual. Isto permite confirmar se uma compra de 1, 5 ou 15 bilhetes foi criada corretamente.
+          Cada registo abaixo representa um bilhete individual.
         </p>
 
         <div id="ticketsList" class="list"></div>
@@ -540,12 +549,13 @@
           <select id="newStatus">
             <option value="active">active</option>
             <option value="closed">closed</option>
+            <option value="sold_out">sold_out</option>
           </select>
           <button class="btn primary" id="createRaffleBtn">Criar sorteio</button>
         </div>
 
         <div class="small" style="margin-top:14px;">
-          Dica: use sempre um ID simples, sem espaços, por exemplo <b>golf7</b>, <b>audiA3</b> ou <b>mercedesA</b>.
+          Dica: use sempre um ID simples, sem espaços.
         </div>
       </div>
 
@@ -576,7 +586,8 @@ import {
   addDoc,
   updateDoc,
   setDoc,
-  where
+  where,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -591,7 +602,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// SORTEIO ATIVO ATUAL
 const ACTIVE_RAFFLE_ID = "Jumpy";
 
 const statTickets = document.getElementById("statTickets");
@@ -605,6 +615,8 @@ const rafflePrice = document.getElementById("rafflePrice");
 const raffleTotal = document.getElementById("raffleTotal");
 const raffleSold = document.getElementById("raffleSold");
 const raffleStatus = document.getElementById("raffleStatus");
+const raffleWinnerDrawn = document.getElementById("raffleWinnerDrawn");
+const raffleEndedReason = document.getElementById("raffleEndedReason");
 
 const progressText = document.getElementById("progressText");
 const progressPercent = document.getElementById("progressPercent");
@@ -648,9 +660,12 @@ async function closeIfSoldOut(raffleRef, raffleData){
   const sold = Number(raffleData.tickets_sold || 0);
   const total = Number(raffleData.tickets_total || 0);
 
-  if(total > 0 && sold >= total && raffleData.status !== "closed"){
-    await updateDoc(raffleRef, { status: "closed" });
-    showStatus("Todos os bilhetes foram vendidos. O sorteio foi fechado automaticamente.", "info");
+  if(total > 0 && sold >= total && raffleData.status !== "sold_out" && raffleData.status !== "closed"){
+    await updateDoc(raffleRef, {
+      status: "sold_out",
+      ended_reason: "tickets_completed"
+    });
+    showStatus("Todos os bilhetes foram vendidos. O sorteio foi marcado como sold_out.", "info");
   }
 }
 
@@ -713,6 +728,8 @@ async function loadDashboard(){
       raffleTotal.textContent = raffle.tickets_total ?? "-";
       raffleSold.textContent = raffle.tickets_sold ?? 0;
       raffleStatus.textContent = raffle.status || "-";
+      raffleWinnerDrawn.textContent = raffle.winner_drawn ? "true" : "false";
+      raffleEndedReason.textContent = raffle.ended_reason || "-";
 
       soldCount = Number(raffle.tickets_sold || 0);
       totalCount = Number(raffle.tickets_total || 0);
@@ -742,6 +759,8 @@ async function loadDashboard(){
       raffleTotal.textContent = "-";
       raffleSold.textContent = "-";
       raffleStatus.textContent = "-";
+      raffleWinnerDrawn.textContent = "-";
+      raffleEndedReason.textContent = "-";
       progressBar.style.width = "0%";
       progressPercent.textContent = "0%";
       progressText.textContent = "0 / 0 vendidos";
@@ -821,7 +840,13 @@ async function drawWinner(){
     const raffle = raffleSnap.data();
 
     if(raffle.status === "closed"){
-      // continua permitido tirar vencedor, mas avisa
+      showStatus("Este sorteio já está encerrado.", "err");
+      return;
+    }
+
+    if(raffle.winner_drawn === true){
+      showStatus("Já existe um vencedor sorteado para este sorteio.", "err");
+      return;
     }
 
     const ticketsQuery = query(collection(db, "tickets"), where("raffle_id", "==", ACTIVE_RAFFLE_ID));
@@ -848,11 +873,17 @@ async function drawWinner(){
       buyer_phone: winner.buyer_phone || "-",
       buyer_city: winner.buyer_city || "-",
       ticket_number: winner.ticket_number || "-",
-      created: new Date()
+      created: serverTimestamp()
     });
 
-    showStatus(`Vencedor sorteado com sucesso: ${winner.buyer} — Ticket #${winner.ticket_number}`, "ok");
-    await loadLatestWinner();
+    await updateDoc(raffleRef, {
+      status: "closed",
+      winner_drawn: true,
+      ended_reason: "winner_selected"
+    });
+
+    showStatus(`Vencedor sorteado com sucesso: ${winner.buyer} — Ticket #${winner.ticket_number}. O sorteio foi encerrado automaticamente.`, "ok");
+    await loadDashboard();
   }catch(error){
     console.error(error);
     showStatus("Erro ao sortear o vencedor.", "err");
@@ -862,7 +893,10 @@ async function drawWinner(){
 async function closeRaffle(){
   try{
     const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
-    await updateDoc(raffleRef, { status: "closed" });
+    await updateDoc(raffleRef, {
+      status: "closed",
+      ended_reason: "manual_close"
+    });
     showStatus("Sorteio fechado manualmente com sucesso.", "info");
     await loadDashboard();
   }catch(error){
@@ -891,7 +925,9 @@ async function createRaffle(){
       tickets_total: ticketsTotal,
       tickets_sold: 0,
       status,
-      image
+      image,
+      winner_drawn: false,
+      ended_reason: ""
     });
 
     showStatus(`Novo sorteio criado com sucesso: ${title} (${id})`, "ok");
