@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Citroen Jumpy - CarSorte</title>
+<title>Sorteio - CarSorte</title>
 
 <style>
 :root{
@@ -15,6 +15,8 @@
   --muted:#b8b8b8;
   --line:rgba(255,255,255,.08);
   --shadow:0 14px 34px rgba(0,0,0,.32);
+  --green:#29c46d;
+  --red:#d95c5c;
 }
 *{box-sizing:border-box}
 body{
@@ -103,6 +105,70 @@ p{
   color:var(--gold-soft);
   font-size:24px;
 }
+.badge{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+.badge.active{
+  background:rgba(41,196,109,.1);
+  border:1px solid rgba(41,196,109,.22);
+  color:#9ef0be;
+}
+.badge.closed{
+  background:rgba(217,92,92,.1);
+  border:1px solid rgba(217,92,92,.22);
+  color:#ffb5b5;
+}
+.badge.soldout{
+  background:rgba(212,160,23,.1);
+  border:1px solid rgba(212,160,23,.22);
+  color:#ffe08a;
+}
+.progress-wrap{
+  margin:18px 0 22px;
+}
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:8px;
+  color:#bbb;
+  font-size:14px;
+}
+.progress{
+  height:12px;
+  border-radius:999px;
+  background:#1a1a1a;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.05);
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#b07b06,#f4c542);
+}
+.notice{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.7;
+  display:none;
+}
+.notice.info{
+  background:rgba(212,160,23,.1);
+  border:1px solid rgba(212,160,23,.22);
+  color:#ffe08a;
+}
+.notice.err{
+  background:rgba(217,92,92,.1);
+  border:1px solid rgba(217,92,92,.22);
+  color:#ffb5b5;
+}
 .packs{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -145,6 +211,11 @@ p{
   background:var(--gold);
   color:#000;
 }
+.btn.disabled{
+  background:#2a2a2a;
+  color:#888;
+  pointer-events:none;
+}
 @media(max-width:900px){
   .grid{grid-template-columns:1fr}
   .packs{grid-template-columns:1fr}
@@ -166,55 +237,70 @@ p{
       <a href="index.html">Início</a>
       <a href="winners.html">Vencedores</a>
       <a href="results.html">Resultados</a>
+      <a href="admin.html">Admin</a>
     </div>
   </div>
 
   <div class="grid">
     <div class="card">
-      <img class="hero-image" src="https://gaeldem21-png.github.io/CarsorteV1/jumpy.jpg" alt="Citroen Jumpy">
+      <img id="raffleImage" class="hero-image" src="https://gaeldem21-png.github.io/CarsorteV1/jumpy.jpg" alt="Veículo">
     </div>
 
     <div class="card">
-      <h1>Citroen Jumpy</h1>
-      <p>
+      <div id="statusBadge" class="badge active">Ativo</div>
+
+      <h1 id="raffleTitle">Citroen Jumpy</h1>
+      <p id="raffleText">
         Uma oportunidade acessível para participar num sorteio premium com packs pensados para conversão rápida e experiência simples.
       </p>
 
       <div class="stats">
         <div class="stat">
-          <strong>2,50€</strong>
+          <strong id="rafflePrice">2,50€</strong>
           <span>por bilhete</span>
         </div>
         <div class="stat">
-          <strong>10000</strong>
+          <strong id="raffleTotal">0</strong>
           <span>bilhetes totais</span>
         </div>
         <div class="stat">
-          <strong>0</strong>
+          <strong id="raffleSold">0</strong>
           <span>vendidos</span>
         </div>
         <div class="stat">
-          <strong>Ativo</strong>
+          <strong id="raffleState">active</strong>
           <span>estado</span>
         </div>
       </div>
 
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span id="progressText">0 / 0 vendidos</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div id="raffleNotice" class="notice info"></div>
+
       <div class="packs">
-        <a class="pack" href="checkout.html?pack=1&raffle=Jumpy">
+        <a id="pack1" class="pack" href="checkout.html?pack=1&raffle=Jumpy">
           <strong>1</strong>
           <small>Entrada simples</small>
           <span>2,50€</span>
           <div class="btn">Escolher</div>
         </a>
 
-        <a class="pack featured" href="checkout.html?pack=5&raffle=Jumpy">
+        <a id="pack5" class="pack featured" href="checkout.html?pack=5&raffle=Jumpy">
           <strong>5</strong>
           <small>Oferta de lançamento</small>
           <span>10€</span>
           <div class="btn">Escolher</div>
         </a>
 
-        <a class="pack" href="checkout.html?pack=15&raffle=Jumpy">
+        <a id="pack15" class="pack" href="checkout.html?pack=15&raffle=Jumpy">
           <strong>15</strong>
           <small>Melhor valor</small>
           <span>25€</span>
@@ -225,5 +311,117 @@ p{
   </div>
 
 </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const ACTIVE_RAFFLE_ID = "Jumpy";
+
+const raffleImage = document.getElementById("raffleImage");
+const raffleTitle = document.getElementById("raffleTitle");
+const rafflePrice = document.getElementById("rafflePrice");
+const raffleTotal = document.getElementById("raffleTotal");
+const raffleSold = document.getElementById("raffleSold");
+const raffleState = document.getElementById("raffleState");
+const statusBadge = document.getElementById("statusBadge");
+const raffleNotice = document.getElementById("raffleNotice");
+const progressText = document.getElementById("progressText");
+const progressPercent = document.getElementById("progressPercent");
+const progressBar = document.getElementById("progressBar");
+
+const pack1 = document.getElementById("pack1");
+const pack5 = document.getElementById("pack5");
+const pack15 = document.getElementById("pack15");
+
+function formatCurrency(value){
+  if(value === undefined || value === null) return "-";
+  return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
+}
+
+function disablePacks(message, badgeType, badgeLabel){
+  [pack1, pack5, pack15].forEach(pack => {
+    pack.removeAttribute("href");
+    const btn = pack.querySelector(".btn");
+    btn.classList.add("disabled");
+    btn.textContent = badgeLabel;
+  });
+
+  statusBadge.className = `badge ${badgeType}`;
+  statusBadge.textContent = badgeLabel;
+  raffleNotice.style.display = "block";
+  raffleNotice.textContent = message;
+}
+
+async function loadRaffle(){
+  try{
+    const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
+    const raffleSnap = await getDoc(raffleRef);
+
+    if(!raffleSnap.exists()){
+      disablePacks("Este sorteio não foi encontrado na base de dados.", "closed", "Indisponível");
+      return;
+    }
+
+    const raffle = raffleSnap.data();
+
+    raffleTitle.textContent = raffle.title || "Sorteio";
+    rafflePrice.textContent = formatCurrency(raffle.price);
+    raffleTotal.textContent = raffle.tickets_total ?? 0;
+    raffleSold.textContent = raffle.tickets_sold ?? 0;
+    raffleState.textContent = raffle.status || "-";
+
+    if(raffle.image){
+      raffleImage.src = raffle.image;
+    }
+
+    const sold = Number(raffle.tickets_sold || 0);
+    const total = Number(raffle.tickets_total || 0);
+    const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
+
+    progressBar.style.width = `${percent}%`;
+    progressPercent.textContent = `${percent.toFixed(2)}%`;
+    progressText.textContent = `${sold} / ${total} vendidos`;
+
+    if(raffle.status === "closed"){
+      disablePacks("Este sorteio foi encerrado. O vencedor já foi sorteado.", "closed", "Encerrado");
+      return;
+    }
+
+    if(raffle.status === "sold_out"){
+      disablePacks("Todos os bilhetes deste sorteio foram vendidos.", "soldout", "Esgotado");
+      return;
+    }
+
+    if(total > 0 && sold >= total){
+      disablePacks("O limite máximo de participantes foi atingido.", "soldout", "Completo");
+      return;
+    }
+
+    statusBadge.className = "badge active";
+    statusBadge.textContent = "Ativo";
+    raffleNotice.style.display = "none";
+
+  }catch(error){
+    console.error(error);
+    disablePacks("Erro ao carregar o sorteio.", "closed", "Erro");
+  }
+}
+
+loadRaffle();
+</script>
+
 </body>
 </html>
