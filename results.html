@@ -1,105 +1,225 @@
 <!doctype html>
 <html lang="pt">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados · CarSorte</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{box-sizing:border-box}
 
-<title>Resultado do Sorteio</title>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#060606;
+      color:white;
+    }
 
-<style>
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-body{
-background:#060606;
-color:white;
-font-family:Arial;
-margin:0;
-padding:40px;
-}
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-.container{
-max-width:900px;
-margin:auto;
-}
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
 
-.card{
-background:#111;
-padding:30px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.08);
-margin-top:30px;
-text-align:center;
-}
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
 
-.ticket{
-font-size:28px;
-color:#f4c542;
-margin-top:20px;
-}
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
 
-button{
-background:#f4c542;
-border:none;
-padding:12px 20px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-margin-top:20px;
-}
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
 
-</style>
+    .container{
+      max-width:950px;
+      margin:auto;
+      padding:40px 20px 70px;
+    }
 
+    .hero{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 12px 28px rgba(0,0,0,.28);
+      text-align:center;
+    }
+
+    .hero h1{
+      margin:0 0 12px 0;
+      font-size:40px;
+      color:#f4c542;
+    }
+
+    .hero p{
+      margin:0 auto;
+      color:#cfcfcf;
+      line-height:1.7;
+      font-size:17px;
+      max-width:700px;
+    }
+
+    .result-card{
+      margin-top:26px;
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:28px;
+      box-shadow:0 12px 28px rgba(0,0,0,.22);
+      text-align:center;
+    }
+
+    .result-card h2{
+      margin:0 0 8px 0;
+      font-size:30px;
+    }
+
+    .winner-ticket{
+      margin-top:18px;
+      font-size:30px;
+      font-weight:bold;
+      color:#f4c542;
+    }
+
+    .actions{
+      margin-top:24px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:12px;
+      font-weight:bold;
+      font-size:16px;
+    }
+
+    .btn-primary{
+      background:#f4c542;
+      color:black;
+    }
+
+    .btn-secondary{
+      background:#1a1a1a;
+      color:white;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    @media (max-width:900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .container{
+        padding:30px 16px 50px;
+      }
+
+      .hero h1{
+        font-size:30px;
+      }
+
+      .result-card h2{
+        font-size:24px;
+      }
+
+      .winner-ticket{
+        font-size:24px;
+      }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+        text-align:center;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
 
-<h1>Resultado do Sorteio</h1>
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="raffle.html">Sorteio</a>
+        <a href="winners.html">Vencedores</a>
+        <a href="faq.html">FAQ</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+  </header>
 
-<div class="card">
+  <div class="container">
+    <div class="hero">
+      <h1>Resultado do sorteio</h1>
+      <p>Resultado visual do último sorteio premium. Esta página mostra um bilhete vencedor gerado de forma demonstrativa para a experiência CarSorte.</p>
+    </div>
 
-<p>Sorteio: BMW Série 1 Pack M</p>
+    <div class="result-card">
+      <h2>BMW Série 1 Pack M</h2>
+      <p>Bilhete vencedor</p>
+      <div id="winner" class="winner-ticket"></div>
 
-<p>Bilhete vencedor</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="winners.html">Ver vencedores</a>
+        <a class="btn btn-secondary" href="index.html">Voltar ao site</a>
+      </div>
+    </div>
+  </div>
 
-<div id="winner" class="ticket"></div>
+  <script>
+    function generateTickets(total){
+      const tickets = [];
 
-<a href="index.html">
-<button>Voltar ao site</button>
-</a>
+      for(let i = 1; i <= total; i++){
+        let num = i.toString().padStart(5,"0");
+        tickets.push("#CS-" + num);
+      }
 
-</div>
+      return tickets;
+    }
 
-</div>
-
-<script>
-
-function generateTickets(total){
-
-const tickets=[]
-
-for(let i=1;i<=total;i++){
-
-let num=i.toString().padStart(5,"0")
-
-tickets.push("#CS-"+num)
-
-}
-
-return tickets
-
-}
-
-const tickets = generateTickets(15000)
-
-const index = Math.floor(Math.random()*tickets.length)
-
-document.getElementById("winner").innerText = tickets[index]
-
-</script>
+    const tickets = generateTickets(15000);
+    const index = Math.floor(Math.random() * tickets.length);
+    document.getElementById("winner").textContent = tickets[index];
+  </script>
 
 </body>
-
 </html>
