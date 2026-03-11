@@ -60,7 +60,7 @@ letter-spacing:.02em;
 position:sticky;
 top:0;
 z-index:50;
-background:rgba(5,5,5,.9);
+background:rgba(5,5,5,.92);
 backdrop-filter:blur(10px);
 border-bottom:1px solid var(--line);
 }
@@ -82,33 +82,34 @@ padding:18px 0;
 .brand{
 display:flex;
 align-items:center;
-gap:14px;
+gap:18px;
 min-width:0;
 }
 
 .brand img{
-height:58px;
+height:92px;
 width:auto;
 object-fit:contain;
-filter:drop-shadow(0 6px 18px rgba(212,160,23,.18));
+filter:drop-shadow(0 8px 22px rgba(212,160,23,.24));
 }
 
 .brand-text{
 display:flex;
 flex-direction:column;
-line-height:1.1;
+line-height:1.05;
 }
 
 .brand-text strong{
 color:var(--gold-soft);
-font-size:24px;
+font-size:34px;
 }
 
 .brand-text span{
 color:#9c9c9c;
-font-size:12px;
-letter-spacing:.12em;
+font-size:13px;
+letter-spacing:.18em;
 text-transform:uppercase;
+margin-top:6px;
 }
 
 .navlinks{
@@ -137,7 +138,7 @@ font-weight:800;
 }
 
 .hero{
-padding:72px 0 38px;
+padding:58px 0 38px;
 display:grid;
 grid-template-columns:1.05fr .95fr;
 gap:34px;
@@ -228,6 +229,49 @@ border:1px solid rgba(212,160,23,.28);
 color:#ffe08a;
 font-size:12px;
 font-weight:800;
+}
+
+.logo-banner{
+margin-top:26px;
+background:linear-gradient(135deg,#141414 0%, #090909 100%);
+border:1px solid rgba(212,160,23,.16);
+border-radius:24px;
+padding:20px 22px;
+display:flex;
+align-items:center;
+gap:18px;
+box-shadow:var(--shadow);
+}
+
+.logo-banner img{
+height:110px;
+width:auto;
+object-fit:contain;
+filter:drop-shadow(0 8px 24px rgba(212,160,23,.22));
+}
+
+.logo-banner-text strong{
+display:block;
+font-size:34px;
+color:var(--gold-soft);
+line-height:1;
+}
+
+.logo-banner-text span{
+display:block;
+margin-top:8px;
+color:#b3b3b3;
+font-size:14px;
+letter-spacing:.18em;
+text-transform:uppercase;
+}
+
+.logo-banner-text p{
+margin:12px 0 0 0;
+font-size:15px;
+line-height:1.7;
+color:var(--muted);
+max-width:520px;
 }
 
 .stats{
@@ -341,202 +385,6 @@ font-size:13px;
 margin-top:8px;
 }
 
-.feature-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:22px;
-}
-
-.feature{
-background:var(--panel);
-border:1px solid var(--line);
-border-radius:22px;
-padding:24px;
-box-shadow:var(--shadow);
-}
-
-.feature-number{
-width:44px;
-height:44px;
-border-radius:14px;
-background:var(--gold);
-color:#000;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:800;
-font-size:20px;
-margin-bottom:14px;
-}
-
-.feature h3{
-margin:0 0 10px;
-font-size:24px;
-color:var(--gold-soft);
-}
-
-.feature p{
-margin:0;
-color:var(--muted);
-line-height:1.7;
-}
-
-.story{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:22px;
-}
-
-.story-box{
-background:var(--panel);
-border:1px solid var(--line);
-border-radius:22px;
-padding:26px;
-box-shadow:var(--shadow);
-}
-
-.story-box h3{
-margin-top:0;
-font-size:28px;
-color:var(--gold-soft);
-}
-
-.story-box p{
-margin:0 0 14px;
-color:var(--muted);
-line-height:1.8;
-}
-
-.winner-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:22px;
-}
-
-.winner{
-background:var(--panel);
-border:1px solid var(--line);
-border-radius:22px;
-overflow:hidden;
-box-shadow:var(--shadow);
-}
-
-.winner img{
-width:100%;
-height:210px;
-object-fit:cover;
-}
-
-.winner-body{
-padding:20px;
-}
-
-.winner-body .tag{
-display:inline-block;
-padding:8px 12px;
-border-radius:999px;
-background:rgba(212,160,23,.10);
-border:1px solid rgba(212,160,23,.20);
-color:#ffe08a;
-font-size:12px;
-font-weight:800;
-margin-bottom:10px;
-}
-
-.winner-body h3{
-margin:0 0 8px;
-font-size:24px;
-}
-
-.winner-body p{
-margin:0;
-color:var(--muted);
-line-height:1.7;
-}
-
-.offer-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:22px;
-}
-
-.offer{
-background:linear-gradient(180deg,#111,#090909);
-border:1px solid rgba(212,160,23,.14);
-border-radius:22px;
-padding:24px;
-text-align:center;
-box-shadow:var(--shadow);
-}
-
-.offer strong{
-display:block;
-font-size:42px;
-color:var(--gold-soft);
-margin-bottom:6px;
-}
-
-.offer small{
-display:block;
-color:#9e9e9e;
-margin-bottom:12px;
-}
-
-.offer span{
-display:block;
-font-size:22px;
-font-weight:800;
-margin-bottom:18px;
-}
-
-.trust-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:18px;
-}
-
-.trust{
-background:var(--panel);
-border:1px solid var(--line);
-border-radius:20px;
-padding:22px;
-text-align:center;
-box-shadow:var(--shadow);
-}
-
-.trust strong{
-display:block;
-font-size:30px;
-color:var(--gold-soft);
-margin-bottom:6px;
-}
-
-.trust span{
-color:#9e9e9e;
-font-size:14px;
-}
-
-.final-cta{
-background:linear-gradient(135deg,#141414 0%,#090909 100%);
-border:1px solid rgba(212,160,23,.18);
-border-radius:30px;
-padding:36px;
-text-align:center;
-box-shadow:var(--shadow);
-}
-
-.final-cta h2{
-margin:12px 0;
-font-size:46px;
-}
-
-.final-cta p{
-margin:0 auto;
-max-width:780px;
-color:var(--muted);
-line-height:1.8;
-}
-
 .footer{
 margin-top:20px;
 border-top:1px solid var(--line);
@@ -583,8 +431,7 @@ justify-content:flex-start;
 gap:14px;
 }
 
-.hero,
-.story{
+.hero{
 grid-template-columns:1fr;
 }
 
@@ -600,12 +447,21 @@ font-size:17px;
 min-height:300px;
 }
 
+.logo-banner{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.logo-banner img{
+height:90px;
+}
+
+.logo-banner-text strong{
+font-size:28px;
+}
+
 .stats,
-.cards,
-.feature-grid,
-.winner-grid,
-.offer-grid,
-.trust-grid{
+.cards{
 grid-template-columns:1fr;
 }
 
@@ -617,13 +473,16 @@ padding:46px 0;
 display:block;
 }
 
-.section-head h2,
-.final-cta h2{
+.section-head h2{
 font-size:32px;
 }
 
 .brand img{
-height:48px;
+height:72px;
+}
+
+.brand-text strong{
+font-size:28px;
 }
 
 .live{
@@ -670,14 +529,25 @@ max-width:none;
 <section class="container hero">
   <div>
     <span class="pill">Sorteios premium · Portugal</span>
-    <h1>Uma chance real de mudar de vida por apenas <span style="color:#f4c542">2,50€</span></h1>
+    <h1>Ganhe um carro por apenas <span style="color:#f4c542">2,50€</span></h1>
     <p>
-      CarSorte by DEM Automóveis nasceu de uma ideia simples: tornar o extraordinário mais acessível. Uma plataforma premium, transparente e pensada para dar oportunidades reais a qualquer pessoa.
+      CarSorte by DEM Automóveis nasceu para tornar o extraordinário mais acessível. Uma plataforma premium, transparente e pensada para dar oportunidades reais a qualquer pessoa.
     </p>
 
     <div class="hero-actions">
       <a class="btn btn-primary" href="raffle.html">Participar agora</a>
       <a class="btn btn-secondary" href="winners.html">Ver vencedores</a>
+    </div>
+
+    <div class="logo-banner">
+      <img src="logo-carsorte.png" alt="CarSorte banner">
+      <div class="logo-banner-text">
+        <strong>CarSorte</strong>
+        <span>by DEM Automóveis</span>
+        <p>
+          Uma identidade forte para um projeto pensado para devolver oportunidade, sonho e acesso a quem normalmente sente que grandes chances não são para si.
+        </p>
+      </div>
     </div>
 
     <div class="stats">
@@ -712,8 +582,8 @@ max-width:none;
 <section class="container section">
   <div class="section-head">
     <div>
-      <p>Sorteio em destaque</p>
-      <h2>Entre agora no sorteio mais quente da plataforma</h2>
+      <p>Sorteios ativos</p>
+      <h2>Escolha a sua próxima oportunidade</h2>
     </div>
   </div>
 
@@ -722,7 +592,7 @@ max-width:none;
       <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1400&q=80" alt="BMW Série 1">
       <div class="card-body">
         <h3>BMW Série 1 Pack M</h3>
-        <p>Um dos sorteios mais procurados da CarSorte. Visual forte, grande desejo e acesso simples.</p>
+        <p>O sorteio premium mais forte da plataforma neste momento.</p>
 
         <div class="progress">
           <div class="progress-bar"></div>
@@ -743,7 +613,7 @@ max-width:none;
       <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1400&q=80" alt="Mercedes Classe A">
       <div class="card-body">
         <h3>Mercedes Classe A</h3>
-        <p>Uma segunda oportunidade premium para reforçar o catálogo e aumentar o desejo de participação.</p>
+        <p>Uma alternativa premium para quem quer entrar noutro grande sorteio.</p>
 
         <div class="progress">
           <div class="progress-bar" style="width:62%"></div>
@@ -764,7 +634,7 @@ max-width:none;
       <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80" alt="Citroën Jumpy">
       <div class="card-body">
         <h3>Citroën Jumpy Business</h3>
-        <p>Uma proposta utilitária para ampliar o alcance da plataforma e falar com públicos diferentes.</p>
+        <p>Uma opção utilitária que alarga o alcance e a utilidade da plataforma.</p>
 
         <div class="progress">
           <div class="progress-bar" style="width:48%"></div>
@@ -779,182 +649,6 @@ max-width:none;
           <a class="btn btn-secondary" href="raffle.html">Ver sorteio</a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="section-head">
-    <div>
-      <p>Como funciona</p>
-      <h2>Simples, rápido e acessível</h2>
-    </div>
-  </div>
-
-  <div class="feature-grid">
-    <div class="feature">
-      <div class="feature-number">1</div>
-      <h3>Escolha o sorteio</h3>
-      <p>Selecione o veículo ou prémio que mais lhe interessa e acompanhe o progresso em tempo real.</p>
-    </div>
-
-    <div class="feature">
-      <div class="feature-number">2</div>
-      <h3>Compre os seus bilhetes</h3>
-      <p>Entre com 1 bilhete ou aproveite packs com melhor valor para aumentar as probabilidades.</p>
-    </div>
-
-    <div class="feature">
-      <div class="feature-number">3</div>
-      <h3>Acompanhe o resultado</h3>
-      <p>Os resultados e vencedores são apresentados para reforçar transparência e confiança.</p>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="section-head">
-    <div>
-      <p>A nossa visão</p>
-      <h2>Mais do que um sorteio: uma oportunidade</h2>
-    </div>
-  </div>
-
-  <div class="story">
-    <div class="story-box">
-      <h3>Porque a CarSorte existe</h3>
-      <p>
-        Num mundo onde tudo parece cada vez mais distante, a CarSorte quer devolver uma chance real a quem normalmente sente que grandes oportunidades não são para si.
-      </p>
-      <p>
-        Aqui, o objetivo não é apenas vender bilhetes. É criar uma experiência que devolve esperança, entusiasmo e possibilidade.
-      </p>
-    </div>
-
-    <div class="story-box">
-      <h3>Uma plataforma para todos</h3>
-      <p>
-        Pouco importa de onde a pessoa vem. Pouco importa a sua classe social. Por apenas 2,50€, qualquer pessoa pode entrar, sonhar e participar.
-      </p>
-      <p>
-        É essa visão que diferencia a CarSorte: tornar o extraordinário mais acessível.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="section-head">
-    <div>
-      <p>Prova social</p>
-      <h2>Quem já ganhou com a CarSorte</h2>
-    </div>
-  </div>
-
-  <div class="winner-grid">
-    <div class="winner">
-      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80" alt="Vencedor">
-      <div class="winner-body">
-        <div class="tag">BMW Série 1</div>
-        <h3>Pedro · Porto</h3>
-        <p>Ganhou o BMW Série 1 Pack M e tornou-se uma das primeiras grandes histórias da plataforma.</p>
-      </div>
-    </div>
-
-    <div class="winner">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80" alt="Vencedora">
-      <div class="winner-body">
-        <div class="tag">Mercedes Classe A</div>
-        <h3>Marta · Braga</h3>
-        <p>Entrou no sorteio com poucos bilhetes e saiu vencedora, reforçando o lado acessível do projeto.</p>
-      </div>
-    </div>
-
-    <div class="winner">
-      <img src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&w=1200&q=80" alt="Vencedor">
-      <div class="winner-body">
-        <div class="tag">Citroën Jumpy</div>
-        <h3>Tiago · Lisboa</h3>
-        <p>Conquistou um veículo utilitário e mostrou que a plataforma pode falar com públicos muito diferentes.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="section-head">
-    <div>
-      <p>Escolha o seu pack</p>
-      <h2>Mais oportunidades, melhor valor</h2>
-    </div>
-  </div>
-
-  <div class="offer-grid">
-    <div class="offer">
-      <strong>1</strong>
-      <small>Entrada simples</small>
-      <span>2,50€</span>
-      <a class="btn btn-secondary" href="checkout.html?pack=1">Entrar</a>
-    </div>
-
-    <div class="offer">
-      <strong>5</strong>
-      <small>Oferta de lançamento</small>
-      <span>10€</span>
-      <a class="btn btn-primary" href="checkout.html?pack=5">Escolher pack</a>
-    </div>
-
-    <div class="offer">
-      <strong>15</strong>
-      <small>Melhor valor</small>
-      <span>25€</span>
-      <a class="btn btn-secondary" href="checkout.html?pack=15">Maximizar hipótese</a>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="section-head">
-    <div>
-      <p>Confiança</p>
-      <h2>Porque confiar na CarSorte</h2>
-    </div>
-  </div>
-
-  <div class="trust-grid">
-    <div class="trust">
-      <strong>10500</strong>
-      <span>bilhetes vendidos</span>
-    </div>
-
-    <div class="trust">
-      <strong>3</strong>
-      <span>sorteios ativos</span>
-    </div>
-
-    <div class="trust">
-      <strong>1245</strong>
-      <span>utilizadores</span>
-    </div>
-
-    <div class="trust">
-      <strong>100%</strong>
-      <span>experiência transparente</span>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="final-cta">
-    <span class="pill">Última chamada</span>
-    <h2>Entre agora e faça parte da próxima grande história</h2>
-    <p>
-      A próxima pessoa a ganhar pode ser alguém que nunca imaginou ter acesso a uma oportunidade assim. Essa é a força da CarSorte: transformar uma pequena participação numa possibilidade real.
-    </p>
-
-    <div class="hero-actions" style="justify-content:center;margin-top:24px;">
-      <a class="btn btn-primary" href="raffle.html">Participar agora</a>
-      <a class="btn btn-secondary" href="results.html">Ver resultados</a>
     </div>
   </div>
 </section>
