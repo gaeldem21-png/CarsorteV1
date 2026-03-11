@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin · CarSorte</title>
+  <title>Admin V2 · CarSorte</title>
   <style>
     :root{
       --bg:#060606;
       --panel:#101010;
+      --panel2:#0b0b0b;
       --gold:#f4c542;
       --line:rgba(255,255,255,.08);
       --muted:#a9a9a9;
@@ -23,14 +24,18 @@
       color:#fff;
     }
     a{text-decoration:none;color:inherit}
-    .container{max-width:1280px;margin:0 auto;padding:0 20px}
+    .container{max-width:1300px;margin:0 auto;padding:0 20px}
+
     .topbar{
       position:sticky;top:0;z-index:20;
       background:rgba(6,6,6,.9);
       border-bottom:1px solid var(--line);
       backdrop-filter:blur(10px);
     }
-    .nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:18px 0;gap:20px;flex-wrap:wrap;
+    }
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
       width:46px;height:46px;border-radius:16px;background:var(--gold);
@@ -38,7 +43,7 @@
     }
     .brand h1{margin:0;color:#f4c542;font-size:28px}
     .brand small{display:block;color:#888}
-    .navlinks{display:flex;gap:20px;align-items:center}
+    .navlinks{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
     .navlinks a{color:#ddd;font-size:14px}
     .navlinks a:hover{color:#f4c542}
     .cta{
@@ -95,10 +100,21 @@
       padding:12px 8px;
       text-align:left;
       font-size:14px;
+      vertical-align:top;
     }
     .badge{
       display:inline-block;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800;
       background:rgba(244,197,66,.1);color:#ffe08a;border:1px solid rgba(244,197,66,.2);
+    }
+    .badge.draft{
+      background:rgba(255,255,255,.06);
+      color:#ddd;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .badge.closed{
+      background:rgba(255,120,120,.10);
+      color:#ffb3b3;
+      border:1px solid rgba(255,120,120,.18);
     }
 
     .form{
@@ -111,9 +127,28 @@
     }
     .form textarea{min-height:120px;resize:vertical}
 
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:900;
+      background:#f4c542;
+      color:#000;
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      border:1px solid var(--line);
+    }
+
     @media (max-width:980px){
       .layout,.stats,.grid-2{grid-template-columns:1fr}
-      .navlinks{display:none}
       .hero-box h2{font-size:32px}
     }
   </style>
@@ -131,7 +166,8 @@
       </div>
       <div class="navlinks">
         <a href="index.html">Site público</a>
-        <a href="utilizador.html">Área do utilizador</a>
+        <a href="raffle.html">Página sorteio</a>
+        <a href="utilizador.html">Área utilizador</a>
         <a class="cta" href="index.html">Sair</a>
       </div>
     </div>
@@ -139,14 +175,14 @@
 
   <section class="container hero">
     <div class="hero-box">
-      <h2>Dashboard administrativo</h2>
-      <p class="muted">Painel de gestão dos sorteios, utilizadores, bilhetes vendidos, vencedores e configurações da plataforma.</p>
+      <h2>Dashboard administrativo V2</h2>
+      <p class="muted">Painel de gestão dos sorteios, utilizadores, bilhetes vendidos, vencedores, performance e configuração visual da plataforma.</p>
     </div>
 
     <div class="stats">
       <div class="stat"><strong>3</strong><span>Sorteios ativos</span></div>
       <div class="stat"><strong>27 547</strong><span>Bilhetes vendidos</span></div>
-      <div class="stat"><strong>8 942€</strong><span>Receita estimada</span></div>
+      <div class="stat"><strong>68 867€</strong><span>Receita estimada</span></div>
       <div class="stat"><strong>1 142</strong><span>Utilizadores ativos</span></div>
     </div>
   </section>
@@ -155,26 +191,47 @@
     <aside class="sidebar">
       <h3 style="margin-top:0">Menu</h3>
       <div class="menu">
+        <a href="#overview">Visão geral</a>
         <a href="#criar">Criar sorteio</a>
         <a href="#gerir">Gerir sorteios</a>
         <a href="#utilizadores">Utilizadores</a>
         <a href="#bilhetes">Bilhetes vendidos</a>
         <a href="#vencedores">Vencedores</a>
+        <a href="#marketing">Marketing</a>
         <a href="#definicoes">Definições</a>
       </div>
     </aside>
 
     <div style="display:grid;gap:22px">
+      <div class="panel" id="overview">
+        <h3>Visão geral</h3>
+        <div class="grid-2">
+          <div class="box">
+            <strong>Melhor desempenho</strong>
+            <p class="muted">BMW Série 1 Pack M é atualmente o sorteio com maior taxa de conversão e maior pressão de compra.</p>
+          </div>
+          <div class="box">
+            <strong>Próximo marco</strong>
+            <p class="muted">Ao atingir 12 000 bilhetes vendidos, recomenda-se reforço de urgência visual na home e nas redes sociais.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="panel" id="criar">
         <h3>Criar novo sorteio</h3>
         <div class="form">
-          <input type="text" placeholder="Nome do sorteio" />
-          <input type="text" placeholder="Veículo / prémio" />
-          <input type="number" placeholder="Preço por bilhete" />
-          <input type="number" placeholder="Número total de bilhetes" />
-          <input type="text" placeholder="Data do sorteio" />
+          <input type="text" placeholder="Nome do sorteio">
+          <input type="text" placeholder="Veículo / prémio">
+          <input type="number" placeholder="Preço por bilhete">
+          <input type="number" placeholder="Número total de bilhetes">
+          <input type="text" placeholder="Data do sorteio">
+          <input type="text" placeholder="Pergunta de qualificação">
+          <input type="text" placeholder="Resposta correta">
           <textarea placeholder="Descrição do sorteio"></textarea>
-          <a class="cta" href="#">Criar sorteio</a>
+          <div class="actions">
+            <a class="btn" href="#">Criar sorteio</a>
+            <a class="btn secondary" href="#">Guardar rascunho</a>
+          </div>
         </div>
       </div>
 
@@ -187,6 +244,7 @@
               <th>Bilhetes vendidos</th>
               <th>Data</th>
               <th>Estado</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -195,18 +253,51 @@
               <td>11 257 / 15 000</td>
               <td>28/03</td>
               <td><span class="badge">Ativo</span></td>
+              <td>
+                <div class="actions">
+                  <a class="btn secondary" href="raffle.html">Ver</a>
+                  <a class="btn secondary" href="#">Editar</a>
+                  <a class="btn secondary" href="#">Fechar</a>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>Mercedes Classe A</td>
               <td>8 950 / 14 000</td>
               <td>04/04</td>
               <td><span class="badge">Ativo</span></td>
+              <td>
+                <div class="actions">
+                  <a class="btn secondary" href="raffle.html">Ver</a>
+                  <a class="btn secondary" href="#">Editar</a>
+                  <a class="btn secondary" href="#">Fechar</a>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>Citroën Jumpy Business</td>
               <td>7 340 / 13 000</td>
               <td>11/04</td>
               <td><span class="badge">Ativo</span></td>
+              <td>
+                <div class="actions">
+                  <a class="btn secondary" href="raffle.html">Ver</a>
+                  <a class="btn secondary" href="#">Editar</a>
+                  <a class="btn secondary" href="#">Fechar</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Voucher combustível</td>
+              <td>0 / 5 000</td>
+              <td>20/04</td>
+              <td><span class="badge draft">Rascunho</span></td>
+              <td>
+                <div class="actions">
+                  <a class="btn secondary" href="#">Editar</a>
+                  <a class="btn secondary" href="#">Publicar</a>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -219,6 +310,7 @@
             <p><strong>Total:</strong> 1 142</p>
             <p><strong>Premium:</strong> 184</p>
             <p><strong>Novos hoje:</strong> 17</p>
+            <p><strong>Conversão média:</strong> 4,8%</p>
           </div>
         </div>
 
@@ -228,6 +320,7 @@
             <p><strong>Hoje:</strong> 327</p>
             <p><strong>Esta semana:</strong> 2 418</p>
             <p><strong>Total:</strong> 27 547</p>
+            <p><strong>Pack mais vendido:</strong> 5 bilhetes</p>
           </div>
         </div>
       </div>
@@ -239,16 +332,38 @@
             <p><strong>Tiago, Porto</strong> — Audi A3 Sportback</p>
             <p><strong>Marta, Braga</strong> — Voucher combustível 500€</p>
             <p><strong>Rui, Lisboa</strong> — Golf GTD</p>
+            <div class="actions">
+              <a class="btn secondary" href="#">Publicar vencedor</a>
+              <a class="btn secondary" href="#">Tirar novo vencedor</a>
+            </div>
           </div>
         </div>
 
-        <div class="panel" id="definicoes">
-          <h3>Definições</h3>
+        <div class="panel" id="marketing">
+          <h3>Marketing</h3>
+          <div class="box">
+            <p><strong>Oferta quente:</strong> BMW Série 1</p>
+            <p><strong>Notificações live:</strong> Ativas</p>
+            <p><strong>CTA principal:</strong> Ver sorteio</p>
+            <p><strong>Próximo push:</strong> campanha quase cheio</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="definicoes">
+        <h3>Definições</h3>
+        <div class="grid-2">
           <div class="box">
             <p><strong>Marca:</strong> CarSorte by DEM Automóveis</p>
             <p><strong>Mercado:</strong> Portugal</p>
             <p><strong>Preço base:</strong> 2,50€</p>
-            <p><strong>Modo atual:</strong> Simulação estática</p>
+            <p><strong>Modo atual:</strong> Simulação estática premium</p>
+          </div>
+          <div class="box">
+            <p><strong>Checkout:</strong> Ativo</p>
+            <p><strong>Área utilizador:</strong> Ativa</p>
+            <p><strong>Página sorteio:</strong> Ativa</p>
+            <p><strong>Próxima etapa:</strong> Stripe + bilhetes reais</p>
           </div>
         </div>
       </div>
