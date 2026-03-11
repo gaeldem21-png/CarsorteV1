@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout · CarSorte</title>
+  <title>Checkout V2 · CarSorte</title>
   <style>
     :root{
       --bg:#060606;
@@ -26,7 +26,6 @@
     }
     a{text-decoration:none;color:inherit}
     .container{max-width:1200px;margin:0 auto;padding:0 20px}
-
     .topbar{
       position:sticky;top:0;z-index:30;
       background:rgba(6,6,6,.88);
@@ -52,9 +51,7 @@
     .navlinks{display:flex;gap:20px;flex-wrap:wrap;color:#d7d7d7;font-size:14px}
     .navlinks a:hover{color:var(--gold)}
 
-    .hero{
-      padding:34px 0 18px;
-    }
+    .hero{padding:34px 0 18px}
     .hero-box{
       background:#101010;
       border:1px solid var(--line);
@@ -282,6 +279,7 @@
       </div>
       <div class="navlinks">
         <a href="index.html">Site público</a>
+        <a href="raffle.html">Página sorteio</a>
         <a href="utilizador.html">Área do utilizador</a>
         <a href="admin.html">Admin</a>
       </div>
@@ -312,26 +310,26 @@
 
       <h3 style="margin-top:28px">Escolha o pack</h3>
       <div class="packs">
-        <div class="pack">
+        <a class="pack" data-pack="1" href="checkout.html?pack=1">
           <strong>1</strong>
           <small>Entrada rápida</small>
           <span>2,50€</span>
-        </div>
-        <div class="pack active">
+        </a>
+        <a class="pack" data-pack="5" href="checkout.html?pack=5">
           <strong>5</strong>
           <small>Mais popular</small>
           <span>10€</span>
-        </div>
-        <div class="pack">
+        </a>
+        <a class="pack" data-pack="10" href="checkout.html?pack=10">
           <strong>10</strong>
           <small>Forte impulso</small>
           <span>20€</span>
-        </div>
-        <div class="pack">
+        </a>
+        <a class="pack" data-pack="25" href="checkout.html?pack=25">
           <strong>25</strong>
           <small>Máxima chance</small>
           <span>50€</span>
-        </div>
+        </a>
       </div>
 
       <h3 style="margin-top:28px">Dados do participante</h3>
@@ -367,7 +365,7 @@
         </div>
         <div class="summary-row">
           <span class="muted">Pack selecionado</span>
-          <strong>5 bilhetes</strong>
+          <strong id="summary-pack">5 bilhetes</strong>
         </div>
         <div class="summary-row">
           <span class="muted">Preço unitário</span>
@@ -375,11 +373,11 @@
         </div>
         <div class="summary-row">
           <span class="muted">Subtotal</span>
-          <strong>10€</strong>
+          <strong id="summary-subtotal">10€</strong>
         </div>
         <div class="summary-total">
           <span>Total</span>
-          <span class="gold">10€</span>
+          <span class="gold" id="summary-total">10€</span>
         </div>
       </div>
 
@@ -395,11 +393,39 @@
         Esta página é uma pré-estrutura visual de checkout. O próximo passo será ligar um pagamento real com Stripe e geração automática dos bilhetes.
       </div>
 
-      <a class="btn primary" href="utilizador.html">Pagar agora</a>
-      <a class="btn secondary" href="index.html#sorteios">Voltar aos sorteios</a>
+      <a class="btn primary" id="pay-btn" href="checkout-success.html">Pagar agora</a>
+      <a class="btn secondary" href="raffle.html">Voltar ao sorteio</a>
     </div>
 
   </section>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const selectedPack = params.get("pack") || "5";
+
+    const packData = {
+      "1": { qty: 1, total: "2,50€" },
+      "5": { qty: 5, total: "10€" },
+      "10": { qty: 10, total: "20€" },
+      "25": { qty: 25, total: "50€" }
+    };
+
+    const active = packData[selectedPack] || packData["5"];
+
+    document.getElementById("summary-pack").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
+    document.getElementById("summary-subtotal").textContent = active.total;
+    document.getElementById("summary-total").textContent = active.total;
+
+    document.querySelectorAll(".pack").forEach((el) => {
+      if (el.dataset.pack === selectedPack) {
+        el.classList.add("active");
+      } else {
+        el.classList.remove("active");
+      }
+    });
+
+    document.getElementById("pay-btn").href = `checkout-success.html?pack=${selectedPack}`;
+  </script>
 
 </body>
 </html>
