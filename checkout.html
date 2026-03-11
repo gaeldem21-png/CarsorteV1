@@ -1,95 +1,98 @@
 <!doctype html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout V2 · CarSorte</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout CarSorte</title>
+
   <style>
-    :root{
-      --bg:#060606;
-      --panel:#111111;
-      --gold:#f4c542;
-      --text:#ffffff;
-      --muted:#b0b0b0;
-      --line:rgba(255,255,255,.08);
-      --shadow:0 18px 40px rgba(0,0,0,.35);
+    *{
+      box-sizing:border-box;
     }
-    *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(244,197,66,.12), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(244,197,66,.08), transparent 22%),
-        var(--bg);
-      color:var(--text);
+      background:#060606;
+      color:white;
     }
-    a{text-decoration:none;color:inherit}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    .topbar{
-      position:sticky;top:0;z-index:30;
-      background:rgba(6,6,6,.88);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:46px;height:46px;border-radius:16px;background:var(--gold);
-      color:#000;display:grid;place-items:center;font-size:24px;font-weight:800;
-      box-shadow:0 10px 25px rgba(244,197,66,.25);
-    }
-    .brand h1{margin:0;font-size:30px;line-height:1;color:var(--gold);font-weight:900}
-    .brand small{display:block;color:#888;margin-top:4px}
-    .navlinks{display:flex;gap:20px;flex-wrap:wrap;color:#d7d7d7;font-size:14px}
-    .navlinks a:hover{color:var(--gold)}
 
-    .hero{padding:34px 0 18px}
-    .hero-box{
-      background:#101010;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:26px;
-      box-shadow:var(--shadow);
+    a{
+      text-decoration:none;
+      color:inherit;
     }
-    .hero-box p{margin:0;color:#f4c542;text-transform:uppercase;letter-spacing:.18em;font-size:13px}
-    .hero-box h2{margin:10px 0 0;font-size:42px}
+
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
+
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
+
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px 60px;
+    }
+
+    h1{
+      font-size:40px;
+      color:#f4c542;
+      margin:0 0 25px 0;
+    }
 
     .layout{
       display:grid;
       grid-template-columns:1.2fr .8fr;
-      gap:24px;
-      padding:26px 0 60px;
+      gap:25px;
     }
 
-    .panel{
-      background:#101010;
-      border:1px solid var(--line);
-      border-radius:28px;
+    .card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
       padding:24px;
-      box-shadow:var(--shadow);
     }
-    .panel h3{margin-top:0;font-size:28px}
-    .muted{color:var(--muted)}
 
     .vehicle{
       display:grid;
-      grid-template-columns:240px 1fr;
-      gap:18px;
+      grid-template-columns:220px 1fr;
+      gap:20px;
       align-items:center;
-      background:#0c0c0c;
-      border:1px solid var(--line);
-      border-radius:22px;
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
       overflow:hidden;
-      margin-bottom:20px;
+      margin-bottom:25px;
     }
+
     .vehicle img{
       width:100%;
       height:100%;
@@ -97,307 +100,327 @@
       object-fit:cover;
       display:block;
     }
-    .vehicle-body{padding:18px}
-    .badge{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
-      background:rgba(244,197,66,.10);
-      border:1px solid rgba(244,197,66,.20);
-      color:#ffe08a;
-      margin-bottom:10px;
+
+    .vehicle-body{
+      padding:18px;
+    }
+
+    .vehicle-body h2{
+      margin:0 0 10px 0;
+      font-size:28px;
+    }
+
+    .muted{
+      color:#bdbdbd;
     }
 
     .packs{
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:12px;
-      margin-top:18px;
+      gap:14px;
+      margin-top:20px;
     }
+
     .pack{
-      background:#0c0c0c;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
+      display:block;
       text-align:center;
-      cursor:pointer;
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:16px 12px;
       transition:.2s ease;
     }
+
     .pack:hover{
-      border-color:rgba(244,197,66,.35);
-      transform:translateY(-1px);
+      border-color:#f4c542;
     }
+
     .pack.active{
-      border-color:rgba(244,197,66,.40);
-      background:rgba(244,197,66,.08);
+      border-color:#f4c542;
+      background:#17120a;
     }
+
     .pack strong{
       display:block;
+      color:#f4c542;
       font-size:28px;
-      color:var(--gold);
+      margin-bottom:6px;
     }
-    .pack small{display:block;color:#888;margin:6px 0 8px}
-    .pack span{font-weight:800}
+
+    .pack small{
+      display:block;
+      color:#aaa;
+      margin-bottom:8px;
+    }
+
+    .pack span{
+      font-weight:bold;
+      font-size:18px;
+    }
 
     .form-grid{
       display:grid;
       gap:14px;
-      margin-top:18px;
+      margin-top:24px;
     }
-    .form-grid input,.form-grid select,.form-grid textarea{
+
+    .form-grid input{
       width:100%;
       background:#0b0b0b;
-      border:1px solid var(--line);
-      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;
       padding:14px 16px;
-      border-radius:16px;
+      color:white;
+      font-size:16px;
       outline:none;
     }
+
     .question{
-      margin-top:20px;
-      background:#0c0c0c;
-      border:1px solid var(--line);
-      border-radius:18px;
+      margin-top:22px;
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
       padding:18px;
     }
+
     .answers{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin-top:12px;
     }
+
     .answer{
       padding:10px 14px;
       border-radius:999px;
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,.08);
       color:#ddd;
-      font-size:13px;
-      cursor:pointer;
-    }
-    .answer.good{
-      border-color:rgba(244,197,66,.35);
-      background:rgba(244,197,66,.10);
-      color:#ffe08a;
+      font-size:14px;
     }
 
-    .summary-box{
-      background:#0c0c0c;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:20px;
+    .answer.good{
+      border-color:#f4c542;
+      color:#f4c542;
     }
+
     .summary-row{
       display:flex;
       justify-content:space-between;
       gap:12px;
-      padding:12px 0;
+      padding:14px 0;
       border-bottom:1px solid rgba(255,255,255,.06);
     }
-    .summary-row:last-child{border-bottom:none}
+
+    .summary-row:last-child{
+      border-bottom:none;
+    }
+
     .summary-total{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      margin-top:16px;
-      padding-top:16px;
+      margin-top:18px;
+      padding-top:18px;
       border-top:1px solid rgba(255,255,255,.08);
-      font-size:20px;
-      font-weight:900;
+      font-size:22px;
+      font-weight:bold;
     }
-    .gold{color:var(--gold)}
 
-    .note{
-      margin-top:16px;
-      padding:16px;
-      border-radius:18px;
-      background:rgba(244,197,66,.08);
-      border:1px solid rgba(244,197,66,.15);
+    .gold{
+      color:#f4c542;
+    }
+
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .chip{
+      padding:10px 12px;
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;
       color:#ddd;
       font-size:14px;
-      line-height:1.6;
     }
 
     .btn{
       display:inline-block;
       width:100%;
       text-align:center;
-      padding:16px 22px;
-      border-radius:18px;
-      font-weight:900;
-      transition:.2s ease;
-      border:1px solid transparent;
-      cursor:pointer;
-    }
-    .btn.primary{
-      background:var(--gold);
-      color:#000;
-      box-shadow:var(--shadow);
+      background:#f4c542;
+      color:black;
+      padding:16px 24px;
+      border-radius:12px;
+      font-weight:bold;
+      font-size:18px;
       margin-top:20px;
     }
-    .btn.primary:hover{background:#ffd95f;transform:translateY(-1px)}
-    .btn.secondary{
-      background:rgba(255,255,255,.05);
-      border-color:var(--line);
-      color:#fff;
+
+    .btn-secondary{
+      display:inline-block;
+      width:100%;
+      text-align:center;
+      background:#1a1a1a;
+      color:white;
+      padding:16px 24px;
+      border-radius:12px;
+      font-weight:bold;
+      font-size:16px;
       margin-top:12px;
+      border:1px solid rgba(255,255,255,.08);
     }
 
-    .payment-icons{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-    .pay-chip{
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#0c0c0c;
-      color:#ddd;
-      font-size:13px;
-    }
+    @media (max-width: 900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
 
-    @media (max-width:980px){
-      .layout,.vehicle,.packs{grid-template-columns:1fr}
-      .hero-box h2{font-size:34px}
-      .vehicle img{min-height:220px}
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .layout{
+        grid-template-columns:1fr;
+      }
+
+      .vehicle{
+        grid-template-columns:1fr;
+      }
+
+      .packs{
+        grid-template-columns:1fr 1fr;
+      }
+
+      h1{
+        font-size:30px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">💳</div>
-        <div>
-          <h1>Checkout</h1>
-          <small>CarSorte by DEM Automóveis</small>
-        </div>
-      </div>
-      <div class="navlinks">
-        <a href="index.html">Site público</a>
-        <a href="raffle.html">Página sorteio</a>
-        <a href="utilizador.html">Área do utilizador</a>
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
+
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="raffle.html">Sorteio</a>
+        <a href="results.html">Resultados</a>
+        <a href="faq.html">FAQ</a>
         <a href="admin.html">Admin</a>
       </div>
-    </div>
-  </div>
+    </nav>
+  </header>
 
-  <section class="container hero">
-    <div class="hero-box">
-      <p>Finalização da participação</p>
-      <h2>Reserve a sua entrada no sorteio</h2>
-    </div>
-  </section>
+  <div class="container">
+    <h1>Checkout</h1>
 
-  <section class="container layout">
+    <div class="layout">
+      <div class="card">
+        <div class="vehicle">
+          <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80" alt="BMW Série 1">
+          <div class="vehicle-body">
+            <h2>BMW Série 1 Pack M</h2>
+            <p class="muted">Finalize a sua participação no sorteio premium CarSorte.</p>
+            <p class="muted">11257 bilhetes vendidos · 3743 restantes</p>
+          </div>
+        </div>
 
-    <div class="panel">
-      <h3>Escolha do sorteio</h3>
+        <h2>Escolha o pack</h2>
 
-      <div class="vehicle">
-        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80" alt="BMW Série 1 Pack M">
-        <div class="vehicle-body">
-          <div class="badge">Quase cheio</div>
-          <h3 style="margin:0 0 8px 0">BMW Série 1 Pack M</h3>
-          <p class="muted" style="margin:0 0 12px 0">11 257 bilhetes vendidos · 3 743 restantes</p>
-          <p class="muted" style="margin:0">Sorteio em 04 dias · 12h · 18m</p>
+        <div class="packs">
+          <a class="pack" data-pack="1" href="checkout.html?pack=1">
+            <strong>1</strong>
+            <small>Entrada rápida</small>
+            <span>2,50€</span>
+          </a>
+
+          <a class="pack" data-pack="5" href="checkout.html?pack=5">
+            <strong>5</strong>
+            <small>Mais popular</small>
+            <span>10€</span>
+          </a>
+
+          <a class="pack" data-pack="10" href="checkout.html?pack=10">
+            <strong>10</strong>
+            <small>Forte impulso</small>
+            <span>20€</span>
+          </a>
+
+          <a class="pack" data-pack="25" href="checkout.html?pack=25">
+            <strong>25</strong>
+            <small>Máxima chance</small>
+            <span>50€</span>
+          </a>
+        </div>
+
+        <h2 style="margin-top:28px;">Dados do participante</h2>
+
+        <div class="form-grid">
+          <input type="text" placeholder="Nome completo">
+          <input type="email" placeholder="Email">
+          <input type="tel" placeholder="Telefone">
+          <input type="text" placeholder="Cidade">
+        </div>
+
+        <div class="question">
+          <strong>Pergunta de qualificação</strong>
+          <p class="muted">Quanto é 4 + 3 ?</p>
+
+          <div class="answers">
+            <span class="answer">5</span>
+            <span class="answer good">7</span>
+            <span class="answer">9</span>
+          </div>
         </div>
       </div>
 
-      <h3 style="margin-top:28px">Escolha o pack</h3>
-      <div class="packs">
-        <a class="pack" data-pack="1" href="checkout.html?pack=1">
-          <strong>1</strong>
-          <small>Entrada rápida</small>
-          <span>2,50€</span>
-        </a>
-        <a class="pack" data-pack="5" href="checkout.html?pack=5">
-          <strong>5</strong>
-          <small>Mais popular</small>
-          <span>10€</span>
-        </a>
-        <a class="pack" data-pack="10" href="checkout.html?pack=10">
-          <strong>10</strong>
-          <small>Forte impulso</small>
-          <span>20€</span>
-        </a>
-        <a class="pack" data-pack="25" href="checkout.html?pack=25">
-          <strong>25</strong>
-          <small>Máxima chance</small>
-          <span>50€</span>
-        </a>
-      </div>
+      <div class="card">
+        <h2>Resumo da participação</h2>
 
-      <h3 style="margin-top:28px">Dados do participante</h3>
-      <div class="form-grid">
-        <input type="text" placeholder="Nome completo">
-        <input type="email" placeholder="Email">
-        <input type="tel" placeholder="Telefone">
-        <input type="text" placeholder="Cidade">
-      </div>
-
-      <div class="question">
-        <div style="font-weight:900;margin-bottom:8px">Pergunta de qualificação</div>
-        <div class="muted">Quanto é 4 + 3 ?</div>
-        <div class="answers">
-          <div class="answer">5</div>
-          <div class="answer good">7</div>
-          <div class="answer">9</div>
-        </div>
-      </div>
-
-      <div class="note">
-        Ao avançar, confirma que leu as informações do sorteio e aceita as condições gerais aplicáveis à participação.
-      </div>
-    </div>
-
-    <div class="panel">
-      <h3>Resumo da participação</h3>
-
-      <div class="summary-box">
         <div class="summary-row">
           <span class="muted">Sorteio</span>
           <strong>BMW Série 1 Pack M</strong>
         </div>
+
         <div class="summary-row">
           <span class="muted">Pack selecionado</span>
           <strong id="summary-pack">5 bilhetes</strong>
         </div>
+
         <div class="summary-row">
           <span class="muted">Preço unitário</span>
           <strong>2,50€</strong>
         </div>
+
         <div class="summary-row">
           <span class="muted">Subtotal</span>
           <strong id="summary-subtotal">10€</strong>
         </div>
+
         <div class="summary-total">
           <span>Total</span>
           <span class="gold" id="summary-total">10€</span>
         </div>
-      </div>
 
-      <div class="payment-icons">
-        <div class="pay-chip">Visa</div>
-        <div class="pay-chip">Mastercard</div>
-        <div class="pay-chip">Apple Pay</div>
-        <div class="pay-chip">Google Pay</div>
-        <div class="pay-chip">Stripe em breve</div>
-      </div>
+        <div class="chips">
+          <span class="chip">Visa</span>
+          <span class="chip">Mastercard</span>
+          <span class="chip">Apple Pay</span>
+          <span class="chip">Google Pay</span>
+        </div>
 
-      <div class="note">
-        Esta página é uma pré-estrutura visual de checkout. O próximo passo será ligar um pagamento real com Stripe e geração automática dos bilhetes.
+        <a class="btn" id="pay-btn" href="checkout-success.html?pack=5">Pagar agora</a>
+        <a class="btn-secondary" href="raffle.html">Voltar ao sorteio</a>
       </div>
-
-      <a class="btn primary" id="pay-btn" href="checkout-success.html">Pagar agora</a>
-      <a class="btn secondary" href="raffle.html">Voltar ao sorteio</a>
     </div>
-
-  </section>
+  </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -415,16 +438,13 @@
     document.getElementById("summary-pack").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
     document.getElementById("summary-subtotal").textContent = active.total;
     document.getElementById("summary-total").textContent = active.total;
+    document.getElementById("pay-btn").href = `checkout-success.html?pack=${selectedPack}`;
 
     document.querySelectorAll(".pack").forEach((el) => {
       if (el.dataset.pack === selectedPack) {
         el.classList.add("active");
-      } else {
-        el.classList.remove("active");
       }
     });
-
-    document.getElementById("pay-btn").href = `checkout-success.html?pack=${selectedPack}`;
   </script>
 
 </body>
