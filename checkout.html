@@ -6,468 +6,297 @@
 <title>Checkout - CarSorte</title>
 
 <style>
+:root{
+--bg:#050505;
+--panel:#101010;
+--gold:#d4a017;
+--gold-soft:#f4c542;
+--text:#ffffff;
+--muted:#b8b8b8;
+--line:rgba(255,255,255,.08);
+--shadow:0 14px 34px rgba(0,0,0,.32);
+}
+
 body{
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
-background:#050505;
-color:white;
-}
-
-a{
-text-decoration:none;
-color:white;
+background:var(--bg);
+color:var(--text);
 }
 
 .container{
-max-width:1200px;
+max-width:1100px;
 margin:auto;
-padding:20px;
+padding:40px 20px;
 }
 
-.topbar{
-background:black;
-border-bottom:1px solid #222;
-}
-
-.nav{
+.header{
 display:flex;
-align-items:center;
 justify-content:space-between;
-flex-wrap:wrap;
-gap:20px;
+align-items:center;
+margin-bottom:40px;
 }
 
 .logo{
 display:flex;
 align-items:center;
-gap:15px;
+gap:12px;
 }
 
 .logo img{
-height:55px;
+height:70px;
 }
 
-.logo-text{
-display:flex;
-flex-direction:column;
+.logo strong{
+font-size:28px;
+color:var(--gold-soft);
 }
 
-.logo-text strong{
-font-size:26px;
-color:#d4a017;
-}
-
-.logo-text span{
-font-size:13px;
-color:#aaa;
-}
-
-.navlinks{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.navlinks a{
-color:#ddd;
-font-size:15px;
-}
-
-.admin-btn{
-background:#6a2a00;
-padding:10px 18px;
-border-radius:12px;
-}
-
-.banner{
-background:#5a1f00;
-text-align:center;
-padding:10px;
-font-weight:bold;
-}
-
-.layout{
+.grid{
 display:grid;
-grid-template-columns:1.2fr .8fr;
-gap:25px;
-padding:50px 0 60px 0;
+grid-template-columns:1fr 420px;
+gap:30px;
 }
 
-.card{
-background:#111;
-border:1px solid #222;
+.box{
+background:var(--panel);
+border:1px solid var(--line);
 border-radius:20px;
 padding:24px;
+box-shadow:var(--shadow);
 }
 
-.card h1,
-.card h2{
+.box h2{
 margin-top:0;
+font-size:28px;
 }
 
 .vehicle{
-display:grid;
-grid-template-columns:220px 1fr;
+display:flex;
 gap:20px;
-align-items:center;
-background:#0b0b0b;
-border:1px solid #222;
-border-radius:16px;
-overflow:hidden;
-margin-bottom:24px;
+margin-top:16px;
 }
 
 .vehicle img{
-width:100%;
-height:100%;
-min-height:180px;
-object-fit:cover;
-display:block;
+width:160px;
+border-radius:12px;
 }
 
-.vehicle-body{
-padding:18px;
+.vehicle-info h3{
+margin:0;
+font-size:24px;
 }
 
-.badge{
-display:inline-block;
-padding:8px 12px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
-background:#1b1305;
-border:1px solid #5a3a00;
-color:#e0b84d;
-margin-bottom:10px;
-}
-
-.muted{
-color:#aaa;
-line-height:1.7;
-}
-
-.packs{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:14px;
-margin-top:18px;
+.vehicle-info p{
+color:var(--muted);
+margin-top:6px;
 }
 
 .pack{
-display:block;
-text-align:center;
+margin-top:20px;
+padding:16px;
+border:1px solid var(--line);
+border-radius:14px;
 background:#0b0b0b;
-border:1px solid #222;
-border-radius:16px;
-padding:16px 12px;
-}
-
-.pack.active{
-border:1px solid #d4a017;
-background:#171005;
 }
 
 .pack strong{
-display:block;
-font-size:30px;
-color:#d4a017;
-margin-bottom:6px;
+font-size:24px;
+color:var(--gold-soft);
 }
 
-.pack small{
-display:block;
-color:#888;
-margin-bottom:8px;
-}
-
-.pack span{
-font-size:18px;
-font-weight:bold;
-}
-
-.form-grid{
+.form{
+margin-top:20px;
 display:grid;
 gap:14px;
-margin-top:22px;
 }
 
-.form-grid input{
+input{
 width:100%;
+padding:14px;
+border-radius:10px;
+border:1px solid var(--line);
 background:#0b0b0b;
-border:1px solid #222;
-border-radius:12px;
-padding:14px 16px;
 color:white;
-font-size:16px;
-outline:none;
 }
 
-.question{
-margin-top:22px;
-background:#0b0b0b;
-border:1px solid #222;
-border-radius:16px;
-padding:18px;
-}
-
-.answers{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-top:12px;
-}
-
-.answer{
-padding:10px 14px;
-border-radius:999px;
-border:1px solid #333;
-color:#ddd;
-font-size:14px;
-}
-
-.answer.good{
-border-color:#d4a017;
-color:#d4a017;
-}
-
-.summary-row{
-display:flex;
-justify-content:space-between;
+.summary{
+display:grid;
 gap:12px;
-padding:14px 0;
-border-bottom:1px solid #222;
+margin-top:20px;
 }
 
-.summary-row:last-child{
-border-bottom:none;
-}
-
-.summary-total{
+.row{
 display:flex;
 justify-content:space-between;
-align-items:center;
-margin-top:18px;
-padding-top:18px;
-border-top:1px solid #333;
+}
+
+.total{
 font-size:22px;
-font-weight:bold;
-}
-
-.gold{
-color:#d4a017;
-}
-
-.chips{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-top:18px;
-}
-
-.chip{
-padding:10px 12px;
-background:#0b0b0b;
-border:1px solid #222;
-border-radius:999px;
-color:#ddd;
-font-size:14px;
+font-weight:800;
+color:var(--gold-soft);
 }
 
 .btn{
-display:inline-block;
-width:100%;
+display:block;
 text-align:center;
-background:#6a2a00;
-padding:16px 24px;
-border-radius:14px;
-font-weight:bold;
-margin-top:18px;
+padding:16px;
+border-radius:12px;
+font-weight:800;
+margin-top:20px;
+cursor:pointer;
 }
 
-.btn-secondary{
-display:inline-block;
-width:100%;
+.btn-primary{
+background:var(--gold);
+color:black;
+}
+
+.secure{
+margin-top:18px;
+font-size:13px;
+color:#aaa;
 text-align:center;
-background:#151515;
-border:1px solid #333;
-padding:16px 24px;
-border-radius:14px;
-font-weight:bold;
-margin-top:12px;
 }
 
 @media(max-width:900px){
-.layout{
+
+.grid{
 grid-template-columns:1fr;
 }
-.vehicle{
-grid-template-columns:1fr;
-}
-.packs{
-grid-template-columns:1fr;
-}
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="banner">
-🔥 Checkout premium · 5 bilhetes por 10€ · 15 bilhetes por 25€
-</div>
+<div class="container">
 
-<div class="topbar">
-<div class="container nav">
+<div class="header">
 
 <div class="logo">
-<img src="logo-carsorte.png" alt="CarSorte">
-<div class="logo-text">
+<img src="logo-carsorte.png">
 <strong>CarSorte</strong>
-<span>BY DEM AUTOMÓVEIS</span>
-</div>
 </div>
 
-<div class="navlinks">
-<a href="index.html">Início</a>
-<a href="raffle.html">Sorteios</a>
-<a href="winners.html">Vencedores</a>
-<a href="results.html">Resultados</a>
-<a href="faq.html">FAQ</a>
-<a href="regulamento.html">Regulamento</a>
-<a href="login.html">Login</a>
-<a class="admin-btn" href="admin.html">Admin</a>
+<div>
+Checkout seguro
 </div>
 
 </div>
+
+
+<div class="grid">
+
+
+<div class="box">
+
+<h2>Detalhes do participante</h2>
+
+<div class="form">
+
+<input placeholder="Nome completo">
+
+<input placeholder="Email">
+
+<input placeholder="Telefone">
+
+<input placeholder="Cidade">
+
 </div>
 
-<div class="container layout">
+</div>
 
-<div class="card">
 
-<h1>Finalizar participação</h1>
+
+<div class="box">
+
+<h2>Resumo do pedido</h2>
 
 <div class="vehicle">
-<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1400&q=80" alt="BMW Série 1 Pack M">
 
-<div class="vehicle-body">
-<div class="badge">Quase cheio</div>
-<h2>BMW Série 1 Pack M</h2>
-<p class="muted">Sorteio premium em destaque com forte procura e acesso por apenas 2,50€ por bilhete.</p>
+<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e">
+
+<div class="vehicle-info">
+
+<h3>BMW Série 1 Pack M</h3>
+
+<p>Sorteio premium CarSorte</p>
+
 </div>
+
 </div>
 
-<h2>Escolha o pack</h2>
 
-<div class="packs">
+<div class="pack">
 
-<a class="pack" data-pack="1" href="checkout.html?pack=1">
-<strong>1</strong>
-<small>Entrada simples</small>
+<strong id="tickets">5 bilhetes</strong>
+
+<div style="color:#aaa;margin-top:4px;">
+Pack promoção
+</div>
+
+</div>
+
+
+<div class="summary">
+
+<div class="row">
+<span>Preço bilhete</span>
 <span>2,50€</span>
-</a>
-
-<a class="pack" data-pack="5" href="checkout.html?pack=5">
-<strong>5</strong>
-<small>Oferta de lançamento</small>
-<span>10€</span>
-</a>
-
-<a class="pack" data-pack="15" href="checkout.html?pack=15">
-<strong>15</strong>
-<small>Melhor valor</small>
-<span>25€</span>
-</a>
-
 </div>
 
-<h2 style="margin-top:28px;">Dados do participante</h2>
-
-<div class="form-grid">
-<input type="text" placeholder="Nome completo">
-<input type="email" placeholder="Email">
-<input type="tel" placeholder="Telefone">
-<input type="text" placeholder="Cidade">
+<div class="row">
+<span>Quantidade</span>
+<span id="qty">5</span>
 </div>
 
-<div class="question">
-<strong>Pergunta de qualificação</strong>
-<p class="muted">Quanto é 4 + 3 ?</p>
-
-<div class="answers">
-<span class="answer">5</span>
-<span class="answer good">7</span>
-<span class="answer">9</span>
-</div>
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>Resumo da participação</h2>
-
-<div class="summary-row">
-<span class="muted">Sorteio</span>
-<strong>BMW Série 1 Pack M</strong>
-</div>
-
-<div class="summary-row">
-<span class="muted">Pack selecionado</span>
-<strong id="summary-pack">5 bilhetes</strong>
-</div>
-
-<div class="summary-row">
-<span class="muted">Preço unitário</span>
-<strong>2,50€</strong>
-</div>
-
-<div class="summary-row">
-<span class="muted">Subtotal</span>
-<strong id="summary-subtotal">10€</strong>
-</div>
-
-<div class="summary-total">
+<div class="row total">
 <span>Total</span>
-<span class="gold" id="summary-total">10€</span>
-</div>
-
-<div class="chips">
-<span class="chip">Visa</span>
-<span class="chip">Mastercard</span>
-<span class="chip">Apple Pay</span>
-<span class="chip">Google Pay</span>
-</div>
-
-<a class="btn" id="pay-btn" href="checkout-success.html?pack=5">Pagar agora</a>
-<a class="btn-secondary" href="raffle.html">Voltar ao sorteio</a>
-
+<span id="price">10€</span>
 </div>
 
 </div>
+
+
+<a class="btn btn-primary" href="checkout-success.html">
+Confirmar participação
+</a>
+
+<div class="secure">
+Pagamento protegido • Bilhetes únicos • Resultado público
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 
 <script>
+
 const params = new URLSearchParams(window.location.search);
-const selectedPack = params.get("pack") || "5";
+const pack = params.get("pack");
 
-const packData = {
-"1": { qty: 1, total: "2,50€" },
-"5": { qty: 5, total: "10€" },
-"15": { qty: 15, total: "25€" }
-};
+let qty = 1;
+let price = 2.5;
 
-const active = packData[selectedPack] || packData["5"];
-
-document.getElementById("summary-pack").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
-document.getElementById("summary-subtotal").textContent = active.total;
-document.getElementById("summary-total").textContent = active.total;
-document.getElementById("pay-btn").href = `checkout-success.html?pack=${selectedPack}`;
-
-document.querySelectorAll(".pack").forEach((el) => {
-if (el.dataset.pack === selectedPack) {
-el.classList.add("active");
+if(pack == "5"){
+qty = 5;
+price = 10;
 }
-});
+
+if(pack == "15"){
+qty = 15;
+price = 25;
+}
+
+document.getElementById("qty").innerText = qty;
+document.getElementById("tickets").innerText = qty + " bilhetes";
+document.getElementById("price").innerText = price + "€";
+
 </script>
 
 </body>
