@@ -1,263 +1,399 @@
 <!doctype html>
 <html lang="pt">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarSorte</title>
 
-<title>CarSorte</title>
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-<style>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#060606;
+      color:white;
+    }
 
-*{
-box-sizing:border-box;
-}
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#060606;
-color:white;
-}
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-/* HEADER */
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
 
-header{
-background:#111;
-border-bottom:1px solid rgba(255,255,255,.08);
-}
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
 
-nav{
-max-width:1200px;
-margin:auto;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px;
-}
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
 
-.logo{
-color:#f4c542;
-font-size:24px;
-font-weight:bold;
-}
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
 
-.menu a{
-color:white;
-text-decoration:none;
-margin-left:20px;
-}
+    .hero{
+      max-width:1200px;
+      margin:auto;
+      padding:70px 20px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+      align-items:center;
+    }
 
-/* HERO */
+    .hero-text h1{
+      font-size:64px;
+      line-height:1.1;
+      margin:0 0 20px 0;
+    }
 
-.hero{
-max-width:1200px;
-margin:auto;
-display:flex;
-align-items:center;
-gap:40px;
-padding:80px 20px;
-}
+    .hero-text p{
+      font-size:22px;
+      line-height:1.5;
+      color:#ddd;
+      margin:0 0 30px 0;
+      max-width:560px;
+    }
 
-.hero-text{
-flex:1;
-}
+    .hero-image img{
+      width:100%;
+      display:block;
+      border-radius:18px;
+    }
 
-.hero-image{
-flex:1;
-}
+    .btn{
+      display:inline-block;
+      background:#f4c542;
+      color:black;
+      padding:16px 26px;
+      border-radius:12px;
+      font-weight:bold;
+      font-size:18px;
+    }
 
-.hero-image img{
-width:100%;
-border-radius:10px;
-}
+    .section{
+      max-width:1200px;
+      margin:auto;
+      padding:60px 20px;
+    }
 
-/* BUTTON */
+    .section h2{
+      font-size:42px;
+      margin:0 0 25px 0;
+    }
 
-.btn{
-display:inline-block;
-background:#f4c542;
-color:black;
-padding:14px 24px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-top:20px;
-}
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:20px;
+    }
 
-/* SECTIONS */
+    .card{
+      background:#111;
+      padding:25px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+    }
 
-.section{
-max-width:1200px;
-margin:auto;
-padding:60px 20px;
-}
+    .card h3{
+      margin-top:0;
+      font-size:26px;
+    }
 
-.cards{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-}
+    .card p{
+      color:#ccc;
+      line-height:1.5;
+      margin-bottom:0;
+      font-size:17px;
+    }
 
-.card{
-flex:1;
-min-width:250px;
-background:#111;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.08);
-padding:25px;
-}
+    .progress{
+      height:10px;
+      background:#222;
+      border-radius:999px;
+      overflow:hidden;
+      margin:16px 0;
+    }
 
-/* PROGRESS */
+    .bar{
+      height:100%;
+      width:75%;
+      background:#f4c542;
+    }
 
-.progress{
-height:10px;
-background:#222;
-border-radius:10px;
-overflow:hidden;
-margin-top:10px;
-}
+    .timer{
+      margin-top:10px;
+      color:#f4c542;
+      font-weight:bold;
+    }
 
-.bar{
-height:100%;
-width:75%;
-background:#f4c542;
-}
+    footer{
+      text-align:center;
+      padding:40px 20px;
+      color:#999;
+      border-top:1px solid rgba(255,255,255,.05);
+      margin-top:20px;
+    }
 
-/* FOOTER */
+    .notification{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      background:#111;
+      padding:12px 16px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.1);
+      color:#fff;
+      font-size:14px;
+      max-width:260px;
+      z-index:999;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
 
-footer{
-text-align:center;
-padding:40px;
-color:#999;
-}
+    @media (max-width: 900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
 
-</style>
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
 
+      .hero{
+        grid-template-columns:1fr;
+        padding:40px 20px;
+      }
+
+      .hero-text{
+        order:1;
+      }
+
+      .hero-image{
+        order:2;
+      }
+
+      .hero-text h1{
+        font-size:34px;
+      }
+
+      .hero-text p{
+        font-size:18px;
+        max-width:100%;
+      }
+
+      .btn{
+        font-size:18px;
+        padding:14px 22px;
+      }
+
+      .section{
+        padding:40px 20px;
+      }
+
+      .section h2{
+        font-size:30px;
+      }
+
+      .cards{
+        grid-template-columns:1fr;
+      }
+
+      .notification{
+        left:12px;
+        right:12px;
+        bottom:12px;
+        max-width:none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
 
-<nav>
+      <div class="menu">
+        <a href="raffle.html">Sorteios</a>
+        <a href="winners.html">Vencedores</a>
+        <a href="results.html">Resultados</a>
+        <a href="faq.html">FAQ</a>
+        <a href="regulamento.html">Regulamento</a>
+        <a href="login.html">Login</a>
+      </div>
+    </nav>
+  </header>
 
-<div class="logo">
-CarSorte
-</div>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Ganhe um carro por apenas 2,50€</h1>
+      <p>Participe nos sorteios CarSorte e tenha a oportunidade de conduzir veículos premium.</p>
+      <a class="btn" href="raffle.html">Participar agora</a>
+    </div>
 
-<div class="menu">
-<a href="raffle.html">Sorteios</a>
-<a href="winners.html">Vencedores</a>
-<a href="results.html">Resultados</a>
-<a href="faq.html">FAQ</a>
-</div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80" alt="BMW Série 1">
+    </div>
+  </section>
 
-</nav>
+  <section class="section">
+    <h2>Sorteio em destaque</h2>
 
-</header>
+    <div class="card">
+      <h3>BMW Série 1 Pack M</h3>
+      <p>15000 bilhetes disponíveis</p>
 
-<section class="hero">
+      <div class="progress">
+        <div class="bar"></div>
+      </div>
 
-<div class="hero-text">
+      <p>11257 vendidos</p>
 
-<h1>Ganhe um carro por apenas 2,50€</h1>
+      <div class="timer">
+        Sorteio em <span id="timer"></span>
+      </div>
 
-<p>Participe nos sorteios CarSorte e tenha a oportunidade de conduzir veículos premium.</p>
+      <br>
 
-<a class="btn" href="raffle.html">
-Participar agora
-</a>
+      <a class="btn" href="raffle.html">Ver sorteio</a>
+    </div>
+  </section>
 
-</div>
+  <section class="section">
+    <h2>Porque escolher CarSorte</h2>
 
-<div class="hero-image">
+    <div class="cards">
+      <div class="card">
+        <h3>Sorteios transparentes</h3>
+        <p>Processo justo e verificável.</p>
+      </div>
 
-<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e">
+      <div class="card">
+        <h3>Bilhetes acessíveis</h3>
+        <p>Participação a partir de 2,50€.</p>
+      </div>
 
-</div>
+      <div class="card">
+        <h3>Experiência premium</h3>
+        <p>Plataforma moderna e segura.</p>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <section class="section">
+    <h2>Últimos vencedores</h2>
 
-<section class="section">
+    <div class="cards">
+      <div class="card">
+        <h3>Tiago – Porto</h3>
+        <p>Audi A3</p>
+      </div>
 
-<h2>Sorteio em destaque</h2>
+      <div class="card">
+        <h3>Marta – Braga</h3>
+        <p>Golf GTD</p>
+      </div>
 
-<div class="card">
+      <div class="card">
+        <h3>Rui – Lisboa</h3>
+        <p>Mercedes Classe A</p>
+      </div>
+    </div>
+  </section>
 
-<h3>BMW Série 1 Pack M</h3>
+  <section class="section">
+    <h2>Plataforma em crescimento</h2>
 
-<p>15000 bilhetes disponíveis</p>
+    <div class="cards">
+      <div class="card">
+        <h3>+20000</h3>
+        <p>Participantes</p>
+      </div>
 
-<div class="progress">
-<div class="bar"></div>
-</div>
+      <div class="card">
+        <h3>+50</h3>
+        <p>Sorteios realizados</p>
+      </div>
 
-<p>11257 vendidos</p>
+      <div class="card">
+        <h3>+100000€</h3>
+        <p>Prémios distribuídos</p>
+      </div>
+    </div>
+  </section>
 
-<a class="btn" href="raffle.html">
-Ver sorteio
-</a>
+  <footer>
+    © CarSorte
+  </footer>
 
-</div>
+  <div id="notification" class="notification"></div>
 
-</section>
+  <script>
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 4);
 
-<section class="section">
+    function updateTimer(){
+      const now = new Date();
+      const diff = endDate - now;
 
-<h2>Porque escolher CarSorte</h2>
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
 
-<div class="cards">
+      const timerEl = document.getElementById("timer");
+      if (timerEl) {
+        timerEl.innerText = days + " dias " + hours + "h";
+      }
+    }
 
-<div class="card">
-<h3>Sorteios transparentes</h3>
-<p>Processo justo e verificável.</p>
-</div>
+    setInterval(updateTimer, 1000);
+    updateTimer();
 
-<div class="card">
-<h3>Bilhetes acessíveis</h3>
-<p>Participação a partir de 2,50€.</p>
-</div>
+    const names = ["Miguel","João","Carlos","Ana","Rita","Pedro","Tiago","Marta"];
 
-<div class="card">
-<h3>Experiência premium</h3>
-<p>Plataforma moderna e segura.</p>
-</div>
+    function fakePurchase(){
+      const name = names[Math.floor(Math.random() * names.length)];
+      const qty = [1,5,10][Math.floor(Math.random() * 3)];
 
-</div>
+      const box = document.getElementById("notification");
+      if (!box) return;
 
-</section>
+      box.innerText = name + " comprou " + qty + " bilhetes";
 
-<section class="section">
+      setTimeout(() => {
+        box.innerText = "";
+      }, 4000);
+    }
 
-<h2>Últimos vencedores</h2>
-
-<div class="cards">
-
-<div class="card">
-<strong>Tiago – Porto</strong>
-<p>Audi A3</p>
-</div>
-
-<div class="card">
-<strong>Marta – Braga</strong>
-<p>Golf GTD</p>
-</div>
-
-<div class="card">
-<strong>Rui – Lisboa</strong>
-<p>Mercedes Classe A</p>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-
-© CarSorte
-
-</footer>
+    setInterval(fakePurchase, 8000);
+  </script>
 
 </body>
 </html>
