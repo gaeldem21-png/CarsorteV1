@@ -3,243 +3,477 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pagamento confirmado - CarSorte</title>
+<title>Participação confirmada - CarSorte</title>
 
 <style>
+:root{
+--bg:#050505;
+--panel:#101010;
+--panel-2:#0b0b0b;
+--gold:#d4a017;
+--gold-soft:#f4c542;
+--text:#ffffff;
+--muted:#b8b8b8;
+--line:rgba(255,255,255,.08);
+--shadow:0 14px 34px rgba(0,0,0,.32);
+--green:#29c46d;
+}
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
-background:#050505;
-color:white;
+background:
+radial-gradient(circle at top, rgba(212,160,23,.10), transparent 28%),
+var(--bg);
+color:var(--text);
 }
 
 a{
 text-decoration:none;
-color:white;
+color:inherit;
 }
 
 .container{
-max-width:900px;
+max-width:1100px;
 margin:auto;
-padding:20px;
+padding:28px 20px 60px;
 }
 
 .topbar{
-background:black;
-border-bottom:1px solid #222;
+background:linear-gradient(90deg,#155a2e,#29c46d,#155a2e);
+color:#021a0b;
+text-align:center;
+padding:10px 14px;
+font-size:14px;
+font-weight:800;
+letter-spacing:.02em;
 }
 
-.nav{
+.header{
 display:flex;
-align-items:center;
 justify-content:space-between;
-flex-wrap:wrap;
+align-items:center;
 gap:20px;
+padding:18px 0 28px;
+flex-wrap:wrap;
 }
 
 .logo{
 display:flex;
 align-items:center;
-gap:15px;
+gap:14px;
 }
 
 .logo img{
-height:55px;
+height:82px;
+width:auto;
+object-fit:contain;
+filter:drop-shadow(0 8px 22px rgba(212,160,23,.24));
 }
 
 .logo-text{
 display:flex;
 flex-direction:column;
+line-height:1.05;
 }
 
 .logo-text strong{
-font-size:26px;
-color:#d4a017;
+font-size:30px;
+color:var(--gold-soft);
 }
 
 .logo-text span{
-font-size:13px;
-color:#aaa;
+font-size:12px;
+letter-spacing:.18em;
+text-transform:uppercase;
+color:#999;
+margin-top:6px;
 }
 
-.navlinks{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.navlinks a{
-color:#ddd;
-font-size:15px;
-}
-
-.admin-btn{
-background:#6a2a00;
-padding:10px 18px;
+.back-link{
+padding:12px 16px;
 border-radius:12px;
+border:1px solid var(--line);
+background:rgba(255,255,255,.03);
+color:#ddd;
+font-weight:700;
 }
 
-.banner{
-background:#1d3b1d;
-text-align:center;
-padding:10px;
-font-weight:bold;
-}
-
-.card{
-background:#111;
-border:1px solid #222;
-border-radius:20px;
-padding:40px;
-margin-top:60px;
+.main-card{
+background:linear-gradient(180deg,#111,#090909);
+border:1px solid rgba(212,160,23,.14);
+border-radius:28px;
+padding:34px;
+box-shadow:var(--shadow);
 text-align:center;
 }
 
 .check{
-font-size:60px;
-color:#2ecc71;
+width:86px;
+height:86px;
+margin:0 auto 18px;
+border-radius:24px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+font-weight:900;
+background:var(--green);
+color:#03180b;
+box-shadow:0 12px 28px rgba(41,196,109,.22);
 }
 
-.gold{
-color:#d4a017;
+.main-card h1{
+margin:0 0 12px;
+font-size:44px;
+color:var(--gold-soft);
+}
+
+.main-card p{
+margin:0 auto;
+max-width:760px;
+color:var(--muted);
+line-height:1.8;
+font-size:18px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:24px;
+margin-top:26px;
+}
+
+.box{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:22px;
+padding:24px;
+box-shadow:var(--shadow);
+text-align:left;
+}
+
+.box h2{
+margin-top:0;
+font-size:28px;
 }
 
 .summary{
-margin-top:25px;
-background:#0b0b0b;
-border:1px solid #222;
-border-radius:16px;
-padding:20px;
+display:grid;
+gap:14px;
 }
 
 .row{
 display:flex;
 justify-content:space-between;
-padding:10px 0;
-border-bottom:1px solid #222;
+gap:12px;
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .row:last-child{
 border-bottom:none;
 }
 
+.muted{
+color:var(--muted);
+}
+
+.gold{
+color:var(--gold-soft);
+font-weight:800;
+}
+
+.tickets{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:14px;
+}
+
+.ticket{
+padding:10px 12px;
+border-radius:999px;
+border:1px solid rgba(212,160,23,.22);
+background:rgba(212,160,23,.08);
+color:#ffe08a;
+font-size:13px;
+font-weight:800;
+}
+
+.share-box{
+margin-top:18px;
+padding:16px;
+border-radius:16px;
+background:rgba(212,160,23,.08);
+border:1px solid rgba(212,160,23,.16);
+}
+
+.share-box strong{
+display:block;
+margin-bottom:8px;
+}
+
+.share-box p{
+margin:0;
+font-size:14px;
+line-height:1.7;
+max-width:none;
+}
+
+.actions{
+display:grid;
+gap:12px;
+margin-top:20px;
+}
+
 .btn{
-display:inline-block;
-background:#6a2a00;
-padding:16px 28px;
+display:block;
+text-align:center;
+padding:16px 18px;
 border-radius:14px;
-font-weight:bold;
-margin-top:25px;
+font-weight:800;
+}
+
+.btn-primary{
+background:var(--gold);
+color:#000;
 }
 
 .btn-secondary{
-display:inline-block;
-background:#151515;
-border:1px solid #333;
-padding:16px 28px;
-border-radius:14px;
-font-weight:bold;
-margin-top:15px;
+background:rgba(255,255,255,.04);
+border:1px solid var(--line);
+color:#fff;
 }
 
+.btn-green{
+background:var(--green);
+color:#04170b;
+}
+
+.mini-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+margin-top:18px;
+}
+
+.mini{
+background:var(--panel-2);
+border:1px solid var(--line);
+border-radius:16px;
+padding:16px;
+text-align:center;
+}
+
+.mini strong{
+display:block;
+font-size:24px;
+color:var(--gold-soft);
+margin-bottom:6px;
+}
+
+.mini span{
+color:#9f9f9f;
+font-size:13px;
+}
+
+.note{
+margin-top:18px;
+font-size:14px;
+line-height:1.7;
+color:#9e9e9e;
+}
+
+@media(max-width:900px){
+.grid{
+grid-template-columns:1fr;
+}
+
+.main-card{
+padding:24px;
+}
+
+.main-card h1{
+font-size:32px;
+}
+
+.main-card p{
+font-size:16px;
+}
+
+.mini-grid{
+grid-template-columns:1fr;
+}
+
+.logo img{
+height:68px;
+}
+}
 </style>
 </head>
-
 <body>
 
-<div class="banner">
-✅ Pagamento confirmado · Participação registada
-</div>
-
 <div class="topbar">
-<div class="container nav">
-
-<div class="logo">
-<img src="logo-carsorte.png" alt="CarSorte">
-<div class="logo-text">
-<strong>CarSorte</strong>
-<span>BY DEM AUTOMÓVEIS</span>
-</div>
-</div>
-
-<div class="navlinks">
-<a href="index.html">Início</a>
-<a href="raffle.html">Sorteios</a>
-<a href="winners.html">Vencedores</a>
-<a href="results.html">Resultados</a>
-<a href="faq.html">FAQ</a>
-<a href="regulamento.html">Regulamento</a>
-<a href="login.html">Login</a>
-<a class="admin-btn" href="admin.html">Admin</a>
-</div>
-
-</div>
+✅ Participação confirmada · bilhetes gerados · partilhe a sua entrada na CarSorte
 </div>
 
 <div class="container">
 
-<div class="card">
+<div class="header">
+  <div class="logo">
+    <img src="logo-carsorte.png" alt="CarSorte">
+    <div class="logo-text">
+      <strong>CarSorte</strong>
+      <span>by DEM Automóveis</span>
+    </div>
+  </div>
 
-<div class="check">✔</div>
-
-<h1>Pagamento confirmado</h1>
-
-<p>
-A sua participação foi registada com sucesso.  
-Os seus bilhetes estão agora ativos para o sorteio.
-</p>
-
-<div class="summary">
-
-<div class="row">
-<span>Sorteio</span>
-<strong>BMW Série 1 Pack M</strong>
+  <a class="back-link" href="index.html">Voltar ao site</a>
 </div>
 
-<div class="row">
-<span>Bilhetes</span>
-<strong id="tickets">5</strong>
+<div class="main-card">
+  <div class="check">✓</div>
+  <h1>Participação confirmada</h1>
+  <p>
+    A sua entrada foi registada com sucesso. Os seus bilhetes já estão associados ao sorteio e a sua participação faz agora parte da próxima grande história da CarSorte.
+  </p>
 </div>
 
-<div class="row">
-<span>Total pago</span>
-<strong id="total" class="gold">10€</strong>
-</div>
+<div class="grid">
 
-</div>
+  <div class="box">
+    <h2>Os seus bilhetes</h2>
 
-<a class="btn" id="userlink" href="utilizador.html?pack=5">
-Ir para a minha conta
-</a>
+    <div class="summary">
+      <div class="row">
+        <span class="muted">Sorteio</span>
+        <strong>BMW Série 1 Pack M</strong>
+      </div>
 
-<br>
+      <div class="row">
+        <span class="muted">Pack comprado</span>
+        <strong id="pack-label">5 bilhetes</strong>
+      </div>
 
-<a class="btn-secondary" href="raffle.html">
-Ver outros sorteios
-</a>
+      <div class="row">
+        <span class="muted">Total pago</span>
+        <strong class="gold" id="pack-total">10€</strong>
+      </div>
+
+      <div class="row">
+        <span class="muted">Estado</span>
+        <strong>Confirmado</strong>
+      </div>
+    </div>
+
+    <div class="tickets" id="tickets-list"></div>
+
+    <div class="share-box">
+      <strong>Partilhe a sua entrada</strong>
+      <p>
+        Diga aos seus amigos que já está no sorteio. Quanto mais forte a comunidade, mais poderosa se torna a marca CarSorte.
+      </p>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-green" href="#" id="share-btn">Partilhar participação</a>
+      <a class="btn btn-primary" id="user-link" href="utilizador.html?pack=5">Ir para a minha conta</a>
+      <a class="btn btn-secondary" href="raffle.html">Voltar ao sorteio</a>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>O que acontece agora</h2>
+
+    <div class="mini-grid">
+      <div class="mini">
+        <strong>1</strong>
+        <span>Bilhetes ativos</span>
+      </div>
+
+      <div class="mini">
+        <strong>2</strong>
+        <span>Sorteio a decorrer</span>
+      </div>
+
+      <div class="mini">
+        <strong>3</strong>
+        <span>Resultado publicado</span>
+      </div>
+    </div>
+
+    <div class="note">
+      Acompanhe a evolução do sorteio, consulte os seus bilhetes na sua área pessoal e esteja atento à página de resultados. Se o seu bilhete for o vencedor, a sua história passa a fazer parte da CarSorte.
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-secondary" href="results.html">Ver resultados</a>
+      <a class="btn btn-secondary" href="winners.html">Ver vencedores</a>
+    </div>
+  </div>
 
 </div>
 
 </div>
 
 <script>
-
 const params = new URLSearchParams(window.location.search);
-const pack = params.get("pack") || "5";
+const selectedPack = params.get("pack") || "5";
 
-const packs = {
-1:{tickets:1,total:"2,50€"},
-5:{tickets:5,total:"10€"},
-15:{tickets:15,total:"25€"}
+const packData = {
+  "1": { qty: 1, total: "2,50€" },
+  "5": { qty: 5, total: "10€" },
+  "15": { qty: 15, total: "25€" }
 };
 
-const data = packs[pack];
+const active = packData[selectedPack] || packData["5"];
 
-document.getElementById("tickets").innerText = data.tickets;
-document.getElementById("total").innerText = data.total;
-document.getElementById("userlink").href = "utilizador.html?pack=" + pack;
+document.getElementById("pack-label").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
+document.getElementById("pack-total").textContent = active.total;
+document.getElementById("user-link").href = `utilizador.html?pack=${selectedPack}`;
 
+function generateTickets(quantity){
+  const tickets = [];
+  const start = Math.floor(Math.random() * 9000) + 1000;
+
+  for(let i = 0; i < quantity; i++){
+    tickets.push("#CS-" + (start + i));
+  }
+
+  return tickets;
+}
+
+const tickets = generateTickets(active.qty);
+const ticketsList = document.getElementById("tickets-list");
+
+tickets.forEach(ticket => {
+  const span = document.createElement("span");
+  span.className = "ticket";
+  span.textContent = ticket;
+  ticketsList.appendChild(span);
+});
+
+document.getElementById("share-btn").addEventListener("click", function(e){
+  e.preventDefault();
+
+  const text = `Acabei de entrar no sorteio CarSorte com ${active.qty} bilhete${active.qty > 1 ? "s" : ""}. 🚗`;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: "CarSorte",
+      text: text,
+      url: window.location.origin + window.location.pathname
+    });
+  } else {
+    navigator.clipboard.writeText(text);
+    this.textContent = "Mensagem copiada";
+  }
+});
 </script>
 
 </body>
