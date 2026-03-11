@@ -19,389 +19,81 @@
       --green:#29c46d;
       --red:#d95c5c;
     }
-
     *{box-sizing:border-box}
-
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%),
-        var(--bg);
+      background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
       color:var(--text);
     }
-
     a{text-decoration:none;color:inherit}
-
-    .container{
-      max-width:1280px;
-      margin:auto;
-      padding:24px 20px 60px;
+    .container{max-width:1280px;margin:auto;padding:24px 20px 60px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{height:72px;width:auto;object-fit:contain}
+    .brand strong{display:block;color:var(--gold-soft);font-size:32px;line-height:1}
+    .brand span{display:block;color:#999;text-transform:uppercase;letter-spacing:.18em;font-size:12px;margin-top:6px}
+    .nav{display:flex;gap:12px;flex-wrap:wrap}
+    .nav a, .nav button{
+      padding:12px 14px;border-radius:12px;background:#111;border:1px solid var(--line);
+      color:#ddd;font-weight:700;cursor:pointer
     }
-
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-      flex-wrap:wrap;
-      margin-bottom:26px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-
-    .brand img{
-      height:72px;
-      width:auto;
-      object-fit:contain;
-    }
-
-    .brand strong{
-      display:block;
-      color:var(--gold-soft);
-      font-size:32px;
-      line-height:1;
-    }
-
-    .brand span{
-      display:block;
-      color:#999;
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      font-size:12px;
-      margin-top:6px;
-    }
-
-    .nav{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .nav a{
-      padding:12px 14px;
-      border-radius:12px;
-      background:#111;
-      border:1px solid var(--line);
-      color:#ddd;
-      font-weight:700;
-    }
-
-    .hero{
-      background:linear-gradient(180deg,#111,#090909);
-      border:1px solid rgba(212,160,23,.14);
-      border-radius:26px;
-      padding:28px;
-      box-shadow:var(--shadow);
-      margin-bottom:24px;
-    }
-
-    .hero h1{
-      margin:0 0 10px;
-      font-size:42px;
-      color:var(--gold-soft);
-    }
-
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.8;
-      max-width:840px;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-bottom:24px;
-    }
-
-    .stat{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:20px;
-      box-shadow:var(--shadow);
-    }
-
-    .stat strong{
-      display:block;
-      font-size:34px;
-      color:var(--gold-soft);
-      margin-bottom:8px;
-    }
-
-    .stat span{
-      color:#a8a8a8;
-      font-size:14px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:20px;
-    }
-
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      margin-bottom:20px;
-    }
-
-    .card h2{
-      margin:0 0 16px;
-      font-size:28px;
-      color:#fff;
-    }
-
-    .sub{
-      color:var(--muted);
-      line-height:1.7;
-      margin-top:-6px;
-      margin-bottom:18px;
-    }
-
-    .toolbar{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:16px;
-    }
-
-    .btn{
-      padding:12px 16px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#111;
-      color:#fff;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .btn.primary{
-      background:var(--gold);
-      color:#000;
-      border:none;
-    }
-
-    .btn.green{
-      background:var(--green);
-      color:#04160b;
-      border:none;
-    }
-
-    .btn.red{
-      background:var(--red);
-      color:#fff;
-      border:none;
-    }
-
-    .list{
-      display:grid;
-      gap:12px;
-    }
-
-    .item{
-      background:var(--panel-2);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:16px;
-      padding:16px;
-    }
-
-    .item strong{
-      display:block;
-      font-size:18px;
-      margin-bottom:8px;
-    }
-
-    .item span{
-      display:block;
-      color:#bcbcbc;
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    .pill{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:10px;
-    }
-
-    .pill.gold{
-      background:rgba(212,160,23,.1);
-      border:1px solid rgba(212,160,23,.22);
-      color:#ffe08a;
-    }
-
-    .pill.green{
-      background:rgba(41,196,109,.1);
-      border:1px solid rgba(41,196,109,.22);
-      color:#9ef0be;
-    }
-
-    .pill.red{
-      background:rgba(217,92,92,.1);
-      border:1px solid rgba(217,92,92,.22);
-      color:#ffb5b5;
-    }
-
-    .meta{
-      display:grid;
-      gap:10px;
-    }
-
-    .meta-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-
-    .meta-row:last-child{
-      border-bottom:none;
-    }
-
-    .meta-row span{
-      color:#aaa;
-    }
-
-    .meta-row strong{
-      color:#fff;
-      font-size:15px;
-      margin:0;
-      text-align:right;
-    }
-
-    .progress-wrap{
-      margin-top:18px;
-    }
-
-    .progress-top{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:8px;
-      color:#bbb;
-      font-size:14px;
-    }
-
-    .progress{
-      height:12px;
-      border-radius:999px;
-      background:#1a1a1a;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.05);
-    }
-
-    .progress-bar{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,#b07b06,#f4c542);
-    }
-
-    .status-box{
-      margin-top:16px;
-      padding:14px 16px;
-      border-radius:14px;
-      display:none;
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .status-box.ok{
-      background:rgba(41,196,109,.1);
-      border:1px solid rgba(41,196,109,.22);
-      color:#9ef0be;
-    }
-
-    .status-box.err{
-      background:rgba(217,92,92,.1);
-      border:1px solid rgba(217,92,92,.22);
-      color:#ffb5b5;
-    }
-
-    .status-box.info{
-      background:rgba(212,160,23,.1);
-      border:1px solid rgba(212,160,23,.22);
-      color:#ffe08a;
-    }
-
-    .empty{
-      padding:16px;
-      border-radius:16px;
-      background:#111;
-      border:1px solid rgba(255,255,255,.06);
-      color:#9f9f9f;
-    }
-
-    .form{
-      display:grid;
-      gap:12px;
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-
-    input, select{
-      width:100%;
-      padding:14px 16px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#0b0b0b;
-      color:#fff;
-      font-size:15px;
-      outline:none;
-    }
-
-    .small{
-      font-size:13px;
-      color:#999;
-      line-height:1.7;
-    }
-
+    .hero{background:linear-gradient(180deg,#111,#090909);border:1px solid rgba(212,160,23,.14);border-radius:26px;padding:28px;box-shadow:var(--shadow);margin-bottom:24px}
+    .hero h1{margin:0 0 10px;font-size:42px;color:var(--gold-soft)}
+    .hero p{margin:0;color:var(--muted);line-height:1.8;max-width:840px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+    .stat{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+    .stat strong{display:block;font-size:34px;color:var(--gold-soft);margin-bottom:8px}
+    .stat span{color:#a8a8a8;font-size:14px}
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}
+    .card h2{margin:0 0 16px;font-size:28px;color:#fff}
+    .sub{color:var(--muted);line-height:1.7;margin-top:-6px;margin-bottom:18px}
+    .toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+    .btn{padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:#111;color:#fff;font-weight:800;cursor:pointer}
+    .btn.primary{background:var(--gold);color:#000;border:none}
+    .btn.green{background:var(--green);color:#04160b;border:none}
+    .btn.red{background:var(--red);color:#fff;border:none}
+    .list{display:grid;gap:12px}
+    .item{background:var(--panel-2);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px}
+    .item strong{display:block;font-size:18px;margin-bottom:8px}
+    .item span{display:block;color:#bcbcbc;line-height:1.7;font-size:14px}
+    .pill{display:inline-block;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:800;margin-bottom:10px}
+    .pill.gold{background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.22);color:#ffe08a}
+    .pill.green{background:rgba(41,196,109,.1);border:1px solid rgba(41,196,109,.22);color:#9ef0be}
+    .meta{display:grid;gap:10px}
+    .meta-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .meta-row:last-child{border-bottom:none}
+    .meta-row span{color:#aaa}
+    .meta-row strong{color:#fff;font-size:15px;margin:0;text-align:right}
+    .progress-wrap{margin-top:18px}
+    .progress-top{display:flex;justify-content:space-between;gap:12px;margin-bottom:8px;color:#bbb;font-size:14px}
+    .progress{height:12px;border-radius:999px;background:#1a1a1a;overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+    .progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#b07b06,#f4c542)}
+    .status-box{margin-top:16px;padding:14px 16px;border-radius:14px;display:none;font-size:14px;line-height:1.6}
+    .status-box.ok{background:rgba(41,196,109,.1);border:1px solid rgba(41,196,109,.22);color:#9ef0be}
+    .status-box.err{background:rgba(217,92,92,.1);border:1px solid rgba(217,92,92,.22);color:#ffb5b5}
+    .status-box.info{background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.22);color:#ffe08a}
+    .empty{padding:16px;border-radius:16px;background:#111;border:1px solid rgba(255,255,255,.06);color:#9f9f9f}
+    .form{display:grid;gap:12px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input, select{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:#0b0b0b;color:#fff;font-size:15px;outline:none}
+    .small{font-size:13px;color:#999;line-height:1.7}
+    #authGate{display:none}
     @media(max-width:980px){
-      .stats{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero h1{
-        font-size:34px;
-      }
-
-      .form-grid{
-        grid-template-columns:1fr;
-      }
+      .stats{grid-template-columns:1fr 1fr}
+      .grid{grid-template-columns:1fr}
+      .hero h1{font-size:34px}
+      .form-grid{grid-template-columns:1fr}
     }
-
     @media(max-width:640px){
-      .stats{
-        grid-template-columns:1fr;
-      }
+      .stats{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-
+<div class="container" id="authGate">
   <div class="topbar">
     <div class="brand">
       <img src="logo-carsorte.png" alt="CarSorte">
@@ -416,45 +108,29 @@
       <a href="raffle.html">Sorteio</a>
       <a href="results.html">Resultados</a>
       <a href="winners.html">Vencedores</a>
+      <button id="logoutBtn">Logout</button>
     </div>
   </div>
 
   <div class="hero">
     <h1>Painel Admin</h1>
     <p>
-      Gere o sorteio ativo, veja as compras em tempo real, acompanhe a evolução dos bilhetes, crie novos sorteios e lance o vencedor diretamente a partir do painel.
+      Acesso protegido. Apenas a conta admin pode gerir sorteios, criar vencedores e fechar anúncios.
     </p>
   </div>
 
   <div class="stats">
-    <div class="stat">
-      <strong id="statTickets">0</strong>
-      <span>Total de bilhetes na coleção <b>tickets</b></span>
-    </div>
-
-    <div class="stat">
-      <strong id="statOrders">0</strong>
-      <span>Total de encomendas na coleção <b>orders</b></span>
-    </div>
-
-    <div class="stat">
-      <strong id="statSold">0</strong>
-      <span>tickets_sold do sorteio ativo</span>
-    </div>
-
-    <div class="stat">
-      <strong id="statDiff">0</strong>
-      <span>Diferença entre bilhetes e contador</span>
-    </div>
+    <div class="stat"><strong id="statTickets">0</strong><span>Total de bilhetes</span></div>
+    <div class="stat"><strong id="statOrders">0</strong><span>Total de encomendas</span></div>
+    <div class="stat"><strong id="statSold">0</strong><span>tickets_sold</span></div>
+    <div class="stat"><strong id="statDiff">0</strong><span>Diferença</span></div>
   </div>
 
   <div class="grid">
     <div>
       <div class="card">
         <h2>Sorteio ativo</h2>
-        <p class="sub">
-          Esta área mostra o documento atualmente selecionado como principal. O sorteio será fechado automaticamente quando todos os bilhetes forem vendidos ou quando o vencedor for sorteado.
-        </p>
+        <p class="sub">O sorteio é fechado automaticamente quando o vencedor é sorteado ou quando os bilhetes acabam.</p>
 
         <div class="toolbar">
           <button class="btn primary" id="refreshBtn">Atualizar painel</button>
@@ -463,38 +139,14 @@
         </div>
 
         <div class="meta">
-          <div class="meta-row">
-            <span>Documento</span>
-            <strong id="raffleIdText">Jumpy</strong>
-          </div>
-          <div class="meta-row">
-            <span>Título</span>
-            <strong id="raffleTitle">-</strong>
-          </div>
-          <div class="meta-row">
-            <span>Preço</span>
-            <strong id="rafflePrice">-</strong>
-          </div>
-          <div class="meta-row">
-            <span>Total de bilhetes</span>
-            <strong id="raffleTotal">-</strong>
-          </div>
-          <div class="meta-row">
-            <span>Bilhetes vendidos</span>
-            <strong id="raffleSold">-</strong>
-          </div>
-          <div class="meta-row">
-            <span>Estado</span>
-            <strong id="raffleStatus">-</strong>
-          </div>
-          <div class="meta-row">
-            <span>Vencedor sorteado</span>
-            <strong id="raffleWinnerDrawn">-</strong>
-          </div>
-          <div class="meta-row">
-            <span>Motivo de fecho</span>
-            <strong id="raffleEndedReason">-</strong>
-          </div>
+          <div class="meta-row"><span>Documento</span><strong id="raffleIdText">-</strong></div>
+          <div class="meta-row"><span>Título</span><strong id="raffleTitle">-</strong></div>
+          <div class="meta-row"><span>Preço</span><strong id="rafflePrice">-</strong></div>
+          <div class="meta-row"><span>Total de bilhetes</span><strong id="raffleTotal">-</strong></div>
+          <div class="meta-row"><span>Bilhetes vendidos</span><strong id="raffleSold">-</strong></div>
+          <div class="meta-row"><span>Estado</span><strong id="raffleStatus">-</strong></div>
+          <div class="meta-row"><span>Vencedor sorteado</span><strong id="raffleWinnerDrawn">-</strong></div>
+          <div class="meta-row"><span>Motivo de fecho</span><strong id="raffleEndedReason">-</strong></div>
         </div>
 
         <div class="progress-wrap">
@@ -502,9 +154,7 @@
             <span id="progressText">0 / 0 vendidos</span>
             <span id="progressPercent">0%</span>
           </div>
-          <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
+          <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
         </div>
 
         <div id="statusBox" class="status-box"></div>
@@ -512,20 +162,12 @@
 
       <div class="card">
         <h2>Últimas encomendas</h2>
-        <p class="sub">
-          Cada documento aqui representa uma compra. Se a participação passou, ela aparece nesta lista.
-        </p>
-
         <div id="ordersList" class="list"></div>
         <div id="ordersEmpty" class="empty" style="display:none;">Nenhuma encomenda encontrada.</div>
       </div>
 
       <div class="card">
         <h2>Últimos bilhetes</h2>
-        <p class="sub">
-          Cada registo abaixo representa um bilhete individual.
-        </p>
-
         <div id="ticketsList" class="list"></div>
         <div id="ticketsEmpty" class="empty" style="display:none;">Nenhum bilhete encontrado.</div>
       </div>
@@ -534,10 +176,6 @@
     <div>
       <div class="card">
         <h2>Criar novo sorteio</h2>
-        <p class="sub">
-          Preencha os dados do próximo sorteio. O novo documento será criado automaticamente na coleção <b>raffles</b>.
-        </p>
-
         <div class="form">
           <input id="newId" placeholder="ID do documento (ex: audiA3)">
           <input id="newTitle" placeholder="Título do sorteio (ex: Audi A3)">
@@ -553,27 +191,23 @@
           </select>
           <button class="btn primary" id="createRaffleBtn">Criar sorteio</button>
         </div>
-
-        <div class="small" style="margin-top:14px;">
-          Dica: use sempre um ID simples, sem espaços.
-        </div>
       </div>
 
       <div class="card">
         <h2>Último vencedor</h2>
-        <p class="sub">
-          Quando o sorteio for executado, o vencedor será gravado automaticamente em <b>winners</b>.
-        </p>
-
         <div id="winnerBox" class="empty">Nenhum vencedor registado.</div>
       </div>
     </div>
   </div>
-
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   getFirestore,
   collection,
@@ -599,10 +233,14 @@ const firebaseConfig = {
   appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
 };
 
+const ADMIN_EMAIL = "admin@carsorte.com";
+
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-const ACTIVE_RAFFLE_ID = "Jumpy";
+const authGate = document.getElementById("authGate");
+const logoutBtn = document.getElementById("logoutBtn");
 
 const statTickets = document.getElementById("statTickets");
 const statOrders = document.getElementById("statOrders");
@@ -634,6 +272,8 @@ const drawBtn = document.getElementById("drawBtn");
 const closeBtn = document.getElementById("closeBtn");
 const createRaffleBtn = document.getElementById("createRaffleBtn");
 
+let ACTIVE_RAFFLE_ID = "Jumpy";
+
 function formatCurrency(value){
   if(value === undefined || value === null) return "-";
   return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
@@ -641,11 +281,9 @@ function formatCurrency(value){
 
 function formatDate(value){
   try{
-    if(value && value.toDate){
-      return value.toDate().toLocaleString("pt-PT");
-    }
+    if(value && value.toDate) return value.toDate().toLocaleString("pt-PT");
     return "-";
-  }catch{
+  } catch {
     return "-";
   }
 }
@@ -656,10 +294,22 @@ function showStatus(text, type){
   statusBox.textContent = text;
 }
 
+async function getPrimaryRaffleId(){
+  const snap = await getDocs(collection(db, "raffles"));
+  const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  if(!raffles.length) return "Jumpy";
+  const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
+  if(featuredActive) return featuredActive.id;
+  const active = raffles.find(r => r.status === "active");
+  if(active) return active.id;
+  const featuredAny = raffles.find(r => r.featured === true);
+  if(featuredAny) return featuredAny.id;
+  return raffles[0].id;
+}
+
 async function closeIfSoldOut(raffleRef, raffleData){
   const sold = Number(raffleData.tickets_sold || 0);
   const total = Number(raffleData.tickets_total || 0);
-
   if(total > 0 && sold >= total && raffleData.status !== "sold_out" && raffleData.status !== "closed"){
     await updateDoc(raffleRef, {
       status: "sold_out",
@@ -705,6 +355,8 @@ async function loadDashboard(){
   statusBox.style.display = "none";
 
   try{
+    ACTIVE_RAFFLE_ID = await getPrimaryRaffleId();
+
     const ticketsSnap = await getDocs(collection(db, "tickets"));
     const ordersSnap = await getDocs(collection(db, "orders"));
     const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
@@ -717,9 +369,6 @@ async function loadDashboard(){
     statOrders.textContent = ordersCount;
     raffleIdText.textContent = ACTIVE_RAFFLE_ID;
 
-    let soldCount = 0;
-    let totalCount = 0;
-
     if(raffleSnap.exists()){
       const raffle = raffleSnap.data();
 
@@ -731,9 +380,8 @@ async function loadDashboard(){
       raffleWinnerDrawn.textContent = raffle.winner_drawn ? "true" : "false";
       raffleEndedReason.textContent = raffle.ended_reason || "-";
 
-      soldCount = Number(raffle.tickets_sold || 0);
-      totalCount = Number(raffle.tickets_total || 0);
-
+      const soldCount = Number(raffle.tickets_sold || 0);
+      const totalCount = Number(raffle.tickets_total || 0);
       statSold.textContent = soldCount;
 
       const diff = soldCount - ticketsCount;
@@ -754,24 +402,11 @@ async function loadDashboard(){
 
       await closeIfSoldOut(raffleRef, raffle);
     } else {
-      raffleTitle.textContent = "Documento não encontrado";
-      rafflePrice.textContent = "-";
-      raffleTotal.textContent = "-";
-      raffleSold.textContent = "-";
-      raffleStatus.textContent = "-";
-      raffleWinnerDrawn.textContent = "-";
-      raffleEndedReason.textContent = "-";
-      progressBar.style.width = "0%";
-      progressPercent.textContent = "0%";
-      progressText.textContent = "0 / 0 vendidos";
-      statSold.textContent = "0";
-      statDiff.textContent = "0";
       showStatus("O documento do sorteio ativo não foi encontrado.", "err");
     }
 
     const latestOrdersQuery = query(collection(db, "orders"), orderBy("created", "desc"), limit(10));
     const latestTicketsQuery = query(collection(db, "tickets"), orderBy("created", "desc"), limit(15));
-
     const latestOrders = await getDocs(latestOrdersQuery);
     const latestTickets = await getDocs(latestTicketsQuery);
 
@@ -782,7 +417,6 @@ async function loadDashboard(){
         const o = docSnap.data();
         const div = document.createElement("div");
         div.className = "item";
-
         div.innerHTML = `
           <span class="pill gold">Encomenda</span>
           <strong>${o.buyer || "-"}</strong>
@@ -805,7 +439,6 @@ async function loadDashboard(){
         const t = docSnap.data();
         const div = document.createElement("div");
         div.className = "item";
-
         div.innerHTML = `
           <span class="pill green">Bilhete</span>
           <strong>Ticket #${t.ticket_number ?? "-"}</strong>
@@ -820,7 +453,6 @@ async function loadDashboard(){
     }
 
     await loadLatestWinner();
-
   }catch(error){
     console.error(error);
     showStatus("Erro ao carregar o painel.", "err");
@@ -857,11 +489,7 @@ async function drawWinner(){
       return;
     }
 
-    const allTickets = ticketsSnap.docs.map(docSnap => ({
-      id: docSnap.id,
-      ...docSnap.data()
-    }));
-
+    const allTickets = ticketsSnap.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
     const randomIndex = Math.floor(Math.random() * allTickets.length);
     const winner = allTickets[randomIndex];
 
@@ -927,7 +555,8 @@ async function createRaffle(){
       status,
       image,
       winner_drawn: false,
-      ended_reason: ""
+      ended_reason: "",
+      featured: false
     });
 
     showStatus(`Novo sorteio criado com sucesso: ${title} (${id})`, "ok");
@@ -944,12 +573,25 @@ async function createRaffle(){
   }
 }
 
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "admin-login.html";
+});
+
 refreshBtn.addEventListener("click", loadDashboard);
 drawBtn.addEventListener("click", drawWinner);
 closeBtn.addEventListener("click", closeRaffle);
 createRaffleBtn.addEventListener("click", createRaffle);
 
-loadDashboard();
+onAuthStateChanged(auth, async (user) => {
+  if(!user || user.email !== ADMIN_EMAIL){
+    window.location.href = "admin-login.html";
+    return;
+  }
+
+  authGate.style.display = "block";
+  await loadDashboard();
+});
 </script>
 
 </body>
