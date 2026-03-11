@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resultado do Sorteio</title>
+
+<style>
+
+body{
+background:#060606;
+color:white;
+font-family:Arial;
+margin:0;
+padding:40px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:#111;
+padding:30px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.08);
+margin-top:30px;
+text-align:center;
+}
+
+.ticket{
+font-size:28px;
+color:#f4c542;
+margin-top:20px;
+}
+
+button{
+background:#f4c542;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Resultado do Sorteio</h1>
+
+<div class="card">
+
+<p>Sorteio: BMW Série 1 Pack M</p>
+
+<p>Bilhete vencedor</p>
+
+<div id="winner" class="ticket"></div>
+
+<a href="index.html">
+<button>Voltar ao site</button>
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function generateTickets(total){
+
+const tickets=[]
+
+for(let i=1;i<=total;i++){
+
+let num=i.toString().padStart(5,"0")
+
+tickets.push("#CS-"+num)
+
+}
+
+return tickets
+
+}
+
+const tickets = generateTickets(15000)
+
+const index = Math.floor(Math.random()*tickets.length)
+
+document.getElementById("winner").innerText = tickets[index]
+
+</script>
+
+</body>
+
+</html>
