@@ -1,374 +1,157 @@
 <!doctype html>
 <html lang="pt">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin V2 · CarSorte</title>
-  <style>
-    :root{
-      --bg:#060606;
-      --panel:#101010;
-      --panel2:#0b0b0b;
-      --gold:#f4c542;
-      --line:rgba(255,255,255,.08);
-      --muted:#a9a9a9;
-      --shadow:0 18px 40px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(244,197,66,.10), transparent 26%),
-        var(--bg);
-      color:#fff;
-    }
-    a{text-decoration:none;color:inherit}
-    .container{max-width:1300px;margin:0 auto;padding:0 20px}
 
-    .topbar{
-      position:sticky;top:0;z-index:20;
-      background:rgba(6,6,6,.9);
-      border-bottom:1px solid var(--line);
-      backdrop-filter:blur(10px);
-    }
-    .nav{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:18px 0;gap:20px;flex-wrap:wrap;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:46px;height:46px;border-radius:16px;background:var(--gold);
-      color:#000;display:grid;place-items:center;font-size:24px;font-weight:900;
-    }
-    .brand h1{margin:0;color:#f4c542;font-size:28px}
-    .brand small{display:block;color:#888}
-    .navlinks{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-    .navlinks a{color:#ddd;font-size:14px}
-    .navlinks a:hover{color:#f4c542}
-    .cta{
-      background:#f4c542;color:#000;padding:10px 14px;border-radius:14px;font-weight:800;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .hero{padding:34px 0}
-    .hero-box{
-      background:#101010;border:1px solid var(--line);border-radius:28px;padding:28px;
-      box-shadow:var(--shadow);
-    }
-    .hero-box h2{margin:0;font-size:40px}
-    .muted{color:var(--muted)}
+<title>Painel Admin</title>
 
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-top:24px;
-    }
-    .stat{
-      background:#101010;border:1px solid var(--line);border-radius:22px;padding:20px;text-align:center;box-shadow:var(--shadow);
-    }
-    .stat strong{display:block;font-size:32px;color:#f4c542}
-    .stat span{font-size:14px;color:#8f8f8f}
+<style>
 
-    .layout{
-      display:grid;
-      grid-template-columns:280px 1fr;
-      gap:22px;
-      padding-bottom:60px;
-    }
-    .sidebar,.panel{
-      background:#101010;border:1px solid var(--line);border-radius:26px;padding:24px;box-shadow:var(--shadow);
-    }
-    .menu{display:grid;gap:12px}
-    .menu a{
-      display:block;padding:14px 16px;border-radius:16px;background:#0b0b0b;border:1px solid var(--line);color:#ddd;
-    }
-    .menu a:hover{border-color:rgba(244,197,66,.25);color:#f4c542}
+body{
+background:#060606;
+color:white;
+font-family:Arial;
+margin:0;
+padding:40px;
+}
 
-    .panel h3{margin-top:0;font-size:28px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .box{
-      background:#0b0b0b;border:1px solid var(--line);border-radius:18px;padding:16px;
-    }
-    .table{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:10px;
-    }
-    .table th,.table td{
-      border-bottom:1px solid var(--line);
-      padding:12px 8px;
-      text-align:left;
-      font-size:14px;
-      vertical-align:top;
-    }
-    .badge{
-      display:inline-block;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800;
-      background:rgba(244,197,66,.1);color:#ffe08a;border:1px solid rgba(244,197,66,.2);
-    }
-    .badge.draft{
-      background:rgba(255,255,255,.06);
-      color:#ddd;
-      border:1px solid rgba(255,255,255,.12);
-    }
-    .badge.closed{
-      background:rgba(255,120,120,.10);
-      color:#ffb3b3;
-      border:1px solid rgba(255,120,120,.18);
-    }
+.container{
+max-width:1000px;
+margin:auto;
+}
 
-    .form{
-      display:grid;gap:14px;
-    }
-    .form input,.form textarea,.form select{
-      width:100%;
-      background:#0b0b0b;border:1px solid var(--line);color:#fff;
-      padding:14px 16px;border-radius:16px;outline:none;
-    }
-    .form textarea{min-height:120px;resize:vertical}
+h1{
+color:#f4c542;
+}
 
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:10px;
-    }
-    .btn{
-      display:inline-block;
-      padding:12px 16px;
-      border-radius:14px;
-      font-weight:900;
-      background:#f4c542;
-      color:#000;
-    }
-    .btn.secondary{
-      background:rgba(255,255,255,.05);
-      color:#fff;
-      border:1px solid var(--line);
-    }
+.card{
+background:#111;
+padding:25px;
+border-radius:15px;
+border:1px solid rgba(255,255,255,.08);
+margin-top:20px;
+}
 
-    @media (max-width:980px){
-      .layout,.stats,.grid-2{grid-template-columns:1fr}
-      .hero-box h2{font-size:32px}
-    }
-  </style>
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:20px;
+}
+
+.stat{
+background:#111;
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.08);
+text-align:center;
+}
+
+button{
+margin-top:20px;
+padding:14px 22px;
+border:none;
+border-radius:10px;
+background:#f4c542;
+font-weight:bold;
+cursor:pointer;
+}
+
+.winner{
+margin-top:20px;
+background:#0b0b0b;
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.08);
+font-size:18px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-  <div class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">⚙️</div>
-        <div>
-          <h1>Admin CarSorte</h1>
-          <small>Back-office DEM Automóveis</small>
-        </div>
-      </div>
-      <div class="navlinks">
-        <a href="index.html">Site público</a>
-        <a href="raffle.html">Página sorteio</a>
-        <a href="utilizador.html">Área utilizador</a>
-        <a class="cta" href="index.html">Sair</a>
-      </div>
-    </div>
-  </div>
+<div class="container">
 
-  <section class="container hero">
-    <div class="hero-box">
-      <h2>Dashboard administrativo V2</h2>
-      <p class="muted">Painel de gestão dos sorteios, utilizadores, bilhetes vendidos, vencedores, performance e configuração visual da plataforma.</p>
-    </div>
+<h1>Painel Admin</h1>
 
-    <div class="stats">
-      <div class="stat"><strong>3</strong><span>Sorteios ativos</span></div>
-      <div class="stat"><strong>27 547</strong><span>Bilhetes vendidos</span></div>
-      <div class="stat"><strong>68 867€</strong><span>Receita estimada</span></div>
-      <div class="stat"><strong>1 142</strong><span>Utilizadores ativos</span></div>
-    </div>
-  </section>
+<div class="stats">
 
-  <section class="container layout">
-    <aside class="sidebar">
-      <h3 style="margin-top:0">Menu</h3>
-      <div class="menu">
-        <a href="#overview">Visão geral</a>
-        <a href="#criar">Criar sorteio</a>
-        <a href="#gerir">Gerir sorteios</a>
-        <a href="#utilizadores">Utilizadores</a>
-        <a href="#bilhetes">Bilhetes vendidos</a>
-        <a href="#vencedores">Vencedores</a>
-        <a href="#marketing">Marketing</a>
-        <a href="#definicoes">Definições</a>
-      </div>
-    </aside>
+<div class="stat">
+<strong>BMW Série 1</strong>
+<br>
+Sorteio ativo
+</div>
 
-    <div style="display:grid;gap:22px">
-      <div class="panel" id="overview">
-        <h3>Visão geral</h3>
-        <div class="grid-2">
-          <div class="box">
-            <strong>Melhor desempenho</strong>
-            <p class="muted">BMW Série 1 Pack M é atualmente o sorteio com maior taxa de conversão e maior pressão de compra.</p>
-          </div>
-          <div class="box">
-            <strong>Próximo marco</strong>
-            <p class="muted">Ao atingir 12 000 bilhetes vendidos, recomenda-se reforço de urgência visual na home e nas redes sociais.</p>
-          </div>
-        </div>
-      </div>
+<div class="stat">
+<strong>11257</strong>
+<br>
+Bilhetes vendidos
+</div>
 
-      <div class="panel" id="criar">
-        <h3>Criar novo sorteio</h3>
-        <div class="form">
-          <input type="text" placeholder="Nome do sorteio">
-          <input type="text" placeholder="Veículo / prémio">
-          <input type="number" placeholder="Preço por bilhete">
-          <input type="number" placeholder="Número total de bilhetes">
-          <input type="text" placeholder="Data do sorteio">
-          <input type="text" placeholder="Pergunta de qualificação">
-          <input type="text" placeholder="Resposta correta">
-          <textarea placeholder="Descrição do sorteio"></textarea>
-          <div class="actions">
-            <a class="btn" href="#">Criar sorteio</a>
-            <a class="btn secondary" href="#">Guardar rascunho</a>
-          </div>
-        </div>
-      </div>
+<div class="stat">
+<strong>15000</strong>
+<br>
+Bilhetes totais
+</div>
 
-      <div class="panel" id="gerir">
-        <h3>Gerir sorteios</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Sorteio</th>
-              <th>Bilhetes vendidos</th>
-              <th>Data</th>
-              <th>Estado</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>BMW Série 1 Pack M</td>
-              <td>11 257 / 15 000</td>
-              <td>28/03</td>
-              <td><span class="badge">Ativo</span></td>
-              <td>
-                <div class="actions">
-                  <a class="btn secondary" href="raffle.html">Ver</a>
-                  <a class="btn secondary" href="#">Editar</a>
-                  <a class="btn secondary" href="#">Fechar</a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mercedes Classe A</td>
-              <td>8 950 / 14 000</td>
-              <td>04/04</td>
-              <td><span class="badge">Ativo</span></td>
-              <td>
-                <div class="actions">
-                  <a class="btn secondary" href="raffle.html">Ver</a>
-                  <a class="btn secondary" href="#">Editar</a>
-                  <a class="btn secondary" href="#">Fechar</a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Citroën Jumpy Business</td>
-              <td>7 340 / 13 000</td>
-              <td>11/04</td>
-              <td><span class="badge">Ativo</span></td>
-              <td>
-                <div class="actions">
-                  <a class="btn secondary" href="raffle.html">Ver</a>
-                  <a class="btn secondary" href="#">Editar</a>
-                  <a class="btn secondary" href="#">Fechar</a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Voucher combustível</td>
-              <td>0 / 5 000</td>
-              <td>20/04</td>
-              <td><span class="badge draft">Rascunho</span></td>
-              <td>
-                <div class="actions">
-                  <a class="btn secondary" href="#">Editar</a>
-                  <a class="btn secondary" href="#">Publicar</a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+</div>
 
-      <div class="grid-2">
-        <div class="panel" id="utilizadores">
-          <h3>Utilizadores</h3>
-          <div class="box">
-            <p><strong>Total:</strong> 1 142</p>
-            <p><strong>Premium:</strong> 184</p>
-            <p><strong>Novos hoje:</strong> 17</p>
-            <p><strong>Conversão média:</strong> 4,8%</p>
-          </div>
-        </div>
+<div class="card">
 
-        <div class="panel" id="bilhetes">
-          <h3>Bilhetes vendidos</h3>
-          <div class="box">
-            <p><strong>Hoje:</strong> 327</p>
-            <p><strong>Esta semana:</strong> 2 418</p>
-            <p><strong>Total:</strong> 27 547</p>
-            <p><strong>Pack mais vendido:</strong> 5 bilhetes</p>
-          </div>
-        </div>
-      </div>
+<h2>Tirar vencedor</h2>
 
-      <div class="grid-2">
-        <div class="panel" id="vencedores">
-          <h3>Últimos vencedores</h3>
-          <div class="box">
-            <p><strong>Tiago, Porto</strong> — Audi A3 Sportback</p>
-            <p><strong>Marta, Braga</strong> — Voucher combustível 500€</p>
-            <p><strong>Rui, Lisboa</strong> — Golf GTD</p>
-            <div class="actions">
-              <a class="btn secondary" href="#">Publicar vencedor</a>
-              <a class="btn secondary" href="#">Tirar novo vencedor</a>
-            </div>
-          </div>
-        </div>
+<p>Clique no botão para sortear um bilhete vencedor.</p>
 
-        <div class="panel" id="marketing">
-          <h3>Marketing</h3>
-          <div class="box">
-            <p><strong>Oferta quente:</strong> BMW Série 1</p>
-            <p><strong>Notificações live:</strong> Ativas</p>
-            <p><strong>CTA principal:</strong> Ver sorteio</p>
-            <p><strong>Próximo push:</strong> campanha quase cheio</p>
-          </div>
-        </div>
-      </div>
+<button onclick="drawWinner()">Sortear vencedor</button>
 
-      <div class="panel" id="definicoes">
-        <h3>Definições</h3>
-        <div class="grid-2">
-          <div class="box">
-            <p><strong>Marca:</strong> CarSorte by DEM Automóveis</p>
-            <p><strong>Mercado:</strong> Portugal</p>
-            <p><strong>Preço base:</strong> 2,50€</p>
-            <p><strong>Modo atual:</strong> Simulação estática premium</p>
-          </div>
-          <div class="box">
-            <p><strong>Checkout:</strong> Ativo</p>
-            <p><strong>Área utilizador:</strong> Ativa</p>
-            <p><strong>Página sorteio:</strong> Ativa</p>
-            <p><strong>Próxima etapa:</strong> Stripe + bilhetes reais</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div id="winner" class="winner" style="display:none"></div>
+
+</div>
+
+<a href="index.html" style="color:#f4c542">Voltar ao site</a>
+
+</div>
+
+<script>
+
+function generateTickets(total){
+
+const tickets=[]
+
+for(let i=1;i<=total;i++){
+
+let num=i.toString().padStart(5,"0")
+
+tickets.push("#CS-"+num)
+
+}
+
+return tickets
+
+}
+
+function drawWinner(){
+
+const tickets = generateTickets(15000)
+
+const index = Math.floor(Math.random()*tickets.length)
+
+const winner = tickets[index]
+
+const box=document.getElementById("winner")
+
+box.style.display="block"
+
+box.innerHTML="🎉 Bilhete vencedor: <strong>"+winner+"</strong>"
+
+}
+
+</script>
 
 </body>
 </html>
