@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BMW Série 1 Pack M - CarSorte</title>
+<title>Citroen Jumpy - CarSorte</title>
 
 <style>
 :root{
   --bg:#050505;
   --panel:#101010;
-  --panel-2:#0b0b0b;
   --gold:#d4a017;
   --gold-soft:#f4c542;
   --text:#ffffff;
@@ -17,921 +16,214 @@
   --line:rgba(255,255,255,.08);
   --shadow:0 14px 34px rgba(0,0,0,.32);
 }
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(212,160,23,.10), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(212,160,23,.06), transparent 24%),
-    var(--bg);
+  background:var(--bg);
   color:var(--text);
 }
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-img{
-  max-width:100%;
-  display:block;
-}
-
-.top-sale{
-  background:linear-gradient(90deg,#7b5300,#d4a017,#7b5300);
-  color:#000;
-  text-align:center;
-  padding:10px 14px;
-  font-size:14px;
-  font-weight:800;
-  letter-spacing:.02em;
-}
-
-.header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(5,5,5,.92);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
-
+a{text-decoration:none;color:inherit}
 .container{
-  max-width:1240px;
+  max-width:1200px;
   margin:auto;
-  padding:0 20px;
+  padding:24px 20px 60px;
 }
-
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:28px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.logo img{height:72px}
+.logo strong{
+  font-size:30px;
+  color:var(--gold-soft);
+}
 .nav{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  padding:18px 0;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  min-width:0;
-}
-
-.brand img{
-  height:92px;
-  width:auto;
-  object-fit:contain;
-  filter:drop-shadow(0 8px 22px rgba(212,160,23,.24));
-}
-
-.brand-text{
-  display:flex;
-  flex-direction:column;
-  line-height:1.05;
-}
-
-.brand-text strong{
-  color:var(--gold-soft);
-  font-size:34px;
-}
-
-.brand-text span{
-  color:#9c9c9c;
-  font-size:13px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  margin-top:6px;
-}
-
-.navlinks{
-  display:flex;
-  align-items:center;
-  gap:18px;
+  gap:14px;
   flex-wrap:wrap;
-  justify-content:flex-end;
 }
-
-.navlinks a{
-  color:#ececec;
-  font-size:15px;
-}
-
-.navlinks a:hover{
-  color:var(--gold-soft);
-}
-
-.admin-btn{
-  background:var(--gold);
-  color:#000;
+.nav a{
   padding:10px 14px;
   border-radius:12px;
-  font-weight:800;
-}
-
-.hero{
-  padding:42px 0 26px;
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
-  gap:28px;
-  align-items:start;
-}
-
-.gallery{
-  background:linear-gradient(180deg,#111,#090909);
-  border:1px solid rgba(212,160,23,.14);
-  border-radius:30px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-
-.gallery-main{
-  position:relative;
-}
-
-.gallery-main img{
-  width:100%;
-  height:520px;
-  object-fit:cover;
-}
-
-.gallery-badge{
-  position:absolute;
-  left:18px;
-  top:18px;
-  padding:10px 14px;
-  border-radius:999px;
-  background:rgba(0,0,0,.72);
-  border:1px solid rgba(212,160,23,.28);
-  color:#ffe08a;
-  font-size:12px;
-  font-weight:800;
-}
-
-.thumbs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  padding:12px;
-  background:#0b0b0b;
-}
-
-.thumbs img{
-  width:100%;
-  height:110px;
-  object-fit:cover;
-  border-radius:14px;
+  background:#111;
   border:1px solid var(--line);
 }
-
-.side{
+.grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:28px;
+}
+.card{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:28px;
-  padding:26px;
+  border-radius:24px;
+  padding:24px;
   box-shadow:var(--shadow);
-  position:sticky;
-  top:108px;
 }
-
-.pill{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid rgba(212,160,23,.25);
-  background:rgba(212,160,23,.08);
-  color:#ffe08a;
-  font-size:13px;
-  font-weight:700;
+.hero-image{
+  width:100%;
+  height:460px;
+  object-fit:cover;
+  border-radius:18px;
 }
-
-.side h1{
-  margin:16px 0 12px 0;
-  font-size:48px;
-  line-height:1.03;
-}
-
-.gold{
+h1{
+  margin:0 0 10px;
   color:var(--gold-soft);
+  font-size:42px;
 }
-
-.side p{
+p{
   color:var(--muted);
   line-height:1.8;
-  margin:0;
 }
-
 .stats{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-top:20px;
+  gap:12px;
+  margin:22px 0;
 }
-
 .stat{
-  background:var(--panel-2);
+  background:#0b0b0b;
   border:1px solid var(--line);
   border-radius:16px;
   padding:16px;
   text-align:center;
 }
-
 .stat strong{
   display:block;
-  font-size:28px;
   color:var(--gold-soft);
-  margin-bottom:4px;
-}
-
-.stat span{
-  color:#9e9e9e;
-  font-size:13px;
-}
-
-.progress-wrap{
-  margin-top:18px;
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.row.muted{
-  color:#a5a5a5;
-  font-size:14px;
-}
-
-.progress{
-  height:10px;
-  background:#232323;
-  border-radius:999px;
-  overflow:hidden;
-  margin-top:10px;
-}
-
-.progress-bar{
-  height:100%;
-  background:var(--gold);
-  width:70%;
-}
-
-.timer{
-  margin-top:16px;
-  padding:14px;
-  background:rgba(212,160,23,.08);
-  border:1px solid rgba(212,160,23,.16);
-  border-radius:16px;
-  text-align:center;
-}
-
-.timer small{
-  display:block;
-  color:#bdbdbd;
-  margin-bottom:6px;
-}
-
-.timer strong{
-  color:#ffe08a;
-  font-size:18px;
-}
-
-.packs-title{
-  margin:22px 0 14px 0;
   font-size:24px;
 }
-
 .packs{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
+  margin-top:20px;
 }
-
 .pack{
   display:block;
-  background:#0c0c0c;
+  background:#0b0b0b;
   border:1px solid var(--line);
   border-radius:18px;
   padding:18px 12px;
   text-align:center;
-  transition:.2s ease;
-  box-shadow:var(--shadow);
 }
-
-.pack:hover{
-  transform:translateY(-2px);
-  border-color:rgba(212,160,23,.3);
-  background:rgba(212,160,23,.06);
-}
-
 .pack.featured{
-  border-color:rgba(212,160,23,.38);
+  border-color:rgba(212,160,23,.35);
   background:rgba(212,160,23,.08);
 }
-
 .pack strong{
   display:block;
-  font-size:32px;
+  font-size:30px;
   color:var(--gold-soft);
-  margin-bottom:6px;
 }
-
 .pack small{
   display:block;
   color:#aaa;
-  min-height:34px;
-  margin-bottom:10px;
+  margin:8px 0 10px;
 }
-
 .pack span{
   display:block;
   font-size:20px;
   font-weight:800;
 }
-
-.qualif{
-  margin-top:18px;
-  padding:16px;
-  border-radius:16px;
-  background:#0b0b0b;
-  border:1px solid var(--line);
-}
-
-.qualif strong{
-  display:block;
-  margin-bottom:8px;
-}
-
-.answers{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
-
-.answer{
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  color:#ddd;
-  font-size:12px;
-}
-
-.answer.good{
-  border-color:rgba(212,160,23,.3);
-  background:rgba(212,160,23,.08);
-  color:#ffe08a;
-}
-
-.buttons{
-  display:grid;
-  gap:12px;
-  margin-top:18px;
-}
-
 .btn{
   display:inline-block;
-  text-align:center;
-  padding:16px 20px;
-  border-radius:14px;
+  margin-top:14px;
+  padding:12px 16px;
+  border-radius:12px;
   font-weight:800;
-}
-
-.btn-primary{
   background:var(--gold);
   color:#000;
-  box-shadow:var(--shadow);
 }
-
-.btn-secondary{
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--line);
-  color:#fff;
-}
-
-.section{
-  padding:58px 0;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:20px;
-  margin-bottom:24px;
-}
-
-.section-head p{
-  margin:0;
-  color:var(--gold-soft);
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.18em;
-}
-
-.section-head h2{
-  margin:8px 0 0;
-  font-size:42px;
-}
-
-.grid-2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px;
-}
-
-.box{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:24px;
-  box-shadow:var(--shadow);
-}
-
-.box h3{
-  margin-top:0;
-  margin-bottom:14px;
-  font-size:28px;
-}
-
-.box p{
-  margin:0;
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.list{
-  display:grid;
-  gap:14px;
-  margin-top:18px;
-}
-
-.item{
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-}
-
-.item strong{
-  display:block;
-  margin-bottom:6px;
-  color:#fff;
-}
-
-.trust-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-top:6px;
-}
-
-.trust{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:22px;
-  text-align:center;
-  box-shadow:var(--shadow);
-}
-
-.trust strong{
-  display:block;
-  font-size:30px;
-  color:var(--gold-soft);
-  margin-bottom:6px;
-}
-
-.trust span{
-  color:#9e9e9e;
-  font-size:14px;
-}
-
-.cta-banner{
-  background:linear-gradient(135deg,#141414 0%,#090909 100%);
-  border:1px solid rgba(212,160,23,.18);
-  border-radius:30px;
-  padding:36px;
-  text-align:center;
-  box-shadow:var(--shadow);
-}
-
-.cta-banner h2{
-  margin:12px 0;
-  font-size:44px;
-}
-
-.cta-banner p{
-  margin:0 auto;
-  max-width:760px;
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.footer{
-  margin-top:20px;
-  border-top:1px solid var(--line);
-  background:#0a0a0a;
-}
-
-.footer-grid{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  flex-wrap:wrap;
-  padding:28px 0 34px;
-  color:#bdbdbd;
-}
-
-.footer-grid strong{
-  color:#f0f0f0;
-}
-
-.live{
-  position:fixed;
-  left:16px;
-  bottom:16px;
-  z-index:80;
-  background:rgba(14,14,14,.96);
-  border:1px solid rgba(255,255,255,.08);
-  color:#fff;
-  padding:14px 16px;
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  font-size:14px;
-  max-width:280px;
-}
-
-@media (max-width:980px){
-  .nav{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .navlinks{
-    justify-content:flex-start;
-    gap:14px;
-  }
-
-  .hero,
-  .grid-2{
-    grid-template-columns:1fr;
-  }
-
-  .gallery-main img{
-    height:300px;
-  }
-
-  .side{
-    position:static;
-  }
-
-  .side h1{
-    font-size:34px;
-  }
-
-  .stats,
-  .packs,
-  .trust-grid{
-    grid-template-columns:1fr;
-  }
-
-  .section{
-    padding:44px 0;
-  }
-
-  .section-head{
-    display:block;
-  }
-
-  .section-head h2,
-  .cta-banner h2{
-    font-size:30px;
-  }
-
-  .brand img{
-    height:72px;
-  }
-
-  .brand-text strong{
-    font-size:28px;
-  }
-
-  .live{
-    left:12px;
-    right:12px;
-    max-width:none;
-  }
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .packs{grid-template-columns:1fr}
+  .hero-image{height:260px}
 }
 </style>
 </head>
 <body>
 
-<div class="top-sale">
-🔥 BMW Série 1 Pack M em destaque · 5 bilhetes por 10€ · 15 bilhetes por 25€
-</div>
+<div class="container">
 
-<header class="header">
-  <div class="container">
+  <div class="header">
+    <div class="logo">
+      <img src="logo-carsorte.png" alt="CarSorte">
+      <strong>CarSorte</strong>
+    </div>
+
     <div class="nav">
-
-      <div class="brand">
-        <img src="logo-carsorte.png" alt="CarSorte by DEM Automóveis">
-        <div class="brand-text">
-          <strong>CarSorte</strong>
-          <span>by DEM Automóveis</span>
-        </div>
-      </div>
-
-      <div class="navlinks">
-        <a href="index.html">Início</a>
-        <a href="raffle.html">Sorteios</a>
-        <a href="winners.html">Vencedores</a>
-        <a href="results.html">Resultados</a>
-        <a href="faq.html">FAQ</a>
-        <a href="regulamento.html">Regulamento</a>
-        <a href="login.html">Login</a>
-        <a class="admin-btn" href="admin.html">Admin</a>
-      </div>
-
-    </div>
-  </div>
-</header>
-
-<section class="container hero">
-  <div class="gallery">
-    <div class="gallery-main">
-      <div class="gallery-badge">Sorteio premium · Quase cheio</div>
-      <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1400&q=80" alt="BMW Série 1 Pack M">
-    </div>
-
-    <div class="thumbs">
-      <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" alt="">
-      <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=900&q=80" alt="">
-      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80" alt="">
+      <a href="index.html">Início</a>
+      <a href="winners.html">Vencedores</a>
+      <a href="results.html">Resultados</a>
     </div>
   </div>
 
-  <div class="side">
-    <span class="pill">Oportunidade em destaque</span>
-    <h1>BMW Série 1 <span class="gold">Pack M</span></h1>
-    <p>
-      Um dos sorteios mais desejados da plataforma. Uma participação acessível, packs otimizados e uma apresentação pensada para converter confiança em ação.
-    </p>
-
-    <div class="stats">
-      <div class="stat">
-        <strong>2,50€</strong>
-        <span>por bilhete</span>
-      </div>
-
-      <div class="stat">
-        <strong>28/03</strong>
-        <span>data do sorteio</span>
-      </div>
-
-      <div class="stat">
-        <strong id="sold">10500</strong>
-        <span>bilhetes vendidos</span>
-      </div>
-
-      <div class="stat">
-        <strong id="left">4500</strong>
-        <span>restantes</span>
-      </div>
+  <div class="grid">
+    <div class="card">
+      <img class="hero-image" src="https://gaeldem21-png.github.io/CarsorteV1/jumpy.jpg" alt="Citroen Jumpy">
     </div>
 
-    <div class="progress-wrap">
-      <div class="row muted">
-        <span>Progresso do sorteio</span>
-        <span id="percent">70%</span>
-      </div>
-
-      <div class="progress">
-        <div class="progress-bar" id="progressbar"></div>
-      </div>
-    </div>
-
-    <div class="timer">
-      <small>Sorteio em</small>
-      <strong id="timer">4 dias · 12h</strong>
-    </div>
-
-    <div class="packs-title">Escolha o seu pack</div>
-
-    <div class="packs">
-      <a class="pack" href="checkout.html?pack=1">
-        <strong>1</strong>
-        <small>Entrada simples</small>
-        <span>2,50€</span>
-      </a>
-
-      <a class="pack featured" href="checkout.html?pack=5">
-        <strong>5</strong>
-        <small>Oferta de lançamento</small>
-        <span>10€</span>
-      </a>
-
-      <a class="pack" href="checkout.html?pack=15">
-        <strong>15</strong>
-        <small>Melhor valor</small>
-        <span>25€</span>
-      </a>
-    </div>
-
-    <div class="qualif">
-      <strong>Pergunta de qualificação</strong>
-      <div style="color:#bcbcbc;">Quanto é 4 + 3 ?</div>
-
-      <div class="answers">
-        <span class="answer">5</span>
-        <span class="answer good">7</span>
-        <span class="answer">9</span>
-      </div>
-    </div>
-
-    <div class="buttons">
-      <a class="btn btn-primary" href="checkout.html?pack=5">Participar agora</a>
-      <a class="btn btn-secondary" href="results.html">Ver último resultado</a>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="section-head">
-    <div>
-      <p>Porque este sorteio vende</p>
-      <h2>Desejo, clareza e urgência</h2>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="box">
-      <h3>Porque participar</h3>
+    <div class="card">
+      <h1>Citroen Jumpy</h1>
       <p>
-        Este sorteio junta tudo o que faz uma grande oferta funcionar: um veículo desejado, um preço de entrada acessível e uma apresentação clara que transmite confiança.
+        Uma oportunidade acessível para participar num sorteio premium com packs pensados para conversão rápida e experiência simples.
       </p>
 
-      <div class="list">
-        <div class="item">
-          <strong>Veículo em destaque</strong>
-          BMW Série 1 Pack M com elevado apelo visual e forte desejo do público.
+      <div class="stats">
+        <div class="stat">
+          <strong>2,50€</strong>
+          <span>por bilhete</span>
         </div>
-
-        <div class="item">
-          <strong>Entrada acessível</strong>
-          Qualquer pessoa pode entrar no sorteio por apenas 2,50€.
+        <div class="stat">
+          <strong>10000</strong>
+          <span>bilhetes totais</span>
         </div>
-
-        <div class="item">
-          <strong>Packs otimizados</strong>
-          Os packs foram desenhados para aumentar valor e facilitar decisão de compra.
+        <div class="stat">
+          <strong>0</strong>
+          <span>vendidos</span>
         </div>
-      </div>
-    </div>
-
-    <div class="box">
-      <h3>Transparência</h3>
-      <p>
-        A experiência foi pensada para parecer clara, justa e visível em todas as etapas da participação.
-      </p>
-
-      <div class="list">
-        <div class="item">
-          <strong>Bilhetes únicos</strong>
-          Cada participação corresponde a bilhetes individualizados dentro do sorteio.
-        </div>
-
-        <div class="item">
-          <strong>Resultado publicado</strong>
-          Os resultados e vencedores são apresentados em páginas específicas.
-        </div>
-
-        <div class="item">
-          <strong>Histórico visível</strong>
-          A plataforma mostra vencedores e resultados como prova social e reforço de confiança.
+        <div class="stat">
+          <strong>Ativo</strong>
+          <span>estado</span>
         </div>
       </div>
+
+      <div class="packs">
+        <a class="pack" href="checkout.html?pack=1&raffle=Jumpy">
+          <strong>1</strong>
+          <small>Entrada simples</small>
+          <span>2,50€</span>
+          <div class="btn">Escolher</div>
+        </a>
+
+        <a class="pack featured" href="checkout.html?pack=5&raffle=Jumpy">
+          <strong>5</strong>
+          <small>Oferta de lançamento</small>
+          <span>10€</span>
+          <div class="btn">Escolher</div>
+        </a>
+
+        <a class="pack" href="checkout.html?pack=15&raffle=Jumpy">
+          <strong>15</strong>
+          <small>Melhor valor</small>
+          <span>25€</span>
+          <div class="btn">Escolher</div>
+        </a>
+      </div>
     </div>
   </div>
-</section>
 
-<section class="container section">
-  <div class="section-head">
-    <div>
-      <p>Confiança</p>
-      <h2>Indicadores que reforçam o desejo</h2>
-    </div>
-  </div>
-
-  <div class="trust-grid">
-    <div class="trust">
-      <strong>10500</strong>
-      <span>bilhetes vendidos</span>
-    </div>
-
-    <div class="trust">
-      <strong>70%</strong>
-      <span>já preenchido</span>
-    </div>
-
-    <div class="trust">
-      <strong>1245</strong>
-      <span>participantes ativos</span>
-    </div>
-
-    <div class="trust">
-      <strong>3</strong>
-      <span>sorteios em curso</span>
-    </div>
-  </div>
-</section>
-
-<section class="container section">
-  <div class="cta-banner">
-    <span class="pill">Última chamada</span>
-    <h2>Entre agora antes que o sorteio feche</h2>
-    <p>
-      Quanto mais o sorteio avança, maior a sensação de urgência. Escolha o pack ideal e avance já para o checkout premium da CarSorte.
-    </p>
-
-    <div class="buttons" style="max-width:320px;margin:24px auto 0;">
-      <a class="btn btn-primary" href="checkout.html?pack=5">Ir para o checkout</a>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <strong>CarSorte</strong><br>
-      by DEM Automóveis
-    </div>
-
-    <div>
-      <a href="faq.html">FAQ</a><br>
-      <a href="regulamento.html">Regulamento</a>
-    </div>
-
-    <div>
-      © CarSorte
-    </div>
-  </div>
-</footer>
-
-<div class="live" id="live">Ana comprou 5 bilhetes</div>
-
-<script>
-const names = ["João","Pedro","Ana","Luis","Marta","Carlos","Tiago","Rui"];
-
-function randomBuy(){
-  let name = names[Math.floor(Math.random()*names.length)];
-  let qty = [1,2,3,5,10][Math.floor(Math.random()*5)];
-  document.getElementById("live").textContent = name + " comprou " + qty + " bilhetes";
-}
-setInterval(randomBuy,5000);
-
-let sold = 10500;
-const total = 15000;
-
-function updateCounter(){
-  const add = Math.floor(Math.random()*3);
-  sold += add;
-  if(sold > total){ sold = total; }
-
-  document.getElementById("sold").innerText = sold;
-  document.getElementById("left").innerText = total - sold;
-
-  const pct = Math.round((sold/total)*100);
-  document.getElementById("progressbar").style.width = pct + "%";
-  document.getElementById("percent").innerText = pct + "%";
-}
-setInterval(updateCounter,5000);
-
-const endDate = new Date();
-endDate.setDate(endDate.getDate()+4);
-
-function updateTimer(){
-  const now = new Date();
-  const diff = endDate - now;
-  const days = Math.floor(diff/(1000*60*60*24));
-  const hours = Math.floor((diff/(1000*60*60))%24);
-  document.getElementById("timer").innerText = "Sorteio em " + days + " dias · " + hours + "h";
-}
-setInterval(updateTimer,1000);
-updateTimer();
-</script>
-
+</div>
 </body>
 </html>
