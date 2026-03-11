@@ -1,772 +1,622 @@
 <!doctype html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin V2 - CarSorte</title>
-
-<style>
-:root{
-  --bg:#050505;
-  --panel:#101010;
-  --panel-2:#0b0b0b;
-  --gold:#d4a017;
-  --gold-soft:#f4c542;
-  --text:#ffffff;
-  --muted:#b8b8b8;
-  --line:rgba(255,255,255,.08);
-  --shadow:0 14px 34px rgba(0,0,0,.32);
-  --green:#29c46d;
-  --red:#d95757;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(212,160,23,.10), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(212,160,23,.06), transparent 24%),
-    var(--bg);
-  color:var(--text);
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-button,
-input,
-textarea,
-select{
-  font-family:Arial, Helvetica, sans-serif;
-}
-
-.topbar{
-  background:linear-gradient(90deg,#7b5300,#d4a017,#7b5300);
-  color:#000;
-  text-align:center;
-  padding:10px 14px;
-  font-size:14px;
-  font-weight:800;
-  letter-spacing:.02em;
-}
-
-.header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(5,5,5,.92);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
-
-.container{
-  max-width:1320px;
-  margin:auto;
-  padding:0 20px;
-}
-
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  padding:18px 0;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  min-width:0;
-}
-
-.brand img{
-  height:86px;
-  width:auto;
-  object-fit:contain;
-  filter:drop-shadow(0 8px 22px rgba(212,160,23,.24));
-}
-
-.brand-text{
-  display:flex;
-  flex-direction:column;
-  line-height:1.05;
-}
-
-.brand-text strong{
-  color:var(--gold-soft);
-  font-size:32px;
-}
-
-.brand-text span{
-  color:#9c9c9c;
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  margin-top:6px;
-}
-
-.navlinks{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
-
-.navlinks a{
-  color:#ececec;
-  font-size:15px;
-}
-
-.navlinks a:hover{
-  color:var(--gold-soft);
-}
-
-.admin-btn{
-  background:var(--gold);
-  color:#000;
-  padding:10px 14px;
-  border-radius:12px;
-  font-weight:800;
-}
-
-.hero{
-  padding:34px 0 10px;
-}
-
-.hero-card{
-  background:linear-gradient(180deg,#111,#090909);
-  border:1px solid rgba(212,160,23,.14);
-  border-radius:28px;
-  padding:30px;
-  box-shadow:var(--shadow);
-}
-
-.hero-card h1{
-  margin:0 0 10px 0;
-  font-size:42px;
-  color:var(--gold-soft);
-}
-
-.hero-card p{
-  margin:0;
-  color:var(--muted);
-  line-height:1.8;
-  font-size:17px;
-  max-width:900px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-top:24px;
-}
-
-.stat{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:20px;
-  text-align:center;
-  box-shadow:var(--shadow);
-}
-
-.stat strong{
-  display:block;
-  font-size:30px;
-  color:var(--gold-soft);
-  margin-bottom:4px;
-}
-
-.stat span{
-  color:#9e9e9e;
-  font-size:14px;
-}
-
-.layout{
-  display:grid;
-  grid-template-columns:290px 1fr;
-  gap:24px;
-  padding:26px 0 60px;
-}
-
-.sidebar{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:22px;
-  box-shadow:var(--shadow);
-  height:fit-content;
-  position:sticky;
-  top:118px;
-}
-
-.sidebar h2{
-  margin-top:0;
-  font-size:24px;
-  color:var(--gold-soft);
-}
-
-.sidebar p{
-  color:#999;
-  line-height:1.6;
-  font-size:14px;
-}
-
-.menu-list{
-  display:grid;
-  gap:12px;
-  margin-top:18px;
-}
-
-.menu-item{
-  display:block;
-  padding:14px 16px;
-  border-radius:14px;
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  color:#ddd;
-  font-weight:700;
-}
-
-.menu-item:hover{
-  border-color:rgba(212,160,23,.28);
-  color:var(--gold-soft);
-}
-
-.stack{
-  display:grid;
-  gap:22px;
-}
-
-.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:24px;
-  box-shadow:var(--shadow);
-}
-
-.panel h2{
-  margin-top:0;
-  margin-bottom:18px;
-  font-size:30px;
-}
-
-.grid-2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.box{
-  background:var(--panel-2);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-}
-
-.box p{
-  color:#cfcfcf;
-  line-height:1.6;
-  margin:8px 0;
-}
-
-.form{
-  display:grid;
-  gap:14px;
-}
-
-.form input,
-.form textarea,
-.form select{
-  width:100%;
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:14px 16px;
-  color:#fff;
-  font-size:15px;
-  outline:none;
-}
-
-.form textarea{
-  min-height:120px;
-  resize:vertical;
-}
-
-.actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:4px;
-}
-
-.btn{
-  display:inline-block;
-  padding:12px 16px;
-  border-radius:12px;
-  font-weight:800;
-  text-align:center;
-  border:none;
-  cursor:pointer;
-}
-
-.btn-primary{
-  background:var(--gold);
-  color:#000;
-  box-shadow:var(--shadow);
-}
-
-.btn-secondary{
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--line);
-  color:#fff;
-}
-
-.btn-green{
-  background:var(--green);
-  color:#021a0b;
-}
-
-.table-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:780px;
-}
-
-th,td{
-  text-align:left;
-  padding:14px 10px;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  font-size:14px;
-  vertical-align:top;
-}
-
-th{
-  color:var(--gold-soft);
-  font-weight:800;
-}
-
-.badge{
-  display:inline-block;
-  padding:7px 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  background:rgba(212,160,23,.10);
-  color:#ffe08a;
-  border:1px solid rgba(212,160,23,.20);
-}
-
-.badge.green{
-  background:rgba(41,196,109,.10);
-  color:#9df0bf;
-  border:1px solid rgba(41,196,109,.18);
-}
-
-.badge.red{
-  background:rgba(217,87,87,.10);
-  color:#ffb2b2;
-  border:1px solid rgba(217,87,87,.18);
-}
-
-.kpi-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-
-.kpi{
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-  text-align:center;
-}
-
-.kpi strong{
-  display:block;
-  color:var(--gold-soft);
-  font-size:28px;
-  margin-bottom:6px;
-}
-
-.kpi span{
-  color:#9f9f9f;
-  font-size:13px;
-}
-
-.winner-box{
-  display:none;
-  margin-top:16px;
-  padding:18px;
-  border-radius:16px;
-  background:#0b0b0b;
-  border:1px solid var(--line);
-}
-
-.winner-box strong{
-  color:var(--gold-soft);
-}
-
-.winner-ticket{
-  margin-top:8px;
-  font-size:24px;
-  font-weight:800;
-  color:#fff;
-}
-
-.note{
-  margin-top:14px;
-  color:#9e9e9e;
-  line-height:1.7;
-  font-size:14px;
-}
-
-@media (max-width:980px){
-  .nav{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .navlinks{
-    justify-content:flex-start;
-    gap:14px;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .layout{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    position:static;
-  }
-
-  .grid-2,
-  .kpi-grid{
-    grid-template-columns:1fr;
-  }
-
-  .brand img{
-    height:72px;
-  }
-
-  .brand-text strong{
-    font-size:28px;
-  }
-
-  .hero-card h1{
-    font-size:32px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - CarSorte</title>
+
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#101010;
+      --panel-2:#0b0b0b;
+      --gold:#d4a017;
+      --gold-soft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 14px 34px rgba(0,0,0,.32);
+      --green:#29c46d;
+      --red:#d95c5c;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      max-width:1280px;
+      margin:auto;
+      padding:24px 20px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand img{
+      height:72px;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--gold-soft);
+      font-size:32px;
+      line-height:1;
+    }
+
+    .brand span{
+      display:block;
+      color:#999;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      margin-top:6px;
+    }
+
+    .nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      padding:12px 14px;
+      border-radius:12px;
+      background:#111;
+      border:1px solid var(--line);
+      color:#ddd;
+      font-weight:700;
+    }
+
+    .hero{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.14);
+      border-radius:26px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:42px;
+      color:var(--gold-soft);
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.8;
+      max-width:800px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:24px;
+    }
+
+    .stat{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:34px;
+      color:var(--gold-soft);
+      margin-bottom:8px;
+    }
+
+    .stat span{
+      color:#a8a8a8;
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:20px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h2{
+      margin:0 0 16px;
+      font-size:28px;
+      color:#fff;
+    }
+
+    .sub{
+      color:var(--muted);
+      line-height:1.7;
+      margin-top:-6px;
+      margin-bottom:18px;
+    }
+
+    .list{
+      display:grid;
+      gap:12px;
+    }
+
+    .item{
+      background:var(--panel-2);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .item strong{
+      display:block;
+      font-size:18px;
+      margin-bottom:8px;
+    }
+
+    .item span{
+      display:block;
+      color:#bcbcbc;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .pill.gold{
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
+
+    .pill.green{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .pill.red{
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .meta{
+      display:grid;
+      gap:10px;
+    }
+
+    .meta-row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .meta-row:last-child{
+      border-bottom:none;
+    }
+
+    .meta-row span{
+      color:#aaa;
+    }
+
+    .meta-row strong{
+      color:#fff;
+      font-size:15px;
+      margin:0;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .btn{
+      padding:12px 16px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#111;
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .btn.primary{
+      background:var(--gold);
+      color:#000;
+      border:none;
+    }
+
+    .empty{
+      padding:16px;
+      border-radius:16px;
+      background:#111;
+      border:1px solid rgba(255,255,255,.06);
+      color:#9f9f9f;
+    }
+
+    .status-box{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:14px;
+      display:none;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .status-box.ok{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .status-box.err{
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .small{
+      font-size:13px;
+      color:#999;
+      line-height:1.7;
+    }
+
+    @media(max-width:980px){
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+    }
+
+    @media(max-width:640px){
+      .stats{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="topbar">
-⚙️ Painel admin premium · controlo da plataforma CarSorte by DEM Automóveis
-</div>
+<div class="container">
 
-<header class="header">
-  <div class="container">
+  <div class="topbar">
+    <div class="brand">
+      <img src="logo-carsorte.png" alt="CarSorte">
+      <div>
+        <strong>CarSorte</strong>
+        <span>by DEM Automóveis</span>
+      </div>
+    </div>
+
     <div class="nav">
+      <a href="index.html">Início</a>
+      <a href="raffle.html">Sorteio</a>
+      <a href="results.html">Resultados</a>
+      <a href="winners.html">Vencedores</a>
+    </div>
+  </div>
 
-      <div class="brand">
-        <img src="logo-carsorte.png" alt="CarSorte by DEM Automóveis">
-        <div class="brand-text">
-          <strong>CarSorte</strong>
-          <span>by DEM Automóveis</span>
+  <div class="hero">
+    <h1>Painel Admin</h1>
+    <p>
+      Aqui pode ver rapidamente se as compras estão a entrar, quantos bilhetes foram vendidos, quantas encomendas existem e quais foram os últimos registos no Firebase.
+    </p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="statTickets">0</strong>
+      <span>Total de bilhetes na coleção <b>tickets</b></span>
+    </div>
+
+    <div class="stat">
+      <strong id="statOrders">0</strong>
+      <span>Total de encomendas na coleção <b>orders</b></span>
+    </div>
+
+    <div class="stat">
+      <strong id="statSold">0</strong>
+      <span>tickets_sold do sorteio <b>Jumpy</b></span>
+    </div>
+
+    <div class="stat">
+      <strong id="statDiff">0</strong>
+      <span>Diferença entre bilhetes e contador</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Últimas encomendas</h2>
+      <p class="sub">
+        Cada documento aqui representa uma compra. Se uma participação passou, ela deve aparecer nesta lista.
+      </p>
+
+      <div class="toolbar">
+        <button class="btn primary" id="refreshBtn">Atualizar painel</button>
+      </div>
+
+      <div id="ordersList" class="list"></div>
+      <div id="ordersEmpty" class="empty" style="display:none;">Nenhuma encomenda encontrada.</div>
+    </div>
+
+    <div class="card">
+      <h2>Resumo do sorteio ativo</h2>
+
+      <div class="meta">
+        <div class="meta-row">
+          <span>Documento</span>
+          <strong>raffles / Jumpy</strong>
+        </div>
+        <div class="meta-row">
+          <span>Título</span>
+          <strong id="raffleTitle">-</strong>
+        </div>
+        <div class="meta-row">
+          <span>Preço</span>
+          <strong id="rafflePrice">-</strong>
+        </div>
+        <div class="meta-row">
+          <span>Total de bilhetes</span>
+          <strong id="raffleTotal">-</strong>
+        </div>
+        <div class="meta-row">
+          <span>Bilhetes vendidos</span>
+          <strong id="raffleSold">-</strong>
+        </div>
+        <div class="meta-row">
+          <span>Estado</span>
+          <strong id="raffleStatus">-</strong>
         </div>
       </div>
 
-      <div class="navlinks">
-        <a href="index.html">Início</a>
-        <a href="raffle.html">Sorteios</a>
-        <a href="winners.html">Vencedores</a>
-        <a href="results.html">Resultados</a>
-        <a href="faq.html">FAQ</a>
-        <a href="regulamento.html">Regulamento</a>
-        <a href="login.html">Login</a>
-        <a class="admin-btn" href="admin.html">Admin</a>
-      </div>
+      <div id="statusBox" class="status-box"></div>
 
+      <div class="small" style="margin-top:16px;">
+        Se <b>tickets</b> e <b>tickets_sold</b> tiverem valores diferentes, isso significa que houve testes antigos, duplicações ou alguma compra que incrementou o contador sem ficar visível na lista esperada.
+      </div>
     </div>
   </div>
-</header>
 
-<section class="container hero">
-  <div class="hero-card">
-    <h1>Painel Admin V2</h1>
-    <p>
-      Um dashboard mais limpo, mais premium e mais claro para gerir sorteios, utilizadores, bilhetes vendidos, resultados e a evolução geral da plataforma.
+  <div class="card" style="margin-top:20px;">
+    <h2>Últimos bilhetes</h2>
+    <p class="sub">
+      Aqui vê os registos individuais da coleção <b>tickets</b>. É útil para confirmar rapidamente se a participação criou 1, 5 ou 15 bilhetes.
     </p>
 
-    <div class="stats">
-      <div class="stat">
-        <strong>3</strong>
-        <span>sorteios ativos</span>
-      </div>
-
-      <div class="stat">
-        <strong>10500</strong>
-        <span>bilhetes vendidos</span>
-      </div>
-
-      <div class="stat">
-        <strong>26250€</strong>
-        <span>receita estimada</span>
-      </div>
-
-      <div class="stat">
-        <strong>1245</strong>
-        <span>utilizadores</span>
-      </div>
-    </div>
+    <div id="ticketsList" class="list"></div>
+    <div id="ticketsEmpty" class="empty" style="display:none;">Nenhum bilhete encontrado.</div>
   </div>
-</section>
 
-<section class="container layout">
+</div>
 
-  <aside class="sidebar">
-    <h2>Menu admin</h2>
-    <p>Gestão rápida dos pontos essenciais da plataforma.</p>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  query,
+  orderBy,
+  limit
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    <div class="menu-list">
-      <a class="menu-item" href="#overview">Visão geral</a>
-      <a class="menu-item" href="#create">Criar sorteio</a>
-      <a class="menu-item" href="#manage">Gerir sorteios</a>
-      <a class="menu-item" href="#users">Utilizadores</a>
-      <a class="menu-item" href="#tickets">Bilhetes</a>
-      <a class="menu-item" href="#winner">Sortear vencedor</a>
-      <a class="menu-item" href="#settings">Definições</a>
-    </div>
-  </aside>
+const firebaseConfig = {
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+};
 
-  <div class="stack">
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    <div class="panel" id="overview">
-      <h2>Visão geral</h2>
+const statTickets = document.getElementById("statTickets");
+const statOrders = document.getElementById("statOrders");
+const statSold = document.getElementById("statSold");
+const statDiff = document.getElementById("statDiff");
 
-      <div class="grid-2">
-        <div class="box">
-          <p><strong>Melhor desempenho</strong></p>
-          <p>BMW Série 1 Pack M continua a ser o sorteio com maior taxa de conversão visual da plataforma.</p>
-        </div>
+const raffleTitle = document.getElementById("raffleTitle");
+const rafflePrice = document.getElementById("rafflePrice");
+const raffleTotal = document.getElementById("raffleTotal");
+const raffleSold = document.getElementById("raffleSold");
+const raffleStatus = document.getElementById("raffleStatus");
 
-        <div class="box">
-          <p><strong>Próximo objetivo</strong></p>
-          <p>Ultrapassar a marca dos 11 000 bilhetes vendidos e reforçar a pressão de compra nas páginas de sorteio.</p>
-        </div>
-      </div>
+const ordersList = document.getElementById("ordersList");
+const ordersEmpty = document.getElementById("ordersEmpty");
+const ticketsList = document.getElementById("ticketsList");
+const ticketsEmpty = document.getElementById("ticketsEmpty");
+const statusBox = document.getElementById("statusBox");
+const refreshBtn = document.getElementById("refreshBtn");
 
-      <div class="kpi-grid" style="margin-top:18px;">
-        <div class="kpi">
-          <strong>70%</strong>
-          <span>preenchimento atual</span>
-        </div>
+function formatCurrency(value){
+  if(value === undefined || value === null) return "-";
+  return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
+}
 
-        <div class="kpi">
-          <strong>327</strong>
-          <span>bilhetes hoje</span>
-        </div>
+function showStatus(text, type){
+  statusBox.style.display = "block";
+  statusBox.className = `status-box ${type}`;
+  statusBox.textContent = text;
+}
 
-        <div class="kpi">
-          <strong>4,8%</strong>
-          <span>conversão média</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="create">
-      <h2>Criar novo sorteio</h2>
-
-      <div class="form">
-        <input type="text" placeholder="Nome do sorteio">
-        <input type="text" placeholder="Veículo / prémio">
-        <input type="text" placeholder="URL da imagem do veículo">
-        <div class="grid-2">
-          <input type="number" placeholder="Preço por bilhete">
-          <input type="number" placeholder="Número total de bilhetes">
-        </div>
-        <div class="grid-2">
-          <input type="text" placeholder="Data do sorteio">
-          <input type="text" placeholder="Pergunta de qualificação">
-        </div>
-        <input type="text" placeholder="Resposta correta">
-        <textarea placeholder="Descrição do sorteio"></textarea>
-
-        <div class="actions">
-          <a class="btn btn-primary" href="#">Criar sorteio</a>
-          <a class="btn btn-secondary" href="#">Guardar rascunho</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="manage">
-      <h2>Gerir sorteios</h2>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Sorteio</th>
-              <th>Bilhetes vendidos</th>
-              <th>Data</th>
-              <th>Estado</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>BMW Série 1 Pack M</td>
-              <td>10500 / 15000</td>
-              <td>28/03</td>
-              <td><span class="badge">Ativo</span></td>
-              <td>
-                <div class="actions">
-                  <a class="btn btn-secondary" href="raffle.html">Ver</a>
-                  <a class="btn btn-secondary" href="#">Editar</a>
-                  <a class="btn btn-secondary" href="#">Fechar</a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>Mercedes Classe A</td>
-              <td>8680 / 14000</td>
-              <td>04/04</td>
-              <td><span class="badge green">Em destaque</span></td>
-              <td>
-                <div class="actions">
-                  <a class="btn btn-secondary" href="raffle.html">Ver</a>
-                  <a class="btn btn-secondary" href="#">Editar</a>
-                  <a class="btn btn-secondary" href="#">Fechar</a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>Voucher combustível</td>
-              <td>0 / 5000</td>
-              <td>20/04</td>
-              <td><span class="badge red">Rascunho</span></td>
-              <td>
-                <div class="actions">
-                  <a class="btn btn-secondary" href="#">Editar</a>
-                  <a class="btn btn-secondary" href="#">Publicar</a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="grid-2">
-      <div class="panel" id="users">
-        <h2>Utilizadores</h2>
-        <div class="box">
-          <p><strong>Total:</strong> 1245</p>
-          <p><strong>Premium:</strong> 184</p>
-          <p><strong>Novos hoje:</strong> 17</p>
-          <p><strong>Origem principal:</strong> tráfego orgânico e redes sociais</p>
-        </div>
-      </div>
-
-      <div class="panel" id="tickets">
-        <h2>Bilhetes vendidos</h2>
-        <div class="box">
-          <p><strong>Hoje:</strong> 327</p>
-          <p><strong>Esta semana:</strong> 2418</p>
-          <p><strong>Total:</strong> 10500</p>
-          <p><strong>Pack mais vendido:</strong> 5 bilhetes</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="winner">
-      <h2>Sortear vencedor</h2>
-
-      <div class="box">
-        <p>Use este bloco para gerar visualmente um bilhete vencedor dentro do intervalo definido para o sorteio.</p>
-
-        <div class="actions">
-          <button class="btn btn-green" onclick="drawWinner()">Sortear vencedor</button>
-        </div>
-
-        <div class="winner-box" id="winner-box">
-          <strong>Bilhete vencedor:</strong>
-          <div class="winner-ticket" id="winner-ticket"></div>
-        </div>
-
-        <div class="note">
-          Esta funcionalidade é visual nesta fase. A ligação real a base de dados poderá ser feita mais tarde com Supabase.
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="settings">
-      <h2>Definições</h2>
-
-      <div class="grid-2">
-        <div class="box">
-          <p><strong>Marca:</strong> CarSorte</p>
-          <p><strong>Empresa:</strong> DEM Automóveis</p>
-          <p><strong>Mercado:</strong> Portugal</p>
-          <p><strong>Preço base:</strong> 2,50€</p>
-        </div>
-
-        <div class="box">
-          <p><strong>Checkout:</strong> Ativo</p>
-          <p><strong>Área utilizador:</strong> Ativa</p>
-          <p><strong>Página sorteio:</strong> Ativa</p>
-          <p><strong>Próxima etapa:</strong> Supabase + pagamentos + bilhetes reais</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<script>
-function generateTickets(total){
-  const tickets = [];
-  for(let i = 1; i <= total; i++){
-    let num = i.toString().padStart(5, "0");
-    tickets.push("#CS-" + num);
+function formatDate(value){
+  try{
+    if(value && value.toDate){
+      return value.toDate().toLocaleString("pt-PT");
+    }
+    return "-";
+  }catch{
+    return "-";
   }
-  return tickets;
 }
 
-function drawWinner(){
-  const tickets = generateTickets(15000);
-  const index = Math.floor(Math.random() * tickets.length);
-  const winner = tickets[index];
+async function loadDashboard(){
+  ordersList.innerHTML = "";
+  ticketsList.innerHTML = "";
+  ordersEmpty.style.display = "none";
+  ticketsEmpty.style.display = "none";
+  statusBox.style.display = "none";
 
-  document.getElementById("winner-box").style.display = "block";
-  document.getElementById("winner-ticket").textContent = winner;
+  try{
+    const ticketsSnap = await getDocs(collection(db, "tickets"));
+    const ordersSnap = await getDocs(collection(db, "orders"));
+    const raffleSnap = await getDoc(doc(db, "raffles", "Jumpy"));
+
+    const ticketsCount = ticketsSnap.size;
+    const ordersCount = ordersSnap.size;
+
+    statTickets.textContent = ticketsCount;
+    statOrders.textContent = ordersCount;
+
+    let soldCount = 0;
+
+    if(raffleSnap.exists()){
+      const raffle = raffleSnap.data();
+
+      raffleTitle.textContent = raffle.title || "-";
+      rafflePrice.textContent = formatCurrency(raffle.price);
+      raffleTotal.textContent = raffle.tickets_total ?? "-";
+      raffleSold.textContent = raffle.tickets_sold ?? 0;
+      raffleStatus.textContent = raffle.status || "-";
+
+      soldCount = Number(raffle.tickets_sold || 0);
+      statSold.textContent = soldCount;
+    } else {
+      raffleTitle.textContent = "Documento não encontrado";
+      rafflePrice.textContent = "-";
+      raffleTotal.textContent = "-";
+      raffleSold.textContent = "-";
+      raffleStatus.textContent = "-";
+      statSold.textContent = "0";
+    }
+
+    const diff = soldCount - ticketsCount;
+    statDiff.textContent = diff;
+
+    if(diff === 0){
+      showStatus("Tudo parece coerente: o número de bilhetes e o contador do sorteio estão alinhados.", "ok");
+    } else if(diff > 0){
+      showStatus(`O contador tickets_sold está ${diff} acima do número real de documentos na coleção tickets. Isto pode vir de testes antigos ou incrementos que não foram acompanhados pelos bilhetes esperados.`, "err");
+    } else {
+      showStatus(`Existem mais documentos em tickets do que o valor guardado em tickets_sold. A coleção tickets está ${Math.abs(diff)} acima do contador.`, "err");
+    }
+
+    const latestOrdersQuery = query(collection(db, "orders"), orderBy("created", "desc"), limit(10));
+    const latestTicketsQuery = query(collection(db, "tickets"), orderBy("created", "desc"), limit(15));
+
+    const latestOrders = await getDocs(latestOrdersQuery);
+    const latestTickets = await getDocs(latestTicketsQuery);
+
+    if(latestOrders.empty){
+      ordersEmpty.style.display = "block";
+    } else {
+      latestOrders.forEach((docSnap) => {
+        const o = docSnap.data();
+        const div = document.createElement("div");
+        div.className = "item";
+
+        div.innerHTML = `
+          <span class="pill gold">Encomenda</span>
+          <strong>${o.buyer || "-"}</strong>
+          <span><b>Email:</b> ${o.buyer_email || "-"}</span>
+          <span><b>Cidade:</b> ${o.buyer_city || "-"}</span>
+          <span><b>Sorteio:</b> ${o.raffle_title || o.raffle_id || "-"}</span>
+          <span><b>Quantidade:</b> ${o.qty ?? "-"}</span>
+          <span><b>Total:</b> ${formatCurrency(o.total)}</span>
+          <span><b>Bilhetes:</b> ${Array.isArray(o.tickets) ? o.tickets.join(", ") : "-"}</span>
+          <span><b>Criado:</b> ${formatDate(o.created)}</span>
+        `;
+        ordersList.appendChild(div);
+      });
+    }
+
+    if(latestTickets.empty){
+      ticketsEmpty.style.display = "block";
+    } else {
+      latestTickets.forEach((docSnap) => {
+        const t = docSnap.data();
+        const div = document.createElement("div");
+        div.className = "item";
+
+        div.innerHTML = `
+          <span class="pill green">Bilhete</span>
+          <strong>Ticket #${t.ticket_number ?? "-"}</strong>
+          <span><b>Participante:</b> ${t.buyer || "-"}</span>
+          <span><b>Email:</b> ${t.buyer_email || "-"}</span>
+          <span><b>Cidade:</b> ${t.buyer_city || "-"}</span>
+          <span><b>Sorteio:</b> ${t.raffle_title || t.raffle_id || "-"}</span>
+          <span><b>Criado:</b> ${formatDate(t.created)}</span>
+        `;
+        ticketsList.appendChild(div);
+      });
+    }
+
+  }catch(error){
+    console.error(error);
+    showStatus("Erro ao carregar dados do Firebase.", "err");
+  }
 }
+
+refreshBtn.addEventListener("click", loadDashboard);
+loadDashboard();
 </script>
 
 </body>
