@@ -1,520 +1,256 @@
 <!doctype html>
 <html lang="pt">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BMW Série 1 Pack M · CarSorte</title>
-  <style>
-    :root{
-      --bg:#060606;
-      --panel:#111111;
-      --panel2:#0c0c0c;
-      --gold:#f4c542;
-      --text:#ffffff;
-      --muted:#b0b0b0;
-      --line:rgba(255,255,255,.08);
-      --shadow:0 18px 40px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(244,197,66,.12), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(244,197,66,.08), transparent 22%),
-        var(--bg);
-      color:var(--text);
-    }
-    a{text-decoration:none;color:inherit}
-    .container{max-width:1240px;margin:0 auto;padding:0 20px}
 
-    .top-alert{
-      background:linear-gradient(90deg,#7a5a00,#f4c542,#7a5a00);
-      color:#000;
-      text-align:center;
-      padding:10px 12px;
-      font-size:14px;
-      font-weight:900;
-      letter-spacing:.02em;
-    }
-    .topbar{
-      position:sticky;top:0;z-index:40;
-      background:rgba(6,6,6,.88);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:46px;height:46px;border-radius:16px;background:var(--gold);
-      color:#000;display:grid;place-items:center;font-size:24px;font-weight:800;
-      box-shadow:0 10px 25px rgba(244,197,66,.25);
-    }
-    .brand h1{margin:0;font-size:30px;line-height:1;color:var(--gold);font-weight:900}
-    .brand small{display:block;color:#888;margin-top:4px}
-    .navlinks{
-      display:flex;
-      gap:20px;
-      color:#d7d7d7;
-      font-size:14px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .navlinks a:hover{color:var(--gold)}
-    .nav-cta{
-      background:var(--gold);
-      color:#000;
-      padding:10px 14px;
-      border-radius:14px;
-      font-weight:800;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .hero{
-      padding:34px 0 18px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:24px;
-      align-items:start;
-    }
-    .gallery{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-    }
-    .gallery-main img{
-      width:100%;
-      height:500px;
-      object-fit:cover;
-      display:block;
-    }
-    .thumbs{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      padding:12px;
-      background:#0b0b0b;
-    }
-    .thumbs img{
-      width:100%;
-      height:110px;
-      object-fit:cover;
-      border-radius:14px;
-      border:1px solid var(--line);
-      display:block;
-    }
+<title>Sorteio BMW Série 1</title>
 
-    .hero-side{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:26px;
-      box-shadow:var(--shadow);
-      position:sticky;
-      top:100px;
-    }
-    .pill{
-      display:inline-block;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(244,197,66,.10);
-      border:1px solid rgba(244,197,66,.22);
-      color:#ffe08a;
-      font-size:13px;
-      font-weight:800;
-      margin-bottom:12px;
-    }
-    .hero-side h2{
-      margin:0;
-      font-size:44px;
-      line-height:1.05;
-    }
-    .muted{color:var(--muted)}
-    .gold{color:var(--gold)}
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-top:18px;
-    }
-    .stat{
-      background:#0b0b0b;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      text-align:center;
-    }
-    .stat strong{
-      display:block;
-      color:var(--gold);
-      font-size:28px;
-      margin-bottom:4px;
-    }
-    .progress-wrap{margin-top:18px}
-    .row{display:flex;justify-content:space-between;gap:10px}
-    .progress{
-      height:10px;
-      background:#242424;
-      border-radius:999px;
-      overflow:hidden;
-      margin-top:10px;
-    }
-    .progress > div{height:100%;background:var(--gold)}
-    .timer{
-      margin-top:16px;
-      border:1px solid rgba(244,197,66,.15);
-      background:rgba(244,197,66,.08);
-      border-radius:18px;
-      padding:14px;
-      text-align:center;
-    }
-    .timer small{display:block;color:#b7b7b7;margin-bottom:6px}
-    .timer strong{color:#ffe08a;font-size:18px}
+<style>
 
-    .packs{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-      margin-top:18px;
-    }
-    .pack{
-      display:block;
-      background:#0c0c0c;
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px 10px;
-      text-align:center;
-      transition:.2s ease;
-    }
-    .pack:hover{
-      transform:translateY(-2px);
-      border-color:rgba(244,197,66,.35);
-      background:rgba(244,197,66,.06);
-    }
-    .pack strong{display:block;color:var(--gold);font-size:24px}
-    .pack small{display:block;color:#888;margin:4px 0 8px}
-    .pack span{font-weight:900}
+body{
+background:#060606;
+color:white;
+font-family:Arial;
+margin:0;
+padding:40px;
+}
 
-    .qualif{
-      margin-top:18px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      border-radius:18px;
-      padding:16px;
-    }
-    .answers{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .answer{
-      border:1px solid var(--line);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      color:#ddd;
-    }
-    .answer.good{
-      border-color:rgba(244,197,66,.35);
-      background:rgba(244,197,66,.10);
-      color:#ffe08a;
-    }
-    .btn{
-      display:inline-block;
-      width:100%;
-      text-align:center;
-      padding:16px 22px;
-      border-radius:18px;
-      font-weight:900;
-      transition:.2s ease;
-      border:1px solid transparent;
-      margin-top:18px;
-    }
-    .btn.primary{background:var(--gold);color:#000}
-    .btn.primary:hover{background:#ffd95f}
-    .btn.secondary{background:rgba(255,255,255,.05);border-color:var(--line);color:#fff}
+.container{
+max-width:1100px;
+margin:auto;
+}
 
-    .section{padding:22px 0 60px}
-    .content-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:22px;
-    }
-    .box{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:26px;
-      padding:24px;
-      box-shadow:var(--shadow);
-    }
-    .box h3{margin-top:0;font-size:30px}
-    .feature-list,.faq-list,.ticket-list{display:grid;gap:14px}
-    .item{
-      background:var(--panel2);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-    }
-    .item strong{display:block;margin-bottom:6px}
-    .proof-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin-top:12px;
-    }
-    .proof{
-      background:var(--panel2);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      text-align:center;
-    }
-    .proof strong{display:block;color:var(--gold);font-size:28px}
-    .cta-banner{
-      margin-top:22px;
-      background:linear-gradient(135deg,#151515 0%,#090909 100%);
-      border:1px solid rgba(244,197,66,.18);
-      border-radius:30px;
-      padding:34px;
-      text-align:center;
-      box-shadow:var(--shadow);
-    }
-    .cta-banner h3{font-size:42px;margin:10px 0}
-    .legal-links{
-      display:flex;
-      gap:18px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:18px;
-      color:#bdbdbd;
-      font-size:14px;
-    }
+h1{
+color:#f4c542;
+}
 
-    @media (max-width: 980px){
-      .hero,.content-grid{grid-template-columns:1fr}
-      .packs,.proof-grid,.stats{grid-template-columns:1fr}
-      .gallery-main img{height:320px}
-      .hero-side{position:static}
-      .hero-side h2,.cta-banner h3{font-size:34px}
-      .navlinks{gap:12px}
-    }
-  </style>
+.hero{
+background:#111;
+padding:25px;
+border-radius:15px;
+border:1px solid rgba(255,255,255,.08);
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+.hero img{
+width:100%;
+border-radius:10px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:20px;
+}
+
+.stat{
+background:#111;
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.08);
+text-align:center;
+}
+
+.progress{
+height:10px;
+background:#222;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.bar{
+height:100%;
+background:#f4c542;
+width:75%;
+}
+
+.packs{
+margin-top:25px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.pack{
+background:#111;
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.08);
+text-align:center;
+}
+
+button{
+margin-top:10px;
+padding:10px 16px;
+border:none;
+border-radius:8px;
+background:#f4c542;
+font-weight:bold;
+cursor:pointer;
+}
+
+.timer{
+margin-top:20px;
+font-size:18px;
+color:#f4c542;
+}
+
+.notification{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#111;
+padding:10px 14px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,.1);
+}
+
+</style>
+
 </head>
+
 <body>
 
-  <div class="top-alert">
-    🔥 BMW Série 1 Pack M quase completo · 3 743 bilhetes restantes · procura muito forte
-  </div>
+<div class="container">
 
-  <div class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">🏁</div>
-        <div>
-          <h1>CarSorte</h1>
-          <small>Detalhe do sorteio</small>
-        </div>
-      </div>
-      <div class="navlinks">
-        <a href="index.html">Site público</a>
-        <a href="checkout.html">Checkout</a>
-        <a href="utilizador.html">Área do utilizador</a>
-        <a href="admin.html" class="nav-cta">Admin</a>
-      </div>
-    </div>
-  </div>
+<h1>BMW Série 1 Pack M</h1>
 
-  <section class="container hero">
-    <div class="gallery">
-      <div class="gallery-main">
-        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1400&q=80" alt="BMW Série 1 Pack M" />
-      </div>
-      <div class="thumbs">
-        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=800&q=80" alt="">
-      </div>
-    </div>
+<div class="hero">
 
-    <div class="hero-side">
-      <div class="pill">Quase cheio</div>
-      <h2>BMW Série 1 <span class="gold">Pack M</span></h2>
-      <p class="muted" style="margin:14px 0 0 0;line-height:1.8">
-        Um dos sorteios mais desejados da plataforma. Visual premium, forte procura e uma experiência pensada para converter.
-      </p>
+<div>
+<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80">
+</div>
 
-      <div class="stats">
-        <div class="stat"><strong>2,50€</strong><span class="muted">por bilhete</span></div>
-        <div class="stat"><strong>28/03</strong><span class="muted">data do sorteio</span></div>
-        <div class="stat"><strong>11 257</strong><span class="muted">bilhetes vendidos</span></div>
-        <div class="stat"><strong>3 743</strong><span class="muted">restantes</span></div>
-      </div>
+<div>
 
-      <div class="progress-wrap">
-        <div class="row muted"><span>Progresso</span><span class="gold">75%</span></div>
-        <div class="progress"><div style="width:75%"></div></div>
-      </div>
+<p>Participe no sorteio deste BMW Série 1 por apenas <strong>2,50€</strong>.</p>
 
-      <div class="timer">
-        <small>Sorteio em</small>
-        <strong>04 dias · 12h · 18m</strong>
-      </div>
+<div class="stats">
 
-      <div class="packs">
-        <a class="pack" href="checkout.html?pack=1">
-          <strong>1</strong>
-          <small>Entrada rápida</small>
-          <span>2,50€</span>
-        </a>
-        <a class="pack" href="checkout.html?pack=5">
-          <strong>5</strong>
-          <small>Mais popular</small>
-          <span>10€</span>
-        </a>
-        <a class="pack" href="checkout.html?pack=10">
-          <strong>10</strong>
-          <small>Forte impulso</small>
-          <span>20€</span>
-        </a>
-        <a class="pack" href="checkout.html?pack=25">
-          <strong>25</strong>
-          <small>Máxima chance</small>
-          <span>50€</span>
-        </a>
-      </div>
+<div class="stat">
+<strong>15000</strong>
+<br>
+Bilhetes totais
+</div>
 
-      <div class="qualif">
-        <strong>Pergunta de qualificação</strong>
-        <div class="muted" style="margin-top:6px">Quanto é 4 + 3 ?</div>
-        <div class="answers">
-          <span class="answer">5</span>
-          <span class="answer good">7</span>
-          <span class="answer">9</span>
-        </div>
-      </div>
+<div class="stat">
+<strong id="sold">11257</strong>
+<br>
+Vendidos
+</div>
 
-      <a class="btn primary" href="checkout.html?pack=5">Participar agora</a>
-      <a class="btn secondary" href="index.html">Voltar ao site</a>
-    </div>
-  </section>
+<div class="stat">
+<strong id="remaining">3743</strong>
+<br>
+Restantes
+</div>
 
-  <section class="container section">
-    <div class="content-grid">
-      <div class="box">
-        <h3>Sobre este sorteio</h3>
-        <p class="muted" style="line-height:1.9">
-          Este sorteio foi pensado para criar uma experiência clara, atrativa e premium. A participação é simples, os packs estão visíveis e o progresso do sorteio é apresentado em tempo real.
-        </p>
-        <div class="feature-list" style="margin-top:18px">
-          <div class="item">
-            <strong>Veículo em destaque</strong>
-            <span class="muted">BMW Série 1 Pack M com forte poder de atração e procura elevada.</span>
-          </div>
-          <div class="item">
-            <strong>Participação simples</strong>
-            <span class="muted">Escolha o pack, valide a qualificação e finalize a sua participação.</span>
-          </div>
-          <div class="item">
-            <strong>Experiência premium</strong>
-            <span class="muted">Visual escuro, detalhes dourados e foco na confiança do utilizador.</span>
-          </div>
-        </div>
-      </div>
+</div>
 
-      <div class="box">
-        <h3>Transparência</h3>
-        <div class="proof-grid">
-          <div class="proof">
-            <strong>75%</strong>
-            <span class="muted">já preenchido</span>
-          </div>
-          <div class="proof">
-            <strong>327</strong>
-            <span class="muted">vendidos hoje</span>
-          </div>
-          <div class="proof">
-            <strong>1 142</strong>
-            <span class="muted">membros premium</span>
-          </div>
-        </div>
+<div class="progress">
+<div class="bar"></div>
+</div>
 
-        <div class="ticket-list" style="margin-top:18px">
-          <div class="item">
-            <strong>Resultados publicados</strong>
-            <span class="muted">Os vencedores e resultados são apresentados de forma visível na plataforma.</span>
-          </div>
-          <div class="item">
-            <strong>Processo claro</strong>
-            <span class="muted">Cada sorteio segue uma estrutura definida e comunicada aos participantes.</span>
-          </div>
-          <div class="item">
-            <strong>Participação qualificada</strong>
-            <span class="muted">A validação final pode incluir uma pergunta de qualificação simples.</span>
-          </div>
-        </div>
-      </div>
+<div class="timer">
+Sorteio em <span id="timer"></span>
+</div>
 
-      <div class="box">
-        <h3>Porque este sorteio converte</h3>
-        <div class="feature-list">
-          <div class="item">
-            <strong>Preço acessível</strong>
-            <span class="muted">Entrada a partir de 2,50€, o que reduz a fricção e aumenta a participação.</span>
-          </div>
-          <div class="item">
-            <strong>Urgência visível</strong>
-            <span class="muted">Timer, progresso e bilhetes restantes criam pressão positiva para decisão rápida.</span>
-          </div>
-          <div class="item">
-            <strong>Prova social</strong>
-            <span class="muted">Bilhetes vendidos, membros premium e atividade diária reforçam a confiança.</span>
-          </div>
-        </div>
-      </div>
+</div>
 
-      <div class="box">
-        <h3>FAQ do sorteio</h3>
-        <div class="faq-list">
-          <div class="item">
-            <strong>Como participo?</strong>
-            <span class="muted">Escolha um pack, valide a participação e avance para o checkout.</span>
-          </div>
-          <div class="item">
-            <strong>Posso comprar vários bilhetes?</strong>
-            <span class="muted">Sim. Pode aumentar as suas hipóteses comprando packs maiores.</span>
-          </div>
-          <div class="item">
-            <strong>Como sei se ganhei?</strong>
-            <span class="muted">O vencedor será contactado e o resultado poderá ser publicado na plataforma.</span>
-          </div>
-          <div class="item">
-            <strong>Existe pagamento real?</strong>
-            <span class="muted">Esta fase é visual. O próximo passo será ligar Stripe e geração automática de bilhetes.</span>
-          </div>
-        </div>
-      </div>
-    </div>
+</div>
 
-    <div class="cta-banner">
-      <p style="color:#f4c542;text-transform:uppercase;letter-spacing:.2em;font-size:13px;margin:0">Pronto para entrar?</p>
-      <h3>Reserve agora a sua participação</h3>
-      <p class="muted" style="max-width:760px;margin:0 auto 22px;line-height:1.9">
-        Escolha o pack ideal e siga diretamente para o checkout premium da CarSorte.
-      </p>
-      <a class="btn primary" style="max-width:340px" href="checkout.html?pack=5">Ir para o checkout</a>
+<h2>Escolha o seu pack</h2>
 
-      <div class="legal-links">
-        <a href="index.html#legal">Regulamento</a>
-        <a href="index.html#faq">FAQ</a>
-        <a href="index.html#contacto">Contacto</a>
-      </div>
-    </div>
-  </section>
+<div class="packs">
+
+<div class="pack">
+<h3>1 bilhete</h3>
+<p>2,50€</p>
+<a href="checkout.html?pack=1">
+<button>Comprar</button>
+</a>
+</div>
+
+<div class="pack">
+<h3>5 bilhetes</h3>
+<p>10€</p>
+<a href="checkout.html?pack=5">
+<button>Comprar</button>
+</a>
+</div>
+
+<div class="pack">
+<h3>10 bilhetes</h3>
+<p>20€</p>
+<a href="checkout.html?pack=10">
+<button>Comprar</button>
+</a>
+</div>
+
+<div class="pack">
+<h3>25 bilhetes</h3>
+<p>50€</p>
+<a href="checkout.html?pack=25">
+<button>Comprar</button>
+</a>
+</div>
+
+</div>
+
+</div>
+
+<div id="notification" class="notification"></div>
+
+<script>
+
+const endDate = new Date()
+endDate.setDate(endDate.getDate()+4)
+
+function updateTimer(){
+
+const now = new Date()
+const diff = endDate-now
+
+const days = Math.floor(diff/(1000*60*60*24))
+const hours = Math.floor((diff/(1000*60*60))%24)
+
+document.getElementById("timer").innerText = days+" dias "+hours+"h"
+
+}
+
+setInterval(updateTimer,1000)
+
+updateTimer()
+
+const names=["Miguel","João","Carlos","Ana","Rita","Pedro","Tiago","Marta"]
+
+function fakePurchase(){
+
+const name=names[Math.floor(Math.random()*names.length)]
+const qty=[1,5,10][Math.floor(Math.random()*3)]
+
+const box=document.getElementById("notification")
+
+box.innerText=name+" comprou "+qty+" bilhetes"
+
+setTimeout(()=>{
+
+box.innerText=""
+
+},4000)
+
+}
+
+setInterval(fakePurchase,7000)
+
+</script>
 
 </body>
 </html>
