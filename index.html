@@ -137,6 +137,7 @@ border:1px solid rgba(255,255,255,.1);
 
 <a href="raffle.html">Sorteios</a>
 <a href="winners.html">Vencedores</a>
+<a href="results.html">Resultados</a>
 <a href="faq.html">FAQ</a>
 <a href="regulamento.html">Regulamento</a>
 <a href="login.html">Login</a>
@@ -197,40 +198,6 @@ Sorteio em <span id="timer"></span>
 
 <section class="section">
 
-<h2>Porque escolher a CarSorte</h2>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>Sorteios transparentes</h3>
-
-<p>Processo justo e verificável.</p>
-
-</div>
-
-<div class="card">
-
-<h3>Bilhetes acessíveis</h3>
-
-<p>Participação a partir de 2,50€.</p>
-
-</div>
-
-<div class="card">
-
-<h3>Experiência premium</h3>
-
-<p>Plataforma moderna e segura.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
 <h2>Últimos vencedores</h2>
 
 <div class="cards">
@@ -248,6 +215,31 @@ Sorteio em <span id="timer"></span>
 <div class="card">
 <strong>Rui – Lisboa</strong>
 <p>Mercedes Classe A</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2>Plataforma em crescimento</h2>
+
+<div class="cards">
+
+<div class="card">
+<strong>+20000</strong>
+<p>Participantes</p>
+</div>
+
+<div class="card">
+<strong>+50</strong>
+<p>Sorteios realizados</p>
+</div>
+
+<div class="card">
+<strong>+100000€</strong>
+<p>Prémios distribuídos</p>
 </div>
 
 </div>
@@ -274,7 +266,6 @@ const now=new Date()
 const diff=endDate-now
 
 const days=Math.floor(diff/(1000*60*60*24))
-
 const hours=Math.floor((diff/(1000*60*60))%24)
 
 document.getElementById("timer").innerText=days+" dias "+hours+"h"
@@ -290,7 +281,6 @@ const names=["Miguel","João","Carlos","Ana","Rita","Pedro","Tiago","Marta"]
 function fakePurchase(){
 
 const name=names[Math.floor(Math.random()*names.length)]
-
 const qty=[1,5,10][Math.floor(Math.random()*3)]
 
 const box=document.getElementById("notification")
