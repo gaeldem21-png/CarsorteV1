@@ -45,8 +45,12 @@
       border-bottom:1px solid var(--line);
     }
     .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:18px 0;gap:20px;flex-wrap:wrap;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0;
+      gap:20px;
+      flex-wrap:wrap;
     }
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
@@ -57,11 +61,20 @@
     .brand h1{margin:0;font-size:30px;line-height:1;color:var(--gold);font-weight:900}
     .brand small{display:block;color:#888;margin-top:4px}
     .navlinks{
-      display:flex;gap:20px;color:#d7d7d7;font-size:14px;align-items:center;flex-wrap:wrap;
+      display:flex;
+      gap:20px;
+      color:#d7d7d7;
+      font-size:14px;
+      align-items:center;
+      flex-wrap:wrap;
     }
     .navlinks a:hover{color:var(--gold)}
     .nav-cta{
-      background:var(--gold);color:#000;padding:10px 14px;border-radius:14px;font-weight:800;
+      background:var(--gold);
+      color:#000;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:800;
     }
 
     .hero{
@@ -174,11 +187,18 @@
       margin-top:18px;
     }
     .pack{
+      display:block;
       background:#0c0c0c;
       border:1px solid var(--line);
       border-radius:16px;
       padding:14px 10px;
       text-align:center;
+      transition:.2s ease;
+    }
+    .pack:hover{
+      transform:translateY(-2px);
+      border-color:rgba(244,197,66,.35);
+      background:rgba(244,197,66,.06);
     }
     .pack strong{display:block;color:var(--gold);font-size:24px}
     .pack small{display:block;color:#888;margin:4px 0 8px}
@@ -232,14 +252,8 @@
       padding:24px;
       box-shadow:var(--shadow);
     }
-    .box h3{
-      margin-top:0;
-      font-size:30px;
-    }
-    .feature-list,.faq-list,.ticket-list{
-      display:grid;
-      gap:14px;
-    }
+    .box h3{margin-top:0;font-size:30px}
+    .feature-list,.faq-list,.ticket-list{display:grid;gap:14px}
     .item{
       background:var(--panel2);
       border:1px solid var(--line);
@@ -352,10 +366,26 @@
       </div>
 
       <div class="packs">
-        <div class="pack"><strong>1</strong><small>Entrada rápida</small><span>2,50€</span></div>
-        <div class="pack"><strong>5</strong><small>Mais popular</small><span>10€</span></div>
-        <div class="pack"><strong>10</strong><small>Forte impulso</small><span>20€</span></div>
-        <div class="pack"><strong>25</strong><small>Máxima chance</small><span>50€</span></div>
+        <a class="pack" href="checkout.html?pack=1">
+          <strong>1</strong>
+          <small>Entrada rápida</small>
+          <span>2,50€</span>
+        </a>
+        <a class="pack" href="checkout.html?pack=5">
+          <strong>5</strong>
+          <small>Mais popular</small>
+          <span>10€</span>
+        </a>
+        <a class="pack" href="checkout.html?pack=10">
+          <strong>10</strong>
+          <small>Forte impulso</small>
+          <span>20€</span>
+        </a>
+        <a class="pack" href="checkout.html?pack=25">
+          <strong>25</strong>
+          <small>Máxima chance</small>
+          <span>50€</span>
+        </a>
       </div>
 
       <div class="qualif">
@@ -368,7 +398,7 @@
         </div>
       </div>
 
-      <a class="btn primary" href="checkout.html">Participar agora</a>
+      <a class="btn primary" href="checkout.html?pack=5">Participar agora</a>
       <a class="btn secondary" href="index.html">Voltar ao site</a>
     </div>
   </section>
@@ -474,9 +504,9 @@
       <p style="color:#f4c542;text-transform:uppercase;letter-spacing:.2em;font-size:13px;margin:0">Pronto para entrar?</p>
       <h3>Reserve agora a sua participação</h3>
       <p class="muted" style="max-width:760px;margin:0 auto 22px;line-height:1.9">
-        Entre no sorteio, selecione o pack ideal e siga para o checkout premium da CarSorte.
+        Escolha o pack ideal e siga diretamente para o checkout premium da CarSorte.
       </p>
-      <a class="btn primary" style="max-width:340px" href="checkout.html">Ir para o checkout</a>
+      <a class="btn primary" style="max-width:340px" href="checkout.html?pack=5">Ir para o checkout</a>
 
       <div class="legal-links">
         <a href="index.html#legal">Regulamento</a>
