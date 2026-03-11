@@ -3,87 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Área do utilizador · CarSorte</title>
+  <title>Área do utilizador · CarSorte by DEM Automóveis</title>
 
   <style>
-    *{
-      box-sizing:border-box;
+    :root{
+      --bg:#050505;
+      --panel:#0f0f0f;
+      --panel-2:#131313;
+      --gold:#d4a017;
+      --gold-soft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 14px 34px rgba(0,0,0,.32);
     }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
 
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:#060606;
-      color:white;
+      background:
+        radial-gradient(circle at top, rgba(212,160,23,.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(212,160,23,.06), transparent 24%),
+        var(--bg);
+      color:var(--text);
     }
 
-    a{
-      text-decoration:none;
-      color:inherit;
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    .topbar{
+      background:linear-gradient(90deg,#8d6500,#d4a017,#8d6500);
+      color:#000;
+      text-align:center;
+      padding:10px 14px;
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:.02em;
     }
 
     header{
-      background:#111;
-      border-bottom:1px solid rgba(255,255,255,.08);
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.9);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .container{
+      max-width:1240px;
+      margin:auto;
+      padding:0 20px;
     }
 
     nav{
-      max-width:1200px;
-      margin:auto;
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      gap:20px;
-      padding:20px;
+      justify-content:space-between;
+      gap:24px;
+      padding:18px 0;
     }
 
-    .logo{
-      color:#f4c542;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand img{
+      height:58px;
+      width:auto;
+      object-fit:contain;
+      filter:drop-shadow(0 6px 18px rgba(212,160,23,.18));
+    }
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+
+    .brand-text strong{
+      color:var(--gold-soft);
       font-size:24px;
-      font-weight:bold;
-      white-space:nowrap;
+    }
+
+    .brand-text span{
+      color:#9c9c9c;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
 
     .menu{
       display:flex;
+      align-items:center;
+      gap:18px;
       flex-wrap:wrap;
       justify-content:flex-end;
-      gap:18px;
     }
 
     .menu a{
-      color:white;
-      font-size:16px;
+      color:#ececec;
+      font-size:15px;
     }
 
-    .container{
-      max-width:1200px;
-      margin:auto;
-      padding:40px 20px 70px;
+    .menu a:hover{
+      color:var(--gold-soft);
+    }
+
+    .menu .admin-link{
+      background:var(--gold);
+      color:#000;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:800;
     }
 
     .hero{
-      background:#111;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:20px;
+      padding:34px 0 10px;
+    }
+
+    .hero-card{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.14);
+      border-radius:28px;
       padding:30px;
+      box-shadow:var(--shadow);
       display:grid;
-      grid-template-columns:1.2fr .8fr;
+      grid-template-columns:1.15fr .85fr;
       gap:24px;
       align-items:center;
-      box-shadow:0 12px 28px rgba(0,0,0,.28);
     }
 
-    .hero h1{
-      margin:0 0 12px 0;
-      font-size:40px;
-      color:#f4c542;
+    .hero-card h1{
+      margin:0 0 10px 0;
+      font-size:42px;
+      color:var(--gold-soft);
     }
 
-    .hero p{
+    .hero-card p{
       margin:0;
-      color:#cfcfcf;
-      line-height:1.7;
+      color:var(--muted);
+      line-height:1.8;
       font-size:17px;
     }
 
@@ -92,35 +158,35 @@
       margin-top:16px;
       padding:10px 14px;
       border-radius:999px;
-      background:rgba(244,197,66,.10);
-      border:1px solid rgba(244,197,66,.20);
+      background:rgba(212,160,23,.10);
+      border:1px solid rgba(212,160,23,.20);
       color:#ffe08a;
-      font-weight:bold;
+      font-weight:800;
       font-size:14px;
     }
 
     .hero-side{
       background:#0b0b0b;
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:16px;
+      border:1px solid var(--line);
+      border-radius:18px;
       padding:20px;
     }
 
     .hero-side small{
-      color:#9f9f9f;
       display:block;
+      color:#9f9f9f;
       margin-bottom:8px;
     }
 
     .hero-side h2{
       margin:0 0 8px 0;
-      color:#f4c542;
+      color:var(--gold-soft);
       font-size:28px;
+      line-height:1.2;
     }
 
     .hero-side p{
       margin:0;
-      color:#cfcfcf;
       font-size:16px;
     }
 
@@ -132,45 +198,45 @@
     }
 
     .stat{
-      background:#111;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
       padding:20px;
       text-align:center;
+      box-shadow:var(--shadow);
     }
 
     .stat strong{
       display:block;
       font-size:30px;
-      color:#f4c542;
-      margin-bottom:6px;
+      color:var(--gold-soft);
+      margin-bottom:4px;
     }
 
     .stat span{
-      color:#9f9f9f;
+      color:#9e9e9e;
       font-size:14px;
     }
 
-    .grid{
+    .layout{
       display:grid;
       grid-template-columns:2fr 1fr;
       gap:22px;
-      margin-top:28px;
+      padding:26px 0 60px;
     }
 
     .panel{
-      background:#111;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:20px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:22px;
       padding:24px;
-      box-shadow:0 12px 28px rgba(0,0,0,.22);
+      box-shadow:var(--shadow);
     }
 
     .panel h3{
       margin-top:0;
       margin-bottom:18px;
       font-size:28px;
-      color:white;
     }
 
     .list{
@@ -180,7 +246,7 @@
 
     .item{
       background:#0b0b0b;
-      border:1px solid rgba(255,255,255,.06);
+      border:1px solid var(--line);
       border-radius:16px;
       padding:16px;
     }
@@ -188,8 +254,8 @@
     .row{
       display:flex;
       justify-content:space-between;
-      gap:12px;
       align-items:center;
+      gap:12px;
       flex-wrap:wrap;
     }
 
@@ -198,16 +264,17 @@
       padding:7px 10px;
       border-radius:999px;
       font-size:12px;
-      font-weight:bold;
-      background:rgba(244,197,66,.10);
+      font-weight:800;
+      background:rgba(212,160,23,.10);
       color:#ffe08a;
-      border:1px solid rgba(244,197,66,.20);
+      border:1px solid rgba(212,160,23,.20);
     }
 
     .small{
-      color:#9f9f9f;
+      color:#9e9e9e;
       font-size:13px;
       margin-top:8px;
+      line-height:1.6;
     }
 
     .ticket-numbers{
@@ -220,18 +287,18 @@
     .ticket-badge{
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(244,197,66,.22);
-      background:rgba(244,197,66,.08);
+      border:1px solid rgba(212,160,23,.22);
+      background:rgba(212,160,23,.08);
       color:#ffe08a;
       font-size:12px;
-      font-weight:bold;
+      font-weight:800;
     }
 
     .side-title{
       font-size:18px;
-      font-weight:bold;
+      font-weight:800;
       margin-bottom:12px;
-      color:#f4c542;
+      color:var(--gold-soft);
     }
 
     .actions{
@@ -241,15 +308,16 @@
 
     .btn{
       display:inline-block;
-      background:#f4c542;
-      color:black;
+      background:var(--gold);
+      color:#000;
       padding:12px 16px;
       border-radius:12px;
-      font-weight:bold;
+      font-weight:800;
       text-align:center;
+      box-shadow:var(--shadow);
     }
 
-    @media (max-width: 900px){
+    @media (max-width:980px){
       nav{
         flex-direction:column;
         align-items:flex-start;
@@ -260,16 +328,12 @@
         gap:14px;
       }
 
-      .container{
-        padding:30px 16px 50px;
-      }
-
-      .hero{
+      .hero-card{
         grid-template-columns:1fr;
       }
 
-      .hero h1{
-        font-size:30px;
+      .hero-card h1{
+        font-size:32px;
       }
 
       .hero-side h2{
@@ -280,34 +344,52 @@
         grid-template-columns:1fr 1fr;
       }
 
-      .grid{
+      .layout{
         grid-template-columns:1fr;
+      }
+
+      .brand img{
+        height:48px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <nav>
-      <div class="logo">CarSorte</div>
+  <div class="topbar">
+    👤 Área do utilizador · acompanhe bilhetes, participações e histórico da sua jornada CarSorte
+  </div>
 
-      <div class="menu">
-        <a href="index.html">Início</a>
-        <a href="raffle.html">Sorteio</a>
-        <a href="results.html">Resultados</a>
-        <a href="faq.html">FAQ</a>
-        <a href="admin.html">Admin</a>
-      </div>
-    </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <img src="logo-carsorte.png" alt="CarSorte by DEM Automóveis">
+          <div class="brand-text">
+            <strong>CarSorte</strong>
+            <span>by DEM Automóveis</span>
+          </div>
+        </div>
+
+        <div class="menu">
+          <a href="index.html">Início</a>
+          <a href="raffle.html">Sorteios</a>
+          <a href="winners.html">Vencedores</a>
+          <a href="results.html">Resultados</a>
+          <a href="faq.html">FAQ</a>
+          <a href="regulamento.html">Regulamento</a>
+          <a href="login.html">Login</a>
+          <a class="admin-link" href="admin.html">Admin</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <div class="container">
-
-    <div class="hero">
+  <section class="container hero">
+    <div class="hero-card">
       <div>
         <h1>Olá, João 👋</h1>
-        <p>Bem-vindo à sua área pessoal. Aqui pode acompanhar os seus bilhetes, participações, histórico e estado Premium.</p>
+        <p>Bem-vindo à sua área pessoal. Aqui pode acompanhar os seus bilhetes, participações ativas, histórico e a evolução da sua experiência CarSorte.</p>
         <div class="premium-badge">Premium Club ativo</div>
       </div>
 
@@ -339,169 +421,168 @@
         <span>Total investido</span>
       </div>
     </div>
+  </section>
 
-    <div class="grid">
-      <div>
-        <div class="panel">
-          <h3>Os meus sorteios ativos</h3>
+  <section class="container layout">
+    <div>
+      <div class="panel">
+        <h3>Os meus sorteios ativos</h3>
 
-          <div class="list">
-            <div class="item">
-              <div class="row">
-                <strong>BMW Série 1 Pack M</strong>
-                <span class="status">Ativo</span>
-              </div>
-              <div class="small" id="active-raffle-line">5 bilhetes · Tiragem a 28/03 · Sorteio quase completo</div>
+        <div class="list">
+          <div class="item">
+            <div class="row">
+              <strong>BMW Série 1 Pack M</strong>
+              <span class="status">Ativo</span>
             </div>
+            <div class="small" id="active-raffle-line">5 bilhetes · Tiragem a 28/03 · Sorteio quase completo</div>
+          </div>
 
-            <div class="item">
-              <div class="row">
-                <strong>Mercedes Classe A</strong>
-                <span class="status">Ativo</span>
-              </div>
-              <div class="small">10 bilhetes · Tiragem a 04/04</div>
+          <div class="item">
+            <div class="row">
+              <strong>Mercedes Classe A</strong>
+              <span class="status">Ativo</span>
             </div>
+            <div class="small">10 bilhetes · Tiragem a 04/04</div>
+          </div>
 
-            <div class="item">
-              <div class="row">
-                <strong>Citroën Jumpy Business</strong>
-                <span class="status">Ativo</span>
-              </div>
-              <div class="small">1 bilhete · Tiragem a 11/04</div>
+          <div class="item">
+            <div class="row">
+              <strong>Citroën Jumpy Business</strong>
+              <span class="status">Ativo</span>
             </div>
+            <div class="small">1 bilhete · Tiragem a 11/04</div>
           </div>
         </div>
+      </div>
 
-        <div class="panel" style="margin-top:22px;">
-          <h3>Os meus bilhetes</h3>
+      <div class="panel" style="margin-top:22px;">
+        <h3>Os meus bilhetes</h3>
 
-          <div class="list">
-            <div class="item">
-              <div class="row">
-                <strong>BMW Série 1 Pack M</strong>
-                <span class="status" id="main-ticket-count">5 bilhetes</span>
-              </div>
-              <div class="ticket-numbers" id="main-ticket-list"></div>
+        <div class="list">
+          <div class="item">
+            <div class="row">
+              <strong>BMW Série 1 Pack M</strong>
+              <span class="status" id="main-ticket-count">5 bilhetes</span>
             </div>
+            <div class="ticket-numbers" id="main-ticket-list"></div>
+          </div>
 
-            <div class="item">
-              <div class="row">
-                <strong>Mercedes Classe A</strong>
-                <span class="status">10 bilhetes</span>
-              </div>
-              <div class="ticket-numbers">
-                <span class="ticket-badge">#CS-M2241</span>
-                <span class="ticket-badge">#CS-M2242</span>
-                <span class="ticket-badge">#CS-M2243</span>
-                <span class="ticket-badge">#CS-M2244</span>
-                <span class="ticket-badge">#CS-M2245</span>
-              </div>
+          <div class="item">
+            <div class="row">
+              <strong>Mercedes Classe A</strong>
+              <span class="status">10 bilhetes</span>
             </div>
-
-            <div class="item">
-              <div class="row">
-                <strong>Citroën Jumpy Business</strong>
-                <span class="status">1 bilhete</span>
-              </div>
-              <div class="ticket-numbers">
-                <span class="ticket-badge">#CS-J7105</span>
-              </div>
+            <div class="ticket-numbers">
+              <span class="ticket-badge">#CS-M2241</span>
+              <span class="ticket-badge">#CS-M2242</span>
+              <span class="ticket-badge">#CS-M2243</span>
+              <span class="ticket-badge">#CS-M2244</span>
+              <span class="ticket-badge">#CS-M2245</span>
             </div>
           </div>
-        </div>
 
-        <div class="panel" style="margin-top:22px;">
-          <h3>Histórico de participações</h3>
-
-          <div class="list">
-            <div class="item">
-              <div class="row">
-                <strong id="history-main-title">Pack 5 bilhetes · BMW Série 1</strong>
-                <span class="small" id="history-main-price">10€</span>
-              </div>
-              <div class="small">Data: 05/03/2026</div>
+          <div class="item">
+            <div class="row">
+              <strong>Citroën Jumpy Business</strong>
+              <span class="status">1 bilhete</span>
             </div>
-
-            <div class="item">
-              <div class="row">
-                <strong>Pack 10 bilhetes · Mercedes Classe A</strong>
-                <span class="small">20€</span>
-              </div>
-              <div class="small">Data: 07/03/2026</div>
-            </div>
-
-            <div class="item">
-              <div class="row">
-                <strong>1 bilhete · Citroën Jumpy</strong>
-                <span class="small">2,50€</span>
-              </div>
-              <div class="small">Data: 08/03/2026</div>
+            <div class="ticket-numbers">
+              <span class="ticket-badge">#CS-J7105</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <div class="panel">
-          <div class="side-title">Resumo da conta</div>
+      <div class="panel" style="margin-top:22px;">
+        <h3>Histórico de participações</h3>
 
-          <div class="list">
-            <div class="item">
-              <strong>Nome</strong>
-              <div class="small">João Ferreira</div>
+        <div class="list">
+          <div class="item">
+            <div class="row">
+              <strong id="history-main-title">Pack 5 bilhetes · BMW Série 1</strong>
+              <span class="small" id="history-main-price">10€</span>
             </div>
-
-            <div class="item">
-              <strong>Email</strong>
-              <div class="small">joao@email.pt</div>
-            </div>
-
-            <div class="item">
-              <strong>Estado Premium</strong>
-              <div class="small">Ativo · 3€/mês</div>
-            </div>
-
-            <div class="item">
-              <strong>Cidade</strong>
-              <div class="small">Porto</div>
-            </div>
+            <div class="small">Data: 05/03/2026</div>
           </div>
-        </div>
 
-        <div class="panel" style="margin-top:22px;">
-          <div class="side-title">Ações rápidas</div>
-
-          <div class="actions">
-            <a class="btn" href="raffle.html">Participar em sorteios</a>
-            <a class="btn" href="results.html">Ver resultados</a>
-            <a class="btn" href="faq.html">Contactar suporte</a>
+          <div class="item">
+            <div class="row">
+              <strong>Pack 10 bilhetes · Mercedes Classe A</strong>
+              <span class="small">20€</span>
+            </div>
+            <div class="small">Data: 07/03/2026</div>
           </div>
-        </div>
 
-        <div class="panel" style="margin-top:22px;">
-          <div class="side-title">Próximas datas</div>
-
-          <div class="list">
-            <div class="item">
-              <strong>28/03</strong>
-              <div class="small">BMW Série 1 Pack M</div>
+          <div class="item">
+            <div class="row">
+              <strong>1 bilhete · Citroën Jumpy</strong>
+              <span class="small">2,50€</span>
             </div>
-
-            <div class="item">
-              <strong>04/04</strong>
-              <div class="small">Mercedes Classe A</div>
-            </div>
-
-            <div class="item">
-              <strong>11/04</strong>
-              <div class="small">Citroën Jumpy Business</div>
-            </div>
+            <div class="small">Data: 08/03/2026</div>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
+    <div>
+      <div class="panel">
+        <div class="side-title">Resumo da conta</div>
+
+        <div class="list">
+          <div class="item">
+            <strong>Nome</strong>
+            <div class="small">João Ferreira</div>
+          </div>
+
+          <div class="item">
+            <strong>Email</strong>
+            <div class="small">joao@email.pt</div>
+          </div>
+
+          <div class="item">
+            <strong>Estado Premium</strong>
+            <div class="small">Ativo · 3€/mês</div>
+          </div>
+
+          <div class="item">
+            <strong>Cidade</strong>
+            <div class="small">Porto</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:22px;">
+        <div class="side-title">Ações rápidas</div>
+
+        <div class="actions">
+          <a class="btn" href="raffle.html">Participar em sorteios</a>
+          <a class="btn" href="results.html">Ver resultados</a>
+          <a class="btn" href="winners.html">Ver vencedores</a>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:22px;">
+        <div class="side-title">Próximas datas</div>
+
+        <div class="list">
+          <div class="item">
+            <strong>28/03</strong>
+            <div class="small">BMW Série 1 Pack M</div>
+          </div>
+
+          <div class="item">
+            <strong>04/04</strong>
+            <div class="small">Mercedes Classe A</div>
+          </div>
+
+          <div class="item">
+            <strong>11/04</strong>
+            <div class="small">Citroën Jumpy Business</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -510,8 +591,7 @@
     const packData = {
       "1": { qty: 1, total: "2,50€" },
       "5": { qty: 5, total: "10€" },
-      "10": { qty: 10, total: "20€" },
-      "25": { qty: 25, total: "50€" }
+      "15": { qty: 15, total: "25€" }
     };
 
     const active = packData[selectedPack] || packData["5"];
