@@ -1,235 +1,342 @@
 <!doctype html>
 <html lang="pt">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteio BMW Série 1</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-<title>Sorteio BMW Série 1</title>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#060606;
+      color:white;
+    }
 
-<style>
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-body{
-background:#060606;
-color:white;
-font-family:Arial;
-margin:0;
-padding:40px;
-}
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-.container{
-max-width:1100px;
-margin:auto;
-}
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
 
-.hero{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px;
-background:#111;
-padding:30px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.08);
-}
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
 
-.hero img{
-width:100%;
-border-radius:10px;
-}
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
 
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-margin-top:20px;
-}
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
 
-.stat{
-background:#0b0b0b;
-padding:20px;
-border-radius:10px;
-text-align:center;
-}
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px 60px;
+    }
 
-.progress{
-height:10px;
-background:#222;
-border-radius:10px;
-overflow:hidden;
-margin-top:10px;
-}
+    h1{
+      font-size:42px;
+      margin:0 0 25px 0;
+      color:#f4c542;
+    }
 
-.bar{
-height:100%;
-background:#f4c542;
-width:75%;
-}
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+      background:#111;
+      padding:30px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+    }
 
-.packs{
-margin-top:40px;
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-}
+    .hero img{
+      width:100%;
+      display:block;
+      border-radius:14px;
+    }
 
-.pack{
-background:#111;
-padding:20px;
-border-radius:10px;
-text-align:center;
-}
+    .hero-right p{
+      color:#ddd;
+      font-size:18px;
+      line-height:1.5;
+      margin-top:0;
+    }
 
-button{
-background:#f4c542;
-border:none;
-padding:10px 18px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+      margin-top:20px;
+    }
 
-.timer{
-margin-top:15px;
-color:#f4c542;
-}
+    .stat{
+      background:#0b0b0b;
+      padding:20px;
+      border-radius:12px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,.06);
+    }
 
-</style>
+    .stat strong{
+      display:block;
+      font-size:28px;
+      color:#f4c542;
+      margin-bottom:6px;
+    }
 
+    .progress{
+      height:12px;
+      background:#222;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:18px;
+    }
+
+    .bar{
+      height:100%;
+      width:75%;
+      background:#f4c542;
+    }
+
+    .timer{
+      margin-top:15px;
+      color:#f4c542;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    h2{
+      font-size:32px;
+      margin:40px 0 20px 0;
+    }
+
+    .packs{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .pack{
+      background:#111;
+      padding:22px;
+      border-radius:16px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .pack h3{
+      margin-top:0;
+      font-size:24px;
+    }
+
+    .pack p{
+      color:#ddd;
+      font-size:18px;
+    }
+
+    .btn{
+      display:inline-block;
+      background:#f4c542;
+      color:black;
+      padding:14px 22px;
+      border-radius:10px;
+      font-weight:bold;
+      border:none;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .secondary-btn{
+      display:inline-block;
+      margin-top:20px;
+      background:#1a1a1a;
+      color:white;
+      padding:14px 22px;
+      border-radius:10px;
+      font-weight:bold;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    @media (max-width: 900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:32px;
+      }
+
+      h2{
+        font-size:26px;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .packs{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
 
-<h1>BMW Série 1 Pack M</h1>
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="winners.html">Vencedores</a>
+        <a href="results.html">Resultados</a>
+        <a href="faq.html">FAQ</a>
+        <a href="regulamento.html">Regulamento</a>
+      </div>
+    </nav>
+  </header>
 
-<div class="hero">
+  <div class="container">
+    <h1>BMW Série 1 Pack M</h1>
 
-<div>
+    <div class="hero">
+      <div>
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80" alt="BMW Série 1">
+      </div>
 
-<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e">
+      <div class="hero-right">
+        <p>Participe neste sorteio por apenas <strong>2,50€</strong> e tenha a oportunidade de ganhar um BMW Série 1 Pack M.</p>
 
-</div>
+        <div class="stats">
+          <div class="stat">
+            <strong>15000</strong>
+            Bilhetes totais
+          </div>
 
-<div>
+          <div class="stat">
+            <strong id="sold">11257</strong>
+            Vendidos
+          </div>
 
-<p>Participe neste sorteio por apenas <strong>2,50€</strong></p>
+          <div class="stat">
+            <strong id="remaining">3743</strong>
+            Restantes
+          </div>
+        </div>
 
-<div class="stats">
+        <div class="progress">
+          <div class="bar"></div>
+        </div>
 
-<div class="stat">
-<strong>15000</strong>
-<br>
-Bilhetes totais
-</div>
+        <div class="timer">
+          Sorteio em <span id="timer"></span>
+        </div>
+      </div>
+    </div>
 
-<div class="stat">
-<strong id="sold">11257</strong>
-<br>
-Vendidos
-</div>
+    <h2>Escolha o pack</h2>
 
-<div class="stat">
-<strong id="remaining">3743</strong>
-<br>
-Restantes
-</div>
+    <div class="packs">
+      <div class="pack">
+        <h3>1 bilhete</h3>
+        <p>2,50€</p>
+        <a class="btn" href="checkout.html?pack=1">Comprar</a>
+      </div>
 
-</div>
+      <div class="pack">
+        <h3>5 bilhetes</h3>
+        <p>10€</p>
+        <a class="btn" href="checkout.html?pack=5">Comprar</a>
+      </div>
 
-<div class="progress">
-<div class="bar"></div>
-</div>
+      <div class="pack">
+        <h3>10 bilhetes</h3>
+        <p>20€</p>
+        <a class="btn" href="checkout.html?pack=10">Comprar</a>
+      </div>
 
-<div class="timer">
-Sorteio em <span id="timer"></span>
-</div>
+      <div class="pack">
+        <h3>25 bilhetes</h3>
+        <p>50€</p>
+        <a class="btn" href="checkout.html?pack=25">Comprar</a>
+      </div>
+    </div>
 
-</div>
+    <a class="secondary-btn" href="results.html">Ver último resultado</a>
+  </div>
 
-</div>
+  <script>
+    let sold = 11257;
 
-<h2>Escolha o pack</h2>
+    function updateCounter(){
+      const add = Math.floor(Math.random() * 3);
+      sold = sold + add;
 
-<div class="packs">
+      if (sold > 15000) {
+        sold = 15000;
+      }
 
-<div class="pack">
-<h3>1 bilhete</h3>
-<p>2,50€</p>
-<a href="checkout.html?pack=1"><button>Comprar</button></a>
-</div>
+      document.getElementById("sold").innerText = sold;
+      document.getElementById("remaining").innerText = 15000 - sold;
+    }
 
-<div class="pack">
-<h3>5 bilhetes</h3>
-<p>10€</p>
-<a href="checkout.html?pack=5"><button>Comprar</button></a>
-</div>
+    setInterval(updateCounter, 5000);
 
-<div class="pack">
-<h3>10 bilhetes</h3>
-<p>20€</p>
-<a href="checkout.html?pack=10"><button>Comprar</button></a>
-</div>
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 4);
 
-<div class="pack">
-<h3>25 bilhetes</h3>
-<p>50€</p>
-<a href="checkout.html?pack=25"><button>Comprar</button></a>
-</div>
+    function updateTimer(){
+      const now = new Date();
+      const diff = endDate - now;
 
-</div>
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
 
-<br>
+      document.getElementById("timer").innerText = days + " dias " + hours + "h";
+    }
 
-<a href="results.html">
-<button>Ver último resultado</button>
-</a>
-
-</div>
-
-<script>
-
-let sold = 11257
-
-function updateCounter(){
-
-const add = Math.floor(Math.random()*3)
-
-sold = sold + add
-
-if(sold>15000){
-sold=15000
-}
-
-document.getElementById("sold").innerText=sold
-document.getElementById("remaining").innerText=15000-sold
-
-}
-
-setInterval(updateCounter,5000)
-
-const endDate = new Date()
-endDate.setDate(endDate.getDate()+4)
-
-function updateTimer(){
-
-const now=new Date()
-const diff=endDate-now
-
-const days=Math.floor(diff/(1000*60*60*24))
-const hours=Math.floor((diff/(1000*60*60))%24)
-
-document.getElementById("timer").innerText=days+" dias "+hours+"h"
-
-}
-
-setInterval(updateTimer,1000)
-
-updateTimer()
-
-</script>
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
 
 </body>
-
 </html>
