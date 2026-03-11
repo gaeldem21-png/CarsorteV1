@@ -2,7 +2,6 @@
 <html lang="pt">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,16 +9,21 @@
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
 body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
 background:#060606;
 color:white;
-font-family:Arial;
-margin:0;
 }
+
+/* HEADER */
 
 header{
 background:#111;
-padding:20px;
 border-bottom:1px solid rgba(255,255,255,.08);
 }
 
@@ -29,12 +33,7 @@ margin:auto;
 display:flex;
 justify-content:space-between;
 align-items:center;
-}
-
-nav a{
-color:white;
-margin-left:20px;
-text-decoration:none;
+padding:20px;
 }
 
 .logo{
@@ -43,29 +42,50 @@ font-size:24px;
 font-weight:bold;
 }
 
+.menu a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+/* HERO */
+
 .hero{
 max-width:1200px;
 margin:auto;
-padding:80px 20px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
+display:flex;
 align-items:center;
+gap:40px;
+padding:80px 20px;
 }
 
-.hero img{
+.hero-text{
+flex:1;
+}
+
+.hero-image{
+flex:1;
+}
+
+.hero-image img{
 width:100%;
 border-radius:10px;
 }
 
-.button{
+/* BUTTON */
+
+.btn{
+display:inline-block;
 background:#f4c542;
 color:black;
 padding:14px 24px;
-border-radius:10px;
+border-radius:8px;
 text-decoration:none;
 font-weight:bold;
+margin-top:20px;
 }
+
+/* SECTIONS */
 
 .section{
 max-width:1200px;
@@ -74,17 +94,21 @@ padding:60px 20px;
 }
 
 .cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
+display:flex;
 gap:20px;
+flex-wrap:wrap;
 }
 
 .card{
+flex:1;
+min-width:250px;
 background:#111;
-padding:25px;
 border-radius:10px;
 border:1px solid rgba(255,255,255,.08);
+padding:25px;
 }
+
+/* PROGRESS */
 
 .progress{
 height:10px;
@@ -96,29 +120,16 @@ margin-top:10px;
 
 .bar{
 height:100%;
-background:#f4c542;
 width:75%;
+background:#f4c542;
 }
 
-.timer{
-margin-top:10px;
-color:#f4c542;
-}
+/* FOOTER */
 
 footer{
 text-align:center;
 padding:40px;
-color:#aaa;
-}
-
-.notification{
-position:fixed;
-bottom:20px;
-left:20px;
-background:#111;
-padding:10px 14px;
-border-radius:8px;
-border:1px solid rgba(255,255,255,.1);
+color:#999;
 }
 
 </style>
@@ -131,17 +142,15 @@ border:1px solid rgba(255,255,255,.1);
 
 <nav>
 
-<div class="logo">CarSorte</div>
+<div class="logo">
+CarSorte
+</div>
 
-<div>
-
+<div class="menu">
 <a href="raffle.html">Sorteios</a>
 <a href="winners.html">Vencedores</a>
 <a href="results.html">Resultados</a>
 <a href="faq.html">FAQ</a>
-<a href="regulamento.html">Regulamento</a>
-<a href="login.html">Login</a>
-
 </div>
 
 </nav>
@@ -150,17 +159,19 @@ border:1px solid rgba(255,255,255,.1);
 
 <section class="hero">
 
-<div>
+<div class="hero-text">
 
 <h1>Ganhe um carro por apenas 2,50€</h1>
 
 <p>Participe nos sorteios CarSorte e tenha a oportunidade de conduzir veículos premium.</p>
 
-<a class="button" href="raffle.html">Participar agora</a>
+<a class="btn" href="raffle.html">
+Participar agora
+</a>
 
 </div>
 
-<div>
+<div class="hero-image">
 
 <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e">
 
@@ -184,13 +195,34 @@ border:1px solid rgba(255,255,255,.1);
 
 <p>11257 vendidos</p>
 
-<div class="timer">
-Sorteio em <span id="timer"></span>
+<a class="btn" href="raffle.html">
+Ver sorteio
+</a>
+
 </div>
 
-<br>
+</section>
 
-<a class="button" href="raffle.html">Ver sorteio</a>
+<section class="section">
+
+<h2>Porque escolher CarSorte</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Sorteios transparentes</h3>
+<p>Processo justo e verificável.</p>
+</div>
+
+<div class="card">
+<h3>Bilhetes acessíveis</h3>
+<p>Participação a partir de 2,50€.</p>
+</div>
+
+<div class="card">
+<h3>Experiência premium</h3>
+<p>Plataforma moderna e segura.</p>
+</div>
 
 </div>
 
@@ -221,84 +253,11 @@ Sorteio em <span id="timer"></span>
 
 </section>
 
-<section class="section">
-
-<h2>Plataforma em crescimento</h2>
-
-<div class="cards">
-
-<div class="card">
-<strong>+20000</strong>
-<p>Participantes</p>
-</div>
-
-<div class="card">
-<strong>+50</strong>
-<p>Sorteios realizados</p>
-</div>
-
-<div class="card">
-<strong>+100000€</strong>
-<p>Prémios distribuídos</p>
-</div>
-
-</div>
-
-</section>
-
 <footer>
 
 © CarSorte
 
 </footer>
 
-<div id="notification" class="notification"></div>
-
-<script>
-
-const endDate = new Date()
-endDate.setDate(endDate.getDate()+4)
-
-function updateTimer(){
-
-const now=new Date()
-
-const diff=endDate-now
-
-const days=Math.floor(diff/(1000*60*60*24))
-const hours=Math.floor((diff/(1000*60*60))%24)
-
-document.getElementById("timer").innerText=days+" dias "+hours+"h"
-
-}
-
-setInterval(updateTimer,1000)
-
-updateTimer()
-
-const names=["Miguel","João","Carlos","Ana","Rita","Pedro","Tiago","Marta"]
-
-function fakePurchase(){
-
-const name=names[Math.floor(Math.random()*names.length)]
-const qty=[1,5,10][Math.floor(Math.random()*3)]
-
-const box=document.getElementById("notification")
-
-box.innerText=name+" comprou "+qty+" bilhetes"
-
-setTimeout(()=>{
-
-box.innerText=""
-
-},4000)
-
-}
-
-setInterval(fakePurchase,8000)
-
-</script>
-
 </body>
-
 </html>
