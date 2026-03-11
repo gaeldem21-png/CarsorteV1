@@ -1,395 +1,509 @@
 <!doctype html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resultados - CarSorte</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados - CarSorte</title>
 
-<style>
-:root{
-  --bg:#050505;
-  --panel:#101010;
-  --gold:#d4a017;
-  --gold-soft:#f4c542;
-  --text:#ffffff;
-  --muted:#b8b8b8;
-  --line:rgba(255,255,255,.08);
-  --shadow:0 14px 34px rgba(0,0,0,.32);
-}
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#101010;
+      --panel-2:#0b0b0b;
+      --gold:#d4a017;
+      --gold-soft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 14px 34px rgba(0,0,0,.32);
+      --green:#29c46d;
+    }
 
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(212,160,23,.10), transparent 28%),
-    var(--bg);
-  color:var(--text);
-}
-a{text-decoration:none;color:inherit}
+    *{box-sizing:border-box}
 
-.top-sale{
-  background:linear-gradient(90deg,#7b5300,#d4a017,#7b5300);
-  color:#000;
-  text-align:center;
-  padding:10px 14px;
-  font-size:14px;
-  font-weight:800;
-}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%),
+        var(--bg);
+      color:var(--text);
+    }
 
-.header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(5,5,5,.92);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 20px;
-}
+    .container{
+      max-width:1180px;
+      margin:auto;
+      padding:24px 20px 60px;
+    }
 
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  padding:18px 0;
-}
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
 
-.brand img{
-  height:92px;
-  width:auto;
-  object-fit:contain;
-  filter:drop-shadow(0 8px 22px rgba(212,160,23,.24));
-}
+    .brand img{
+      height:72px;
+      width:auto;
+      object-fit:contain;
+    }
 
-.brand-text{
-  display:flex;
-  flex-direction:column;
-  line-height:1.05;
-}
+    .brand strong{
+      display:block;
+      color:var(--gold-soft);
+      font-size:32px;
+      line-height:1;
+    }
 
-.brand-text strong{
-  color:var(--gold-soft);
-  font-size:34px;
-}
+    .brand span{
+      display:block;
+      color:#999;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      margin-top:6px;
+    }
 
-.brand-text span{
-  color:#9c9c9c;
-  font-size:13px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  margin-top:6px;
-}
+    .nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
 
-.navlinks{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  flex-wrap:wrap;
-}
+    .nav a{
+      padding:12px 14px;
+      border-radius:12px;
+      background:#111;
+      border:1px solid var(--line);
+      color:#ddd;
+      font-weight:700;
+    }
 
-.navlinks a{
-  color:#ececec;
-  font-size:15px;
-}
+    .hero{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.14);
+      border-radius:26px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
 
-.navlinks a:hover{
-  color:var(--gold-soft);
-}
+    .hero h1{
+      margin:0 0 10px;
+      font-size:42px;
+      color:var(--gold-soft);
+    }
 
-.admin-btn{
-  background:var(--gold);
-  color:#000;
-  padding:10px 14px;
-  border-radius:12px;
-  font-weight:800;
-}
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.8;
+      max-width:840px;
+    }
 
-.hero{
-  padding:44px 0 18px;
-}
+    .result-card{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.16);
+      border-radius:26px;
+      padding:32px 24px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      margin-bottom:24px;
+    }
 
-.hero-card{
-  background:linear-gradient(180deg,#111,#090909);
-  border:1px solid rgba(212,160,23,.14);
-  border-radius:30px;
-  padding:34px;
-  box-shadow:var(--shadow);
-  text-align:center;
-}
+    .pill{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:14px;
+    }
 
-.hero-card h1{
-  margin:0 0 10px;
-  font-size:46px;
-  color:var(--gold-soft);
-}
+    .pill.gold{
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
 
-.hero-card p{
-  margin:0 auto;
-  max-width:760px;
-  color:var(--muted);
-  line-height:1.8;
-  font-size:18px;
-}
+    .pill.green{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
 
-.section{
-  padding:20px 0 70px;
-}
+    .winner-name{
+      font-size:52px;
+      font-weight:900;
+      color:#fff;
+      margin:0 0 10px;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:22px;
-}
+    .winner-ticket{
+      font-size:64px;
+      font-weight:900;
+      color:var(--gold-soft);
+      margin:14px 0;
+      line-height:1;
+    }
 
-.card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:26px;
-  box-shadow:var(--shadow);
-}
+    .winner-sub{
+      color:var(--muted);
+      line-height:1.8;
+      max-width:760px;
+      margin:0 auto 24px;
+      font-size:18px;
+    }
 
-.card h2{
-  margin-top:0;
-  font-size:30px;
-}
+    .meta{
+      display:grid;
+      gap:10px;
+      max-width:860px;
+      margin:0 auto;
+      text-align:left;
+    }
 
-.muted{
-  color:var(--muted);
-  line-height:1.8;
-}
+    .meta-row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
 
-.status{
-  display:inline-block;
-  padding:8px 12px;
-  border-radius:999px;
-  background:rgba(212,160,23,.10);
-  border:1px solid rgba(212,160,23,.20);
-  color:#ffe08a;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:16px;
-}
+    .meta-row:last-child{
+      border-bottom:none;
+    }
 
-.draw{
-  text-align:center;
-  padding:18px 0 6px;
-}
+    .meta-row span{
+      color:#aaa;
+    }
 
-.draw-name{
-  font-size:22px;
-  margin-bottom:10px;
-}
+    .meta-row strong{
+      color:#fff;
+      font-size:16px;
+      text-align:right;
+    }
 
-.draw-ticket{
-  font-size:42px;
-  font-weight:900;
-  color:var(--gold-soft);
-  margin-bottom:10px;
-  animation: pulse 1.2s ease-in-out infinite alternate;
-}
+    .actions{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
 
-@keyframes pulse{
-  from{transform:scale(1);opacity:.88}
-  to{transform:scale(1.04);opacity:1}
-}
+    .btn{
+      display:inline-block;
+      padding:16px 22px;
+      border-radius:14px;
+      font-weight:800;
+    }
 
-.actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin-top:18px;
-}
+    .btn-primary{
+      background:var(--gold);
+      color:#000;
+    }
 
-.btn{
-  display:inline-block;
-  padding:14px 20px;
-  border-radius:12px;
-  font-weight:800;
-}
+    .btn-secondary{
+      background:#181818;
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+    }
 
-.btn-primary{
-  background:var(--gold);
-  color:#000;
-}
+    .history-card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
 
-.btn-secondary{
-  background:#0c0c0c;
-  border:1px solid var(--line);
-}
+    .history-card h2{
+      margin:0 0 14px;
+      font-size:30px;
+    }
 
-.history{
-  display:grid;
-  gap:12px;
-  margin-top:18px;
-}
+    .history-list{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
 
-.history-item{
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-}
+    .history-item{
+      background:var(--panel-2);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      padding:18px;
+    }
 
-.history-item strong{
-  display:block;
-  margin-bottom:6px;
-}
+    .history-item strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:10px;
+    }
 
-.footer{
-  border-top:1px solid var(--line);
-  background:#0a0a0a;
-}
+    .history-item span{
+      display:block;
+      color:#bcbcbc;
+      line-height:1.7;
+      font-size:14px;
+    }
 
-.footer-grid{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  flex-wrap:wrap;
-  padding:28px 0 34px;
-  color:#bdbdbd;
-}
+    .empty{
+      padding:18px;
+      border-radius:16px;
+      background:#111;
+      border:1px solid rgba(255,255,255,.06);
+      color:#a0a0a0;
+    }
 
-.footer-grid strong{
-  color:#f0f0f0;
-}
+    .refresh{
+      display:inline-block;
+      margin-top:16px;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:800;
+      border:none;
+      cursor:pointer;
+      background:var(--gold);
+      color:#000;
+    }
 
-@media (max-width:980px){
-  .nav{flex-direction:column;align-items:flex-start}
-  .navlinks{justify-content:flex-start;gap:14px}
-  .brand img{height:72px}
-  .brand-text strong{font-size:28px}
-  .hero-card h1{font-size:34px}
-  .hero-card p{font-size:16px}
-  .grid{grid-template-columns:1fr}
-  .draw-ticket{font-size:30px}
-}
-</style>
+    @media(max-width:980px){
+      .winner-name{
+        font-size:38px;
+      }
+
+      .winner-ticket{
+        font-size:48px;
+      }
+
+      .history-list{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+    }
+
+    @media(max-width:700px){
+      .winner-ticket{
+        font-size:40px;
+      }
+
+      .winner-sub{
+        font-size:16px;
+      }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="top-sale">
-🎯 Resultados publicados · transparência visual · histórico disponível
-</div>
+<div class="container">
 
-<header class="header">
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <img src="logo-carsorte.png" alt="CarSorte">
-        <div class="brand-text">
-          <strong>CarSorte</strong>
-          <span>by DEM Automóveis</span>
-        </div>
-      </div>
-
-      <div class="navlinks">
-        <a href="index.html">Início</a>
-        <a href="raffle.html">Sorteios</a>
-        <a href="winners.html">Vencedores</a>
-        <a href="results.html">Resultados</a>
-        <a href="faq.html">FAQ</a>
-        <a href="regulamento.html">Regulamento</a>
-        <a href="login.html">Login</a>
-        <a class="admin-btn" href="admin.html">Admin</a>
+  <div class="header">
+    <div class="brand">
+      <img src="logo-carsorte.png" alt="CarSorte">
+      <div>
+        <strong>CarSorte</strong>
+        <span>by DEM Automóveis</span>
       </div>
     </div>
-  </div>
-</header>
 
-<section class="container hero">
-  <div class="hero-card">
-    <h1>Resultados dos sorteios</h1>
+    <div class="nav">
+      <a href="index.html">Início</a>
+      <a href="raffle.html">Sorteios</a>
+      <a href="winners.html">Vencedores</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Último resultado</h1>
     <p>
-      Uma área criada para reforçar a clareza da experiência CarSorte. Aqui os resultados ganham forma, contexto e prova social.
+      Esta página mostra o resultado oficial mais recente, lido diretamente da coleção <b>winners</b> no Firebase.
     </p>
   </div>
-</section>
 
-<section class="container section">
-  <div class="grid">
-    <div class="card">
-      <h2>Último resultado</h2>
-      <p class="muted">Sorteio encerrado: BMW Série 1 Pack M. Abaixo encontra a referência visual do último bilhete vencedor.</p>
+  <div class="result-card">
+    <span class="pill gold">Resultado validado</span>
 
-      <div class="draw">
-        <div class="status">Resultado validado</div>
-        <div class="draw-name" id="winner-name">Pedro · Porto</div>
-        <div class="draw-ticket" id="winner-ticket">#CS-4521</div>
-        <div class="muted">Data da tiragem: 28/03/2026</div>
+    <div id="winnerName" class="winner-name">A carregar...</div>
+    <div id="winnerTicket" class="winner-ticket">#---</div>
+
+    <div id="winnerSub" class="winner-sub">
+      Estamos a carregar o último resultado oficial registado na plataforma.
+    </div>
+
+    <div class="meta">
+      <div class="meta-row">
+        <span>Sorteio encerrado</span>
+        <strong id="raffleTitle">-</strong>
       </div>
-
-      <div class="actions">
-        <a class="btn btn-primary" href="winners.html">Ver vencedores</a>
-        <a class="btn btn-secondary" href="raffle.html">Participar no próximo</a>
+      <div class="meta-row">
+        <span>Cidade</span>
+        <strong id="winnerCity">-</strong>
+      </div>
+      <div class="meta-row">
+        <span>Email</span>
+        <strong id="winnerEmail">-</strong>
+      </div>
+      <div class="meta-row">
+        <span>Data da tiragem</span>
+        <strong id="winnerDate">-</strong>
       </div>
     </div>
 
-    <div class="card">
-      <h2>Histórico recente</h2>
-
-      <div class="history">
-        <div class="history-item">
-          <strong>BMW Série 1 Pack M</strong>
-          Bilhete vencedor: #CS-4521 · Pedro · Porto
-        </div>
-
-        <div class="history-item">
-          <strong>Mercedes Classe A</strong>
-          Bilhete vencedor: #CS-9132 · Marta · Braga
-        </div>
-
-        <div class="history-item">
-          <strong>Citroën Jumpy Business</strong>
-          Bilhete vencedor: #CS-2210 · Tiago · Lisboa
-        </div>
-      </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="winners.html">Ver vencedores</a>
+      <a class="btn btn-secondary" href="raffle.html">Participar no próximo</a>
     </div>
+
+    <button class="refresh" id="refreshBtn">Atualizar resultado</button>
   </div>
-</section>
 
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <strong>CarSorte</strong><br>
-      by DEM Automóveis
-    </div>
-    <div>
-      <a href="faq.html">FAQ</a><br>
-      <a href="regulamento.html">Regulamento</a>
-    </div>
-    <div>© CarSorte</div>
+  <div class="history-card">
+    <h2>Resultados recentes</h2>
+    <div id="historyList" class="history-list"></div>
+    <div id="historyEmpty" class="empty" style="display:none;">Nenhum resultado encontrado.</div>
   </div>
-</footer>
 
-<script>
-const winners = [
-  {ticket:"#CS-4521",name:"Pedro · Porto"},
-  {ticket:"#CS-9132",name:"Marta · Braga"},
-  {ticket:"#CS-2210",name:"Tiago · Lisboa"},
-  {ticket:"#CS-7844",name:"Rui · Coimbra"}
-];
+</div>
 
-function rotateWinner(){
-  const pick = winners[Math.floor(Math.random()*winners.length)];
-  document.getElementById("winner-ticket").innerText = pick.ticket;
-  document.getElementById("winner-name").innerText = pick.name;
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const winnerName = document.getElementById("winnerName");
+const winnerTicket = document.getElementById("winnerTicket");
+const winnerSub = document.getElementById("winnerSub");
+const raffleTitle = document.getElementById("raffleTitle");
+const winnerCity = document.getElementById("winnerCity");
+const winnerEmail = document.getElementById("winnerEmail");
+const winnerDate = document.getElementById("winnerDate");
+const historyList = document.getElementById("historyList");
+const historyEmpty = document.getElementById("historyEmpty");
+const refreshBtn = document.getElementById("refreshBtn");
+
+function formatDate(value){
+  try{
+    if(value && value.toDate){
+      return value.toDate().toLocaleString("pt-PT");
+    }
+    return "-";
+  }catch{
+    return "-";
+  }
 }
-setInterval(rotateWinner, 5000);
+
+async function loadResults(){
+  historyList.innerHTML = "";
+  historyEmpty.style.display = "none";
+
+  try{
+    const winnersQuery = query(
+      collection(db, "winners"),
+      orderBy("created", "desc"),
+      limit(20)
+    );
+
+    const snap = await getDocs(winnersQuery);
+
+    if(snap.empty){
+      winnerName.textContent = "Nenhum vencedor";
+      winnerTicket.textContent = "#---";
+      winnerSub.textContent = "Ainda não existe nenhum resultado oficial registado.";
+      raffleTitle.textContent = "-";
+      winnerCity.textContent = "-";
+      winnerEmail.textContent = "-";
+      winnerDate.textContent = "-";
+      historyEmpty.style.display = "block";
+      return;
+    }
+
+    const docs = snap.docs;
+    const latest = docs[0].data();
+
+    winnerName.textContent = latest.buyer || "-";
+    winnerTicket.textContent = latest.ticket_number ? `#CS-${latest.ticket_number}` : "#---";
+    winnerSub.textContent = "Último vencedor oficial registado na plataforma CarSorte.";
+    raffleTitle.textContent = latest.raffle_title || latest.raffle_id || "-";
+    winnerCity.textContent = latest.buyer_city || "-";
+    winnerEmail.textContent = latest.buyer_email || "-";
+    winnerDate.textContent = formatDate(latest.created);
+
+    docs.forEach((docSnap, index) => {
+      const r = docSnap.data();
+      const div = document.createElement("div");
+      div.className = "history-item";
+
+      div.innerHTML = `
+        <span class="pill ${index === 0 ? "gold" : "green"}">${index === 0 ? "Mais recente" : "Resultado"}</span>
+        <strong>${r.buyer || "-"}</strong>
+        <span><b>Sorteio:</b> ${r.raffle_title || r.raffle_id || "-"}</span>
+        <span><b>Ticket:</b> ${r.ticket_number ? "#CS-" + r.ticket_number : "-"}</span>
+        <span><b>Cidade:</b> ${r.buyer_city || "-"}</span>
+        <span><b>Email:</b> ${r.buyer_email || "-"}</span>
+        <span><b>Data:</b> ${formatDate(r.created)}</span>
+      `;
+      historyList.appendChild(div);
+    });
+
+  }catch(error){
+    console.error(error);
+    winnerName.textContent = "Erro";
+    winnerTicket.textContent = "#---";
+    winnerSub.textContent = "Ocorreu um erro ao carregar os resultados.";
+    historyEmpty.style.display = "block";
+    historyEmpty.textContent = "Erro ao carregar a coleção winners.";
+  }
+}
+
+refreshBtn.addEventListener("click", loadResults);
+loadResults();
 </script>
 
 </body>
