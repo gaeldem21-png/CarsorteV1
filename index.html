@@ -21,7 +21,6 @@
     }
 
     *{box-sizing:border-box}
-
     html{scroll-behavior:smooth}
 
     body{
@@ -33,10 +32,7 @@
       color:var(--text);
     }
 
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
+    a{text-decoration:none;color:inherit}
 
     .container{
       max-width:1240px;
@@ -335,49 +331,22 @@
     }
 
     @media(max-width:980px){
-      .hero{
-        grid-template-columns:1fr;
-      }
-
-      .headline{
-        font-size:44px;
-      }
-
-      .hero-image{
-        min-height:260px;
-      }
-
-      .sections{
-        grid-template-columns:1fr;
-      }
+      .hero{grid-template-columns:1fr}
+      .headline{font-size:44px}
+      .hero-image{min-height:260px}
+      .sections{grid-template-columns:1fr}
     }
 
     @media(max-width:700px){
-      .stats{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .actions{
-        flex-direction:column;
-      }
-
-      .btn{
-        width:100%;
-      }
-
-      .headline{
-        font-size:36px;
-      }
-
-      .subtext{
-        font-size:16px;
-      }
+      .stats{grid-template-columns:1fr 1fr}
+      .actions{flex-direction:column}
+      .btn{width:100%}
+      .headline{font-size:36px}
+      .subtext{font-size:16px}
     }
 
     @media(max-width:480px){
-      .stats{
-        grid-template-columns:1fr;
-      }
+      .stats{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -498,7 +467,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
@@ -511,10 +480,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// Pour l'instant on pointe sur Jumpy.
-// Plus tard on pourra rendre ça automatique avec un champ "featured" ou "is_active".
-const ACTIVE_RAFFLE_ID = "Jumpy";
 
 const heroTitle = document.getElementById("heroTitle");
 const heroText = document.getElementById("heroText");
@@ -552,19 +517,34 @@ function setClosedState(message, badgeClass, badgeLabel){
   footerMainBtn.textContent = badgeLabel;
 }
 
+async function getPrimaryRaffle(){
+  const snap = await getDocs(collection(db, "raffles"));
+  const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  if(!raffles.length) return null;
+
+  const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
+  if(featuredActive) return featuredActive;
+
+  const firstActive = raffles.find(r => r.status === "active");
+  if(firstActive) return firstActive;
+
+  const featuredAny = raffles.find(r => r.featured === true);
+  if(featuredAny) return featuredAny;
+
+  return raffles[0];
+}
+
 async function loadHomeRaffle(){
   try{
-    const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
-    const raffleSnap = await getDoc(raffleRef);
+    const raffle = await getPrimaryRaffle();
 
-    if(!raffleSnap.exists()){
+    if(!raffle){
       heroTitle.textContent = "Sorteio indisponível";
-      heroText.textContent = "Não foi possível encontrar o sorteio principal na base de dados.";
-      setClosedState("O sorteio principal não foi encontrado.", "closed", "Indisponível");
+      heroText.textContent = "Não foi possível encontrar nenhum sorteio na base de dados.";
+      setClosedState("Nenhum sorteio encontrado.", "closed", "Indisponível");
       return;
     }
-
-    const raffle = raffleSnap.data();
 
     heroTitle.textContent = raffle.title || "Sorteio ativo";
     heroPrice.textContent = formatCurrency(raffle.price);
@@ -584,8 +564,8 @@ async function loadHomeRaffle(){
     progressPercent.textContent = `${percent.toFixed(2)}%`;
     progressText.textContent = `${sold} / ${total} vendidos`;
 
-    heroMainBtn.href = "raffle.html";
-    footerMainBtn.href = "raffle.html";
+    heroMainBtn.href = `raffle.html?raffle=${encodeURIComponent(raffle.id)}`;
+    footerMainBtn.href = `raffle.html?raffle=${encodeURIComponent(raffle.id)}`;
 
     if(raffle.status === "closed"){
       heroText.textContent = "Este sorteio já foi encerrado e o vencedor já foi selecionado.";
