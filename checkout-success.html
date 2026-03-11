@@ -1,172 +1,319 @@
 <!doctype html>
 <html lang="pt">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Participação confirmada · CarSorte</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-<title>Participação confirmada</title>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#060606;
+      color:white;
+    }
 
-<style>
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-body{
-background:#060606;
-color:white;
-font-family:Arial;
-margin:0;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-}
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-.card{
-background:#111;
-padding:40px;
-border-radius:20px;
-border:1px solid rgba(255,255,255,.1);
-max-width:700px;
-width:90%;
-text-align:center;
-}
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
 
-h1{
-color:#f4c542;
-margin-top:0;
-}
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
 
-.summary{
-margin-top:25px;
-background:#0b0b0b;
-padding:20px;
-border-radius:15px;
-border:1px solid rgba(255,255,255,.08);
-text-align:left;
-}
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
 
-.row{
-display:flex;
-justify-content:space-between;
-margin-bottom:10px;
-}
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
 
-.tickets{
-margin-top:15px;
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-}
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:50px 20px 70px;
+    }
 
-.ticket{
-background:#1a1a1a;
-padding:8px 10px;
-border-radius:8px;
-font-size:13px;
-border:1px solid rgba(255,255,255,.08);
-}
+    .success-card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:34px;
+      text-align:center;
+      box-shadow:0 12px 28px rgba(0,0,0,.28);
+    }
 
-.actions{
-margin-top:25px;
-}
+    .icon{
+      width:74px;
+      height:74px;
+      margin:0 auto 20px;
+      border-radius:22px;
+      background:#f4c542;
+      color:black;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:38px;
+      font-weight:bold;
+    }
 
-button{
-background:#f4c542;
-border:none;
-padding:12px 20px;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-}
+    h1{
+      margin:0 0 12px 0;
+      font-size:42px;
+      color:#f4c542;
+    }
 
-</style>
+    .intro{
+      margin:0 auto 26px;
+      color:#cfcfcf;
+      line-height:1.7;
+      max-width:620px;
+      font-size:18px;
+    }
 
+    .summary{
+      margin-top:24px;
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      padding:22px;
+      text-align:left;
+    }
+
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      align-items:center;
+    }
+
+    .row:last-child{
+      border-bottom:none;
+    }
+
+    .muted{
+      color:#bdbdbd;
+    }
+
+    .ticket-title{
+      margin:20px 0 10px 0;
+      font-size:18px;
+      color:#f4c542;
+      text-align:left;
+    }
+
+    .tickets{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .ticket{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(244,197,66,.22);
+      background:rgba(244,197,66,.08);
+      color:#ffe08a;
+      font-size:13px;
+      font-weight:bold;
+    }
+
+    .actions{
+      margin-top:28px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:15px 22px;
+      border-radius:12px;
+      font-weight:bold;
+      font-size:16px;
+    }
+
+    .btn-primary{
+      background:#f4c542;
+      color:black;
+    }
+
+    .btn-secondary{
+      background:#1a1a1a;
+      color:white;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    @media (max-width: 900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .container{
+        padding:35px 16px 50px;
+      }
+
+      .success-card{
+        padding:24px;
+      }
+
+      h1{
+        font-size:30px;
+      }
+
+      .intro{
+        font-size:16px;
+      }
+
+      .row{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+        text-align:center;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="card">
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
 
-<h1>Participação confirmada</h1>
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="raffle.html">Sorteio</a>
+        <a href="results.html">Resultados</a>
+        <a href="faq.html">FAQ</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+  </header>
 
-<p>Os seus bilhetes foram registados com sucesso.</p>
+  <div class="container">
+    <div class="success-card">
+      <div class="icon">✓</div>
 
-<div class="summary">
+      <h1>Participação confirmada</h1>
+      <p class="intro">
+        A sua participação foi registada com sucesso. Os seus bilhetes estão agora associados ao sorteio selecionado.
+      </p>
 
-<div class="row">
-<span>Sorteio</span>
-<strong>BMW Série 1 Pack M</strong>
-</div>
+      <div class="summary">
+        <div class="row">
+          <span class="muted">Sorteio</span>
+          <strong>BMW Série 1 Pack M</strong>
+        </div>
 
-<div class="row">
-<span>Bilhetes</span>
-<strong id="ticket-count">5</strong>
-</div>
+        <div class="row">
+          <span class="muted">Pack comprado</span>
+          <strong id="pack-label">5 bilhetes</strong>
+        </div>
 
-<div class="row">
-<span>Total pago</span>
-<strong id="ticket-total">10€</strong>
-</div>
+        <div class="row">
+          <span class="muted">Total pago</span>
+          <strong id="pack-total">10€</strong>
+        </div>
 
-<div class="tickets" id="tickets"></div>
+        <div class="row">
+          <span class="muted">Estado</span>
+          <strong>Confirmado</strong>
+        </div>
 
-</div>
+        <div class="ticket-title">Bilhetes atribuídos</div>
+        <div class="tickets" id="tickets-list"></div>
+      </div>
 
-<div class="actions">
+      <div class="actions">
+        <a class="btn btn-primary" id="user-link" href="utilizador.html?pack=5">Ver a minha área</a>
+        <a class="btn btn-secondary" href="index.html">Voltar ao site</a>
+      </div>
+    </div>
+  </div>
 
-<a href="utilizador.html">
-<button>Ver área do utilizador</button>
-</a>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const selectedPack = params.get("pack") || "5";
 
-</div>
+    const packData = {
+      "1": { qty: 1, total: "2,50€" },
+      "5": { qty: 5, total: "10€" },
+      "10": { qty: 10, total: "20€" },
+      "25": { qty: 25, total: "50€" }
+    };
 
-</div>
+    const active = packData[selectedPack] || packData["5"];
 
-<script>
+    document.getElementById("pack-label").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
+    document.getElementById("pack-total").textContent = active.total;
+    document.getElementById("user-link").href = `utilizador.html?pack=${selectedPack}`;
 
-const params = new URLSearchParams(window.location.search)
+    function generateTickets(quantity){
+      const tickets = [];
+      const start = Math.floor(Math.random() * 9000) + 1000;
 
-const pack = params.get("pack") || 5
+      for(let i = 0; i < quantity; i++){
+        tickets.push("#CS-" + (start + i));
+      }
 
-const packPrices = {
-1:2.5,
-5:10,
-10:20,
-25:50
-}
+      return tickets;
+    }
 
-document.getElementById("ticket-count").innerText = pack
-document.getElementById("ticket-total").innerText = packPrices[pack]+"€"
+    const tickets = generateTickets(active.qty);
+    const ticketsList = document.getElementById("tickets-list");
 
-function generateTickets(quantity){
-
-const tickets=[]
-const start=Math.floor(Math.random()*9000)+1000
-
-for(let i=0;i<quantity;i++){
-
-tickets.push("#CS-"+(start+i))
-
-}
-
-return tickets
-
-}
-
-const tickets = generateTickets(pack)
-
-const container = document.getElementById("tickets")
-
-tickets.forEach(ticket => {
-
-const el=document.createElement("div")
-el.className="ticket"
-el.innerText=ticket
-
-container.appendChild(el)
-
-})
-
-</script>
+    tickets.forEach(ticket => {
+      const span = document.createElement("span");
+      span.className = "ticket";
+      span.textContent = ticket;
+      ticketsList.appendChild(span);
+    });
+  </script>
 
 </body>
 </html>
