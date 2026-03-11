@@ -9,7 +9,6 @@
 :root{
   --bg:#050505;
   --panel:#101010;
-  --panel-2:#0b0b0b;
   --gold:#d4a017;
   --gold-soft:#f4c542;
   --text:#ffffff;
@@ -26,81 +25,82 @@
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
+  background:#050505;
+  color:white;
 }
 
 .container{
-  max-width:960px;
+  max-width:900px;
   margin:auto;
   padding:40px 20px 60px;
 }
 
 .card{
-  background:linear-gradient(180deg,#111,#090909);
-  border:1px solid rgba(212,160,23,.14);
-  border-radius:28px;
-  padding:34px;
-  box-shadow:var(--shadow);
+  background:#101010;
+  padding:40px 24px;
+  border-radius:24px;
+  box-shadow:0 14px 34px rgba(0,0,0,.32);
   text-align:center;
 }
 
 .check{
-  width:86px;
-  height:86px;
-  margin:0 auto 18px;
-  border-radius:24px;
+  width:80px;
+  height:80px;
+  border-radius:20px;
+  background:#29c46d;
+  color:#03180b;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:42px;
+  margin:0 auto 20px;
+  font-size:40px;
   font-weight:900;
-  background:var(--green);
-  color:#03180b;
 }
 
 h1{
-  margin:0 0 12px;
-  font-size:44px;
-  color:var(--gold-soft);
+  margin:0 0 16px;
+  color:#f4c542;
+  font-size:42px;
 }
 
 p{
-  margin:0 auto 24px;
-  max-width:700px;
-  color:var(--muted);
+  color:#b8b8b8;
   line-height:1.8;
   font-size:18px;
+  margin:0 auto 24px;
+  max-width:680px;
+}
+
+.subtitle{
+  color:white;
+  font-size:24px;
+  margin:20px 0 14px;
+  font-weight:800;
 }
 
 #tickets{
   display:flex;
   flex-wrap:wrap;
-  gap:12px;
   justify-content:center;
+  gap:12px;
   margin-top:18px;
 }
 
 .ticket{
-  background:#161616;
-  border:1px solid rgba(255,255,255,.06);
+  background:#1a1a1a;
   padding:12px 16px;
   border-radius:12px;
   display:inline-block;
   font-weight:700;
+  border:1px solid rgba(255,255,255,.06);
 }
 
 .actions{
   display:flex;
-  gap:14px;
   justify-content:center;
+  gap:14px;
   flex-wrap:wrap;
-  margin-top:28px;
+  margin-top:30px;
 }
 
 .btn{
@@ -108,24 +108,21 @@ p{
   padding:16px 22px;
   border-radius:14px;
   font-weight:800;
+  text-decoration:none;
 }
 
 .btn-primary{
-  background:var(--gold);
+  background:#d4a017;
   color:#000;
 }
 
 .btn-secondary{
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--line);
+  background:#181818;
+  border:1px solid rgba(255,255,255,.08);
   color:#fff;
 }
 
 @media(max-width:700px){
-  .card{
-    padding:24px;
-  }
-
   h1{
     font-size:34px;
   }
@@ -156,7 +153,7 @@ p{
       A sua participação foi registada com sucesso. Os seus bilhetes foram gerados e já estão associados ao sorteio.
     </p>
 
-    <h2 style="color:#fff;margin-top:10px;">Os seus bilhetes</h2>
+    <div class="subtitle">Os seus bilhetes</div>
     <div id="tickets"></div>
 
     <div class="actions">
