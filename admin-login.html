@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - CarSorte</title>
+
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#101010;
+      --gold:#d4a017;
+      --gold-soft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 14px 34px rgba(0,0,0,.32);
+      --red:#d95c5c;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .card{
+      width:100%;
+      max-width:480px;
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.14);
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:22px;
+    }
+    .brand img{height:72px}
+    .brand strong{
+      display:block;
+      color:var(--gold-soft);
+      font-size:32px;
+      line-height:1;
+    }
+    .brand span{
+      display:block;
+      color:#999;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      margin-top:6px;
+    }
+    h1{
+      margin:0 0 10px;
+      color:#fff;
+      font-size:34px;
+    }
+    p{
+      margin:0 0 20px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+    .form{
+      display:grid;
+      gap:14px;
+    }
+    input{
+      width:100%;
+      padding:14px 16px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b0b0b;
+      color:#fff;
+      font-size:16px;
+      outline:none;
+    }
+    button{
+      width:100%;
+      padding:15px 16px;
+      border:none;
+      border-radius:12px;
+      background:var(--gold);
+      color:#000;
+      font-weight:800;
+      font-size:16px;
+      cursor:pointer;
+    }
+    .error{
+      display:none;
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+      line-height:1.6;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="brand">
+    <img src="logo-carsorte.png" alt="CarSorte">
+    <div>
+      <strong>CarSorte</strong>
+      <span>by DEM Automóveis</span>
+    </div>
+  </div>
+
+  <h1>Admin Login</h1>
+  <p>Entre com a conta administrativa para aceder ao painel protegido.</p>
+
+  <div class="form">
+    <input id="email" type="email" placeholder="Email admin">
+    <input id="password" type="password" placeholder="Palavra-passe">
+    <button id="loginBtn">Entrar</button>
+  </div>
+
+  <div id="errorBox" class="error"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+};
+
+const ADMIN_EMAIL = "admin@carsorte.com";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const errorBox = document.getElementById("errorBox");
+
+function showError(text){
+  errorBox.style.display = "block";
+  errorBox.textContent = text;
+}
+
+loginBtn.addEventListener("click", async () => {
+  errorBox.style.display = "none";
+
+  try{
+    const cred = await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
+    if(cred.user.email !== ADMIN_EMAIL){
+      showError("Esta conta não tem acesso ao painel admin.");
+      return;
+    }
+    window.location.href = "admin.html";
+  }catch(error){
+    console.error(error);
+    showError("Login inválido. Verifique o email e a palavra-passe.");
+  }
+});
+
+onAuthStateChanged(auth, (user) => {
+  if(user && user.email === ADMIN_EMAIL){
+    window.location.href = "admin.html";
+  }
+});
+</script>
+
+</body>
+</html>
