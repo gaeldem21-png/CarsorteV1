@@ -31,7 +31,7 @@
     a{text-decoration:none;color:inherit}
     .card{
       width:100%;
-      max-width:700px;
+      max-width:760px;
       background:var(--panel);
       border:1px solid var(--line);
       border-radius:30px;
@@ -106,30 +106,63 @@
       </div>
       <div class="row">
         <strong>Pack comprado</strong>
-        <span>5 bilhetes</span>
+        <span id="pack-label">5 bilhetes</span>
       </div>
       <div class="row">
         <strong>Total pago</strong>
-        <span>10€</span>
+        <span id="pack-total">10€</span>
       </div>
       <div class="row">
         <strong>Estado</strong>
         <span>Confirmado</span>
       </div>
 
-      <div class="tickets">
-        <span class="ticket">#A1032</span>
-        <span class="ticket">#A1033</span>
-        <span class="ticket">#A1034</span>
-        <span class="ticket">#A1035</span>
-        <span class="ticket">#A1036</span>
-      </div>
+      <div class="tickets" id="tickets-list"></div>
     </div>
 
     <div class="actions">
-      <a class="btn primary" href="utilizador.html">Ver a minha área</a>
+      <a class="btn primary" id="user-link" href="utilizador.html?pack=5">Ver a minha área</a>
       <a class="btn secondary" href="index.html">Voltar ao site</a>
     </div>
   </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const selectedPack = params.get("pack") || "5";
+
+    const packData = {
+      "1": { qty: 1, total: "2,50€", prefix: "A" },
+      "5": { qty: 5, total: "10€", prefix: "A" },
+      "10": { qty: 10, total: "20€", prefix: "M" },
+      "25": { qty: 25, total: "50€", prefix: "X" }
+    };
+
+    const active = packData[selectedPack] || packData["5"];
+
+    document.getElementById("pack-label").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
+    document.getElementById("pack-total").textContent = active.total;
+    document.getElementById("user-link").href = `utilizador.html?pack=${selectedPack}`;
+
+    const ticketsList = document.getElementById("tickets-list");
+
+    function generateTickets(qty, prefix) {
+      const base = 1032;
+      const tickets = [];
+      for (let i = 0; i < qty; i++) {
+        const num = base + i;
+        tickets.push(`#CS-${prefix}${num}`);
+      }
+      return tickets;
+    }
+
+    const tickets = generateTickets(active.qty, active.prefix);
+
+    tickets.forEach(ticket => {
+      const span = document.createElement("span");
+      span.className = "ticket";
+      span.textContent = ticket;
+      ticketsList.appendChild(span);
+    });
+  </script>
 </body>
 </html>
