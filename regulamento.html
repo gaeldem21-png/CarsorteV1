@@ -1,36 +1,163 @@
 <!doctype html>
 <html lang="pt">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulamento · CarSorte</title>
 
-<meta charset="UTF-8">
+  <style>
+    *{box-sizing:border-box}
 
-<title>Regulamento</title>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#060606;
+      color:white;
+    }
 
-<style>
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-body{
-background:#060606;
-color:white;
-font-family:Arial;
-padding:40px;
-line-height:1.6;
-}
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-</style>
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
 
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
+
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
+
+    .container{
+      max-width:1000px;
+      margin:auto;
+      padding:40px 20px 70px;
+    }
+
+    .hero{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 12px 28px rgba(0,0,0,.28);
+    }
+
+    .hero h1{
+      margin:0 0 12px 0;
+      font-size:40px;
+      color:#f4c542;
+    }
+
+    .hero p{
+      margin:0;
+      color:#cfcfcf;
+      line-height:1.7;
+      font-size:17px;
+    }
+
+    .content{
+      margin-top:26px;
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+    }
+
+    .content h2{
+      color:#f4c542;
+      font-size:24px;
+      margin-top:0;
+    }
+
+    .content p{
+      color:#d0d0d0;
+      line-height:1.8;
+      margin:0 0 16px 0;
+    }
+
+    @media (max-width:900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .container{
+        padding:30px 16px 50px;
+      }
+
+      .hero h1{
+        font-size:30px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<h1>Regulamento</h1>
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
 
-<p>Este concurso é organizado pela CarSorte.</p>
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="raffle.html">Sorteio</a>
+        <a href="results.html">Resultados</a>
+        <a href="faq.html">FAQ</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+  </header>
 
-<p>A participação requer a resposta correta a uma pergunta de qualificação.</p>
+  <div class="container">
+    <div class="hero">
+      <h1>Regulamento</h1>
+      <p>Informação geral e enquadramento visual da participação nos sorteios da plataforma CarSorte.</p>
+    </div>
 
-<p>O vencedor será selecionado aleatoriamente entre os participantes elegíveis.</p>
+    <div class="content">
+      <h2>Condições gerais</h2>
+      <p>Os sorteios apresentados na plataforma CarSorte são disponibilizados com uma estrutura clara, transparente e orientada para uma experiência premium de participação.</p>
+
+      <p>Cada participação corresponde a uma entrada individual associada ao sorteio selecionado e ao pack escolhido pelo utilizador.</p>
+
+      <p>A experiência visual inclui uma pergunta simples de qualificação antes da validação final da participação.</p>
+
+      <p>Os resultados, vencedores e elementos informativos relacionados com os sorteios podem ser publicados nas áreas correspondentes da plataforma.</p>
+
+      <p>Os dados fornecidos destinam-se à gestão da participação, comunicação com o utilizador e organização interna da experiência CarSorte.</p>
+    </div>
+  </div>
 
 </body>
-
 </html>
