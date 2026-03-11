@@ -31,10 +31,7 @@
       color:var(--text);
     }
 
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
+    a{text-decoration:none;color:inherit}
 
     .container{
       max-width:1280px;
@@ -113,7 +110,7 @@
       margin:0;
       color:var(--muted);
       line-height:1.8;
-      max-width:800px;
+      max-width:840px;
     }
 
     .stats{
@@ -145,7 +142,7 @@
 
     .grid{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
+      grid-template-columns:1.15fr .85fr;
       gap:20px;
     }
 
@@ -155,6 +152,7 @@
       border-radius:22px;
       padding:22px;
       box-shadow:var(--shadow);
+      margin-bottom:20px;
     }
 
     .card h2{
@@ -168,6 +166,41 @@
       line-height:1.7;
       margin-top:-6px;
       margin-bottom:18px;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .btn{
+      padding:12px 16px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#111;
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .btn.primary{
+      background:var(--gold);
+      color:#000;
+      border:none;
+    }
+
+    .btn.green{
+      background:var(--green);
+      color:#04160b;
+      border:none;
+    }
+
+    .btn.red{
+      background:var(--red);
+      color:#fff;
+      border:none;
     }
 
     .list{
@@ -249,35 +282,31 @@
       margin:0;
     }
 
-    .toolbar{
+    .progress-wrap{
+      margin-top:18px;
+    }
+
+    .progress-top{
       display:flex;
+      justify-content:space-between;
       gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:16px;
+      margin-bottom:8px;
+      color:#bbb;
+      font-size:14px;
     }
 
-    .btn{
-      padding:12px 16px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#111;
-      color:#fff;
-      font-weight:800;
-      cursor:pointer;
+    .progress{
+      height:12px;
+      border-radius:999px;
+      background:#1a1a1a;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.05);
     }
 
-    .btn.primary{
-      background:var(--gold);
-      color:#000;
-      border:none;
-    }
-
-    .empty{
-      padding:16px;
-      border-radius:16px;
-      background:#111;
-      border:1px solid rgba(255,255,255,.06);
-      color:#9f9f9f;
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,#b07b06,#f4c542);
     }
 
     .status-box{
@@ -301,6 +330,42 @@
       color:#ffb5b5;
     }
 
+    .status-box.info{
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
+
+    .empty{
+      padding:16px;
+      border-radius:16px;
+      background:#111;
+      border:1px solid rgba(255,255,255,.06);
+      color:#9f9f9f;
+    }
+
+    .form{
+      display:grid;
+      gap:12px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    input, select{
+      width:100%;
+      padding:14px 16px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b0b0b;
+      color:#fff;
+      font-size:15px;
+      outline:none;
+    }
+
     .small{
       font-size:13px;
       color:#999;
@@ -318,6 +383,10 @@
 
       .hero h1{
         font-size:34px;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
       }
     }
 
@@ -352,7 +421,7 @@
   <div class="hero">
     <h1>Painel Admin</h1>
     <p>
-      Aqui pode ver rapidamente se as compras estão a entrar, quantos bilhetes foram vendidos, quantas encomendas existem e quais foram os últimos registos no Firebase.
+      Gere o sorteio ativo, veja as compras em tempo real, acompanhe a evolução dos bilhetes, crie novos sorteios e lance o vencedor diretamente a partir do painel.
     </p>
   </div>
 
@@ -369,7 +438,7 @@
 
     <div class="stat">
       <strong id="statSold">0</strong>
-      <span>tickets_sold do sorteio <b>Jumpy</b></span>
+      <span>tickets_sold do sorteio ativo</span>
     </div>
 
     <div class="stat">
@@ -379,66 +448,116 @@
   </div>
 
   <div class="grid">
-    <div class="card">
-      <h2>Últimas encomendas</h2>
-      <p class="sub">
-        Cada documento aqui representa uma compra. Se uma participação passou, ela deve aparecer nesta lista.
-      </p>
+    <div>
+      <div class="card">
+        <h2>Sorteio ativo</h2>
+        <p class="sub">
+          Esta área mostra o documento atualmente selecionado como principal. O sorteio será fechado automaticamente quando todos os bilhetes forem vendidos.
+        </p>
 
-      <div class="toolbar">
-        <button class="btn primary" id="refreshBtn">Atualizar painel</button>
+        <div class="toolbar">
+          <button class="btn primary" id="refreshBtn">Atualizar painel</button>
+          <button class="btn green" id="drawBtn">Sortear vencedor</button>
+          <button class="btn red" id="closeBtn">Fechar sorteio</button>
+        </div>
+
+        <div class="meta">
+          <div class="meta-row">
+            <span>Documento</span>
+            <strong id="raffleIdText">Jumpy</strong>
+          </div>
+          <div class="meta-row">
+            <span>Título</span>
+            <strong id="raffleTitle">-</strong>
+          </div>
+          <div class="meta-row">
+            <span>Preço</span>
+            <strong id="rafflePrice">-</strong>
+          </div>
+          <div class="meta-row">
+            <span>Total de bilhetes</span>
+            <strong id="raffleTotal">-</strong>
+          </div>
+          <div class="meta-row">
+            <span>Bilhetes vendidos</span>
+            <strong id="raffleSold">-</strong>
+          </div>
+          <div class="meta-row">
+            <span>Estado</span>
+            <strong id="raffleStatus">-</strong>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-top">
+            <span id="progressText">0 / 0 vendidos</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div id="statusBox" class="status-box"></div>
       </div>
 
-      <div id="ordersList" class="list"></div>
-      <div id="ordersEmpty" class="empty" style="display:none;">Nenhuma encomenda encontrada.</div>
+      <div class="card">
+        <h2>Últimas encomendas</h2>
+        <p class="sub">
+          Cada documento aqui representa uma compra. Se a participação passou, ela aparece nesta lista.
+        </p>
+
+        <div id="ordersList" class="list"></div>
+        <div id="ordersEmpty" class="empty" style="display:none;">Nenhuma encomenda encontrada.</div>
+      </div>
+
+      <div class="card">
+        <h2>Últimos bilhetes</h2>
+        <p class="sub">
+          Cada registo abaixo representa um bilhete individual. Isto permite confirmar se uma compra de 1, 5 ou 15 bilhetes foi criada corretamente.
+        </p>
+
+        <div id="ticketsList" class="list"></div>
+        <div id="ticketsEmpty" class="empty" style="display:none;">Nenhum bilhete encontrado.</div>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>Resumo do sorteio ativo</h2>
+    <div>
+      <div class="card">
+        <h2>Criar novo sorteio</h2>
+        <p class="sub">
+          Preencha os dados do próximo sorteio. O novo documento será criado automaticamente na coleção <b>raffles</b>.
+        </p>
 
-      <div class="meta">
-        <div class="meta-row">
-          <span>Documento</span>
-          <strong>raffles / Jumpy</strong>
+        <div class="form">
+          <input id="newId" placeholder="ID do documento (ex: audiA3)">
+          <input id="newTitle" placeholder="Título do sorteio (ex: Audi A3)">
+          <div class="form-grid">
+            <input id="newPrice" type="number" step="0.01" placeholder="Preço do bilhete">
+            <input id="newTotal" type="number" placeholder="Total de bilhetes">
+          </div>
+          <input id="newImage" placeholder="URL da imagem">
+          <select id="newStatus">
+            <option value="active">active</option>
+            <option value="closed">closed</option>
+          </select>
+          <button class="btn primary" id="createRaffleBtn">Criar sorteio</button>
         </div>
-        <div class="meta-row">
-          <span>Título</span>
-          <strong id="raffleTitle">-</strong>
-        </div>
-        <div class="meta-row">
-          <span>Preço</span>
-          <strong id="rafflePrice">-</strong>
-        </div>
-        <div class="meta-row">
-          <span>Total de bilhetes</span>
-          <strong id="raffleTotal">-</strong>
-        </div>
-        <div class="meta-row">
-          <span>Bilhetes vendidos</span>
-          <strong id="raffleSold">-</strong>
-        </div>
-        <div class="meta-row">
-          <span>Estado</span>
-          <strong id="raffleStatus">-</strong>
+
+        <div class="small" style="margin-top:14px;">
+          Dica: use sempre um ID simples, sem espaços, por exemplo <b>golf7</b>, <b>audiA3</b> ou <b>mercedesA</b>.
         </div>
       </div>
 
-      <div id="statusBox" class="status-box"></div>
+      <div class="card">
+        <h2>Último vencedor</h2>
+        <p class="sub">
+          Quando o sorteio for executado, o vencedor será gravado automaticamente em <b>winners</b>.
+        </p>
 
-      <div class="small" style="margin-top:16px;">
-        Se <b>tickets</b> e <b>tickets_sold</b> tiverem valores diferentes, isso significa que houve testes antigos, duplicações ou alguma compra que incrementou o contador sem ficar visível na lista esperada.
+        <div id="winnerBox" class="empty">Nenhum vencedor registado.</div>
       </div>
     </div>
-  </div>
-
-  <div class="card" style="margin-top:20px;">
-    <h2>Últimos bilhetes</h2>
-    <p class="sub">
-      Aqui vê os registos individuais da coleção <b>tickets</b>. É útil para confirmar rapidamente se a participação criou 1, 5 ou 15 bilhetes.
-    </p>
-
-    <div id="ticketsList" class="list"></div>
-    <div id="ticketsEmpty" class="empty" style="display:none;">Nenhum bilhete encontrado.</div>
   </div>
 
 </div>
@@ -453,7 +572,11 @@ import {
   getDoc,
   query,
   orderBy,
-  limit
+  limit,
+  addDoc,
+  updateDoc,
+  setDoc,
+  where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -468,33 +591,40 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// SORTEIO ATIVO ATUAL
+const ACTIVE_RAFFLE_ID = "Jumpy";
+
 const statTickets = document.getElementById("statTickets");
 const statOrders = document.getElementById("statOrders");
 const statSold = document.getElementById("statSold");
 const statDiff = document.getElementById("statDiff");
 
+const raffleIdText = document.getElementById("raffleIdText");
 const raffleTitle = document.getElementById("raffleTitle");
 const rafflePrice = document.getElementById("rafflePrice");
 const raffleTotal = document.getElementById("raffleTotal");
 const raffleSold = document.getElementById("raffleSold");
 const raffleStatus = document.getElementById("raffleStatus");
 
+const progressText = document.getElementById("progressText");
+const progressPercent = document.getElementById("progressPercent");
+const progressBar = document.getElementById("progressBar");
+
 const ordersList = document.getElementById("ordersList");
 const ordersEmpty = document.getElementById("ordersEmpty");
 const ticketsList = document.getElementById("ticketsList");
 const ticketsEmpty = document.getElementById("ticketsEmpty");
 const statusBox = document.getElementById("statusBox");
+const winnerBox = document.getElementById("winnerBox");
+
 const refreshBtn = document.getElementById("refreshBtn");
+const drawBtn = document.getElementById("drawBtn");
+const closeBtn = document.getElementById("closeBtn");
+const createRaffleBtn = document.getElementById("createRaffleBtn");
 
 function formatCurrency(value){
   if(value === undefined || value === null) return "-";
   return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
-}
-
-function showStatus(text, type){
-  statusBox.style.display = "block";
-  statusBox.className = `status-box ${type}`;
-  statusBox.textContent = text;
 }
 
 function formatDate(value){
@@ -508,6 +638,50 @@ function formatDate(value){
   }
 }
 
+function showStatus(text, type){
+  statusBox.style.display = "block";
+  statusBox.className = `status-box ${type}`;
+  statusBox.textContent = text;
+}
+
+async function closeIfSoldOut(raffleRef, raffleData){
+  const sold = Number(raffleData.tickets_sold || 0);
+  const total = Number(raffleData.tickets_total || 0);
+
+  if(total > 0 && sold >= total && raffleData.status !== "closed"){
+    await updateDoc(raffleRef, { status: "closed" });
+    showStatus("Todos os bilhetes foram vendidos. O sorteio foi fechado automaticamente.", "info");
+  }
+}
+
+async function loadLatestWinner(){
+  try{
+    const winnersQuery = query(collection(db, "winners"), orderBy("created", "desc"), limit(1));
+    const winnersSnap = await getDocs(winnersQuery);
+
+    if(winnersSnap.empty){
+      winnerBox.textContent = "Nenhum vencedor registado.";
+      return;
+    }
+
+    const winner = winnersSnap.docs[0].data();
+    winnerBox.innerHTML = `
+      <span class="pill gold">Vencedor</span>
+      <strong style="display:block;font-size:22px;margin-bottom:10px;">${winner.buyer || "-"}</strong>
+      <div class="small">
+        <div><b>Sorteio:</b> ${winner.raffle_title || winner.raffle_id || "-"}</div>
+        <div><b>Ticket:</b> #${winner.ticket_number || "-"}</div>
+        <div><b>Email:</b> ${winner.buyer_email || "-"}</div>
+        <div><b>Cidade:</b> ${winner.buyer_city || "-"}</div>
+        <div><b>Data:</b> ${formatDate(winner.created)}</div>
+      </div>
+    `;
+  }catch(error){
+    console.error(error);
+    winnerBox.textContent = "Erro ao carregar vencedor.";
+  }
+}
+
 async function loadDashboard(){
   ordersList.innerHTML = "";
   ticketsList.innerHTML = "";
@@ -518,15 +692,18 @@ async function loadDashboard(){
   try{
     const ticketsSnap = await getDocs(collection(db, "tickets"));
     const ordersSnap = await getDocs(collection(db, "orders"));
-    const raffleSnap = await getDoc(doc(db, "raffles", "Jumpy"));
+    const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
+    const raffleSnap = await getDoc(raffleRef);
 
     const ticketsCount = ticketsSnap.size;
     const ordersCount = ordersSnap.size;
 
     statTickets.textContent = ticketsCount;
     statOrders.textContent = ordersCount;
+    raffleIdText.textContent = ACTIVE_RAFFLE_ID;
 
     let soldCount = 0;
+    let totalCount = 0;
 
     if(raffleSnap.exists()){
       const raffle = raffleSnap.data();
@@ -538,25 +715,39 @@ async function loadDashboard(){
       raffleStatus.textContent = raffle.status || "-";
 
       soldCount = Number(raffle.tickets_sold || 0);
+      totalCount = Number(raffle.tickets_total || 0);
+
       statSold.textContent = soldCount;
+
+      const diff = soldCount - ticketsCount;
+      statDiff.textContent = diff;
+
+      const percent = totalCount > 0 ? Math.min((soldCount / totalCount) * 100, 100) : 0;
+      progressBar.style.width = `${percent}%`;
+      progressPercent.textContent = `${percent.toFixed(2)}%`;
+      progressText.textContent = `${soldCount} / ${totalCount} vendidos`;
+
+      if(diff === 0){
+        showStatus("Tudo está alinhado: o total de bilhetes e o contador do sorteio estão coerentes.", "ok");
+      } else if(diff > 0){
+        showStatus(`O contador tickets_sold está ${diff} acima do número de documentos em tickets.`, "err");
+      } else {
+        showStatus(`Existem ${Math.abs(diff)} bilhetes a mais na coleção tickets face ao contador tickets_sold.`, "err");
+      }
+
+      await closeIfSoldOut(raffleRef, raffle);
     } else {
       raffleTitle.textContent = "Documento não encontrado";
       rafflePrice.textContent = "-";
       raffleTotal.textContent = "-";
       raffleSold.textContent = "-";
       raffleStatus.textContent = "-";
+      progressBar.style.width = "0%";
+      progressPercent.textContent = "0%";
+      progressText.textContent = "0 / 0 vendidos";
       statSold.textContent = "0";
-    }
-
-    const diff = soldCount - ticketsCount;
-    statDiff.textContent = diff;
-
-    if(diff === 0){
-      showStatus("Tudo parece coerente: o número de bilhetes e o contador do sorteio estão alinhados.", "ok");
-    } else if(diff > 0){
-      showStatus(`O contador tickets_sold está ${diff} acima do número real de documentos na coleção tickets. Isto pode vir de testes antigos ou incrementos que não foram acompanhados pelos bilhetes esperados.`, "err");
-    } else {
-      showStatus(`Existem mais documentos em tickets do que o valor guardado em tickets_sold. A coleção tickets está ${Math.abs(diff)} acima do contador.`, "err");
+      statDiff.textContent = "0";
+      showStatus("O documento do sorteio ativo não foi encontrado.", "err");
     }
 
     const latestOrdersQuery = query(collection(db, "orders"), orderBy("created", "desc"), limit(10));
@@ -609,13 +800,119 @@ async function loadDashboard(){
       });
     }
 
+    await loadLatestWinner();
+
   }catch(error){
     console.error(error);
-    showStatus("Erro ao carregar dados do Firebase.", "err");
+    showStatus("Erro ao carregar o painel.", "err");
+  }
+}
+
+async function drawWinner(){
+  try{
+    const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
+    const raffleSnap = await getDoc(raffleRef);
+
+    if(!raffleSnap.exists()){
+      showStatus("O sorteio ativo não foi encontrado.", "err");
+      return;
+    }
+
+    const raffle = raffleSnap.data();
+
+    if(raffle.status === "closed"){
+      // continua permitido tirar vencedor, mas avisa
+    }
+
+    const ticketsQuery = query(collection(db, "tickets"), where("raffle_id", "==", ACTIVE_RAFFLE_ID));
+    const ticketsSnap = await getDocs(ticketsQuery);
+
+    if(ticketsSnap.empty){
+      showStatus("Não existem bilhetes para este sorteio.", "err");
+      return;
+    }
+
+    const allTickets = ticketsSnap.docs.map(docSnap => ({
+      id: docSnap.id,
+      ...docSnap.data()
+    }));
+
+    const randomIndex = Math.floor(Math.random() * allTickets.length);
+    const winner = allTickets[randomIndex];
+
+    await addDoc(collection(db, "winners"), {
+      raffle_id: ACTIVE_RAFFLE_ID,
+      raffle_title: raffle.title || ACTIVE_RAFFLE_ID,
+      buyer: winner.buyer || "-",
+      buyer_email: winner.buyer_email || "-",
+      buyer_phone: winner.buyer_phone || "-",
+      buyer_city: winner.buyer_city || "-",
+      ticket_number: winner.ticket_number || "-",
+      created: new Date()
+    });
+
+    showStatus(`Vencedor sorteado com sucesso: ${winner.buyer} — Ticket #${winner.ticket_number}`, "ok");
+    await loadLatestWinner();
+  }catch(error){
+    console.error(error);
+    showStatus("Erro ao sortear o vencedor.", "err");
+  }
+}
+
+async function closeRaffle(){
+  try{
+    const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
+    await updateDoc(raffleRef, { status: "closed" });
+    showStatus("Sorteio fechado manualmente com sucesso.", "info");
+    await loadDashboard();
+  }catch(error){
+    console.error(error);
+    showStatus("Erro ao fechar o sorteio.", "err");
+  }
+}
+
+async function createRaffle(){
+  const id = document.getElementById("newId").value.trim();
+  const title = document.getElementById("newTitle").value.trim();
+  const price = Number(document.getElementById("newPrice").value);
+  const ticketsTotal = Number(document.getElementById("newTotal").value);
+  const image = document.getElementById("newImage").value.trim();
+  const status = document.getElementById("newStatus").value;
+
+  if(!id || !title || !price || !ticketsTotal || !image){
+    showStatus("Preencha todos os campos do novo sorteio.", "err");
+    return;
+  }
+
+  try{
+    await setDoc(doc(db, "raffles", id), {
+      title,
+      price,
+      tickets_total: ticketsTotal,
+      tickets_sold: 0,
+      status,
+      image
+    });
+
+    showStatus(`Novo sorteio criado com sucesso: ${title} (${id})`, "ok");
+
+    document.getElementById("newId").value = "";
+    document.getElementById("newTitle").value = "";
+    document.getElementById("newPrice").value = "";
+    document.getElementById("newTotal").value = "";
+    document.getElementById("newImage").value = "";
+    document.getElementById("newStatus").value = "active";
+  }catch(error){
+    console.error(error);
+    showStatus("Erro ao criar novo sorteio.", "err");
   }
 }
 
 refreshBtn.addEventListener("click", loadDashboard);
+drawBtn.addEventListener("click", drawWinner);
+closeBtn.addEventListener("click", closeRaffle);
+createRaffleBtn.addEventListener("click", createRaffle);
+
 loadDashboard();
 </script>
 
