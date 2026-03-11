@@ -1,177 +1,553 @@
 <!doctype html>
 <html lang="pt">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área do utilizador · CarSorte</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-<title>Área do utilizador</title>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#060606;
+      color:white;
+    }
 
-<style>
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-body{
-background:#060606;
-color:white;
-font-family:Arial;
-margin:0;
-padding:40px;
-}
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-.container{
-max-width:1000px;
-margin:auto;
-}
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
 
-h1{
-color:#f4c542;
-}
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
 
-.card{
-background:#111;
-padding:25px;
-border-radius:15px;
-border:1px solid rgba(255,255,255,.08);
-margin-top:20px;
-}
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
 
-.row{
-display:flex;
-justify-content:space-between;
-margin-bottom:10px;
-}
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
 
-.tickets{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-top:15px;
-}
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px 70px;
+    }
 
-.ticket{
-background:#1a1a1a;
-padding:8px 10px;
-border-radius:8px;
-border:1px solid rgba(255,255,255,.08);
-font-size:13px;
-}
+    .hero{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:30px;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:center;
+      box-shadow:0 12px 28px rgba(0,0,0,.28);
+    }
 
-.button{
-display:inline-block;
-margin-top:20px;
-padding:12px 20px;
-background:#f4c542;
-color:black;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
+    .hero h1{
+      margin:0 0 12px 0;
+      font-size:40px;
+      color:#f4c542;
+    }
 
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-margin-top:20px;
-}
+    .hero p{
+      margin:0;
+      color:#cfcfcf;
+      line-height:1.7;
+      font-size:17px;
+    }
 
-.stat{
-background:#111;
-padding:20px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.08);
-text-align:center;
-}
+    .premium-badge{
+      display:inline-block;
+      margin-top:16px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(244,197,66,.10);
+      border:1px solid rgba(244,197,66,.20);
+      color:#ffe08a;
+      font-weight:bold;
+      font-size:14px;
+    }
 
-</style>
+    .hero-side{
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:20px;
+    }
 
+    .hero-side small{
+      color:#9f9f9f;
+      display:block;
+      margin-bottom:8px;
+    }
+
+    .hero-side h2{
+      margin:0 0 8px 0;
+      color:#f4c542;
+      font-size:28px;
+    }
+
+    .hero-side p{
+      margin:0;
+      color:#cfcfcf;
+      font-size:16px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-top:24px;
+    }
+
+    .stat{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:30px;
+      color:#f4c542;
+      margin-bottom:6px;
+    }
+
+    .stat span{
+      color:#9f9f9f;
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:22px;
+      margin-top:28px;
+    }
+
+    .panel{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 12px 28px rgba(0,0,0,.22);
+    }
+
+    .panel h3{
+      margin-top:0;
+      margin-bottom:18px;
+      font-size:28px;
+      color:white;
+    }
+
+    .list{
+      display:grid;
+      gap:14px;
+    }
+
+    .item{
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .status{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:bold;
+      background:rgba(244,197,66,.10);
+      color:#ffe08a;
+      border:1px solid rgba(244,197,66,.20);
+    }
+
+    .small{
+      color:#9f9f9f;
+      font-size:13px;
+      margin-top:8px;
+    }
+
+    .ticket-numbers{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .ticket-badge{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(244,197,66,.22);
+      background:rgba(244,197,66,.08);
+      color:#ffe08a;
+      font-size:12px;
+      font-weight:bold;
+    }
+
+    .side-title{
+      font-size:18px;
+      font-weight:bold;
+      margin-bottom:12px;
+      color:#f4c542;
+    }
+
+    .actions{
+      display:grid;
+      gap:12px;
+    }
+
+    .btn{
+      display:inline-block;
+      background:#f4c542;
+      color:black;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:bold;
+      text-align:center;
+    }
+
+    @media (max-width: 900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .container{
+        padding:30px 16px 50px;
+      }
+
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:30px;
+      }
+
+      .hero-side h2{
+        font-size:24px;
+      }
+
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
 
-<h1>Área do utilizador</h1>
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="raffle.html">Sorteio</a>
+        <a href="results.html">Resultados</a>
+        <a href="faq.html">FAQ</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+  </header>
 
-<div class="stats">
+  <div class="container">
 
-<div class="stat">
-<strong id="total-tickets">0</strong>
-<br>
-Bilhetes
-</div>
+    <div class="hero">
+      <div>
+        <h1>Olá, João 👋</h1>
+        <p>Bem-vindo à sua área pessoal. Aqui pode acompanhar os seus bilhetes, participações, histórico e estado Premium.</p>
+        <div class="premium-badge">Premium Club ativo</div>
+      </div>
 
-<div class="stat">
-<strong>3</strong>
-<br>
-Sorteios ativos
-</div>
+      <div class="hero-side">
+        <small>Última participação confirmada</small>
+        <h2 id="hero-pack-title">5 bilhetes · BMW Série 1 Pack M</h2>
+        <p id="hero-pack-total">Total pago: 10€</p>
+      </div>
+    </div>
 
-<div class="stat">
-<strong id="total-spent">0€</strong>
-<br>
-Total gasto
-</div>
+    <div class="stats">
+      <div class="stat">
+        <strong id="stat-total-tickets">5</strong>
+        <span>Bilhetes totais</span>
+      </div>
 
-</div>
+      <div class="stat">
+        <strong>3</strong>
+        <span>Sorteios ativos</span>
+      </div>
 
-<div class="card">
+      <div class="stat">
+        <strong>1</strong>
+        <span>Conta Premium</span>
+      </div>
 
-<h2>Os meus bilhetes</h2>
+      <div class="stat">
+        <strong id="stat-total-spent">10€</strong>
+        <span>Total investido</span>
+      </div>
+    </div>
 
-<div class="tickets" id="tickets"></div>
+    <div class="grid">
+      <div>
+        <div class="panel">
+          <h3>Os meus sorteios ativos</h3>
 
-</div>
+          <div class="list">
+            <div class="item">
+              <div class="row">
+                <strong>BMW Série 1 Pack M</strong>
+                <span class="status">Ativo</span>
+              </div>
+              <div class="small" id="active-raffle-line">5 bilhetes · Tiragem a 28/03 · Sorteio quase completo</div>
+            </div>
 
-<a class="button" href="index.html">Voltar ao site</a>
+            <div class="item">
+              <div class="row">
+                <strong>Mercedes Classe A</strong>
+                <span class="status">Ativo</span>
+              </div>
+              <div class="small">10 bilhetes · Tiragem a 04/04</div>
+            </div>
 
-</div>
+            <div class="item">
+              <div class="row">
+                <strong>Citroën Jumpy Business</strong>
+                <span class="status">Ativo</span>
+              </div>
+              <div class="small">1 bilhete · Tiragem a 11/04</div>
+            </div>
+          </div>
+        </div>
 
-<script>
+        <div class="panel" style="margin-top:22px;">
+          <h3>Os meus bilhetes</h3>
 
-const params = new URLSearchParams(window.location.search)
+          <div class="list">
+            <div class="item">
+              <div class="row">
+                <strong>BMW Série 1 Pack M</strong>
+                <span class="status" id="main-ticket-count">5 bilhetes</span>
+              </div>
+              <div class="ticket-numbers" id="main-ticket-list"></div>
+            </div>
 
-const pack = params.get("pack") || 5
+            <div class="item">
+              <div class="row">
+                <strong>Mercedes Classe A</strong>
+                <span class="status">10 bilhetes</span>
+              </div>
+              <div class="ticket-numbers">
+                <span class="ticket-badge">#CS-M2241</span>
+                <span class="ticket-badge">#CS-M2242</span>
+                <span class="ticket-badge">#CS-M2243</span>
+                <span class="ticket-badge">#CS-M2244</span>
+                <span class="ticket-badge">#CS-M2245</span>
+              </div>
+            </div>
 
-const prices = {
-1:2.5,
-5:10,
-10:20,
-25:50
-}
+            <div class="item">
+              <div class="row">
+                <strong>Citroën Jumpy Business</strong>
+                <span class="status">1 bilhete</span>
+              </div>
+              <div class="ticket-numbers">
+                <span class="ticket-badge">#CS-J7105</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-document.getElementById("total-tickets").innerText = pack
-document.getElementById("total-spent").innerText = prices[pack]+"€"
+        <div class="panel" style="margin-top:22px;">
+          <h3>Histórico de participações</h3>
 
-function generateTickets(quantity){
+          <div class="list">
+            <div class="item">
+              <div class="row">
+                <strong id="history-main-title">Pack 5 bilhetes · BMW Série 1</strong>
+                <span class="small" id="history-main-price">10€</span>
+              </div>
+              <div class="small">Data: 05/03/2026</div>
+            </div>
 
-const tickets=[]
-const start=Math.floor(Math.random()*9000)+1000
+            <div class="item">
+              <div class="row">
+                <strong>Pack 10 bilhetes · Mercedes Classe A</strong>
+                <span class="small">20€</span>
+              </div>
+              <div class="small">Data: 07/03/2026</div>
+            </div>
 
-for(let i=0;i<quantity;i++){
+            <div class="item">
+              <div class="row">
+                <strong>1 bilhete · Citroën Jumpy</strong>
+                <span class="small">2,50€</span>
+              </div>
+              <div class="small">Data: 08/03/2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-tickets.push("#CS-"+(start+i))
+      <div>
+        <div class="panel">
+          <div class="side-title">Resumo da conta</div>
 
-}
+          <div class="list">
+            <div class="item">
+              <strong>Nome</strong>
+              <div class="small">João Ferreira</div>
+            </div>
 
-return tickets
+            <div class="item">
+              <strong>Email</strong>
+              <div class="small">joao@email.pt</div>
+            </div>
 
-}
+            <div class="item">
+              <strong>Estado Premium</strong>
+              <div class="small">Ativo · 3€/mês</div>
+            </div>
 
-const tickets = generateTickets(pack)
+            <div class="item">
+              <strong>Cidade</strong>
+              <div class="small">Porto</div>
+            </div>
+          </div>
+        </div>
 
-const container = document.getElementById("tickets")
+        <div class="panel" style="margin-top:22px;">
+          <div class="side-title">Ações rápidas</div>
 
-tickets.forEach(ticket => {
+          <div class="actions">
+            <a class="btn" href="raffle.html">Participar em sorteios</a>
+            <a class="btn" href="results.html">Ver resultados</a>
+            <a class="btn" href="faq.html">Contactar suporte</a>
+          </div>
+        </div>
 
-const el=document.createElement("div")
-el.className="ticket"
-el.innerText=ticket
+        <div class="panel" style="margin-top:22px;">
+          <div class="side-title">Próximas datas</div>
 
-container.appendChild(el)
+          <div class="list">
+            <div class="item">
+              <strong>28/03</strong>
+              <div class="small">BMW Série 1 Pack M</div>
+            </div>
 
-})
+            <div class="item">
+              <strong>04/04</strong>
+              <div class="small">Mercedes Classe A</div>
+            </div>
 
-</script>
+            <div class="item">
+              <strong>11/04</strong>
+              <div class="small">Citroën Jumpy Business</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const selectedPack = params.get("pack") || "5";
+
+    const packData = {
+      "1": { qty: 1, total: "2,50€" },
+      "5": { qty: 5, total: "10€" },
+      "10": { qty: 10, total: "20€" },
+      "25": { qty: 25, total: "50€" }
+    };
+
+    const active = packData[selectedPack] || packData["5"];
+
+    function generateTickets(quantity){
+      const tickets = [];
+      const start = Math.floor(Math.random() * 9000) + 1000;
+
+      for(let i = 0; i < quantity; i++){
+        tickets.push("#CS-" + (start + i));
+      }
+
+      return tickets;
+    }
+
+    const tickets = generateTickets(active.qty);
+
+    document.getElementById("hero-pack-title").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""} · BMW Série 1 Pack M`;
+    document.getElementById("hero-pack-total").textContent = `Total pago: ${active.total}`;
+    document.getElementById("main-ticket-count").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""}`;
+    document.getElementById("history-main-title").textContent = `Pack ${active.qty} bilhete${active.qty > 1 ? "s" : ""} · BMW Série 1`;
+    document.getElementById("history-main-price").textContent = active.total;
+    document.getElementById("active-raffle-line").textContent = `${active.qty} bilhete${active.qty > 1 ? "s" : ""} · Tiragem a 28/03 · Sorteio quase completo`;
+    document.getElementById("stat-total-tickets").textContent = active.qty;
+    document.getElementById("stat-total-spent").textContent = active.total;
+
+    const list = document.getElementById("main-ticket-list");
+    list.innerHTML = "";
+
+    tickets.forEach(ticket => {
+      const span = document.createElement("span");
+      span.className = "ticket-badge";
+      span.textContent = ticket;
+      list.appendChild(span);
+    });
+  </script>
 
 </body>
 </html>
