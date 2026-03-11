@@ -8,6 +8,7 @@
     :root{
       --bg:#060606;
       --panel:#101010;
+      --panel2:#0b0b0b;
       --gold:#f4c542;
       --line:rgba(255,255,255,.08);
       --muted:#a9a9a9;
@@ -23,14 +24,22 @@
       color:#fff;
     }
     a{text-decoration:none;color:inherit}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .container{max-width:1240px;margin:0 auto;padding:0 20px}
+
     .topbar{
       position:sticky;top:0;z-index:20;
       background:rgba(6,6,6,.9);
       border-bottom:1px solid var(--line);
       backdrop-filter:blur(10px);
     }
-    .nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 0;
+      gap:20px;
+      flex-wrap:wrap;
+    }
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
       width:46px;height:46px;border-radius:16px;background:var(--gold);
@@ -38,7 +47,7 @@
     }
     .brand h1{margin:0;color:var(--gold);font-size:28px}
     .brand small{display:block;color:#888}
-    .navlinks{display:flex;gap:22px;align-items:center}
+    .navlinks{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
     .navlinks a{color:#ddd;font-size:14px}
     .navlinks a:hover{color:var(--gold)}
     .logout{
@@ -86,11 +95,16 @@
       background:#101010;border:1px solid var(--line);border-radius:26px;padding:24px;box-shadow:var(--shadow);
     }
     .panel h3{margin-top:0;font-size:28px}
-    .ticket-list,.history-list,.side-list{display:grid;gap:14px}
-    .ticket,.history-item,.side-item{
+
+    .ticket-list,.history-list,.side-list,.raffle-list{
+      display:grid;
+      gap:14px;
+    }
+    .ticket,.history-item,.side-item,.raffle-item{
       background:#0b0b0b;border:1px solid var(--line);border-radius:18px;padding:16px;
     }
-    .row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+
+    .row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
     .status{
       display:inline-block;
       padding:7px 10px;
@@ -108,9 +122,29 @@
       background:var(--gold);color:#000;padding:12px 16px;border-radius:14px;font-weight:900;
     }
 
+    .ticket-numbers{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .ticket-badge{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(244,197,66,.22);
+      background:rgba(244,197,66,.08);
+      color:#ffe08a;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .actions{
+      display:grid;
+      gap:12px;
+    }
+
     @media (max-width:980px){
       .hero-box,.grid,.stats{grid-template-columns:1fr}
-      .navlinks{display:none}
       .hero-box h2{font-size:32px}
     }
   </style>
@@ -128,6 +162,7 @@
       </div>
       <div class="navlinks">
         <a href="index.html">Site público</a>
+        <a href="raffle.html">Página do sorteio</a>
         <a href="#bilhetes">Os meus bilhetes</a>
         <a href="#historico">Histórico</a>
         <a href="#conta">Conta</a>
@@ -146,7 +181,7 @@
       </div>
       <div>
         <p class="small">Próximo sorteio</p>
-        <h3 style="margin:0 0 8px 0;color:#f4c542">BMW Série 1 Pack M</h3>
+        <h3 style="margin:0 0 8px 0;color:#f4c542;font-size:30px">BMW Série 1 Pack M</h3>
         <p class="muted" style="margin:0">Sorteio em 04 dias · 12h · 18m</p>
       </div>
     </div>
@@ -155,37 +190,81 @@
       <div class="stat"><strong>42</strong><span>Bilhetes totais</span></div>
       <div class="stat"><strong>3</strong><span>Sorteios ativos</span></div>
       <div class="stat"><strong>1</strong><span>Conta Premium</span></div>
-      <div class="stat"><strong>0</strong><span>Prémios ganhos</span></div>
+      <div class="stat"><strong>32,50€</strong><span>Total investido</span></div>
     </div>
   </section>
 
   <section class="container grid">
     <div>
-      <div class="panel" id="bilhetes">
-        <h3>Os meus bilhetes</h3>
-        <div class="ticket-list">
-          <div class="ticket">
+      <div class="panel">
+        <h3>Os meus sorteios ativos</h3>
+        <div class="raffle-list">
+          <div class="raffle-item">
             <div class="row">
               <strong>BMW Série 1 Pack M</strong>
               <span class="status">Ativo</span>
             </div>
-            <p class="small">Bilhetes: #A1032 · #A1033 · #A1034 · #A1035 · #A1036</p>
+            <p class="small">5 bilhetes · Tiragem a 28/03 · Sorteio quase completo</p>
+          </div>
+
+          <div class="raffle-item">
+            <div class="row">
+              <strong>Mercedes Classe A</strong>
+              <span class="status">Ativo</span>
+            </div>
+            <p class="small">10 bilhetes · Tiragem a 04/04</p>
+          </div>
+
+          <div class="raffle-item">
+            <div class="row">
+              <strong>Citroën Jumpy Business</strong>
+              <span class="status">Ativo</span>
+            </div>
+            <p class="small">1 bilhete · Tiragem a 11/04</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="bilhetes" style="margin-top:22px">
+        <h3>Os meus bilhetes</h3>
+
+        <div class="ticket-list">
+          <div class="ticket">
+            <div class="row">
+              <strong>BMW Série 1 Pack M</strong>
+              <span class="status">5 bilhetes</span>
+            </div>
+            <div class="ticket-numbers">
+              <span class="ticket-badge">#CS-A1032</span>
+              <span class="ticket-badge">#CS-A1033</span>
+              <span class="ticket-badge">#CS-A1034</span>
+              <span class="ticket-badge">#CS-A1035</span>
+              <span class="ticket-badge">#CS-A1036</span>
+            </div>
           </div>
 
           <div class="ticket">
             <div class="row">
               <strong>Mercedes Classe A</strong>
-              <span class="status">Ativo</span>
+              <span class="status">10 bilhetes</span>
             </div>
-            <p class="small">Bilhetes: #M2241 · #M2242 · #M2243 · #M2244 · #M2245 · #M2246 · #M2247 · #M2248 · #M2249 · #M2250</p>
+            <div class="ticket-numbers">
+              <span class="ticket-badge">#CS-M2241</span>
+              <span class="ticket-badge">#CS-M2242</span>
+              <span class="ticket-badge">#CS-M2243</span>
+              <span class="ticket-badge">#CS-M2244</span>
+              <span class="ticket-badge">#CS-M2245</span>
+            </div>
           </div>
 
           <div class="ticket">
             <div class="row">
               <strong>Citroën Jumpy Business</strong>
-              <span class="status">Ativo</span>
+              <span class="status">1 bilhete</span>
             </div>
-            <p class="small">Bilhete: #J7105</p>
+            <div class="ticket-numbers">
+              <span class="ticket-badge">#CS-J7105</span>
+            </div>
           </div>
         </div>
       </div>
@@ -237,23 +316,36 @@
             <p class="small">Ativo · 3€/mês</p>
           </div>
           <div class="side-item">
-            <strong>Total investido</strong>
-            <p class="small">32,50€</p>
+            <strong>Cidade</strong>
+            <p class="small">Porto</p>
           </div>
         </div>
       </div>
 
       <div class="panel" style="margin-top:22px">
         <div class="side-title">Ações rápidas</div>
+        <div class="actions">
+          <a class="cta" href="index.html#sorteios">Participar em sorteios</a>
+          <a class="cta" href="raffle.html">Ver sorteio completo</a>
+          <a class="cta" href="index.html#premium">Gerir Premium Club</a>
+          <a class="cta" href="index.html#contacto">Contactar suporte</a>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:22px">
+        <div class="side-title">Próximas datas</div>
         <div class="side-list">
           <div class="side-item">
-            <a class="cta" href="index.html#sorteios">Participar em sorteios</a>
+            <strong>28/03</strong>
+            <p class="small">BMW Série 1 Pack M</p>
           </div>
           <div class="side-item">
-            <a class="cta" href="index.html#premium">Gerir Premium Club</a>
+            <strong>04/04</strong>
+            <p class="small">Mercedes Classe A</p>
           </div>
           <div class="side-item">
-            <a class="cta" href="index.html#contacto">Contactar suporte</a>
+            <strong>11/04</strong>
+            <p class="small">Citroën Jumpy Business</p>
           </div>
         </div>
       </div>
