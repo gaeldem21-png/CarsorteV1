@@ -747,7 +747,7 @@ img{
         <strong>CarSorte</strong>
         <span>by DEM Automóveis</span>
         <p>
-          Mais do que um sorteio. Uma oportunidade criada para devolver esperança, desejo et accès à ceux qui sentent souvent que les grandes chances ne sont pas faites pour eux.
+          Mais do que um sorteio. Uma oportunidade criada para devolver esperança e abrir portas a quem muitas vezes sente que as grandes oportunidades estão fora do seu alcance.
         </p>
       </div>
     </div>
@@ -1063,7 +1063,8 @@ const names = ["João","Pedro","Ana","Luis","Marta","Carlos","Tiago","Rui"];
 function randomBuy(){
   const name = names[Math.floor(Math.random()*names.length)];
   const qty = [1,2,3,5,10][Math.floor(Math.random()*5)];
-  document.getElementById("live").textContent = `${name} comprou ${qty} bilhetes`;
+  const billetText = qty === 1 ? "bilhete" : "bilhetes";
+  document.getElementById("live").textContent = `${name} comprou ${qty} ${billetText}`;
 }
 
 setInterval(randomBuy, 5000);
