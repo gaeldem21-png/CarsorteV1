@@ -3,62 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registo · CarSorte</title>
+  <title>Registo · CarSorte by DEM Automóveis</title>
 
   <style>
-    *{
-      box-sizing:border-box;
+    :root{
+      --bg:#050505;
+      --panel:#0f0f0f;
+      --gold:#d4a017;
+      --gold-soft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 14px 34px rgba(0,0,0,.32);
     }
+
+    *{box-sizing:border-box}
 
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:#060606;
-      color:white;
+      background:
+        radial-gradient(circle at top, rgba(212,160,23,.10), transparent 28%),
+        var(--bg);
+      color:var(--text);
       min-height:100vh;
     }
 
-    a{
-      text-decoration:none;
-      color:inherit;
+    a{text-decoration:none;color:inherit}
+
+    .topbar{
+      background:linear-gradient(90deg,#8d6500,#d4a017,#8d6500);
+      color:#000;
+      text-align:center;
+      padding:10px 14px;
+      font-size:14px;
+      font-weight:800;
     }
 
     header{
-      background:#111;
-      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(5,5,5,.9);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(10px);
+    }
+
+    .container{
+      max-width:1240px;
+      margin:auto;
+      padding:0 20px;
     }
 
     nav{
-      max-width:1200px;
-      margin:auto;
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      gap:20px;
-      padding:20px;
+      justify-content:space-between;
+      gap:24px;
+      padding:18px 0;
     }
 
-    .logo{
-      color:#f4c542;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand img{
+      height:58px;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+
+    .brand-text strong{
+      color:var(--gold-soft);
       font-size:24px;
-      font-weight:bold;
-      white-space:nowrap;
+    }
+
+    .brand-text span{
+      color:#9c9c9c;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
 
     .menu{
       display:flex;
+      align-items:center;
+      gap:18px;
       flex-wrap:wrap;
       justify-content:flex-end;
-      gap:18px;
     }
 
     .menu a{
-      color:white;
-      font-size:16px;
+      color:#ececec;
+      font-size:15px;
     }
 
-    .wrapper{
-      max-width:1200px;
+    .menu a:hover{
+      color:var(--gold-soft);
+    }
+
+    .menu .admin-link{
+      background:var(--gold);
+      color:#000;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:800;
+    }
+
+    .wrap{
+      max-width:1240px;
       margin:auto;
       padding:50px 20px 70px;
       display:flex;
@@ -68,36 +126,36 @@
 
     .card{
       width:100%;
-      max-width:560px;
-      background:#111;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;
+      max-width:580px;
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.14);
+      border-radius:28px;
       padding:32px;
-      box-shadow:0 12px 28px rgba(0,0,0,.28);
+      box-shadow:var(--shadow);
     }
 
     .icon{
-      width:62px;
-      height:62px;
+      width:64px;
+      height:64px;
       border-radius:18px;
-      background:#f4c542;
-      color:black;
+      background:var(--gold);
+      color:#000;
       display:flex;
       align-items:center;
       justify-content:center;
       font-size:30px;
-      font-weight:bold;
+      font-weight:800;
       margin-bottom:18px;
     }
 
     h1{
-      margin:0 0 10px 0;
+      margin:0 0 10px;
       font-size:38px;
-      color:#f4c542;
+      color:var(--gold-soft);
     }
 
     p{
-      margin:0 0 22px 0;
+      margin:0 0 22px;
       color:#cfcfcf;
       line-height:1.7;
       font-size:16px;
@@ -112,10 +170,10 @@
     .form select{
       width:100%;
       background:#0b0b0b;
-      border:1px solid rgba(255,255,255,.08);
+      border:1px solid var(--line);
       border-radius:12px;
       padding:14px 16px;
-      color:white;
+      color:#fff;
       font-size:16px;
       outline:none;
     }
@@ -123,13 +181,13 @@
     .btn{
       display:inline-block;
       text-align:center;
-      background:#f4c542;
-      color:black;
+      background:var(--gold);
+      color:#000;
       padding:15px 18px;
       border-radius:12px;
-      font-weight:bold;
-      font-size:16px;
+      font-weight:800;
       margin-top:4px;
+      box-shadow:var(--shadow);
     }
 
     .links{
@@ -143,10 +201,10 @@
     }
 
     .links a:hover{
-      color:#f4c542;
+      color:var(--gold-soft);
     }
 
-    @media (max-width:900px){
+    @media (max-width:980px){
       nav{
         flex-direction:column;
         align-items:flex-start;
@@ -157,8 +215,8 @@
         gap:14px;
       }
 
-      .wrapper{
-        padding:30px 16px 50px;
+      .brand img{
+        height:48px;
       }
 
       .card{
@@ -173,39 +231,58 @@
 </head>
 <body>
 
-  <header>
-    <nav>
-      <div class="logo">CarSorte</div>
+  <div class="topbar">
+    📝 Crie a sua conta CarSorte e entre na experiência premium
+  </div>
 
-      <div class="menu">
-        <a href="index.html">Início</a>
-        <a href="raffle.html">Sorteio</a>
-        <a href="results.html">Resultados</a>
-        <a href="faq.html">FAQ</a>
-        <a href="admin.html">Admin</a>
-      </div>
-    </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <img src="logo-carsorte.png" alt="CarSorte by DEM Automóveis">
+          <div class="brand-text">
+            <strong>CarSorte</strong>
+            <span>by DEM Automóveis</span>
+          </div>
+        </div>
+
+        <div class="menu">
+          <a href="index.html">Início</a>
+          <a href="raffle.html">Sorteios</a>
+          <a href="winners.html">Vencedores</a>
+          <a href="results.html">Resultados</a>
+          <a href="faq.html">FAQ</a>
+          <a href="regulamento.html">Regulamento</a>
+          <a href="login.html">Login</a>
+          <a class="admin-link" href="admin.html">Admin</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <div class="wrapper">
+  <div class="wrap">
     <div class="card">
       <div class="icon">📝</div>
       <h1>Criar conta</h1>
-      <p>Crie a sua conta CarSorte para comprar bilhetes, acompanhar sorteios e guardar o seu histórico.</p>
+      <p>Crie a sua conta CarSorte para comprar bilhetes, acompanhar sorteios e guardar o seu histórico de participações.</p>
 
       <div class="form">
         <input type="text" placeholder="Nome completo">
         <input type="email" placeholder="Email">
         <input type="tel" placeholder="Telefone">
+
         <select>
           <option>Cidade</option>
           <option>Porto</option>
           <option>Lisboa</option>
           <option>Braga</option>
           <option>Coimbra</option>
+          <option>Faro</option>
         </select>
+
         <input type="password" placeholder="Palavra-passe">
         <input type="password" placeholder="Confirmar palavra-passe">
+
         <a class="btn" href="utilizador.html">Criar conta</a>
       </div>
 
