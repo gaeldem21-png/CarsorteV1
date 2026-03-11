@@ -6,271 +6,353 @@
 <title>Vencedores - CarSorte</title>
 
 <style>
-
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#050505;
-color:white;
+:root{
+  --bg:#050505;
+  --panel:#101010;
+  --gold:#d4a017;
+  --gold-soft:#f4c542;
+  --text:#ffffff;
+  --muted:#b8b8b8;
+  --line:rgba(255,255,255,.08);
+  --shadow:0 14px 34px rgba(0,0,0,.32);
 }
 
-a{
-text-decoration:none;
-color:white;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(212,160,23,.10), transparent 28%),
+    var(--bg);
+  color:var(--text);
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+.top-sale{
+  background:linear-gradient(90deg,#7b5300,#d4a017,#7b5300);
+  color:#000;
+  text-align:center;
+  padding:10px 14px;
+  font-size:14px;
+  font-weight:800;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(5,5,5,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
 }
 
 .container{
-max-width:1200px;
-margin:auto;
-padding:20px;
-}
-
-.topbar{
-background:black;
-border-bottom:1px solid #222;
+  max-width:1240px;
+  margin:auto;
+  padding:0 20px;
 }
 
 .nav{
-display:flex;
-align-items:center;
-justify-content:space-between;
-flex-wrap:wrap;
-gap:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:18px 0;
 }
 
-.logo{
-display:flex;
-align-items:center;
-gap:15px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:18px;
 }
 
-.logo img{
-height:55px;
+.brand img{
+  height:92px;
+  width:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 22px rgba(212,160,23,.24));
 }
 
-.logo-text{
-display:flex;
-flex-direction:column;
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
 }
 
-.logo-text strong{
-font-size:26px;
-color:#d4a017;
+.brand-text strong{
+  color:var(--gold-soft);
+  font-size:34px;
 }
 
-.logo-text span{
-font-size:13px;
-color:#aaa;
+.brand-text span{
+  color:#9c9c9c;
+  font-size:13px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-top:6px;
 }
 
 .navlinks{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
 }
 
 .navlinks a{
-color:#ddd;
-font-size:15px;
+  color:#ececec;
+  font-size:15px;
+}
+
+.navlinks a:hover{
+  color:var(--gold-soft);
 }
 
 .admin-btn{
-background:#6a2a00;
-padding:10px 18px;
-border-radius:12px;
-}
-
-.banner{
-background:#1f3a1f;
-text-align:center;
-padding:10px;
-font-weight:bold;
+  background:var(--gold);
+  color:#000;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:800;
 }
 
 .hero{
-text-align:center;
-padding:60px 0;
+  padding:44px 0 20px;
 }
 
-.hero img{
-height:90px;
-margin-bottom:20px;
+.hero-card{
+  background:linear-gradient(180deg,#111,#090909);
+  border:1px solid rgba(212,160,23,.14);
+  border-radius:30px;
+  padding:34px;
+  box-shadow:var(--shadow);
+  text-align:center;
 }
 
-.hero h1{
-font-size:46px;
-color:#d4a017;
-margin-bottom:10px;
+.hero-card img{
+  height:110px;
+  width:auto;
+  margin:0 auto 18px;
+  filter:drop-shadow(0 8px 22px rgba(212,160,23,.22));
 }
 
-.hero p{
-color:#aaa;
-max-width:700px;
-margin:auto;
+.hero-card h1{
+  margin:0 0 10px;
+  font-size:46px;
+  color:var(--gold-soft);
+}
+
+.hero-card p{
+  margin:0 auto;
+  max-width:760px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:18px;
+}
+
+.section{
+  padding:34px 0 70px;
+}
+
+.section-head{
+  margin-bottom:24px;
+}
+
+.section-head p{
+  margin:0;
+  color:var(--gold-soft);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+}
+
+.section-head h2{
+  margin:8px 0 0;
+  font-size:40px;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-padding-bottom:60px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
 }
 
 .card{
-background:#111;
-border:1px solid #222;
-border-radius:20px;
-overflow:hidden;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
 }
 
 .card img{
-width:100%;
-height:220px;
-object-fit:cover;
+  width:100%;
+  height:230px;
+  object-fit:cover;
 }
 
 .card-body{
-padding:22px;
+  padding:22px;
 }
 
-.badge{
-display:inline-block;
-padding:8px 12px;
-border-radius:999px;
-background:#1b1305;
-border:1px solid #5a3a00;
-color:#e0b84d;
-font-size:12px;
-font-weight:bold;
-margin-bottom:10px;
+.tag{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(212,160,23,.10);
+  border:1px solid rgba(212,160,23,.20);
+  color:#ffe08a;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:12px;
 }
 
 .card h3{
-margin:8px 0;
-font-size:24px;
+  margin:0 0 10px;
+  font-size:26px;
+}
+
+.meta{
+  color:var(--muted);
+  line-height:1.7;
+  margin:0 0 10px;
 }
 
 .ticket{
-margin-top:8px;
-font-size:14px;
-color:#aaa;
+  margin-top:10px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#0b0b0b;
+  border:1px solid var(--line);
+  color:#ddd;
+  font-size:14px;
 }
 
 .footer{
-border-top:1px solid #222;
-padding:40px 0;
-text-align:center;
-color:#777;
+  border-top:1px solid var(--line);
+  background:#0a0a0a;
 }
 
+.footer-grid{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  flex-wrap:wrap;
+  padding:28px 0 34px;
+  color:#bdbdbd;
+}
+
+.footer-grid strong{
+  color:#f0f0f0;
+}
+
+@media (max-width:980px){
+  .nav{flex-direction:column;align-items:flex-start}
+  .navlinks{justify-content:flex-start;gap:14px}
+  .brand img{height:72px}
+  .brand-text strong{font-size:28px}
+  .hero-card h1{font-size:34px}
+  .hero-card p{font-size:16px}
+  .grid{grid-template-columns:1fr}
+  .section-head h2{font-size:30px}
+}
 </style>
 </head>
-
 <body>
 
-<div class="banner">
-🏆 Vencedores reais da plataforma CarSorte
+<div class="top-sale">
+🏆 Vencedores publicados · prova social · confiança reforçada
 </div>
 
-<div class="topbar">
-<div class="container nav">
+<header class="header">
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <img src="logo-carsorte.png" alt="CarSorte">
+        <div class="brand-text">
+          <strong>CarSorte</strong>
+          <span>by DEM Automóveis</span>
+        </div>
+      </div>
 
-<div class="logo">
-<img src="logo-carsorte.png" alt="CarSorte">
-<div class="logo-text">
-<strong>CarSorte</strong>
-<span>BY DEM AUTOMÓVEIS</span>
-</div>
-</div>
+      <div class="navlinks">
+        <a href="index.html">Início</a>
+        <a href="raffle.html">Sorteios</a>
+        <a href="winners.html">Vencedores</a>
+        <a href="results.html">Resultados</a>
+        <a href="faq.html">FAQ</a>
+        <a href="regulamento.html">Regulamento</a>
+        <a href="login.html">Login</a>
+        <a class="admin-btn" href="admin.html">Admin</a>
+      </div>
+    </div>
+  </div>
+</header>
 
-<div class="navlinks">
-<a href="index.html">Início</a>
-<a href="raffle.html">Sorteios</a>
-<a href="winners.html">Vencedores</a>
-<a href="results.html">Resultados</a>
-<a href="faq.html">FAQ</a>
-<a href="regulamento.html">Regulamento</a>
-<a href="login.html">Login</a>
-<a class="admin-btn" href="admin.html">Admin</a>
-</div>
+<section class="container hero">
+  <div class="hero-card">
+    <img src="logo-carsorte.png" alt="CarSorte">
+    <h1>Vencedores CarSorte</h1>
+    <p>
+      Aqui celebramos as histórias que dão força ao projeto. Cada vencedor reforça a ideia central da CarSorte: uma pequena participação pode transformar-se numa grande oportunidade.
+    </p>
+  </div>
+</section>
 
-</div>
-</div>
+<section class="container section">
+  <div class="section-head">
+    <p>Prova social</p>
+    <h2>Histórias que já marcaram a plataforma</h2>
+  </div>
 
-<div class="container hero">
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80" alt="Pedro">
+      <div class="card-body">
+        <div class="tag">BMW Série 1 Pack M</div>
+        <h3>Pedro · Porto</h3>
+        <p class="meta">Bilhete vencedor: #CS-4521<br>Data: 28/03/2026</p>
+        <div class="ticket">Participou com um pack promocional e tornou-se uma das primeiras grandes histórias da CarSorte.</div>
+      </div>
+    </div>
 
-<img src="logo-carsorte.png">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80" alt="Marta">
+      <div class="card-body">
+        <div class="tag">Mercedes Classe A</div>
+        <h3>Marta · Braga</h3>
+        <p class="meta">Bilhete vencedor: #CS-9132<br>Data: 04/04/2026</p>
+        <div class="ticket">Entrou no sorteio com poucos bilhetes e saiu vencedora, reforçando o lado acessível da plataforma.</div>
+      </div>
+    </div>
 
-<h1>Vencedores CarSorte</h1>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&w=1200&q=80" alt="Tiago">
+      <div class="card-body">
+        <div class="tag">Citroën Jumpy Business</div>
+        <h3>Tiago · Lisboa</h3>
+        <p class="meta">Bilhete vencedor: #CS-2210<br>Data: 11/04/2026</p>
+        <div class="ticket">Mais uma prova de que a CarSorte pode falar com públicos diferentes e criar histórias memoráveis.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<p>
-Aqui celebramos os vencedores da nossa comunidade.
-Cada sorteio muda uma vida e prova que qualquer pessoa pode ganhar.
-</p>
-
-</div>
-
-<div class="container grid">
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1549921296-3c3e3f9f7e6c?auto=format&fit=crop&w=1200&q=80">
-
-<div class="card-body">
-
-<span class="badge">BMW Série 1</span>
-
-<h3>Pedro · Porto</h3>
-
-<p>Ganhou um BMW Série 1 Pack M no sorteio de março.</p>
-
-<div class="ticket">Bilhete vencedor: #CS-4521</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80">
-
-<div class="card-body">
-
-<span class="badge">Mercedes Classe A</span>
-
-<h3>Marta · Braga</h3>
-
-<p>Venceu o Mercedes Classe A no sorteio de abril.</p>
-
-<div class="ticket">Bilhete vencedor: #CS-9132</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80">
-
-<div class="card-body">
-
-<span class="badge">Citroën Jumpy</span>
-
-<h3>Tiago · Lisboa</h3>
-
-<p>Ganhou um utilitário Citroën Jumpy Business.</p>
-
-<div class="ticket">Bilhete vencedor: #CS-2210</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="footer">
-CarSorte by DEM Automóveis © 2026
-</div>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>CarSorte</strong><br>
+      by DEM Automóveis
+    </div>
+    <div>
+      <a href="faq.html">FAQ</a><br>
+      <a href="regulamento.html">Regulamento</a>
+    </div>
+    <div>© CarSorte</div>
+  </div>
+</footer>
 
 </body>
 </html>
