@@ -1,37 +1,183 @@
+
 <!doctype html>
 <html lang="pt">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · CarSorte</title>
 
-<meta charset="UTF-8">
+  <style>
+    *{box-sizing:border-box}
 
-<title>FAQ</title>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#060606;
+      color:white;
+    }
 
-<style>
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-body{
-background:#060606;
-color:white;
-font-family:Arial;
-padding:40px;
-}
+    header{
+      background:#111;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-</style>
+    nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:20px;
+    }
 
+    .logo{
+      color:#f4c542;
+      font-size:24px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+    }
+
+    .menu a{
+      color:white;
+      font-size:16px;
+    }
+
+    .container{
+      max-width:1000px;
+      margin:auto;
+      padding:40px 20px 70px;
+    }
+
+    .hero{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 12px 28px rgba(0,0,0,.28);
+    }
+
+    .hero h1{
+      margin:0 0 12px 0;
+      font-size:40px;
+      color:#f4c542;
+    }
+
+    .hero p{
+      margin:0;
+      color:#cfcfcf;
+      line-height:1.7;
+      font-size:17px;
+    }
+
+    .faq-list{
+      display:grid;
+      gap:18px;
+      margin-top:26px;
+    }
+
+    .faq-item{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+    }
+
+    .faq-item h3{
+      margin:0 0 10px 0;
+      color:#f4c542;
+      font-size:22px;
+    }
+
+    .faq-item p{
+      margin:0;
+      color:#d0d0d0;
+      line-height:1.7;
+    }
+
+    @media (max-width:900px){
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .menu{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .container{
+        padding:30px 16px 50px;
+      }
+
+      .hero h1{
+        font-size:30px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<h1>Perguntas frequentes</h1>
+  <header>
+    <nav>
+      <div class="logo">CarSorte</div>
 
-<h3>Como funciona?</h3>
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="raffle.html">Sorteio</a>
+        <a href="results.html">Resultados</a>
+        <a href="winners.html">Vencedores</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+  </header>
 
-<p>Escolha um sorteio, compre bilhetes e aguarde o resultado.</p>
+  <div class="container">
+    <div class="hero">
+      <h1>Perguntas frequentes</h1>
+      <p>Respostas rápidas às dúvidas mais comuns sobre participação, bilhetes, resultados e funcionamento geral da plataforma CarSorte.</p>
+    </div>
 
-<h3>Como é escolhido o vencedor?</h3>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Como funciona a participação?</h3>
+        <p>Escolhe o sorteio, seleciona o pack pretendido, preenche os dados do participante e avança para a confirmação da participação.</p>
+      </div>
 
-<p>O vencedor é sorteado aleatoriamente.</p>
+      <div class="faq-item">
+        <h3>Posso comprar vários bilhetes?</h3>
+        <p>Sim. Podes comprar vários bilhetes e aumentar as probabilidades de vitória através dos packs disponíveis.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Como é escolhido o vencedor?</h3>
+        <p>O vencedor é selecionado aleatoriamente a partir dos bilhetes válidos associados ao sorteio concluído.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Existe pergunta de qualificação?</h3>
+        <p>Sim. A experiência visual da plataforma inclui uma pergunta simples de qualificação antes da validação final da participação.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Os pagamentos já são reais?</h3>
+        <p>Nesta fase, a plataforma está preparada como demonstração premium visual. A próxima etapa será ligar pagamentos reais e base de dados.</p>
+      </div>
+    </div>
+  </div>
 
 </body>
-
 </html>
