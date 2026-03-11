@@ -23,18 +23,14 @@ max-width:1100px;
 margin:auto;
 }
 
-h1{
-color:#f4c542;
-}
-
 .hero{
-background:#111;
-padding:25px;
-border-radius:15px;
-border:1px solid rgba(255,255,255,.08);
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:30px;
+background:#111;
+padding:30px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.08);
 }
 
 .hero img{
@@ -50,10 +46,9 @@ margin-top:20px;
 }
 
 .stat{
-background:#111;
+background:#0b0b0b;
 padding:20px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.08);
+border-radius:10px;
 text-align:center;
 }
 
@@ -72,7 +67,7 @@ width:75%;
 }
 
 .packs{
-margin-top:25px;
+margin-top:40px;
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:15px;
@@ -81,35 +76,22 @@ gap:15px;
 .pack{
 background:#111;
 padding:20px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.08);
+border-radius:10px;
 text-align:center;
 }
 
 button{
-margin-top:10px;
-padding:10px 16px;
-border:none;
-border-radius:8px;
 background:#f4c542;
+border:none;
+padding:10px 18px;
+border-radius:8px;
 font-weight:bold;
 cursor:pointer;
 }
 
 .timer{
-margin-top:20px;
-font-size:18px;
+margin-top:15px;
 color:#f4c542;
-}
-
-.notification{
-position:fixed;
-bottom:20px;
-left:20px;
-background:#111;
-padding:10px 14px;
-border-radius:8px;
-border:1px solid rgba(255,255,255,.1);
 }
 
 </style>
@@ -125,12 +107,14 @@ border:1px solid rgba(255,255,255,.1);
 <div class="hero">
 
 <div>
-<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80">
+
+<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e">
+
 </div>
 
 <div>
 
-<p>Participe no sorteio deste BMW Série 1 por apenas <strong>2,50€</strong>.</p>
+<p>Participe neste sorteio por apenas <strong>2,50€</strong></p>
 
 <div class="stats">
 
@@ -166,62 +150,77 @@ Sorteio em <span id="timer"></span>
 
 </div>
 
-<h2>Escolha o seu pack</h2>
+<h2>Escolha o pack</h2>
 
 <div class="packs">
 
 <div class="pack">
 <h3>1 bilhete</h3>
 <p>2,50€</p>
-<a href="checkout.html?pack=1">
-<button>Comprar</button>
-</a>
+<a href="checkout.html?pack=1"><button>Comprar</button></a>
 </div>
 
 <div class="pack">
 <h3>5 bilhetes</h3>
 <p>10€</p>
-<a href="checkout.html?pack=5">
-<button>Comprar</button>
-</a>
+<a href="checkout.html?pack=5"><button>Comprar</button></a>
 </div>
 
 <div class="pack">
 <h3>10 bilhetes</h3>
 <p>20€</p>
-<a href="checkout.html?pack=10">
-<button>Comprar</button>
-</a>
+<a href="checkout.html?pack=10"><button>Comprar</button></a>
 </div>
 
 <div class="pack">
 <h3>25 bilhetes</h3>
 <p>50€</p>
-<a href="checkout.html?pack=25">
-<button>Comprar</button>
+<a href="checkout.html?pack=25"><button>Comprar</button></a>
+</div>
+
+</div>
+
+<br>
+
+<a href="results.html">
+<button>Ver último resultado</button>
 </a>
-</div>
 
 </div>
-
-</div>
-
-<div id="notification" class="notification"></div>
 
 <script>
+
+let sold = 11257
+
+function updateCounter(){
+
+const add = Math.floor(Math.random()*3)
+
+sold = sold + add
+
+if(sold>15000){
+sold=15000
+}
+
+document.getElementById("sold").innerText=sold
+document.getElementById("remaining").innerText=15000-sold
+
+}
+
+setInterval(updateCounter,5000)
 
 const endDate = new Date()
 endDate.setDate(endDate.getDate()+4)
 
 function updateTimer(){
 
-const now = new Date()
-const diff = endDate-now
+const now=new Date()
+const diff=endDate-now
 
-const days = Math.floor(diff/(1000*60*60*24))
-const hours = Math.floor((diff/(1000*60*60))%24)
+const days=Math.floor(diff/(1000*60*60*24))
+const hours=Math.floor((diff/(1000*60*60))%24)
 
-document.getElementById("timer").innerText = days+" dias "+hours+"h"
+document.getElementById("timer").innerText=days+" dias "+hours+"h"
 
 }
 
@@ -229,28 +228,8 @@ setInterval(updateTimer,1000)
 
 updateTimer()
 
-const names=["Miguel","João","Carlos","Ana","Rita","Pedro","Tiago","Marta"]
-
-function fakePurchase(){
-
-const name=names[Math.floor(Math.random()*names.length)]
-const qty=[1,5,10][Math.floor(Math.random()*3)]
-
-const box=document.getElementById("notification")
-
-box.innerText=name+" comprou "+qty+" bilhetes"
-
-setTimeout(()=>{
-
-box.innerText=""
-
-},4000)
-
-}
-
-setInterval(fakePurchase,7000)
-
 </script>
 
 </body>
+
 </html>
