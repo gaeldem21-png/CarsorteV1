@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Participação confirmada · CarSorte</title>
+  <style>
+    :root{
+      --bg:#060606;
+      --panel:#111111;
+      --gold:#f4c542;
+      --text:#ffffff;
+      --muted:#a9a9a9;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(244,197,66,.12), transparent 28%),
+        var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    a{text-decoration:none;color:inherit}
+    .card{
+      width:100%;
+      max-width:700px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:34px;
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+    .icon{
+      width:72px;height:72px;border-radius:22px;background:var(--gold);color:#000;
+      display:grid;place-items:center;font-size:36px;font-weight:900;margin:0 auto 18px;
+    }
+    h1{margin:0 0 10px 0;font-size:42px;color:var(--gold)}
+    p{margin:0 auto 18px auto;color:var(--muted);line-height:1.8;max-width:560px}
+    .summary{
+      margin-top:24px;
+      background:#0b0b0b;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      text-align:left;
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .row:last-child{border-bottom:none}
+    .tickets{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .ticket{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(244,197,66,.22);
+      background:rgba(244,197,66,.08);
+      color:#ffe08a;
+      font-size:13px;
+      font-weight:800;
+    }
+    .actions{
+      margin-top:24px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-block;
+      padding:15px 18px;
+      border-radius:16px;
+      font-weight:900;
+    }
+    .btn.primary{background:var(--gold);color:#000}
+    .btn.secondary{background:rgba(255,255,255,.05);border:1px solid var(--line);color:#fff}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✓</div>
+    <h1>Participação confirmada</h1>
+    <p>A sua participação foi registada com sucesso. Os seus bilhetes estão agora associados ao sorteio selecionado.</p>
+
+    <div class="summary">
+      <div class="row">
+        <strong>Sorteio</strong>
+        <span>BMW Série 1 Pack M</span>
+      </div>
+      <div class="row">
+        <strong>Pack comprado</strong>
+        <span>5 bilhetes</span>
+      </div>
+      <div class="row">
+        <strong>Total pago</strong>
+        <span>10€</span>
+      </div>
+      <div class="row">
+        <strong>Estado</strong>
+        <span>Confirmado</span>
+      </div>
+
+      <div class="tickets">
+        <span class="ticket">#A1032</span>
+        <span class="ticket">#A1033</span>
+        <span class="ticket">#A1034</span>
+        <span class="ticket">#A1035</span>
+        <span class="ticket">#A1036</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="utilizador.html">Ver a minha área</a>
+      <a class="btn secondary" href="index.html">Voltar ao site</a>
+    </div>
+  </div>
+</body>
+</html>
