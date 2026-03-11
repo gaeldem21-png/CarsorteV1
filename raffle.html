@@ -15,8 +15,6 @@
   --muted:#b8b8b8;
   --line:rgba(255,255,255,.08);
   --shadow:0 14px 34px rgba(0,0,0,.32);
-  --green:#29c46d;
-  --red:#d95c5c;
 }
 *{box-sizing:border-box}
 body{
@@ -249,14 +247,14 @@ p{
     <div class="card">
       <div id="statusBadge" class="badge active">Ativo</div>
 
-      <h1 id="raffleTitle">Citroen Jumpy</h1>
+      <h1 id="raffleTitle">Carregando...</h1>
       <p id="raffleText">
-        Uma oportunidade acessível para participar num sorteio premium com packs pensados para conversão rápida e experiência simples.
+        A carregar o sorteio diretamente da base de dados.
       </p>
 
       <div class="stats">
         <div class="stat">
-          <strong id="rafflePrice">2,50€</strong>
+          <strong id="rafflePrice">-</strong>
           <span>por bilhete</span>
         </div>
         <div class="stat">
@@ -268,7 +266,7 @@ p{
           <span>vendidos</span>
         </div>
         <div class="stat">
-          <strong id="raffleState">active</strong>
+          <strong id="raffleState">-</strong>
           <span>estado</span>
         </div>
       </div>
@@ -286,24 +284,24 @@ p{
       <div id="raffleNotice" class="notice info"></div>
 
       <div class="packs">
-        <a id="pack1" class="pack" href="checkout.html?pack=1&raffle=Jumpy">
+        <a id="pack1" class="pack" href="#">
           <strong>1</strong>
           <small>Entrada simples</small>
-          <span>2,50€</span>
+          <span id="price1">-</span>
           <div class="btn">Escolher</div>
         </a>
 
-        <a id="pack5" class="pack featured" href="checkout.html?pack=5&raffle=Jumpy">
+        <a id="pack5" class="pack featured" href="#">
           <strong>5</strong>
           <small>Oferta de lançamento</small>
-          <span>10€</span>
+          <span id="price5">-</span>
           <div class="btn">Escolher</div>
         </a>
 
-        <a id="pack15" class="pack" href="checkout.html?pack=15&raffle=Jumpy">
+        <a id="pack15" class="pack" href="#">
           <strong>15</strong>
           <small>Melhor valor</small>
-          <span>25€</span>
+          <span id="price15">-</span>
           <div class="btn">Escolher</div>
         </a>
       </div>
@@ -314,7 +312,7 @@ p{
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
@@ -328,7 +326,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const ACTIVE_RAFFLE_ID = "Jumpy";
+const params = new URLSearchParams(window.location.search);
+const requestedRaffleId = params.get("raffle");
 
 const raffleImage = document.getElementById("raffleImage");
 const raffleTitle = document.getElementById("raffleTitle");
@@ -337,18 +336,27 @@ const raffleTotal = document.getElementById("raffleTotal");
 const raffleSold = document.getElementById("raffleSold");
 const raffleState = document.getElementById("raffleState");
 const statusBadge = document.getElementById("statusBadge");
+const raffleText = document.getElementById("raffleText");
 const raffleNotice = document.getElementById("raffleNotice");
 const progressText = document.getElementById("progressText");
 const progressPercent = document.getElementById("progressPercent");
 const progressBar = document.getElementById("progressBar");
-
 const pack1 = document.getElementById("pack1");
 const pack5 = document.getElementById("pack5");
 const pack15 = document.getElementById("pack15");
+const price1 = document.getElementById("price1");
+const price5 = document.getElementById("price5");
+const price15 = document.getElementById("price15");
 
 function formatCurrency(value){
   if(value === undefined || value === null) return "-";
   return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
+}
+
+function setPackLinks(raffleId){
+  pack1.href = `checkout.html?pack=1&raffle=${encodeURIComponent(raffleId)}`;
+  pack5.href = `checkout.html?pack=5&raffle=${encodeURIComponent(raffleId)}`;
+  pack15.href = `checkout.html?pack=15&raffle=${encodeURIComponent(raffleId)}`;
 }
 
 function disablePacks(message, badgeType, badgeLabel){
@@ -365,17 +373,42 @@ function disablePacks(message, badgeType, badgeLabel){
   raffleNotice.textContent = message;
 }
 
+async function getPrimaryRaffle(){
+  const snap = await getDocs(collection(db, "raffles"));
+  const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  if(!raffles.length) return null;
+
+  const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
+  if(featuredActive) return featuredActive;
+
+  const firstActive = raffles.find(r => r.status === "active");
+  if(firstActive) return firstActive;
+
+  const featuredAny = raffles.find(r => r.featured === true);
+  if(featuredAny) return featuredAny;
+
+  return raffles[0];
+}
+
+async function getRaffle(){
+  if(requestedRaffleId){
+    const snap = await getDoc(doc(db, "raffles", requestedRaffleId));
+    if(snap.exists()) return { id: requestedRaffleId, ...snap.data() };
+  }
+  return await getPrimaryRaffle();
+}
+
 async function loadRaffle(){
   try{
-    const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
-    const raffleSnap = await getDoc(raffleRef);
+    const raffle = await getRaffle();
 
-    if(!raffleSnap.exists()){
-      disablePacks("Este sorteio não foi encontrado na base de dados.", "closed", "Indisponível");
+    if(!raffle){
+      raffleTitle.textContent = "Sorteio indisponível";
+      raffleText.textContent = "Nenhum sorteio foi encontrado na base de dados.";
+      disablePacks("Nenhum sorteio encontrado.", "closed", "Indisponível");
       return;
     }
-
-    const raffle = raffleSnap.data();
 
     raffleTitle.textContent = raffle.title || "Sorteio";
     rafflePrice.textContent = formatCurrency(raffle.price);
@@ -387,6 +420,11 @@ async function loadRaffle(){
       raffleImage.src = raffle.image;
     }
 
+    const unit = Number(raffle.price || 0);
+    price1.textContent = formatCurrency(unit);
+    price5.textContent = formatCurrency(10);
+    price15.textContent = formatCurrency(25);
+
     const sold = Number(raffle.tickets_sold || 0);
     const total = Number(raffle.tickets_total || 0);
     const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
@@ -395,17 +433,22 @@ async function loadRaffle(){
     progressPercent.textContent = `${percent.toFixed(2)}%`;
     progressText.textContent = `${sold} / ${total} vendidos`;
 
+    setPackLinks(raffle.id);
+
     if(raffle.status === "closed"){
-      disablePacks("Este sorteio foi encerrado. O vencedor já foi sorteado.", "closed", "Encerrado");
+      raffleText.textContent = "Este sorteio foi encerrado e o vencedor já foi selecionado.";
+      disablePacks("Este sorteio foi encerrado. Consulte os vencedores para ver o resultado oficial.", "closed", "Encerrado");
       return;
     }
 
     if(raffle.status === "sold_out"){
-      disablePacks("Todos os bilhetes deste sorteio foram vendidos.", "soldout", "Esgotado");
+      raffleText.textContent = "Todos os bilhetes deste sorteio foram vendidos.";
+      disablePacks("Todos os bilhetes foram vendidos para este sorteio.", "soldout", "Esgotado");
       return;
     }
 
     if(total > 0 && sold >= total){
+      raffleText.textContent = "O número máximo de participantes foi atingido.";
       disablePacks("O limite máximo de participantes foi atingido.", "soldout", "Completo");
       return;
     }
@@ -413,9 +456,12 @@ async function loadRaffle(){
     statusBadge.className = "badge active";
     statusBadge.textContent = "Ativo";
     raffleNotice.style.display = "none";
+    raffleText.textContent = "Escolha o pack que preferir e participe diretamente no sorteio ativo da plataforma.";
 
   }catch(error){
     console.error(error);
+    raffleTitle.textContent = "Erro ao carregar";
+    raffleText.textContent = "Ocorreu um erro ao carregar o sorteio.";
     disablePacks("Erro ao carregar o sorteio.", "closed", "Erro");
   }
 }
