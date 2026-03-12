@@ -1,212 +1,344 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sorteios - CarSorte</title>
 
 <style>
+:root{
+  --bg:#050505;
+  --panel:#101010;
+  --panel2:#0b0b0b;
+  --gold:#d4a017;
+  --goldSoft:#f4c542;
+  --text:#ffffff;
+  --muted:#b8b8b8;
+  --line:rgba(255,255,255,.08);
+  --shadow:0 14px 34px rgba(0,0,0,.32);
+}
 
+*{box-sizing:border-box}
 body{
-background:#050505;
-color:white;
-font-family:Arial;
-margin:0;
-padding:20px;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
+  color:var(--text);
+}
+a{text-decoration:none;color:inherit}
+
+.container{
+  max-width:1240px;
+  margin:auto;
+  padding:24px 20px 60px;
 }
 
 .header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:28px;
 }
 
-.logo{
-font-size:28px;
-font-weight:bold;
-color:#d4a017;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
-.menu a{
-color:white;
-margin-left:20px;
-text-decoration:none;
-font-weight:bold;
+.brand img{
+  height:76px;
+  width:auto;
+  object-fit:contain;
+}
+
+.brand strong{
+  display:block;
+  color:var(--goldSoft);
+  font-size:34px;
+  line-height:1;
+}
+
+.brand span{
+  display:block;
+  color:#999;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:12px;
+  margin-top:6px;
+}
+
+.nav{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.nav a{
+  padding:12px 14px;
+  border-radius:12px;
+  background:#111;
+  border:1px solid var(--line);
+  color:#ddd;
+  font-weight:700;
 }
 
 h1{
-text-align:center;
-margin-bottom:40px;
+  margin:0 0 10px;
+  font-size:42px;
+  color:#fff;
+}
+
+.sub{
+  color:var(--muted);
+  line-height:1.8;
+  margin-bottom:26px;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
 }
 
 .card{
-background:#0f0f0f;
-border-radius:20px;
-padding:15px;
-box-shadow:0 0 20px rgba(0,0,0,0.6);
+  background:linear-gradient(180deg,#111,#090909);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
 }
 
 .card img{
-width:100%;
-border-radius:15px;
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  display:block;
+}
+
+.body{
+  padding:20px;
 }
 
 .title{
-font-size:24px;
-margin-top:12px;
-color:#d4a017;
+  font-size:30px;
+  color:var(--goldSoft);
+  margin:0 0 10px;
 }
 
 .desc{
-margin-top:8px;
-color:#ccc;
-font-size:14px;
+  color:var(--muted);
+  line-height:1.7;
+  margin:0 0 16px;
+  font-size:15px;
 }
 
 .info{
-display:flex;
-justify-content:space-between;
-margin-top:15px;
-font-size:16px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:#fff;
+  margin-bottom:10px;
+  font-size:18px;
+  font-weight:700;
 }
 
 .progress{
-height:8px;
-background:#222;
-border-radius:5px;
-margin-top:10px;
-overflow:hidden;
+  height:10px;
+  border-radius:999px;
+  background:#1a1a1a;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.05);
 }
 
 .bar{
-height:8px;
-background:#d4a017;
+  height:100%;
+  background:linear-gradient(90deg,#b07b06,#f4c542);
+  width:0%;
 }
 
-.btn{
-display:block;
-margin-top:15px;
-text-align:center;
-padding:12px;
-background:#d4a017;
-border-radius:10px;
-color:black;
-font-weight:bold;
-text-decoration:none;
+.mini{
+  margin-top:10px;
+  color:#86e6a9;
+  font-size:14px;
+  font-weight:700;
 }
 
-.status{
-margin-top:10px;
-font-size:12px;
-color:#66ff99;
+.badge{
+  display:inline-block;
+  margin-top:14px;
+  margin-bottom:10px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.badge.active{
+  background:rgba(41,196,109,.1);
+  border:1px solid rgba(41,196,109,.22);
+  color:#9ef0be;
+}
+
+.badge.closed{
+  background:rgba(217,92,92,.1);
+  border:1px solid rgba(217,92,92,.22);
+  color:#ffb5b5;
+}
+
+.badge.soldout{
+  background:rgba(212,160,23,.1);
+  border:1px solid rgba(212,160,23,.22);
+  color:#ffe08a;
+}
+
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:170px;
+  margin-top:14px;
+  padding:14px 18px;
+  background:var(--gold);
+  color:#000;
+  font-weight:800;
+  border-radius:14px;
+}
+
+.button.secondary{
+  background:#151515;
+  color:#fff;
+  border:1px solid var(--line);
+}
+
+.empty{
+  padding:18px;
+  border-radius:18px;
+  background:#0f0f0f;
+  border:1px solid rgba(255,255,255,.06);
+  color:#9c9c9c;
 }
 
 </style>
-
 </head>
-
 <body>
 
-<div class="header">
+<div class="container">
 
-<div class="logo">CarSorte</div>
+  <div class="header">
+    <div class="brand">
+      <img src="logo-carsorte.png" alt="CarSorte">
+      <div>
+        <strong>CarSorte</strong>
+        <span>by DEM Automóveis</span>
+      </div>
+    </div>
 
-<div class="menu">
-<a href="index.html">Início</a>
-<a href="sorteios.html">Sorteios</a>
-<a href="winners.html">Vencedores</a>
+    <div class="nav">
+      <a href="index.html">Início</a>
+      <a href="sorteios.html">Sorteios</a>
+      <a href="winners.html">Vencedores</a>
+      <a href="results.html">Resultados</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </div>
+
+  <h1>Sorteios disponíveis</h1>
+  <p class="sub">Veja todos os sorteios da plataforma e abra diretamente a página certa de cada veículo.</p>
+
+  <div id="raffleGrid" class="grid"></div>
+  <div id="emptyBox" class="empty" style="display:none;">Nenhum sorteio encontrado.</div>
+
 </div>
-
-</div>
-
-<h1>Sorteios disponíveis</h1>
-
-<div class="grid" id="raffleGrid"></div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
-authDomain: "carsorte.firebaseapp.com",
-projectId: "carsorte",
-storageBucket: "carsorte.firebasestorage.app",
-messagingSenderId: "995392174657",
-appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const grid = document.getElementById("raffleGrid");
+const emptyBox = document.getElementById("emptyBox");
 
-async function loadRaffles(){
-
-const snapshot = await getDocs(collection(db,"raffles"));
-
-snapshot.forEach(doc => {
-
-const r = doc.data();
-
-if(r.status !== "active") return;
-
-let percent = 0;
-
-if(r.tickets_total > 0){
-percent = (r.tickets_sold / r.tickets_total) * 100;
+function formatCurrency(value){
+  if(value === undefined || value === null) return "-";
+  return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
 }
 
-const card = document.createElement("div");
-card.className="card";
+function getBadge(status){
+  if(status === "closed") return `<div class="badge closed">Encerrado</div>`;
+  if(status === "sold_out") return `<div class="badge soldout">Esgotado</div>`;
+  return `<div class="badge active">Ativo</div>`;
+}
 
-card.innerHTML = `
+function getButton(status, id){
+  if(status === "closed"){
+    return `<a class="button secondary" href="results.html">Ver resultado</a>`;
+  }
+  if(status === "sold_out"){
+    return `<a class="button secondary" href="raffle.html?raffle=${encodeURIComponent(id)}">Ver detalhes</a>`;
+  }
+  return `<a class="button" href="raffle.html?raffle=${encodeURIComponent(id)}">Participar</a>`;
+}
 
-<img src="${r.image}">
+async function loadRaffles(){
+  const snapshot = await getDocs(collection(db, "raffles"));
+  const raffles = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-<div class="title">${r.title}</div>
+  if(!raffles.length){
+    emptyBox.style.display = "block";
+    return;
+  }
 
-<div class="desc">
-Participe no sorteio e tenha a chance de ganhar este veículo incrível.
-</div>
+  grid.innerHTML = "";
 
-<div class="info">
-<div>${r.price}€ / bilhete</div>
-<div>${r.tickets_sold}/${r.tickets_total}</div>
-</div>
+  raffles.forEach((r) => {
+    const sold = Number(r.tickets_sold || 0);
+    const total = Number(r.tickets_total || 0);
+    const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
 
-<div class="progress">
-<div class="bar" style="width:${percent}%"></div>
-</div>
+    const card = document.createElement("div");
+    card.className = "card";
 
-<div class="status">
-${percent.toFixed(2)}% vendidos
-</div>
+    card.innerHTML = `
+      <img src="${r.image || ""}" alt="${r.title || r.id}">
+      <div class="body">
+        ${getBadge(r.status)}
+        <h2 class="title">${r.title || r.id}</h2>
+        <p class="desc">Participe no sorteio e tenha a chance de ganhar este veículo incrível.</p>
 
-<a class="btn" href="raffle.html">
-Participar
-</a>
+        <div class="info">
+          <div>${formatCurrency(r.price)} / bilhete</div>
+          <div>${sold}/${total}</div>
+        </div>
 
-`;
+        <div class="progress">
+          <div class="bar" style="width:${percent}%"></div>
+        </div>
 
-grid.appendChild(card);
+        <div class="mini">${percent.toFixed(2)}% vendidos</div>
 
-});
+        ${getButton(r.status, r.id)}
+      </div>
+    `;
 
+    grid.appendChild(card);
+  });
 }
 
 loadRaffles();
-
 </script>
 
 </body>
