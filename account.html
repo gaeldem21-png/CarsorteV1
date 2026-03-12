@@ -15,7 +15,9 @@
       --text:#ffffff;
       --muted:#b8b8b8;
       --line:rgba(255,255,255,.08);
-      --shadow:0 14px 34px rgba(0,0,0,.32);
+      --shadow:0 16px 36px rgba(0,0,0,.35);
+      --green:#29c46d;
+      --red:#d95c5c;
     }
 
     *{box-sizing:border-box}
@@ -27,8 +29,10 @@
       color:var(--text);
     }
 
+    a{text-decoration:none;color:inherit}
+
     .container{
-      max-width:1100px;
+      max-width:1180px;
       margin:auto;
       padding:24px 20px 60px;
     }
@@ -50,6 +54,8 @@
 
     .brand img{
       height:76px;
+      width:auto;
+      object-fit:contain;
     }
 
     .brand strong{
@@ -81,32 +87,42 @@
       border:1px solid var(--line);
       color:#ddd;
       font-weight:700;
-      text-decoration:none;
     }
 
+    .hero,
     .card{
       background:linear-gradient(180deg,#111,#090909);
       border:1px solid rgba(255,255,255,.06);
       border-radius:24px;
       padding:22px;
       box-shadow:var(--shadow);
-      margin-bottom:20px;
+      margin-bottom:22px;
     }
 
-    h1,h2{
-      margin:0 0 14px;
+    .hero h1{
+      margin:0 0 10px;
+      font-size:40px;
+      color:#fff;
     }
 
-    p{
+    .hero p,
+    .sub{
+      margin:0;
       color:var(--muted);
       line-height:1.8;
     }
 
-    .search{
+    .card h2{
+      margin:0 0 14px;
+      font-size:28px;
+      color:#fff;
+    }
+
+    .search-grid{
       display:grid;
-      grid-template-columns:1fr auto;
+      grid-template-columns:1fr auto auto;
       gap:12px;
-      margin-top:14px;
+      margin-top:16px;
     }
 
     input{
@@ -124,10 +140,76 @@
       padding:16px 18px;
       border:none;
       border-radius:14px;
-      background:var(--gold);
-      color:#000;
       font-weight:800;
       cursor:pointer;
+      font-size:15px;
+    }
+
+    .btn-primary{
+      background:var(--gold);
+      color:#000;
+    }
+
+    .btn-secondary{
+      background:#171717;
+      color:#fff;
+      border:1px solid var(--line);
+    }
+
+    .status-box{
+      display:none;
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:14px;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .status-box.ok{
+      display:block;
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .status-box.err{
+      display:block;
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .stat{
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      text-align:center;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:30px;
+      color:var(--gold-soft);
+      margin-bottom:6px;
+    }
+
+    .stat span{
+      color:#bcbcbc;
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
     }
 
     .list{
@@ -145,29 +227,65 @@
 
     .item strong{
       display:block;
+      font-size:19px;
       margin-bottom:8px;
-      font-size:18px;
+      color:#fff;
+    }
+
+    .pill{
+      display:inline-block;
+      margin-bottom:10px;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .pill.gold{
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
+
+    .pill.green{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
     }
 
     .item span{
       display:block;
-      color:#c9c9c9;
+      color:#cfcfcf;
       line-height:1.7;
       font-size:14px;
     }
 
     .empty{
-      color:#9a9a9a;
+      margin-top:16px;
+      padding:16px;
+      border-radius:16px;
       background:#111;
       border:1px solid rgba(255,255,255,.06);
-      border-radius:16px;
-      padding:16px;
-      margin-top:16px;
+      color:#9f9f9f;
     }
 
-    @media(max-width:700px){
-      .search{
+    @media(max-width:960px){
+      .grid{
         grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:780px){
+      .search-grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:34px;
       }
     }
   </style>
@@ -175,6 +293,7 @@
 <body>
 
 <div class="container">
+
   <div class="header">
     <div class="brand">
       <img src="logo-carsorte.png" alt="CarSorte">
@@ -186,4 +305,251 @@
 
     <div class="nav">
       <a href="index.html">Início</a>
-      <a href="sorteios.html">S
+      <a href="sorteios.html">Sorteios</a>
+      <a href="results.html">Resultados</a>
+      <a href="winners.html">Vencedores</a>
+      <a href="raffle.html">Sorteio</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Minha conta</h1>
+    <p>Consulte as suas encomendas e bilhetes usando o email utilizado na participação.</p>
+  </div>
+
+  <div class="card">
+    <h2>Procurar</h2>
+    <p class="sub">Introduza o seu email para carregar o histórico associado.</p>
+
+    <div class="search-grid">
+      <input id="emailSearch" type="email" placeholder="O seu email">
+      <button id="searchBtn" class="btn-primary">Procurar</button>
+      <button id="clearBtn" class="btn-secondary">Limpar</button>
+    </div>
+
+    <div id="statusBox" class="status-box"></div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="ordersCount">0</strong>
+        <span>encomendas</span>
+      </div>
+      <div class="stat">
+        <strong id="ticketsCount">0</strong>
+        <span>bilhetes</span>
+      </div>
+      <div class="stat">
+        <strong id="spentTotal">0€</strong>
+        <span>total investido</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>As minhas encomendas</h2>
+      <p class="sub">Compras registadas com o seu email.</p>
+      <div id="ordersList" class="list"></div>
+      <div id="ordersEmpty" class="empty" style="display:none;">Nenhuma encomenda encontrada para este email.</div>
+    </div>
+
+    <div class="card">
+      <h2>Os meus bilhetes</h2>
+      <p class="sub">Bilhetes associados ao seu email.</p>
+      <div id="ticketsList" class="list"></div>
+      <div id="ticketsEmpty" class="empty" style="display:none;">Nenhum bilhete encontrado para este email.</div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const params = new URLSearchParams(window.location.search);
+const emailFromUrl = (params.get("email") || "").trim();
+
+const emailSearch = document.getElementById("emailSearch");
+const searchBtn = document.getElementById("searchBtn");
+const clearBtn = document.getElementById("clearBtn");
+const statusBox = document.getElementById("statusBox");
+
+const ordersCount = document.getElementById("ordersCount");
+const ticketsCount = document.getElementById("ticketsCount");
+const spentTotal = document.getElementById("spentTotal");
+
+const ordersList = document.getElementById("ordersList");
+const ticketsList = document.getElementById("ticketsList");
+const ordersEmpty = document.getElementById("ordersEmpty");
+const ticketsEmpty = document.getElementById("ticketsEmpty");
+
+emailSearch.value = emailFromUrl;
+
+function formatCurrency(value){
+  if(value === undefined || value === null) return "-";
+  return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
+}
+
+function formatDate(value){
+  try{
+    if(value && value.toDate) return value.toDate().toLocaleString("pt-PT");
+    return "-";
+  }catch{
+    return "-";
+  }
+}
+
+function showStatus(text, type){
+  statusBox.className = `status-box ${type}`;
+  statusBox.textContent = text;
+}
+
+function resetStatus(){
+  statusBox.className = "status-box";
+  statusBox.textContent = "";
+}
+
+function resetView(){
+  ordersList.innerHTML = "";
+  ticketsList.innerHTML = "";
+  ordersEmpty.style.display = "none";
+  ticketsEmpty.style.display = "none";
+  ordersCount.textContent = "0";
+  ticketsCount.textContent = "0";
+  spentTotal.textContent = "0€";
+}
+
+async function loadAccount(){
+  const email = emailSearch.value.trim();
+
+  resetView();
+  resetStatus();
+
+  if(!email){
+    showStatus("Introduza um email para consultar a sua conta.", "err");
+    return;
+  }
+
+  try{
+    const ordersQuery = query(
+      collection(db, "orders"),
+      where("buyer_email", "==", email)
+    );
+
+    const ticketsQuery = query(
+      collection(db, "tickets"),
+      where("buyer_email", "==", email)
+    );
+
+    const [ordersSnap, ticketsSnap] = await Promise.all([
+      getDocs(ordersQuery),
+      getDocs(ticketsQuery)
+    ]);
+
+    const orders = ordersSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const tickets = ticketsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    orders.sort((a, b) => {
+      const at = a.created?.toDate ? a.created.toDate().getTime() : 0;
+      const bt = b.created?.toDate ? b.created.toDate().getTime() : 0;
+      return bt - at;
+    });
+
+    tickets.sort((a, b) => Number(a.ticket_number || 0) - Number(b.ticket_number || 0));
+
+    ordersCount.textContent = orders.length;
+    ticketsCount.textContent = tickets.length;
+
+    const totalSpent = orders.reduce((sum, order) => sum + Number(order.total || 0), 0);
+    spentTotal.textContent = formatCurrency(totalSpent);
+
+    if(orders.length === 0){
+      ordersEmpty.style.display = "block";
+    } else {
+      orders.forEach(order => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <span class="pill gold">Encomenda</span>
+          <strong>${order.raffle_title || order.raffle_id || "-"}</strong>
+          <span><b>Quantidade:</b> ${order.qty ?? "-"}</span>
+          <span><b>Total:</b> ${formatCurrency(order.total)}</span>
+          <span><b>Bilhetes:</b> ${Array.isArray(order.tickets) ? order.tickets.join(", ") : "-"}</span>
+          <span><b>Data:</b> ${formatDate(order.created)}</span>
+        `;
+        ordersList.appendChild(div);
+      });
+    }
+
+    if(tickets.length === 0){
+      ticketsEmpty.style.display = "block";
+    } else {
+      tickets.forEach(ticket => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <span class="pill green">Bilhete</span>
+          <strong>Ticket #${ticket.ticket_number ?? "-"}</strong>
+          <span><b>Sorteio:</b> ${ticket.raffle_title || ticket.raffle_id || "-"}</span>
+          <span><b>Participante:</b> ${ticket.buyer || "-"}</span>
+          <span><b>Data:</b> ${formatDate(ticket.created)}</span>
+        `;
+        ticketsList.appendChild(div);
+      });
+    }
+
+    if(orders.length === 0 && tickets.length === 0){
+      showStatus("Nenhum registo encontrado para este email.", "err");
+    } else {
+      showStatus("Conta carregada com sucesso.", "ok");
+    }
+
+  } catch(error){
+    console.error(error);
+    resetView();
+    ordersEmpty.style.display = "block";
+    ticketsEmpty.style.display = "block";
+    showStatus("Erro ao carregar a conta.", "err");
+  }
+}
+
+searchBtn.addEventListener("click", loadAccount);
+
+clearBtn.addEventListener("click", () => {
+  emailSearch.value = "";
+  resetView();
+  resetStatus();
+});
+
+emailSearch.addEventListener("keydown", (e) => {
+  if(e.key === "Enter"){
+    loadAccount();
+  }
+});
+
+if(emailFromUrl){
+  loadAccount();
+}
+</script>
+
+</body>
+</html>
