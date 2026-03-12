@@ -118,7 +118,7 @@
 
     .stats{
       display:grid;
-      grid-template-columns:repeat(5,1fr);
+      grid-template-columns:repeat(7,1fr);
       gap:16px;
       margin-bottom:24px;
     }
@@ -141,6 +141,7 @@
     .stat span{
       color:#a8a8a8;
       font-size:14px;
+      line-height:1.5;
     }
 
     .grid{
@@ -484,11 +485,13 @@
       display:none;
     }
 
-    @media(max-width:1100px){
+    @media(max-width:1200px){
       .stats{
-        grid-template-columns:1fr 1fr 1fr;
+        grid-template-columns:1fr 1fr 1fr 1fr;
       }
+    }
 
+    @media(max-width:1100px){
       .grid{
         grid-template-columns:1fr;
       }
@@ -546,11 +549,19 @@
   <div class="stats">
     <div class="stat">
       <strong id="statTickets">0</strong>
-      <span>Total de bilhetes</span>
+      <span>Total de bilhetes (plataforma)</span>
     </div>
     <div class="stat">
       <strong id="statOrders">0</strong>
-      <span>Total de encomendas</span>
+      <span>Total de encomendas (plataforma)</span>
+    </div>
+    <div class="stat">
+      <strong id="statFeaturedTickets">0</strong>
+      <span>Bilhetes do destaque</span>
+    </div>
+    <div class="stat">
+      <strong id="statFeaturedOrders">0</strong>
+      <span>Encomendas do destaque</span>
     </div>
     <div class="stat">
       <strong id="statSold">0</strong>
@@ -558,7 +569,7 @@
     </div>
     <div class="stat">
       <strong id="statDiff">0</strong>
-      <span>Diferença tickets / contador</span>
+      <span>Diferença destaque</span>
     </div>
     <div class="stat">
       <strong id="statRaffles">0</strong>
@@ -718,6 +729,8 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 const statTickets = document.getElementById("statTickets");
 const statOrders = document.getElementById("statOrders");
+const statFeaturedTickets = document.getElementById("statFeaturedTickets");
+const statFeaturedOrders = document.getElementById("statFeaturedOrders");
 const statSold = document.getElementById("statSold");
 const statDiff = document.getElementById("statDiff");
 const statRaffles = document.getElementById("statRaffles");
@@ -768,6 +781,10 @@ function formatDate(value){
   }catch{
     return "-";
   }
+}
+
+function normalize(value){
+  return String(value || "").trim().toLowerCase();
 }
 
 function showStatus(text, type){
@@ -947,11 +964,11 @@ async function loadDashboard(resetToPrimary = true){
     const raffleRef = doc(db, "raffles", ACTIVE_RAFFLE_ID);
     const raffleSnap = await getDoc(raffleRef);
 
-    const ticketsCount = ticketsSnap.size;
-    const ordersCount = ordersSnap.size;
+    const allTickets = ticketsSnap.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+    const allOrders = ordersSnap.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
 
-    statTickets.textContent = ticketsCount;
-    statOrders.textContent = ordersCount;
+    statTickets.textContent = allTickets.length;
+    statOrders.textContent = allOrders.length;
     raffleIdText.textContent = ACTIVE_RAFFLE_ID;
 
     if(raffleSnap.exists()){
@@ -967,28 +984,60 @@ async function loadDashboard(resetToPrimary = true){
       raffleFeatured.textContent = raffle.featured === true ? "true" : "false";
 
       const soldCount = Number(raffle.tickets_sold || 0);
-      const totalCount = Number(raffle.tickets_total || 0);
       statSold.textContent = soldCount;
 
-      const diff = soldCount - ticketsCount;
+      const activeRaffleIdNormalized = normalize(ACTIVE_RAFFLE_ID);
+      const activeRaffleTitleNormalized = normalize(raffle.title);
+
+      const featuredTickets = allTickets.filter(t => {
+        const raffleId = normalize(t.raffle_id);
+        const raffleTitle = normalize(t.raffle_title);
+        return raffleId === activeRaffleIdNormalized || raffleTitle === activeRaffleTitleNormalized;
+      });
+
+      const featuredOrders = allOrders.filter(o => {
+        const raffleId = normalize(o.raffle_id);
+        const raffleTitle = normalize(o.raffle_title);
+        return raffleId === activeRaffleIdNormalized || raffleTitle === activeRaffleTitleNormalized;
+      });
+
+      statFeaturedTickets.textContent = featuredTickets.length;
+      statFeaturedOrders.textContent = featuredOrders.length;
+
+      const diff = featuredTickets.length - soldCount;
       statDiff.textContent = diff;
 
+      const totalCount = Number(raffle.tickets_total || 0);
       const percent = totalCount > 0 ? Math.min((soldCount / totalCount) * 100, 100) : 0;
       progressBar.style.width = `${percent}%`;
       progressPercent.textContent = `${percent.toFixed(2)}%`;
       progressText.textContent = `${soldCount} / ${totalCount} vendidos`;
 
       if(diff === 0){
-        showStatus("Tudo está alinhado: o total de bilhetes e o contador do sorteio estão coerentes.", "ok");
+        showStatus("Tudo está alinhado: os bilhetes do sorteio carregado e o contador tickets_sold estão coerentes.", "ok");
       } else if(diff > 0){
-        showStatus(`O contador tickets_sold está ${diff} acima do número de documentos em tickets.`, "err");
+        showStatus(`Existem ${diff} bilhetes a mais na coleção tickets para este sorteio face ao contador tickets_sold.`, "err");
       } else {
-        showStatus(`Existem ${Math.abs(diff)} bilhetes a mais na coleção tickets face ao contador tickets_sold.`, "err");
+        showStatus(`O contador tickets_sold deste sorteio está ${Math.abs(diff)} acima do número real de bilhetes registados.`, "err");
       }
 
       await closeIfSoldOut(raffleRef, raffle);
     } else {
       raffleTitle.textContent = "Documento não encontrado";
+      rafflePrice.textContent = "-";
+      raffleTotal.textContent = "-";
+      raffleSold.textContent = "-";
+      raffleStatus.textContent = "-";
+      raffleWinnerDrawn.textContent = "-";
+      raffleEndedReason.textContent = "-";
+      raffleFeatured.textContent = "-";
+      statSold.textContent = "0";
+      statFeaturedTickets.textContent = "0";
+      statFeaturedOrders.textContent = "0";
+      statDiff.textContent = "0";
+      progressBar.style.width = "0%";
+      progressPercent.textContent = "0%";
+      progressText.textContent = "0 / 0 vendidos";
       showStatus("O documento do sorteio selecionado não foi encontrado.", "err");
     }
 
