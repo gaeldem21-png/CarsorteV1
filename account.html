@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Conta - CarSorte</title>
+
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#101010;
+      --panel-2:#0b0b0b;
+      --gold:#d4a017;
+      --gold-soft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 14px 34px rgba(0,0,0,.32);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
+      color:var(--text);
+    }
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:24px 20px 60px;
+    }
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand img{
+      height:76px;
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--gold-soft);
+      font-size:34px;
+      line-height:1;
+    }
+
+    .brand span{
+      display:block;
+      color:#999;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      margin-top:6px;
+    }
+
+    .nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      padding:12px 14px;
+      border-radius:12px;
+      background:#111;
+      border:1px solid var(--line);
+      color:#ddd;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .card{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:24px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      margin-bottom:20px;
+    }
+
+    h1,h2{
+      margin:0 0 14px;
+    }
+
+    p{
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .search{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    input{
+      width:100%;
+      padding:16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#0b0b0b;
+      color:#fff;
+      font-size:16px;
+      outline:none;
+    }
+
+    button{
+      padding:16px 18px;
+      border:none;
+      border-radius:14px;
+      background:var(--gold);
+      color:#000;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .list{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .item{
+      background:var(--panel-2);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .item strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:18px;
+    }
+
+    .item span{
+      display:block;
+      color:#c9c9c9;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .empty{
+      color:#9a9a9a;
+      background:#111;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:16px;
+      margin-top:16px;
+    }
+
+    @media(max-width:700px){
+      .search{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-carsorte.png" alt="CarSorte">
+      <div>
+        <strong>CarSorte</strong>
+        <span>by DEM Automóveis</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a href="index.html">Início</a>
+      <a href="sorteios.html">S
