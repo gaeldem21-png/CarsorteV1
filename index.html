@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarSorte - Sorteios Premium</title>
+  <title>CarSorte - Início</title>
 
   <style>
     :root{
       --bg:#050505;
       --panel:#101010;
-      --panel-2:#0b0b0b;
+      --panel2:#0b0b0b;
       --gold:#d4a017;
-      --gold-soft:#f4c542;
+      --goldSoft:#f4c542;
       --text:#ffffff;
       --muted:#b8b8b8;
       --line:rgba(255,255,255,.08);
@@ -21,14 +21,10 @@
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%),
-        var(--bg);
+      background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
       color:var(--text);
     }
 
@@ -63,7 +59,7 @@
 
     .brand strong{
       display:block;
-      color:var(--gold-soft);
+      color:var(--goldSoft);
       font-size:34px;
       line-height:1;
     }
@@ -96,7 +92,7 @@
       display:grid;
       grid-template-columns:1.05fr .95fr;
       gap:22px;
-      margin-bottom:24px;
+      margin-bottom:32px;
     }
 
     .hero-card{
@@ -116,6 +112,7 @@
       border-radius:22px;
       border:1px solid rgba(255,255,255,.06);
       background:#0b0b0b;
+      display:block;
     }
 
     .badge{
@@ -149,7 +146,7 @@
       font-size:58px;
       line-height:1;
       margin:0 0 14px;
-      color:var(--gold-soft);
+      color:var(--goldSoft);
       letter-spacing:-.03em;
     }
 
@@ -169,7 +166,7 @@
     }
 
     .stat{
-      background:var(--panel-2);
+      background:var(--panel2);
       border:1px solid var(--line);
       border-radius:18px;
       padding:18px;
@@ -178,7 +175,7 @@
 
     .stat strong{
       display:block;
-      color:var(--gold-soft);
+      color:var(--goldSoft);
       font-size:34px;
       margin-bottom:6px;
     }
@@ -213,7 +210,7 @@
       height:100%;
       width:0%;
       background:linear-gradient(90deg,#b07b06,#f4c542);
-      transition:width .5s ease;
+      transition:width .35s ease;
     }
 
     .actions{
@@ -260,55 +257,81 @@
       font-size:14px;
       line-height:1.7;
       display:none;
-    }
-
-    .notice.info{
       background:rgba(212,160,23,.1);
       border:1px solid rgba(212,160,23,.22);
       color:#ffe08a;
     }
 
-    .sections{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-top:22px;
-    }
-
-    .section-card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:22px;
-      box-shadow:var(--shadow);
-    }
-
-    .section-card h3{
-      margin:0 0 12px;
-      font-size:24px;
+    .section-title{
+      font-size:34px;
+      margin:0 0 10px;
       color:#fff;
     }
 
-    .section-card p{
-      margin:0;
+    .section-sub{
       color:var(--muted);
       line-height:1.8;
+      margin:0 0 22px;
     }
 
-    .mini-pill{
-      display:inline-block;
+    .raffles-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:22px;
+      margin-top:20px;
+    }
+
+    .raffle-card{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .raffle-card img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .raffle-body{
+      padding:20px;
+    }
+
+    .raffle-title{
+      font-size:30px;
+      color:var(--goldSoft);
+      margin:0 0 10px;
+    }
+
+    .raffle-desc{
+      color:var(--muted);
+      line-height:1.7;
+      margin:0 0 16px;
+      font-size:15px;
+    }
+
+    .raffle-info{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      color:#fff;
       margin-bottom:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:800;
-      background:rgba(212,160,23,.1);
-      border:1px solid rgba(212,160,23,.2);
-      color:#ffe08a;
+      font-size:18px;
+      font-weight:700;
+    }
+
+    .raffle-mini{
+      margin-top:10px;
+      color:#86e6a9;
+      font-size:14px;
+      font-weight:700;
     }
 
     .footer-cta{
-      margin-top:24px;
+      margin-top:34px;
       background:linear-gradient(180deg,#111,#090909);
       border:1px solid rgba(212,160,23,.14);
       border-radius:24px;
@@ -319,7 +342,7 @@
 
     .footer-cta h3{
       margin:0 0 10px;
-      color:var(--gold-soft);
+      color:var(--goldSoft);
       font-size:30px;
     }
 
@@ -330,11 +353,18 @@
       line-height:1.8;
     }
 
+    .empty-box{
+      padding:18px;
+      border-radius:18px;
+      background:#0f0f0f;
+      border:1px solid rgba(255,255,255,.06);
+      color:#9c9c9c;
+    }
+
     @media(max-width:980px){
       .hero{grid-template-columns:1fr}
       .headline{font-size:44px}
       .hero-image{min-height:260px}
-      .sections{grid-template-columns:1fr}
     }
 
     @media(max-width:700px){
@@ -365,7 +395,7 @@
 
     <div class="nav">
       <a href="index.html">Início</a>
-      <a href="raffle.html">Sorteios</a>
+      <a href="sorteios.html">Sorteios</a>
       <a href="winners.html">Vencedores</a>
       <a href="results.html">Resultados</a>
       <a href="faq.html">FAQ</a>
@@ -416,51 +446,37 @@
         </div>
       </div>
 
-      <div id="heroNotice" class="notice info"></div>
+      <div id="heroNotice" class="notice"></div>
 
       <div class="actions">
         <a id="heroMainBtn" class="btn btn-primary" href="raffle.html">Participar agora</a>
-        <a class="btn btn-secondary" href="winners.html">Ver vencedores</a>
+        <a class="btn btn-secondary" href="sorteios.html">Ver todos os sorteios</a>
       </div>
     </div>
 
     <div class="hero-card">
-      <img id="heroImage" class="hero-image" src="https://gaeldem21-png.github.io/CarsorteV1/jumpy.jpg" alt="Veículo em destaque">
+      <img id="heroImage" class="hero-image" src="" alt="Veículo em destaque">
     </div>
   </div>
 
-  <div class="sections">
-    <div class="section-card">
-      <span class="mini-pill">Sorteios premium</span>
-      <h3>Experiência simples</h3>
-      <p>
-        Escolha o pack, confirme a participação e acompanhe os resultados com uma experiência rápida, limpa e transparente.
-      </p>
-    </div>
+  <section>
+    <h2 class="section-title">Outros sorteios ativos</h2>
+    <p class="section-sub">
+      Descubra todos os sorteios disponíveis na plataforma e escolha o veículo que mais lhe agrada.
+    </p>
 
-    <div class="section-card">
-      <span class="mini-pill">Transparência</span>
-      <h3>Resultados públicos</h3>
-      <p>
-        Os vencedores e resultados são ligados ao Firebase, para manter coerência entre o painel admin e as páginas públicas.
-      </p>
+    <div id="otherRaffles" class="raffles-grid"></div>
+    <div id="otherRafflesEmpty" class="empty-box" style="display:none;">
+      Não existem outros sorteios ativos para mostrar neste momento.
     </div>
-
-    <div class="section-card">
-      <span class="mini-pill">Confiança</span>
-      <h3>Estado em tempo real</h3>
-      <p>
-        A plataforma mostra se o sorteio está ativo, encerrado ou esgotado, evitando compras fora do estado real do anúncio.
-      </p>
-    </div>
-  </div>
+  </section>
 
   <div class="footer-cta">
     <h3>Entre cedo. Entre forte.</h3>
     <p>
-      Quanto mais cedo participa, mais cedo acompanha a evolução do sorteio e a prova social da plataforma CarSorte.
+      Escolha o sorteio principal ou descubra outros sorteios ativos da plataforma CarSorte.
     </p>
-    <a id="footerMainBtn" class="btn btn-primary" href="raffle.html">Abrir sorteio</a>
+    <a href="sorteios.html" class="btn btn-primary">Abrir página sorteios</a>
   </div>
 
 </div>
@@ -494,115 +510,161 @@ const progressText = document.getElementById("progressText");
 const progressPercent = document.getElementById("progressPercent");
 const progressBar = document.getElementById("progressBar");
 const heroMainBtn = document.getElementById("heroMainBtn");
-const footerMainBtn = document.getElementById("footerMainBtn");
+
+const otherRaffles = document.getElementById("otherRaffles");
+const otherRafflesEmpty = document.getElementById("otherRafflesEmpty");
 
 function formatCurrency(value){
   if(value === undefined || value === null) return "-";
   return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
 }
 
-function setClosedState(message, badgeClass, badgeLabel){
-  statusBadge.className = `badge ${badgeClass}`;
-  statusBadge.textContent = badgeLabel;
-
-  heroNotice.style.display = "block";
-  heroNotice.textContent = message;
-
-  heroMainBtn.className = "btn btn-disabled";
-  heroMainBtn.removeAttribute("href");
-  heroMainBtn.textContent = badgeLabel;
-
-  footerMainBtn.className = "btn btn-disabled";
-  footerMainBtn.removeAttribute("href");
-  footerMainBtn.textContent = badgeLabel;
-}
-
-async function getPrimaryRaffle(){
-  const snap = await getDocs(collection(db, "raffles"));
-  const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-
-  if(!raffles.length) return null;
-
+function pickFeaturedRaffle(raffles){
   const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
   if(featuredActive) return featuredActive;
 
-  const firstActive = raffles.find(r => r.status === "active");
-  if(firstActive) return firstActive;
+  const active = raffles.find(r => r.status === "active");
+  if(active) return active;
 
   const featuredAny = raffles.find(r => r.featured === true);
   if(featuredAny) return featuredAny;
 
-  return raffles[0];
+  return raffles[0] || null;
 }
 
-async function loadHomeRaffle(){
-  try{
-    const raffle = await getPrimaryRaffle();
+function setBadge(type, label){
+  statusBadge.className = "badge " + type;
+  statusBadge.textContent = label;
+}
 
-    if(!raffle){
+function setHeroClosed(message, type, label){
+  setBadge(type, label);
+  heroNotice.style.display = "block";
+  heroNotice.textContent = message;
+  heroMainBtn.className = "btn btn-disabled";
+  heroMainBtn.removeAttribute("href");
+  heroMainBtn.textContent = label;
+}
+
+function renderOtherRaffles(raffles, featuredId){
+  otherRaffles.innerHTML = "";
+
+  const activeOthers = raffles.filter(r => r.status === "active" && r.id !== featuredId);
+
+  if(!activeOthers.length){
+    otherRafflesEmpty.style.display = "block";
+    return;
+  }
+
+  otherRafflesEmpty.style.display = "none";
+
+  activeOthers.forEach((raffle) => {
+    const sold = Number(raffle.tickets_sold || 0);
+    const total = Number(raffle.tickets_total || 0);
+    const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
+
+    const card = document.createElement("div");
+    card.className = "raffle-card";
+
+    card.innerHTML = `
+      <img src="${raffle.image || ""}" alt="${raffle.title || raffle.id}">
+      <div class="raffle-body">
+        <h3 class="raffle-title">${raffle.title || raffle.id}</h3>
+        <p class="raffle-desc">
+          Participe no sorteio e tenha a chance de ganhar este veículo incrível.
+        </p>
+
+        <div class="raffle-info">
+          <div>${formatCurrency(raffle.price)} / bilhete</div>
+          <div>${sold}/${total}</div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar" style="width:${percent}%"></div>
+        </div>
+
+        <div class="raffle-mini">${percent.toFixed(2)}% vendidos</div>
+
+        <div class="actions" style="margin-top:16px;">
+          <a class="btn btn-primary" href="raffle.html?raffle=${encodeURIComponent(raffle.id)}">Participar</a>
+        </div>
+      </div>
+    `;
+
+    otherRaffles.appendChild(card);
+  });
+}
+
+async function loadHome(){
+  try{
+    const snap = await getDocs(collection(db, "raffles"));
+    const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    if(!raffles.length){
       heroTitle.textContent = "Sorteio indisponível";
       heroText.textContent = "Não foi possível encontrar nenhum sorteio na base de dados.";
-      setClosedState("Nenhum sorteio encontrado.", "closed", "Indisponível");
+      setHeroClosed("Nenhum sorteio encontrado.", "closed", "Indisponível");
+      otherRafflesEmpty.style.display = "block";
       return;
     }
 
-    heroTitle.textContent = raffle.title || "Sorteio ativo";
-    heroPrice.textContent = formatCurrency(raffle.price);
-    heroTotal.textContent = raffle.tickets_total ?? 0;
-    heroSold.textContent = raffle.tickets_sold ?? 0;
-    heroState.textContent = raffle.status || "-";
+    const featured = pickFeaturedRaffle(raffles);
 
-    if(raffle.image){
-      heroImage.src = raffle.image;
+    if(!featured){
+      heroTitle.textContent = "Sorteio indisponível";
+      heroText.textContent = "Nenhum sorteio principal encontrado.";
+      setHeroClosed("Nenhum sorteio principal encontrado.", "closed", "Indisponível");
+      return;
     }
 
-    const sold = Number(raffle.tickets_sold || 0);
-    const total = Number(raffle.tickets_total || 0);
+    heroTitle.textContent = featured.title || "Sorteio";
+    heroPrice.textContent = formatCurrency(featured.price);
+    heroTotal.textContent = featured.tickets_total ?? 0;
+    heroSold.textContent = featured.tickets_sold ?? 0;
+    heroState.textContent = featured.status || "-";
+
+    if(featured.image){
+      heroImage.src = featured.image;
+    }
+
+    const sold = Number(featured.tickets_sold || 0);
+    const total = Number(featured.tickets_total || 0);
     const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
 
     progressBar.style.width = `${percent}%`;
     progressPercent.textContent = `${percent.toFixed(2)}%`;
     progressText.textContent = `${sold} / ${total} vendidos`;
 
-    heroMainBtn.href = `raffle.html?raffle=${encodeURIComponent(raffle.id)}`;
-    footerMainBtn.href = `raffle.html?raffle=${encodeURIComponent(raffle.id)}`;
+    heroMainBtn.href = `raffle.html?raffle=${encodeURIComponent(featured.id)}`;
 
-    if(raffle.status === "closed"){
+    if(featured.status === "closed"){
       heroText.textContent = "Este sorteio já foi encerrado e o vencedor já foi selecionado.";
-      setClosedState("O sorteio foi encerrado. Consulte a página de vencedores para ver o resultado oficial.", "closed", "Encerrado");
-      return;
-    }
-
-    if(raffle.status === "sold_out"){
-      heroText.textContent = "Todos os bilhetes deste sorteio foram vendidos. O sorteio aguarda a conclusão oficial.";
-      setClosedState("Todos os bilhetes foram vendidos para este sorteio.", "soldout", "Esgotado");
-      return;
-    }
-
-    if(total > 0 && sold >= total){
+      setHeroClosed("O sorteio foi encerrado. Consulte a página de vencedores para ver o resultado oficial.", "closed", "Encerrado");
+    } else if(featured.status === "sold_out"){
+      heroText.textContent = "Todos os bilhetes deste sorteio foram vendidos.";
+      setHeroClosed("Todos os bilhetes foram vendidos para este sorteio.", "soldout", "Esgotado");
+    } else if(total > 0 && sold >= total){
       heroText.textContent = "O número máximo de participantes foi atingido para este sorteio.";
-      setClosedState("O limite máximo de participantes foi atingido.", "soldout", "Completo");
-      return;
+      setHeroClosed("O limite máximo de participantes foi atingido.", "soldout", "Completo");
+    } else {
+      setBadge("active", "Ativo");
+      heroNotice.style.display = "none";
+      heroMainBtn.className = "btn btn-primary";
+      heroMainBtn.textContent = "Participar agora";
+      heroText.textContent = "Mais do que um sorteio. Uma oportunidade criada para transformar desejo em acesso, com uma plataforma limpa, transparente e preparada para crescer.";
     }
 
-    statusBadge.className = "badge active";
-    statusBadge.textContent = "Ativo";
-    heroNotice.style.display = "none";
-    heroMainBtn.className = "btn btn-primary";
-    heroMainBtn.textContent = "Participar agora";
-    footerMainBtn.className = "btn btn-primary";
-    footerMainBtn.textContent = "Abrir sorteio";
+    renderOtherRaffles(raffles, featured.id);
 
-    heroText.textContent = "Mais do que um sorteio. Uma oportunidade criada para transformar desejo em acesso, com uma plataforma limpa, transparente e preparada para crescer.";
-  }catch(error){
+  } catch(error){
     console.error(error);
     heroTitle.textContent = "Erro ao carregar";
     heroText.textContent = "Ocorreu um erro ao ligar a página principal ao Firebase.";
-    setClosedState("Erro ao carregar o sorteio principal.", "closed", "Erro");
+    setHeroClosed("Erro ao carregar o sorteio principal.", "closed", "Erro");
   }
 }
 
-loadHomeRaffle();
+loadHome();
 </script>
 
 </body>
