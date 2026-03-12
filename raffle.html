@@ -22,6 +22,7 @@
     }
 
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
@@ -624,8 +625,8 @@ async function loadRaffle(){
     raffleRemaining.textContent = rest;
 
     price1.textContent = formatCurrency(unit);
-    price5.textContent = formatCurrency(unit * 5);
-    price15.textContent = formatCurrency(unit * 15);
+    price5.textContent = "10€";
+    price15.textContent = "25€";
 
     progressBar.style.width = `${percent}%`;
     progressPercent.textContent = `${percent.toFixed(2)}%`;
