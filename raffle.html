@@ -1,298 +1,460 @@
 <!doctype html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sorteio - CarSorte</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteio - CarSorte</title>
 
-<style>
-:root{
-  --bg:#050505;
-  --panel:#101010;
-  --gold:#d4a017;
-  --gold-soft:#f4c542;
-  --text:#ffffff;
-  --muted:#b8b8b8;
-  --line:rgba(255,255,255,.08);
-  --shadow:0 14px 34px rgba(0,0,0,.32);
-  --green:#29c46d;
-  --red:#d95c5c;
-  --orange:#ff9f43;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-a{text-decoration:none;color:inherit}
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:24px 20px 60px;
-}
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  flex-wrap:wrap;
-  margin-bottom:28px;
-}
-.logo{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.logo img{height:72px}
-.logo strong{
-  font-size:30px;
-  color:var(--gold-soft);
-}
-.nav{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-}
-.nav a{
-  padding:10px 14px;
-  border-radius:12px;
-  background:#111;
-  border:1px solid var(--line);
-}
-.grid{
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
-  gap:28px;
-}
-.card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:24px;
-  box-shadow:var(--shadow);
-}
-.hero-image{
-  width:100%;
-  height:500px;
-  object-fit:cover;
-  border-radius:18px;
-  display:block;
-}
-h1{
-  margin:0 0 10px;
-  color:var(--gold-soft);
-  font-size:42px;
-}
-p{
-  color:var(--muted);
-  line-height:1.8;
-}
-.badge{
-  display:inline-block;
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:14px;
-}
-.badge.active{
-  background:rgba(41,196,109,.1);
-  border:1px solid rgba(41,196,109,.22);
-  color:#9ef0be;
-}
-.badge.closed{
-  background:rgba(217,92,92,.1);
-  border:1px solid rgba(217,92,92,.22);
-  color:#ffb5b5;
-}
-.badge.soldout{
-  background:rgba(212,160,23,.1);
-  border:1px solid rgba(212,160,23,.22);
-  color:#ffe08a;
-}
-.urgency{
-  margin-top:10px;
-  padding:14px 16px;
-  border-radius:14px;
-  font-size:14px;
-  line-height:1.7;
-  display:none;
-}
-.urgency.orange{
-  background:rgba(255,159,67,.1);
-  border:1px solid rgba(255,159,67,.22);
-  color:#ffc58f;
-}
-.urgency.green{
-  background:rgba(41,196,109,.1);
-  border:1px solid rgba(41,196,109,.22);
-  color:#9ef0be;
-}
-.urgency.red{
-  background:rgba(217,92,92,.1);
-  border:1px solid rgba(217,92,92,.22);
-  color:#ffb5b5;
-}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  margin:22px 0;
-}
-.stat{
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-  text-align:center;
-}
-.stat strong{
-  display:block;
-  color:var(--gold-soft);
-  font-size:24px;
-}
-.stat small{
-  color:#bdbdbd;
-  display:block;
-  margin-top:5px;
-}
-.progress-wrap{
-  margin:18px 0 22px;
-}
-.progress-top{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:8px;
-  color:#bbb;
-  font-size:14px;
-}
-.progress{
-  height:12px;
-  border-radius:999px;
-  background:#1a1a1a;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.05);
-}
-.progress-bar{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#b07b06,#f4c542);
-  transition:width .35s ease;
-}
-.notice{
-  margin-top:14px;
-  padding:14px 16px;
-  border-radius:14px;
-  font-size:14px;
-  line-height:1.7;
-  display:none;
-}
-.notice.info{
-  background:rgba(212,160,23,.1);
-  border:1px solid rgba(212,160,23,.22);
-  color:#ffe08a;
-}
-.notice.err{
-  background:rgba(217,92,92,.1);
-  border:1px solid rgba(217,92,92,.22);
-  color:#ffb5b5;
-}
-.proof{
-  margin-top:16px;
-  display:grid;
-  gap:10px;
-}
-.proof-box{
-  background:#0c0c0c;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:14px;
-  padding:14px;
-  color:#d8d8d8;
-  font-size:14px;
-  line-height:1.7;
-}
-.packs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:22px;
-}
-.pack{
-  display:block;
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:18px 12px;
-  text-align:center;
-  transition:transform .2s ease,border-color .2s ease;
-}
-.pack:hover{
-  transform:translateY(-2px);
-  border-color:rgba(212,160,23,.35);
-}
-.pack.featured{
-  border-color:rgba(212,160,23,.35);
-  background:rgba(212,160,23,.08);
-}
-.pack strong{
-  display:block;
-  font-size:30px;
-  color:var(--gold-soft);
-}
-.pack small{
-  display:block;
-  color:#aaa;
-  margin:8px 0 10px;
-}
-.pack span{
-  display:block;
-  font-size:20px;
-  font-weight:800;
-}
-.pack .mini{
-  margin-top:8px;
-  color:#86e6a9;
-  font-size:13px;
-  font-weight:700;
-}
-.btn{
-  display:inline-block;
-  margin-top:14px;
-  padding:12px 16px;
-  border-radius:12px;
-  font-weight:800;
-  background:var(--gold);
-  color:#000;
-}
-.btn.disabled{
-  background:#2a2a2a;
-  color:#888;
-  pointer-events:none;
-}
-.footer-info{
-  margin-top:18px;
-  color:#9f9f9f;
-  font-size:13px;
-  line-height:1.7;
-}
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr}
-  .packs{grid-template-columns:1fr}
-  .hero-image{height:280px}
-}
-</style>
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#101010;
+      --panel2:#0b0b0b;
+      --gold:#d4a017;
+      --goldSoft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 14px 34px rgba(0,0,0,.32);
+      --green:#29c46d;
+      --red:#d95c5c;
+      --orange:#ff9f43;
+      --blue:#5aa9ff;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
+      color:var(--text);
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      max-width:1240px;
+      margin:auto;
+      padding:24px 20px 60px;
+    }
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand img{
+      height:76px;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--goldSoft);
+      font-size:34px;
+      line-height:1;
+    }
+
+    .brand span{
+      display:block;
+      color:#999;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      margin-top:6px;
+    }
+
+    .nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      padding:12px 14px;
+      border-radius:12px;
+      background:#111;
+      border:1px solid var(--line);
+      color:#ddd;
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      margin-bottom:28px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.14);
+      border-radius:28px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-image{
+      width:100%;
+      height:540px;
+      object-fit:cover;
+      border-radius:20px;
+      display:block;
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .badge.active{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .badge.closed{
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .badge.soldout{
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
+
+    h1{
+      margin:0 0 12px;
+      color:var(--goldSoft);
+      font-size:52px;
+      line-height:1;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:18px;
+      margin-bottom:18px;
+    }
+
+    .urgency{
+      margin:14px 0 18px;
+      padding:15px 16px;
+      border-radius:16px;
+      font-size:14px;
+      line-height:1.7;
+      display:none;
+      font-weight:700;
+    }
+
+    .urgency.green{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .urgency.orange{
+      background:rgba(255,159,67,.1);
+      border:1px solid rgba(255,159,67,.22);
+      color:#ffc58f;
+    }
+
+    .urgency.red{
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .stat{
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      text-align:center;
+    }
+
+    .stat strong{
+      display:block;
+      color:var(--goldSoft);
+      font-size:30px;
+      margin-bottom:5px;
+    }
+
+    .stat span{
+      color:#bbb;
+      font-size:14px;
+    }
+
+    .progress-wrap{
+      margin:20px 0 18px;
+    }
+
+    .progress-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      color:#bbb;
+      font-size:14px;
+      margin-bottom:8px;
+    }
+
+    .progress{
+      height:12px;
+      border-radius:999px;
+      background:#1a1a1a;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,#b07b06,#f4c542);
+      transition:width .35s ease;
+    }
+
+    .notice{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:14px;
+      font-size:14px;
+      line-height:1.7;
+      display:none;
+    }
+
+    .notice.info{
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
+
+    .notice.err{
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin:18px 0 14px;
+    }
+
+    .social-box{
+      background:#0c0c0c;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:14px;
+      font-size:14px;
+      line-height:1.7;
+      color:#ddd;
+    }
+
+    .social-box b{
+      color:#fff;
+    }
+
+    .packs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .pack{
+      display:block;
+      background:#0b0b0b;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px 12px;
+      text-align:center;
+      transition:transform .2s ease,border-color .2s ease,background .2s ease;
+    }
+
+    .pack:hover{
+      transform:translateY(-2px);
+      border-color:rgba(212,160,23,.35);
+    }
+
+    .pack.featured{
+      border-color:rgba(212,160,23,.35);
+      background:rgba(212,160,23,.08);
+    }
+
+    .pack strong{
+      display:block;
+      font-size:34px;
+      color:var(--goldSoft);
+    }
+
+    .pack small{
+      display:block;
+      color:#aaa;
+      margin:8px 0 10px;
+      font-size:14px;
+    }
+
+    .pack .pack-price{
+      display:block;
+      font-size:22px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .pack .mini{
+      margin-top:8px;
+      color:#86e6a9;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .pack .cta{
+      display:inline-block;
+      margin-top:14px;
+      padding:11px 15px;
+      border-radius:12px;
+      font-weight:800;
+      background:var(--gold);
+      color:#000;
+    }
+
+    .pack.disabled{
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .mini-section{
+      margin-top:24px;
+    }
+
+    .mini-title{
+      margin:0 0 10px;
+      font-size:24px;
+      color:#fff;
+    }
+
+    .recent-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .recent-item{
+      background:#0c0c0c;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:12px 14px;
+      color:#ddd;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .recent-item b{
+      color:#fff;
+    }
+
+    .footer-note{
+      margin-top:18px;
+      color:#9f9f9f;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .floating-activity{
+      position:fixed;
+      left:16px;
+      bottom:16px;
+      max-width:320px;
+      background:rgba(10,10,10,.96);
+      border:1px solid rgba(212,160,23,.22);
+      box-shadow:var(--shadow);
+      border-radius:18px;
+      padding:14px 16px;
+      z-index:999;
+      display:none;
+    }
+
+    .floating-activity .top{
+      color:var(--goldSoft);
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:6px;
+    }
+
+    .floating-activity .body{
+      color:#e6e6e6;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .floating-activity .body b{
+      color:#fff;
+    }
+
+    @media(max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .hero-image{height:300px}
+      h1{font-size:40px}
+    }
+
+    @media(max-width:760px){
+      .packs{grid-template-columns:1fr}
+      .social-grid{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:520px){
+      .stats{grid-template-columns:1fr}
+      .floating-activity{
+        left:12px;
+        right:12px;
+        bottom:12px;
+        max-width:none;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <div class="container">
 
   <div class="header">
-    <div class="logo">
+    <div class="brand">
       <img src="logo-carsorte.png" alt="CarSorte">
-      <strong>CarSorte</strong>
+      <div>
+        <strong>CarSorte</strong>
+        <span>by DEM Automóveis</span>
+      </div>
     </div>
 
     <div class="nav">
@@ -300,6 +462,7 @@ p{
       <a href="sorteios.html">Sorteios</a>
       <a href="winners.html">Vencedores</a>
       <a href="results.html">Resultados</a>
+      <a href="faq.html">FAQ</a>
       <a href="admin.html">Admin</a>
     </div>
   </div>
@@ -313,26 +476,26 @@ p{
       <div id="statusBadge" class="badge active">Ativo</div>
 
       <h1 id="raffleTitle">Carregando...</h1>
-      <p id="raffleText">A carregar o sorteio diretamente da base de dados.</p>
+      <p id="raffleText" class="sub">A carregar o sorteio diretamente do Firebase.</p>
 
-      <div id="urgencyBox" class="urgency orange"></div>
+      <div id="urgencyBox" class="urgency green"></div>
 
       <div class="stats">
         <div class="stat">
           <strong id="rafflePrice">-</strong>
-          <small>por bilhete</small>
+          <span>por bilhete</span>
         </div>
         <div class="stat">
           <strong id="raffleTotal">0</strong>
-          <small>bilhetes totais</small>
+          <span>bilhetes totais</span>
         </div>
         <div class="stat">
           <strong id="raffleSold">0</strong>
-          <small>vendidos</small>
+          <span>vendidos</span>
         </div>
         <div class="stat">
           <strong id="raffleRemaining">0</strong>
-          <small>restantes</small>
+          <span>restantes</span>
         </div>
       </div>
 
@@ -348,48 +511,70 @@ p{
 
       <div id="raffleNotice" class="notice info"></div>
 
-      <div class="proof">
-        <div class="proof-box" id="socialProof1">A carregar prova social...</div>
-        <div class="proof-box" id="socialProof2">A carregar atividade...</div>
+      <div class="social-grid">
+        <div class="social-box" id="socialProof1">A carregar prova social...</div>
+        <div class="social-box" id="socialProof2">A carregar atividade...</div>
       </div>
 
       <div class="packs">
         <a id="pack1" class="pack" href="#">
           <strong>1</strong>
           <small>Entrada simples</small>
-          <span id="price1">-</span>
-          <div class="mini" id="mini1">Entrada rápida</div>
-          <div class="btn">Escolher</div>
+          <span id="price1" class="pack-price">-</span>
+          <div class="mini">Entrada rápida</div>
+          <div class="cta">Escolher</div>
         </a>
 
         <a id="pack5" class="pack featured" href="#">
           <strong>5</strong>
           <small>Mais escolhido</small>
-          <span id="price5">-</span>
+          <span id="price5" class="pack-price">-</span>
           <div class="mini">Melhor equilíbrio</div>
-          <div class="btn">Escolher</div>
+          <div class="cta">Escolher</div>
         </a>
 
         <a id="pack15" class="pack" href="#">
           <strong>15</strong>
           <small>Melhor valor</small>
-          <span id="price15">-</span>
+          <span id="price15" class="pack-price">-</span>
           <div class="mini">Máxima exposição</div>
-          <div class="btn">Escolher</div>
+          <div class="cta">Escolher</div>
         </a>
       </div>
 
-      <div class="footer-info">
-        Compra simples, resultado público e acompanhamento através da plataforma CarSorte.
+      <div class="footer-note">
+        Processo simples, histórico público e acompanhamento transparente através da plataforma CarSorte.
       </div>
+    </div>
+  </div>
+
+  <div class="card mini-section">
+    <h2 class="mini-title">Atividade recente neste sorteio</h2>
+    <div id="recentOrdersList" class="recent-list"></div>
+    <div id="recentOrdersEmpty" class="recent-item" style="display:none;">
+      Ainda não existem compras recentes para este sorteio.
     </div>
   </div>
 
 </div>
 
+<div id="floatingActivity" class="floating-activity">
+  <div class="top">Atividade recente</div>
+  <div id="floatingActivityBody" class="body"></div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  query,
+  orderBy,
+  limit
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
@@ -419,18 +604,44 @@ const urgencyBox = document.getElementById("urgencyBox");
 const progressText = document.getElementById("progressText");
 const progressPercent = document.getElementById("progressPercent");
 const progressBar = document.getElementById("progressBar");
+
 const pack1 = document.getElementById("pack1");
 const pack5 = document.getElementById("pack5");
 const pack15 = document.getElementById("pack15");
 const price1 = document.getElementById("price1");
 const price5 = document.getElementById("price5");
 const price15 = document.getElementById("price15");
+
 const socialProof1 = document.getElementById("socialProof1");
 const socialProof2 = document.getElementById("socialProof2");
+
+const recentOrdersList = document.getElementById("recentOrdersList");
+const recentOrdersEmpty = document.getElementById("recentOrdersEmpty");
+
+const floatingActivity = document.getElementById("floatingActivity");
+const floatingActivityBody = document.getElementById("floatingActivityBody");
 
 function formatCurrency(value){
   if(value === undefined || value === null) return "-";
   return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
+}
+
+function formatDate(value){
+  try{
+    if(value && value.toDate) return value.toDate().toLocaleString("pt-PT");
+    return "-";
+  }catch{
+    return "-";
+  }
+}
+
+function getMaskedName(name){
+  if(!name) return "Participante";
+  const parts = String(name).trim().split(" ");
+  if(parts.length === 1){
+    return parts[0].slice(0, 1).toUpperCase() + "***";
+  }
+  return `${parts[0]} ${parts[parts.length - 1].slice(0,1).toUpperCase()}.`;
 }
 
 async function getPrimaryRaffle(){
@@ -451,6 +662,14 @@ async function getPrimaryRaffle(){
   return raffles[0];
 }
 
+async function getRaffle(){
+  if(requestedRaffleId){
+    const snap = await getDoc(doc(db, "raffles", requestedRaffleId));
+    if(snap.exists()) return { id: requestedRaffleId, ...snap.data() };
+  }
+  return await getPrimaryRaffle();
+}
+
 function setPackLinks(raffleId){
   pack1.href = `checkout.html?pack=1&raffle=${encodeURIComponent(raffleId)}`;
   pack5.href = `checkout.html?pack=5&raffle=${encodeURIComponent(raffleId)}`;
@@ -459,10 +678,11 @@ function setPackLinks(raffleId){
 
 function disablePacks(message, badgeType, badgeLabel){
   [pack1, pack5, pack15].forEach(pack => {
+    pack.classList.add("disabled");
     pack.removeAttribute("href");
-    const btn = pack.querySelector(".btn");
-    btn.classList.add("disabled");
-    btn.textContent = badgeLabel;
+    const cta = pack.querySelector(".cta");
+    cta.classList.add("disabled");
+    cta.textContent = badgeLabel;
   });
 
   statusBadge.className = `badge ${badgeType}`;
@@ -493,27 +713,84 @@ function buildUrgency(sold, total, percent, remaining){
 function buildSocialProof(sold, total, percent, remaining){
   const estimatedParticipants = Math.max(1, Math.ceil(sold / 2.4));
 
-  socialProof1.textContent =
-    `${estimatedParticipants} participantes estimados já entraram neste sorteio.`;
+  socialProof1.innerHTML = `<b>${estimatedParticipants}</b> participantes estimados já entraram neste sorteio.`;
 
   if(percent >= 80){
-    socialProof2.textContent =
-      `Fase final: ${remaining} bilhetes restantes antes do fecho do sorteio.`;
+    socialProof2.innerHTML = `Fase final: <b>${remaining}</b> bilhetes restantes antes do fecho do sorteio.`;
   } else if(percent >= 50){
-    socialProof2.textContent =
-      `Sorteio em forte progressão: ${percent.toFixed(0)}% dos bilhetes já foram ocupados.`;
+    socialProof2.innerHTML = `Sorteio em forte progressão: <b>${percent.toFixed(0)}%</b> dos bilhetes já foram ocupados.`;
   } else {
-    socialProof2.textContent =
-      `Boa janela de entrada: ainda existem ${remaining} bilhetes disponíveis neste sorteio.`;
+    socialProof2.innerHTML = `Boa janela de entrada: ainda existem <b>${remaining}</b> bilhetes disponíveis neste sorteio.`;
   }
 }
 
-async function getRaffle(){
-  if(requestedRaffleId){
-    const snap = await getDoc(doc(db, "raffles", requestedRaffleId));
-    if(snap.exists()) return { id: requestedRaffleId, ...snap.data() };
+async function loadRecentOrders(raffleId){
+  try{
+    const ordersQuery = query(collection(db, "orders"), orderBy("created", "desc"), limit(20));
+    const ordersSnap = await getDocs(ordersQuery);
+
+    const orders = ordersSnap.docs
+      .map(docSnap => ({ id: docSnap.id, ...docSnap.data() }))
+      .filter(order => order.raffle_id === raffleId)
+      .slice(0, 6);
+
+    recentOrdersList.innerHTML = "";
+
+    if(!orders.length){
+      recentOrdersEmpty.style.display = "block";
+      floatingActivity.style.display = "none";
+      return;
+    }
+
+    recentOrdersEmpty.style.display = "none";
+
+    orders.forEach(order => {
+      const div = document.createElement("div");
+      div.className = "recent-item";
+      div.innerHTML = `
+        <b>${getMaskedName(order.buyer)}</b> de <b>${order.buyer_city || "Portugal"}</b>
+        comprou <b>${order.qty || 1}</b> bilhete(s) para
+        <b>${order.raffle_title || order.raffle_id || raffleId}</b> ·
+        ${formatDate(order.created)}
+      `;
+      recentOrdersList.appendChild(div);
+    });
+
+    startFloatingActivity(orders);
+
+  }catch(error){
+    console.error(error);
+    recentOrdersList.innerHTML = "";
+    recentOrdersEmpty.style.display = "block";
+    recentOrdersEmpty.textContent = "Não foi possível carregar a atividade recente.";
   }
-  return await getPrimaryRaffle();
+}
+
+let floatingIndex = 0;
+let floatingTimer = null;
+
+function startFloatingActivity(orders){
+  if(!orders.length){
+    floatingActivity.style.display = "none";
+    return;
+  }
+
+  function renderFloating(){
+    const order = orders[floatingIndex];
+    floatingActivityBody.innerHTML = `
+      <b>${getMaskedName(order.buyer)}</b> de <b>${order.buyer_city || "Portugal"}</b>
+      comprou <b>${order.qty || 1}</b> bilhete(s).
+    `;
+    floatingActivity.style.display = "block";
+    floatingIndex = (floatingIndex + 1) % orders.length;
+  }
+
+  if(floatingTimer){
+    clearInterval(floatingTimer);
+  }
+
+  renderFloating();
+  floatingTimer = setInterval(renderFloating, 5000);
 }
 
 async function loadRaffle(){
@@ -524,6 +801,9 @@ async function loadRaffle(){
       raffleTitle.textContent = "Sorteio indisponível";
       raffleText.textContent = "Nenhum sorteio foi encontrado na base de dados.";
       disablePacks("Nenhum sorteio encontrado.", "closed", "Indisponível");
+      urgencyBox.style.display = "none";
+      socialProof1.textContent = "Nenhum sorteio disponível.";
+      socialProof2.textContent = "Sem atividade.";
       return;
     }
 
@@ -544,8 +824,8 @@ async function loadRaffle(){
 
     raffleRemaining.textContent = remaining;
     price1.textContent = formatCurrency(unit);
-    price5.textContent = formatCurrency(10);
-    price15.textContent = formatCurrency(25);
+    price5.textContent = formatCurrency(unit * 4);
+    price15.textContent = formatCurrency(unit * 10);
 
     progressBar.style.width = `${percent}%`;
     progressPercent.textContent = `${percent.toFixed(2)}%`;
@@ -554,6 +834,7 @@ async function loadRaffle(){
     setPackLinks(raffle.id);
     buildUrgency(sold, total, percent, remaining);
     buildSocialProof(sold, total, percent, remaining);
+    await loadRecentOrders(raffle.id);
 
     if(raffle.status === "closed"){
       raffleText.textContent = "Este sorteio foi encerrado e o vencedor já foi sorteado.";
@@ -580,11 +861,13 @@ async function loadRaffle(){
     statusBadge.textContent = "Ativo";
     raffleNotice.style.display = "none";
     raffleText.textContent = "Escolha o pack que preferir e participe diretamente no sorteio ativo da plataforma.";
+
   }catch(error){
     console.error(error);
     raffleTitle.textContent = "Erro ao carregar";
     raffleText.textContent = "Ocorreu um erro ao carregar o sorteio.";
     disablePacks("Erro ao carregar o sorteio.", "closed", "Erro");
+    urgencyBox.style.display = "none";
   }
 }
 
