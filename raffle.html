@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sorteio - CarSorte</title>
+  <title>CarSorte - Sorteio</title>
 
   <style>
     :root{
       --bg:#050505;
       --panel:#101010;
-      --panel2:#0b0b0b;
+      --panel-2:#0b0b0b;
       --gold:#d4a017;
-      --goldSoft:#f4c542;
+      --gold-soft:#f4c542;
       --text:#ffffff;
       --muted:#b8b8b8;
       --line:rgba(255,255,255,.08);
-      --shadow:0 14px 34px rgba(0,0,0,.32);
+      --shadow:0 16px 36px rgba(0,0,0,.35);
       --green:#29c46d;
       --red:#d95c5c;
       --orange:#ff9f43;
-      --blue:#5aa9ff;
     }
 
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
+      background:
+        radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%),
+        var(--bg);
       color:var(--text);
     }
 
@@ -61,7 +63,7 @@
 
     .brand strong{
       display:block;
-      color:var(--goldSoft);
+      color:var(--gold-soft);
       font-size:34px;
       line-height:1;
     }
@@ -90,11 +92,11 @@
       font-weight:700;
     }
 
-    .grid{
+    .hero{
       display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:22px;
-      margin-bottom:28px;
+      grid-template-columns:1.02fr .98fr;
+      gap:24px;
+      align-items:stretch;
     }
 
     .card{
@@ -108,7 +110,8 @@
 
     .hero-image{
       width:100%;
-      height:540px;
+      height:100%;
+      min-height:560px;
       object-fit:cover;
       border-radius:20px;
       display:block;
@@ -145,8 +148,8 @@
 
     h1{
       margin:0 0 12px;
-      color:var(--goldSoft);
-      font-size:52px;
+      color:var(--gold-soft);
+      font-size:54px;
       line-height:1;
       letter-spacing:-.03em;
     }
@@ -158,29 +161,29 @@
       margin-bottom:18px;
     }
 
-    .urgency{
+    .alert-box{
+      display:none;
       margin:14px 0 18px;
-      padding:15px 16px;
+      padding:16px;
       border-radius:16px;
       font-size:14px;
       line-height:1.7;
-      display:none;
       font-weight:700;
     }
 
-    .urgency.green{
+    .alert-box.green{
       background:rgba(41,196,109,.1);
       border:1px solid rgba(41,196,109,.22);
       color:#9ef0be;
     }
 
-    .urgency.orange{
+    .alert-box.orange{
       background:rgba(255,159,67,.1);
       border:1px solid rgba(255,159,67,.22);
       color:#ffc58f;
     }
 
-    .urgency.red{
+    .alert-box.red{
       background:rgba(217,92,92,.1);
       border:1px solid rgba(217,92,92,.22);
       color:#ffb5b5;
@@ -190,40 +193,40 @@
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:12px;
-      margin-bottom:18px;
+      margin:22px 0;
     }
 
     .stat{
-      background:var(--panel2);
+      background:var(--panel-2);
       border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
+      border-radius:18px;
+      padding:18px;
       text-align:center;
     }
 
     .stat strong{
       display:block;
-      color:var(--goldSoft);
-      font-size:30px;
-      margin-bottom:5px;
+      color:var(--gold-soft);
+      font-size:32px;
+      margin-bottom:6px;
     }
 
     .stat span{
-      color:#bbb;
+      color:#bcbcbc;
       font-size:14px;
     }
 
     .progress-wrap{
-      margin:20px 0 18px;
+      margin:18px 0 22px;
     }
 
     .progress-top{
       display:flex;
       justify-content:space-between;
       gap:12px;
+      margin-bottom:8px;
       color:#bbb;
       font-size:14px;
-      margin-bottom:8px;
     }
 
     .progress{
@@ -241,48 +244,6 @@
       transition:width .35s ease;
     }
 
-    .notice{
-      margin-top:14px;
-      padding:14px 16px;
-      border-radius:14px;
-      font-size:14px;
-      line-height:1.7;
-      display:none;
-    }
-
-    .notice.info{
-      background:rgba(212,160,23,.1);
-      border:1px solid rgba(212,160,23,.22);
-      color:#ffe08a;
-    }
-
-    .notice.err{
-      background:rgba(217,92,92,.1);
-      border:1px solid rgba(217,92,92,.22);
-      color:#ffb5b5;
-    }
-
-    .social-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin:18px 0 14px;
-    }
-
-    .social-box{
-      background:#0c0c0c;
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:16px;
-      padding:14px;
-      font-size:14px;
-      line-height:1.7;
-      color:#ddd;
-    }
-
-    .social-box b{
-      color:#fff;
-    }
-
     .packs{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -297,7 +258,7 @@
       border-radius:20px;
       padding:18px 12px;
       text-align:center;
-      transition:transform .2s ease,border-color .2s ease,background .2s ease;
+      transition:transform .2s ease,border-color .2s ease;
     }
 
     .pack:hover{
@@ -310,10 +271,15 @@
       background:rgba(212,160,23,.08);
     }
 
+    .pack.disabled{
+      opacity:.5;
+      pointer-events:none;
+    }
+
     .pack strong{
       display:block;
       font-size:34px;
-      color:var(--goldSoft);
+      color:var(--gold-soft);
     }
 
     .pack small{
@@ -323,7 +289,7 @@
       font-size:14px;
     }
 
-    .pack .pack-price{
+    .pack .price{
       display:block;
       font-size:22px;
       font-weight:800;
@@ -347,37 +313,36 @@
       color:#000;
     }
 
-    .pack.disabled{
-      opacity:.55;
-      pointer-events:none;
+    .notice{
+      display:none;
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:14px;
+      font-size:14px;
+      line-height:1.7;
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
     }
 
-    .mini-section{
-      margin-top:24px;
-    }
-
-    .mini-title{
-      margin:0 0 10px;
-      font-size:24px;
-      color:#fff;
-    }
-
-    .recent-list{
+    .proof{
       display:grid;
-      gap:10px;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:18px;
     }
 
-    .recent-item{
+    .proof-box{
       background:#0c0c0c;
       border:1px solid rgba(255,255,255,.06);
-      border-radius:14px;
-      padding:12px 14px;
+      border-radius:16px;
+      padding:14px;
       color:#ddd;
       font-size:14px;
       line-height:1.7;
     }
 
-    .recent-item b{
+    .proof-box b{
       color:#fff;
     }
 
@@ -388,59 +353,20 @@
       line-height:1.7;
     }
 
-    .floating-activity{
-      position:fixed;
-      left:16px;
-      bottom:16px;
-      max-width:320px;
-      background:rgba(10,10,10,.96);
-      border:1px solid rgba(212,160,23,.22);
-      box-shadow:var(--shadow);
-      border-radius:18px;
-      padding:14px 16px;
-      z-index:999;
-      display:none;
-    }
-
-    .floating-activity .top{
-      color:var(--goldSoft);
-      font-size:12px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      margin-bottom:6px;
-    }
-
-    .floating-activity .body{
-      color:#e6e6e6;
-      font-size:14px;
-      line-height:1.7;
-    }
-
-    .floating-activity .body b{
-      color:#fff;
-    }
-
     @media(max-width:980px){
-      .grid{grid-template-columns:1fr}
-      .hero-image{height:300px}
-      h1{font-size:40px}
+      .hero{grid-template-columns:1fr}
+      .hero-image{min-height:300px}
+      h1{font-size:42px}
     }
 
     @media(max-width:760px){
       .packs{grid-template-columns:1fr}
-      .social-grid{grid-template-columns:1fr}
+      .proof{grid-template-columns:1fr}
       .stats{grid-template-columns:1fr 1fr}
     }
 
     @media(max-width:520px){
       .stats{grid-template-columns:1fr}
-      .floating-activity{
-        left:12px;
-        right:12px;
-        bottom:12px;
-        max-width:none;
-      }
     }
   </style>
 </head>
@@ -467,7 +393,7 @@
     </div>
   </div>
 
-  <div class="grid">
+  <div class="hero">
     <div class="card">
       <img id="raffleImage" class="hero-image" src="" alt="Veículo">
     </div>
@@ -478,7 +404,7 @@
       <h1 id="raffleTitle">Carregando...</h1>
       <p id="raffleText" class="sub">A carregar o sorteio diretamente do Firebase.</p>
 
-      <div id="urgencyBox" class="urgency green"></div>
+      <div id="alertBox" class="alert-box green"></div>
 
       <div class="stats">
         <div class="stat">
@@ -509,18 +435,11 @@
         </div>
       </div>
 
-      <div id="raffleNotice" class="notice info"></div>
-
-      <div class="social-grid">
-        <div class="social-box" id="socialProof1">A carregar prova social...</div>
-        <div class="social-box" id="socialProof2">A carregar atividade...</div>
-      </div>
-
       <div class="packs">
         <a id="pack1" class="pack" href="#">
           <strong>1</strong>
           <small>Entrada simples</small>
-          <span id="price1" class="pack-price">-</span>
+          <span id="price1" class="price">-</span>
           <div class="mini">Entrada rápida</div>
           <div class="cta">Escolher</div>
         </a>
@@ -528,7 +447,7 @@
         <a id="pack5" class="pack featured" href="#">
           <strong>5</strong>
           <small>Mais escolhido</small>
-          <span id="price5" class="pack-price">-</span>
+          <span id="price5" class="price">-</span>
           <div class="mini">Melhor equilíbrio</div>
           <div class="cta">Escolher</div>
         </a>
@@ -536,10 +455,17 @@
         <a id="pack15" class="pack" href="#">
           <strong>15</strong>
           <small>Melhor valor</small>
-          <span id="price15" class="pack-price">-</span>
+          <span id="price15" class="price">-</span>
           <div class="mini">Máxima exposição</div>
           <div class="cta">Escolher</div>
         </a>
+      </div>
+
+      <div id="raffleNotice" class="notice"></div>
+
+      <div class="proof">
+        <div id="proof1" class="proof-box">A carregar estatísticas do sorteio...</div>
+        <div id="proof2" class="proof-box">A calcular o ritmo de vendas...</div>
       </div>
 
       <div class="footer-note">
@@ -548,33 +474,11 @@
     </div>
   </div>
 
-  <div class="card mini-section">
-    <h2 class="mini-title">Atividade recente neste sorteio</h2>
-    <div id="recentOrdersList" class="recent-list"></div>
-    <div id="recentOrdersEmpty" class="recent-item" style="display:none;">
-      Ainda não existem compras recentes para este sorteio.
-    </div>
-  </div>
-
-</div>
-
-<div id="floatingActivity" class="floating-activity">
-  <div class="top">Atividade recente</div>
-  <div id="floatingActivityBody" class="body"></div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  doc,
-  getDoc,
-  query,
-  orderBy,
-  limit
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
@@ -597,13 +501,13 @@ const rafflePrice = document.getElementById("rafflePrice");
 const raffleTotal = document.getElementById("raffleTotal");
 const raffleSold = document.getElementById("raffleSold");
 const raffleRemaining = document.getElementById("raffleRemaining");
-const statusBadge = document.getElementById("statusBadge");
 const raffleText = document.getElementById("raffleText");
-const raffleNotice = document.getElementById("raffleNotice");
-const urgencyBox = document.getElementById("urgencyBox");
+const statusBadge = document.getElementById("statusBadge");
+const alertBox = document.getElementById("alertBox");
 const progressText = document.getElementById("progressText");
 const progressPercent = document.getElementById("progressPercent");
 const progressBar = document.getElementById("progressBar");
+const raffleNotice = document.getElementById("raffleNotice");
 
 const pack1 = document.getElementById("pack1");
 const pack5 = document.getElementById("pack5");
@@ -612,36 +516,12 @@ const price1 = document.getElementById("price1");
 const price5 = document.getElementById("price5");
 const price15 = document.getElementById("price15");
 
-const socialProof1 = document.getElementById("socialProof1");
-const socialProof2 = document.getElementById("socialProof2");
-
-const recentOrdersList = document.getElementById("recentOrdersList");
-const recentOrdersEmpty = document.getElementById("recentOrdersEmpty");
-
-const floatingActivity = document.getElementById("floatingActivity");
-const floatingActivityBody = document.getElementById("floatingActivityBody");
+const proof1 = document.getElementById("proof1");
+const proof2 = document.getElementById("proof2");
 
 function formatCurrency(value){
   if(value === undefined || value === null) return "-";
   return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
-}
-
-function formatDate(value){
-  try{
-    if(value && value.toDate) return value.toDate().toLocaleString("pt-PT");
-    return "-";
-  }catch{
-    return "-";
-  }
-}
-
-function getMaskedName(name){
-  if(!name) return "Participante";
-  const parts = String(name).trim().split(" ");
-  if(parts.length === 1){
-    return parts[0].slice(0, 1).toUpperCase() + "***";
-  }
-  return `${parts[0]} ${parts[parts.length - 1].slice(0,1).toUpperCase()}.`;
 }
 
 async function getPrimaryRaffle(){
@@ -653,8 +533,8 @@ async function getPrimaryRaffle(){
   const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
   if(featuredActive) return featuredActive;
 
-  const firstActive = raffles.find(r => r.status === "active");
-  if(firstActive) return firstActive;
+  const active = raffles.find(r => r.status === "active");
+  if(active) return active;
 
   const featuredAny = raffles.find(r => r.featured === true);
   if(featuredAny) return featuredAny;
@@ -676,121 +556,49 @@ function setPackLinks(raffleId){
   pack15.href = `checkout.html?pack=15&raffle=${encodeURIComponent(raffleId)}`;
 }
 
-function disablePacks(message, badgeType, badgeLabel){
+function disablePacks(message, type, label){
   [pack1, pack5, pack15].forEach(pack => {
     pack.classList.add("disabled");
     pack.removeAttribute("href");
-    const cta = pack.querySelector(".cta");
-    cta.classList.add("disabled");
-    cta.textContent = badgeLabel;
+    pack.querySelector(".cta").textContent = label;
   });
 
-  statusBadge.className = `badge ${badgeType}`;
-  statusBadge.textContent = badgeLabel;
+  statusBadge.className = `badge ${type}`;
+  statusBadge.textContent = label;
   raffleNotice.style.display = "block";
   raffleNotice.textContent = message;
 }
 
-function buildUrgency(sold, total, percent, remaining){
-  urgencyBox.style.display = "block";
+function showAlert(percent, remaining, sold){
+  alertBox.style.display = "block";
 
   if(percent >= 85){
-    urgencyBox.className = "urgency red";
-    urgencyBox.textContent = `Atenção: restam apenas ${remaining} bilhetes. Este sorteio está numa fase muito avançada.`;
+    alertBox.className = "alert-box red";
+    alertBox.textContent = `Atenção: restam apenas ${remaining} bilhetes. Este sorteio está numa fase muito avançada.`;
     return;
   }
 
   if(percent >= 60){
-    urgencyBox.className = "urgency orange";
-    urgencyBox.textContent = `Mais de ${percent.toFixed(0)}% dos bilhetes já foram vendidos. A procura está a acelerar.`;
+    alertBox.className = "alert-box orange";
+    alertBox.textContent = `Mais de ${percent.toFixed(0)}% dos bilhetes já foram vendidos. A procura está a acelerar.`;
     return;
   }
 
-  urgencyBox.className = "urgency green";
-  urgencyBox.textContent = `O sorteio está ativo e já conta com ${sold} bilhetes vendidos. Ainda vai a tempo de entrar.`;
+  alertBox.className = "alert-box green";
+  alertBox.textContent = `O sorteio está ativo e já conta com ${sold} bilhetes vendidos. Ainda vai a tempo de entrar.`;
 }
 
-function buildSocialProof(sold, total, percent, remaining){
+function showProof(sold, total, remaining, percent){
   const estimatedParticipants = Math.max(1, Math.ceil(sold / 2.4));
-
-  socialProof1.innerHTML = `<b>${estimatedParticipants}</b> participantes estimados já entraram neste sorteio.`;
+  proof1.innerHTML = `<b>${estimatedParticipants}</b> participantes estimados já entraram neste sorteio.`;
 
   if(percent >= 80){
-    socialProof2.innerHTML = `Fase final: <b>${remaining}</b> bilhetes restantes antes do fecho do sorteio.`;
+    proof2.innerHTML = `Fase final: <b>${remaining}</b> bilhetes restantes antes do fecho do sorteio.`;
   } else if(percent >= 50){
-    socialProof2.innerHTML = `Sorteio em forte progressão: <b>${percent.toFixed(0)}%</b> dos bilhetes já foram ocupados.`;
+    proof2.innerHTML = `Sorteio em forte progressão: <b>${percent.toFixed(0)}%</b> dos bilhetes já foram ocupados.`;
   } else {
-    socialProof2.innerHTML = `Boa janela de entrada: ainda existem <b>${remaining}</b> bilhetes disponíveis neste sorteio.`;
+    proof2.innerHTML = `Boa janela de entrada: ainda existem <b>${remaining}</b> bilhetes disponíveis.`;
   }
-}
-
-async function loadRecentOrders(raffleId){
-  try{
-    const ordersQuery = query(collection(db, "orders"), orderBy("created", "desc"), limit(20));
-    const ordersSnap = await getDocs(ordersQuery);
-
-    const orders = ordersSnap.docs
-      .map(docSnap => ({ id: docSnap.id, ...docSnap.data() }))
-      .filter(order => order.raffle_id === raffleId)
-      .slice(0, 6);
-
-    recentOrdersList.innerHTML = "";
-
-    if(!orders.length){
-      recentOrdersEmpty.style.display = "block";
-      floatingActivity.style.display = "none";
-      return;
-    }
-
-    recentOrdersEmpty.style.display = "none";
-
-    orders.forEach(order => {
-      const div = document.createElement("div");
-      div.className = "recent-item";
-      div.innerHTML = `
-        <b>${getMaskedName(order.buyer)}</b> de <b>${order.buyer_city || "Portugal"}</b>
-        comprou <b>${order.qty || 1}</b> bilhete(s) para
-        <b>${order.raffle_title || order.raffle_id || raffleId}</b> ·
-        ${formatDate(order.created)}
-      `;
-      recentOrdersList.appendChild(div);
-    });
-
-    startFloatingActivity(orders);
-
-  }catch(error){
-    console.error(error);
-    recentOrdersList.innerHTML = "";
-    recentOrdersEmpty.style.display = "block";
-    recentOrdersEmpty.textContent = "Não foi possível carregar a atividade recente.";
-  }
-}
-
-let floatingIndex = 0;
-let floatingTimer = null;
-
-function startFloatingActivity(orders){
-  if(!orders.length){
-    floatingActivity.style.display = "none";
-    return;
-  }
-
-  function renderFloating(){
-    const order = orders[floatingIndex];
-    floatingActivityBody.innerHTML = `
-      <b>${getMaskedName(order.buyer)}</b> de <b>${order.buyer_city || "Portugal"}</b>
-      comprou <b>${order.qty || 1}</b> bilhete(s).
-    `;
-    floatingActivity.style.display = "block";
-    floatingIndex = (floatingIndex + 1) % orders.length;
-  }
-
-  if(floatingTimer){
-    clearInterval(floatingTimer);
-  }
-
-  renderFloating();
-  floatingTimer = setInterval(renderFloating, 5000);
 }
 
 async function loadRaffle(){
@@ -800,10 +608,8 @@ async function loadRaffle(){
     if(!raffle){
       raffleTitle.textContent = "Sorteio indisponível";
       raffleText.textContent = "Nenhum sorteio foi encontrado na base de dados.";
+      alertBox.style.display = "none";
       disablePacks("Nenhum sorteio encontrado.", "closed", "Indisponível");
-      urgencyBox.style.display = "none";
-      socialProof1.textContent = "Nenhum sorteio disponível.";
-      socialProof2.textContent = "Sem atividade.";
       return;
     }
 
@@ -823,37 +629,37 @@ async function loadRaffle(){
     const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
 
     raffleRemaining.textContent = remaining;
+
     price1.textContent = formatCurrency(unit);
-    price5.textContent = formatCurrency(unit * 4);
-    price15.textContent = formatCurrency(unit * 10);
+    price5.textContent = formatCurrency(unit * 5);
+    price15.textContent = formatCurrency(unit * 15);
 
     progressBar.style.width = `${percent}%`;
     progressPercent.textContent = `${percent.toFixed(2)}%`;
     progressText.textContent = `${sold} / ${total} vendidos`;
 
     setPackLinks(raffle.id);
-    buildUrgency(sold, total, percent, remaining);
-    buildSocialProof(sold, total, percent, remaining);
-    await loadRecentOrders(raffle.id);
+    showAlert(percent, remaining, sold);
+    showProof(sold, total, remaining, percent);
 
     if(raffle.status === "closed"){
       raffleText.textContent = "Este sorteio foi encerrado e o vencedor já foi sorteado.";
+      alertBox.style.display = "none";
       disablePacks("Este sorteio foi encerrado. Consulte os vencedores para ver o resultado oficial.", "closed", "Encerrado");
-      urgencyBox.style.display = "none";
       return;
     }
 
     if(raffle.status === "sold_out"){
       raffleText.textContent = "Todos os bilhetes deste sorteio foram vendidos.";
+      alertBox.style.display = "none";
       disablePacks("Todos os bilhetes foram vendidos para este sorteio.", "soldout", "Esgotado");
-      urgencyBox.style.display = "none";
       return;
     }
 
     if(total > 0 && sold >= total){
       raffleText.textContent = "O limite máximo de participantes foi atingido.";
+      alertBox.style.display = "none";
       disablePacks("O limite máximo de participantes foi atingido.", "soldout", "Completo");
-      urgencyBox.style.display = "none";
       return;
     }
 
@@ -866,8 +672,8 @@ async function loadRaffle(){
     console.error(error);
     raffleTitle.textContent = "Erro ao carregar";
     raffleText.textContent = "Ocorreu um erro ao carregar o sorteio.";
+    alertBox.style.display = "none";
     disablePacks("Erro ao carregar o sorteio.", "closed", "Erro");
-    urgencyBox.style.display = "none";
   }
 }
 
