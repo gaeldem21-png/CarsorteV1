@@ -15,6 +15,9 @@
   --muted:#b8b8b8;
   --line:rgba(255,255,255,.08);
   --shadow:0 14px 34px rgba(0,0,0,.32);
+  --green:#29c46d;
+  --red:#d95c5c;
+  --orange:#ff9f43;
 }
 *{box-sizing:border-box}
 body{
@@ -60,7 +63,7 @@ a{text-decoration:none;color:inherit}
 }
 .grid{
   display:grid;
-  grid-template-columns:1.1fr .9fr;
+  grid-template-columns:1.08fr .92fr;
   gap:28px;
 }
 .card{
@@ -72,9 +75,10 @@ a{text-decoration:none;color:inherit}
 }
 .hero-image{
   width:100%;
-  height:460px;
+  height:500px;
   object-fit:cover;
   border-radius:18px;
+  display:block;
 }
 h1{
   margin:0 0 10px;
@@ -84,24 +88,6 @@ h1{
 p{
   color:var(--muted);
   line-height:1.8;
-}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  margin:22px 0;
-}
-.stat{
-  background:#0b0b0b;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-  text-align:center;
-}
-.stat strong{
-  display:block;
-  color:var(--gold-soft);
-  font-size:24px;
 }
 .badge{
   display:inline-block;
@@ -126,6 +112,52 @@ p{
   border:1px solid rgba(212,160,23,.22);
   color:#ffe08a;
 }
+.urgency{
+  margin-top:10px;
+  padding:14px 16px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.7;
+  display:none;
+}
+.urgency.orange{
+  background:rgba(255,159,67,.1);
+  border:1px solid rgba(255,159,67,.22);
+  color:#ffc58f;
+}
+.urgency.green{
+  background:rgba(41,196,109,.1);
+  border:1px solid rgba(41,196,109,.22);
+  color:#9ef0be;
+}
+.urgency.red{
+  background:rgba(217,92,92,.1);
+  border:1px solid rgba(217,92,92,.22);
+  color:#ffb5b5;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin:22px 0;
+}
+.stat{
+  background:#0b0b0b;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;
+  text-align:center;
+}
+.stat strong{
+  display:block;
+  color:var(--gold-soft);
+  font-size:24px;
+}
+.stat small{
+  color:#bdbdbd;
+  display:block;
+  margin-top:5px;
+}
 .progress-wrap{
   margin:18px 0 22px;
 }
@@ -148,6 +180,7 @@ p{
   height:100%;
   width:0%;
   background:linear-gradient(90deg,#b07b06,#f4c542);
+  transition:width .35s ease;
 }
 .notice{
   margin-top:14px;
@@ -167,11 +200,25 @@ p{
   border:1px solid rgba(217,92,92,.22);
   color:#ffb5b5;
 }
+.proof{
+  margin-top:16px;
+  display:grid;
+  gap:10px;
+}
+.proof-box{
+  background:#0c0c0c;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:14px;
+  color:#d8d8d8;
+  font-size:14px;
+  line-height:1.7;
+}
 .packs{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
-  margin-top:20px;
+  margin-top:22px;
 }
 .pack{
   display:block;
@@ -180,6 +227,11 @@ p{
   border-radius:18px;
   padding:18px 12px;
   text-align:center;
+  transition:transform .2s ease,border-color .2s ease;
+}
+.pack:hover{
+  transform:translateY(-2px);
+  border-color:rgba(212,160,23,.35);
 }
 .pack.featured{
   border-color:rgba(212,160,23,.35);
@@ -200,6 +252,12 @@ p{
   font-size:20px;
   font-weight:800;
 }
+.pack .mini{
+  margin-top:8px;
+  color:#86e6a9;
+  font-size:13px;
+  font-weight:700;
+}
 .btn{
   display:inline-block;
   margin-top:14px;
@@ -214,10 +272,16 @@ p{
   color:#888;
   pointer-events:none;
 }
+.footer-info{
+  margin-top:18px;
+  color:#9f9f9f;
+  font-size:13px;
+  line-height:1.7;
+}
 @media(max-width:900px){
   .grid{grid-template-columns:1fr}
   .packs{grid-template-columns:1fr}
-  .hero-image{height:260px}
+  .hero-image{height:280px}
 }
 </style>
 </head>
@@ -233,6 +297,7 @@ p{
 
     <div class="nav">
       <a href="index.html">Início</a>
+      <a href="sorteios.html">Sorteios</a>
       <a href="winners.html">Vencedores</a>
       <a href="results.html">Resultados</a>
       <a href="admin.html">Admin</a>
@@ -241,33 +306,33 @@ p{
 
   <div class="grid">
     <div class="card">
-      <img id="raffleImage" class="hero-image" src="https://gaeldem21-png.github.io/CarsorteV1/jumpy.jpg" alt="Veículo">
+      <img id="raffleImage" class="hero-image" src="" alt="Veículo">
     </div>
 
     <div class="card">
       <div id="statusBadge" class="badge active">Ativo</div>
 
       <h1 id="raffleTitle">Carregando...</h1>
-      <p id="raffleText">
-        A carregar o sorteio diretamente da base de dados.
-      </p>
+      <p id="raffleText">A carregar o sorteio diretamente da base de dados.</p>
+
+      <div id="urgencyBox" class="urgency orange"></div>
 
       <div class="stats">
         <div class="stat">
           <strong id="rafflePrice">-</strong>
-          <span>por bilhete</span>
+          <small>por bilhete</small>
         </div>
         <div class="stat">
           <strong id="raffleTotal">0</strong>
-          <span>bilhetes totais</span>
+          <small>bilhetes totais</small>
         </div>
         <div class="stat">
           <strong id="raffleSold">0</strong>
-          <span>vendidos</span>
+          <small>vendidos</small>
         </div>
         <div class="stat">
-          <strong id="raffleState">-</strong>
-          <span>estado</span>
+          <strong id="raffleRemaining">0</strong>
+          <small>restantes</small>
         </div>
       </div>
 
@@ -283,18 +348,25 @@ p{
 
       <div id="raffleNotice" class="notice info"></div>
 
+      <div class="proof">
+        <div class="proof-box" id="socialProof1">A carregar prova social...</div>
+        <div class="proof-box" id="socialProof2">A carregar atividade...</div>
+      </div>
+
       <div class="packs">
         <a id="pack1" class="pack" href="#">
           <strong>1</strong>
           <small>Entrada simples</small>
           <span id="price1">-</span>
+          <div class="mini" id="mini1">Entrada rápida</div>
           <div class="btn">Escolher</div>
         </a>
 
         <a id="pack5" class="pack featured" href="#">
           <strong>5</strong>
-          <small>Oferta de lançamento</small>
+          <small>Mais escolhido</small>
           <span id="price5">-</span>
+          <div class="mini">Melhor equilíbrio</div>
           <div class="btn">Escolher</div>
         </a>
 
@@ -302,8 +374,13 @@ p{
           <strong>15</strong>
           <small>Melhor valor</small>
           <span id="price15">-</span>
+          <div class="mini">Máxima exposição</div>
           <div class="btn">Escolher</div>
         </a>
+      </div>
+
+      <div class="footer-info">
+        Compra simples, resultado público e acompanhamento através da plataforma CarSorte.
       </div>
     </div>
   </div>
@@ -334,10 +411,11 @@ const raffleTitle = document.getElementById("raffleTitle");
 const rafflePrice = document.getElementById("rafflePrice");
 const raffleTotal = document.getElementById("raffleTotal");
 const raffleSold = document.getElementById("raffleSold");
-const raffleState = document.getElementById("raffleState");
+const raffleRemaining = document.getElementById("raffleRemaining");
 const statusBadge = document.getElementById("statusBadge");
 const raffleText = document.getElementById("raffleText");
 const raffleNotice = document.getElementById("raffleNotice");
+const urgencyBox = document.getElementById("urgencyBox");
 const progressText = document.getElementById("progressText");
 const progressPercent = document.getElementById("progressPercent");
 const progressBar = document.getElementById("progressBar");
@@ -347,10 +425,30 @@ const pack15 = document.getElementById("pack15");
 const price1 = document.getElementById("price1");
 const price5 = document.getElementById("price5");
 const price15 = document.getElementById("price15");
+const socialProof1 = document.getElementById("socialProof1");
+const socialProof2 = document.getElementById("socialProof2");
 
 function formatCurrency(value){
   if(value === undefined || value === null) return "-";
   return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
+}
+
+async function getPrimaryRaffle(){
+  const snap = await getDocs(collection(db, "raffles"));
+  const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  if(!raffles.length) return null;
+
+  const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
+  if(featuredActive) return featuredActive;
+
+  const firstActive = raffles.find(r => r.status === "active");
+  if(firstActive) return firstActive;
+
+  const featuredAny = raffles.find(r => r.featured === true);
+  if(featuredAny) return featuredAny;
+
+  return raffles[0];
 }
 
 function setPackLinks(raffleId){
@@ -373,22 +471,41 @@ function disablePacks(message, badgeType, badgeLabel){
   raffleNotice.textContent = message;
 }
 
-async function getPrimaryRaffle(){
-  const snap = await getDocs(collection(db, "raffles"));
-  const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+function buildUrgency(sold, total, percent, remaining){
+  urgencyBox.style.display = "block";
 
-  if(!raffles.length) return null;
+  if(percent >= 85){
+    urgencyBox.className = "urgency red";
+    urgencyBox.textContent = `Atenção: restam apenas ${remaining} bilhetes. Este sorteio está numa fase muito avançada.`;
+    return;
+  }
 
-  const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
-  if(featuredActive) return featuredActive;
+  if(percent >= 60){
+    urgencyBox.className = "urgency orange";
+    urgencyBox.textContent = `Mais de ${percent.toFixed(0)}% dos bilhetes já foram vendidos. A procura está a acelerar.`;
+    return;
+  }
 
-  const firstActive = raffles.find(r => r.status === "active");
-  if(firstActive) return firstActive;
+  urgencyBox.className = "urgency green";
+  urgencyBox.textContent = `O sorteio está ativo e já conta com ${sold} bilhetes vendidos. Ainda vai a tempo de entrar.`;
+}
 
-  const featuredAny = raffles.find(r => r.featured === true);
-  if(featuredAny) return featuredAny;
+function buildSocialProof(sold, total, percent, remaining){
+  const estimatedParticipants = Math.max(1, Math.ceil(sold / 2.4));
 
-  return raffles[0];
+  socialProof1.textContent =
+    `${estimatedParticipants} participantes estimados já entraram neste sorteio.`;
+
+  if(percent >= 80){
+    socialProof2.textContent =
+      `Fase final: ${remaining} bilhetes restantes antes do fecho do sorteio.`;
+  } else if(percent >= 50){
+    socialProof2.textContent =
+      `Sorteio em forte progressão: ${percent.toFixed(0)}% dos bilhetes já foram ocupados.`;
+  } else {
+    socialProof2.textContent =
+      `Boa janela de entrada: ainda existem ${remaining} bilhetes disponíveis neste sorteio.`;
+  }
 }
 
 async function getRaffle(){
@@ -414,42 +531,48 @@ async function loadRaffle(){
     rafflePrice.textContent = formatCurrency(raffle.price);
     raffleTotal.textContent = raffle.tickets_total ?? 0;
     raffleSold.textContent = raffle.tickets_sold ?? 0;
-    raffleState.textContent = raffle.status || "-";
 
     if(raffle.image){
       raffleImage.src = raffle.image;
     }
 
     const unit = Number(raffle.price || 0);
+    const sold = Number(raffle.tickets_sold || 0);
+    const total = Number(raffle.tickets_total || 0);
+    const remaining = Math.max(0, total - sold);
+    const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
+
+    raffleRemaining.textContent = remaining;
     price1.textContent = formatCurrency(unit);
     price5.textContent = formatCurrency(10);
     price15.textContent = formatCurrency(25);
-
-    const sold = Number(raffle.tickets_sold || 0);
-    const total = Number(raffle.tickets_total || 0);
-    const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
 
     progressBar.style.width = `${percent}%`;
     progressPercent.textContent = `${percent.toFixed(2)}%`;
     progressText.textContent = `${sold} / ${total} vendidos`;
 
     setPackLinks(raffle.id);
+    buildUrgency(sold, total, percent, remaining);
+    buildSocialProof(sold, total, percent, remaining);
 
     if(raffle.status === "closed"){
-      raffleText.textContent = "Este sorteio foi encerrado e o vencedor já foi selecionado.";
+      raffleText.textContent = "Este sorteio foi encerrado e o vencedor já foi sorteado.";
       disablePacks("Este sorteio foi encerrado. Consulte os vencedores para ver o resultado oficial.", "closed", "Encerrado");
+      urgencyBox.style.display = "none";
       return;
     }
 
     if(raffle.status === "sold_out"){
       raffleText.textContent = "Todos os bilhetes deste sorteio foram vendidos.";
       disablePacks("Todos os bilhetes foram vendidos para este sorteio.", "soldout", "Esgotado");
+      urgencyBox.style.display = "none";
       return;
     }
 
     if(total > 0 && sold >= total){
-      raffleText.textContent = "O número máximo de participantes foi atingido.";
+      raffleText.textContent = "O limite máximo de participantes foi atingido.";
       disablePacks("O limite máximo de participantes foi atingido.", "soldout", "Completo");
+      urgencyBox.style.display = "none";
       return;
     }
 
@@ -457,7 +580,6 @@ async function loadRaffle(){
     statusBadge.textContent = "Ativo";
     raffleNotice.style.display = "none";
     raffleText.textContent = "Escolha o pack que preferir e participe diretamente no sorteio ativo da plataforma.";
-
   }catch(error){
     console.error(error);
     raffleTitle.textContent = "Erro ao carregar";
