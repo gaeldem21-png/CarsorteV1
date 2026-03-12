@@ -1,204 +1,1012 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarSorte - Sorteio</title>
 
-<title>CarSorte - Comprar Bilhetes</title>
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#101010;
+      --panel-2:#0b0b0b;
+      --gold:#d4a017;
+      --gold-soft:#f4c542;
+      --text:#ffffff;
+      --muted:#b8b8b8;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 16px 36px rgba(0,0,0,.35);
+      --green:#29c46d;
+      --red:#d95c5c;
+      --orange:#ff9f43;
+      --blue:#3f7cff;
+    }
 
-<style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
 
-body{
-background:#050505;
-color:white;
-font-family:Arial;
-margin:0;
-padding:0;
-}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:radial-gradient(circle at top, rgba(212,160,23,.08), transparent 28%), var(--bg);
+      color:var(--text);
+    }
 
-.container{
-max-width:700px;
-margin:auto;
-padding:20px;
-}
+    a{text-decoration:none;color:inherit}
 
-input{
-width:100%;
-padding:14px;
-margin-bottom:12px;
-border-radius:10px;
-border:1px solid #333;
-background:#111;
-color:white;
-}
+    .container{
+      max-width:1240px;
+      margin:auto;
+      padding:24px 20px 60px;
+    }
 
-button{
-width:100%;
-padding:16px;
-background:#d4a017;
-border:none;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-}
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
 
-img{
-width:100%;
-border-radius:16px;
-margin-bottom:20px;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
 
-.title{
-font-size:28px;
-margin-bottom:10px;
-}
+    .brand img{
+      height:76px;
+      width:auto;
+      object-fit:contain;
+    }
 
-.price{
-font-size:22px;
-color:#f4c542;
-margin-bottom:20px;
-}
+    .brand strong{
+      display:block;
+      color:var(--gold-soft);
+      font-size:34px;
+      line-height:1;
+    }
 
-</style>
+    .brand span{
+      display:block;
+      color:#999;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      margin-top:6px;
+    }
+
+    .nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      padding:12px 14px;
+      border-radius:12px;
+      background:#111;
+      border:1px solid var(--line);
+      color:#ddd;
+      font-weight:700;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .card{
+      background:linear-gradient(180deg,#111,#090909);
+      border:1px solid rgba(212,160,23,.14);
+      border-radius:28px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-image{
+      width:100%;
+      height:100%;
+      min-height:560px;
+      object-fit:cover;
+      border-radius:20px;
+      display:block;
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .badge.active{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .badge.closed{
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .badge.soldout{
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
+
+    h1{
+      margin:0 0 12px;
+      color:var(--gold-soft);
+      font-size:54px;
+      line-height:1;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:18px;
+      margin-bottom:18px;
+    }
+
+    .alert-box{
+      display:none;
+      margin:14px 0 18px;
+      padding:16px;
+      border-radius:16px;
+      font-size:14px;
+      line-height:1.7;
+      font-weight:700;
+    }
+
+    .alert-box.green{
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .alert-box.orange{
+      background:rgba(255,159,67,.1);
+      border:1px solid rgba(255,159,67,.22);
+      color:#ffc58f;
+    }
+
+    .alert-box.red{
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin:22px 0;
+    }
+
+    .stat{
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      text-align:center;
+    }
+
+    .stat strong{
+      display:block;
+      color:var(--gold-soft);
+      font-size:32px;
+      margin-bottom:6px;
+    }
+
+    .stat span{
+      color:#bcbcbc;
+      font-size:14px;
+    }
+
+    .progress-wrap{
+      margin:18px 0 22px;
+    }
+
+    .progress-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:8px;
+      color:#bbb;
+      font-size:14px;
+    }
+
+    .progress{
+      height:12px;
+      border-radius:999px;
+      background:#1a1a1a;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,#b07b06,#f4c542);
+      transition:width .35s ease;
+    }
+
+    .packs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .pack{
+      display:block;
+      background:#0b0b0b;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px 12px;
+      text-align:center;
+      transition:transform .2s ease,border-color .2s ease, background .2s ease;
+      cursor:pointer;
+    }
+
+    .pack:hover{
+      transform:translateY(-2px);
+      border-color:rgba(212,160,23,.35);
+    }
+
+    .pack.featured{
+      border-color:rgba(212,160,23,.35);
+      background:rgba(212,160,23,.08);
+    }
+
+    .pack.active-choice{
+      border-color:rgba(63,124,255,.45);
+      background:rgba(63,124,255,.10);
+    }
+
+    .pack.disabled{
+      opacity:.5;
+      pointer-events:none;
+    }
+
+    .pack strong{
+      display:block;
+      font-size:34px;
+      color:var(--gold-soft);
+    }
+
+    .pack small{
+      display:block;
+      color:#aaa;
+      margin:8px 0 10px;
+      font-size:14px;
+    }
+
+    .pack .price{
+      display:block;
+      font-size:22px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .pack .mini{
+      margin-top:8px;
+      color:#86e6a9;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .pack .cta{
+      display:inline-block;
+      margin-top:14px;
+      padding:11px 15px;
+      border-radius:12px;
+      font-weight:800;
+      background:var(--gold);
+      color:#000;
+    }
+
+    .notice{
+      display:none;
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:14px;
+      font-size:14px;
+      line-height:1.7;
+      background:rgba(212,160,23,.1);
+      border:1px solid rgba(212,160,23,.22);
+      color:#ffe08a;
+    }
+
+    .proof{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .proof-box{
+      background:#0c0c0c;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:14px;
+      color:#ddd;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .proof-box b{
+      color:#fff;
+    }
+
+    .buy-card{
+      margin-top:24px;
+    }
+
+    .buy-card h2{
+      margin:0 0 12px;
+      font-size:34px;
+      color:#fff;
+    }
+
+    .buy-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .full{
+      grid-column:1 / -1;
+    }
+
+    input{
+      width:100%;
+      padding:16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#0b0b0b;
+      color:#fff;
+      font-size:16px;
+      outline:none;
+    }
+
+    input:focus{
+      border-color:rgba(212,160,23,.35);
+    }
+
+    .summary-box{
+      margin-top:16px;
+      background:#0c0c0c;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .summary-row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:8px 0;
+      color:#ddd;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .summary-row:last-child{
+      border-bottom:none;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .buy-btn{
+      width:100%;
+      margin-top:18px;
+      padding:16px 18px;
+      border:none;
+      border-radius:14px;
+      background:var(--gold);
+      color:#000;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .buy-btn:disabled{
+      background:#3a3a3a;
+      color:#8f8f8f;
+      cursor:not-allowed;
+    }
+
+    .result-box{
+      margin-top:16px;
+      display:none;
+      padding:16px;
+      border-radius:16px;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .result-box.ok{
+      display:block;
+      background:rgba(41,196,109,.1);
+      border:1px solid rgba(41,196,109,.22);
+      color:#9ef0be;
+    }
+
+    .result-box.err{
+      display:block;
+      background:rgba(217,92,92,.1);
+      border:1px solid rgba(217,92,92,.22);
+      color:#ffb5b5;
+    }
+
+    .footer-note{
+      margin-top:18px;
+      color:#9f9f9f;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .hero-image{min-height:300px}
+      h1{font-size:42px}
+    }
+
+    @media(max-width:760px){
+      .packs{grid-template-columns:1fr}
+      .proof{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+      .form-grid{grid-template-columns:1fr}
+      .full{grid-column:auto}
+    }
+
+    @media(max-width:520px){
+      .stats{grid-template-columns:1fr}
+    }
+  </style>
 </head>
-
 <body>
 
 <div class="container">
 
-<div class="title">Ford Ranger</div>
+  <div class="header">
+    <div class="brand">
+      <img src="logo-carsorte.png" alt="CarSorte">
+      <div>
+        <strong>CarSorte</strong>
+        <span>by DEM Automóveis</span>
+      </div>
+    </div>
 
-<img id="raffleImage">
+    <div class="nav">
+      <a href="index.html">Início</a>
+      <a href="sorteios.html">Sorteios</a>
+      <a href="winners.html">Vencedores</a>
+      <a href="results.html">Resultados</a>
+      <a href="faq.html">FAQ</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </div>
 
-<div class="price">Bilhete: 2.5€</div>
+  <div class="hero">
+    <div class="card">
+      <img id="raffleImage" class="hero-image" src="" alt="Veículo">
+    </div>
 
-<input id="name" placeholder="Nome">
-<input id="email" placeholder="Email">
-<input id="phone" placeholder="Telefone">
-<input id="city" placeholder="Cidade">
+    <div class="card">
+      <div id="statusBadge" class="badge active">Ativo</div>
 
-<input id="qty" type="number" value="1" min="1">
+      <h1 id="raffleTitle">Carregando...</h1>
+      <p id="raffleText" class="sub">A carregar o sorteio diretamente do Firebase.</p>
 
-<button onclick="buyTickets()">Comprar Bilhetes</button>
+      <div id="alertBox" class="alert-box green"></div>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="rafflePrice">-</strong>
+          <span>por bilhete</span>
+        </div>
+        <div class="stat">
+          <strong id="raffleTotal">0</strong>
+          <span>bilhetes totais</span>
+        </div>
+        <div class="stat">
+          <strong id="raffleSold">0</strong>
+          <span>vendidos</span>
+        </div>
+        <div class="stat">
+          <strong id="raffleRemaining">0</strong>
+          <span>restantes</span>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span id="progressText">0 / 0 vendidos</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div class="packs">
+        <div class="pack active-choice" data-pack="1">
+          <strong>1</strong>
+          <small>Entrada simples</small>
+          <span id="price1" class="price">-</span>
+          <div class="mini">Entrada rápida</div>
+          <div class="cta">Escolher</div>
+        </div>
+
+        <div class="pack featured" data-pack="5">
+          <strong>5</strong>
+          <small>Mais escolhido</small>
+          <span id="price5" class="price">-</span>
+          <div class="mini">Melhor equilíbrio</div>
+          <div class="cta">Escolher</div>
+        </div>
+
+        <div class="pack" data-pack="15">
+          <strong>15</strong>
+          <small>Melhor valor</small>
+          <span id="price15" class="price">-</span>
+          <div class="mini">Máxima exposição</div>
+          <div class="cta">Escolher</div>
+        </div>
+      </div>
+
+      <div id="raffleNotice" class="notice"></div>
+
+      <div class="proof">
+        <div id="proof1" class="proof-box">A carregar estatísticas do sorteio...</div>
+        <div id="proof2" class="proof-box">A calcular o ritmo do sorteio...</div>
+      </div>
+
+      <div class="footer-note">
+        Processo simples, histórico público e acompanhamento transparente através da plataforma CarSorte.
+      </div>
+    </div>
+  </div>
+
+  <div class="card buy-card" id="buySection">
+    <h2>Finalizar participação</h2>
+    <p>Preencha os seus dados para confirmar a participação. O pack escolhido é refletido automaticamente no resumo.</p>
+
+    <div class="form-grid">
+      <input id="buyerName" type="text" placeholder="Nome completo">
+      <input id="buyerEmail" type="email" placeholder="Email">
+      <input id="buyerPhone" type="text" placeholder="Telefone">
+      <input id="buyerCity" type="text" placeholder="Cidade">
+      <input id="buyerQty" class="full" type="number" min="1" value="1" placeholder="Quantidade de bilhetes">
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-row">
+        <span>Sorteio</span>
+        <strong id="summaryRaffle">-</strong>
+      </div>
+      <div class="summary-row">
+        <span>Pack escolhido</span>
+        <strong id="summaryQty">1 bilhete</strong>
+      </div>
+      <div class="summary-row">
+        <span>Total</span>
+        <strong id="summaryTotal">-</strong>
+      </div>
+    </div>
+
+    <button id="buyBtn" class="buy-btn">Confirmar participação</button>
+
+    <div id="resultBox" class="result-box"></div>
+  </div>
 
 </div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 import {
-getFirestore,
-collection,
-getDocs,
-addDoc,
-doc,
-updateDoc,
-increment,
-serverTimestamp,
-getDoc
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  addDoc,
+  updateDoc,
+  increment,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
-authDomain: "carsorte.firebaseapp.com",
-projectId: "carsorte",
-storageBucket: "carsorte.firebasestorage.app",
-messagingSenderId: "995392174657",
-appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+  apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+  authDomain: "carsorte.firebaseapp.com",
+  projectId: "carsorte",
+  storageBucket: "carsorte.firebasestorage.app",
+  messagingSenderId: "995392174657",
+  appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const raffleId = "Ford ranger test"
+const params = new URLSearchParams(window.location.search);
+const requestedRaffleId = params.get("raffle");
+
+const raffleImage = document.getElementById("raffleImage");
+const raffleTitle = document.getElementById("raffleTitle");
+const rafflePrice = document.getElementById("rafflePrice");
+const raffleTotal = document.getElementById("raffleTotal");
+const raffleSold = document.getElementById("raffleSold");
+const raffleRemaining = document.getElementById("raffleRemaining");
+const raffleText = document.getElementById("raffleText");
+const statusBadge = document.getElementById("statusBadge");
+const alertBox = document.getElementById("alertBox");
+const progressText = document.getElementById("progressText");
+const progressPercent = document.getElementById("progressPercent");
+const progressBar = document.getElementById("progressBar");
+const raffleNotice = document.getElementById("raffleNotice");
+
+const price1 = document.getElementById("price1");
+const price5 = document.getElementById("price5");
+const price15 = document.getElementById("price15");
+
+const proof1 = document.getElementById("proof1");
+const proof2 = document.getElementById("proof2");
+
+const buyerName = document.getElementById("buyerName");
+const buyerEmail = document.getElementById("buyerEmail");
+const buyerPhone = document.getElementById("buyerPhone");
+const buyerCity = document.getElementById("buyerCity");
+const buyerQty = document.getElementById("buyerQty");
+const buyBtn = document.getElementById("buyBtn");
+const resultBox = document.getElementById("resultBox");
+
+const summaryRaffle = document.getElementById("summaryRaffle");
+const summaryQty = document.getElementById("summaryQty");
+const summaryTotal = document.getElementById("summaryTotal");
+
+const packCards = Array.from(document.querySelectorAll(".pack"));
+
+let currentRaffle = null;
+
+function formatCurrency(value){
+  if(value === undefined || value === null) return "-";
+  return Number(value) % 1 === 0 ? `${value}€` : `${String(value).replace(".", ",")}€`;
+}
+
+function normalize(value){
+  return String(value || "").trim().toLowerCase();
+}
+
+function showResult(text, type){
+  resultBox.className = `result-box ${type}`;
+  resultBox.innerHTML = text;
+}
+
+function hideResult(){
+  resultBox.className = "result-box";
+  resultBox.innerHTML = "";
+}
+
+async function getFeaturedRaffle(){
+  const snap = await getDocs(collection(db, "raffles"));
+  const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  if(!raffles.length) return null;
+
+  const featuredActive = raffles.find(r => r.featured === true && r.status === "active");
+  if(featuredActive) return featuredActive;
+
+  const active = raffles.find(r => r.status === "active");
+  if(active) return active;
+
+  const featuredAny = raffles.find(r => r.featured === true);
+  if(featuredAny) return featuredAny;
+
+  return raffles[0];
+}
+
+async function getExactRaffle(){
+  if (requestedRaffleId) {
+    const exactSnap = await getDoc(doc(db, "raffles", requestedRaffleId));
+    if (exactSnap.exists()) {
+      return { id: exactSnap.id, ...exactSnap.data() };
+    }
+
+    const snap = await getDocs(collection(db, "raffles"));
+    const raffles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const lower = normalize(requestedRaffleId);
+
+    const found = raffles.find(r => normalize(r.id) === lower);
+    if (found) return found;
+
+    return null;
+  }
+
+  return await getFeaturedRaffle();
+}
+
+function getPackTotal(qty, unitPrice){
+  const q = Number(qty || 0);
+  if(q === 5) return 10;
+  if(q === 15) return 25;
+  return Number(unitPrice || 0) * q;
+}
+
+function updateSummary(){
+  if(!currentRaffle) return;
+  const qty = Math.max(1, Number(buyerQty.value || 1));
+  buyerQty.value = qty;
+  summaryRaffle.textContent = currentRaffle.title || currentRaffle.id;
+  summaryQty.textContent = qty > 1 ? `${qty} bilhetes` : "1 bilhete";
+  summaryTotal.textContent = formatCurrency(getPackTotal(qty, currentRaffle.price));
+}
+
+function setActivePack(qty){
+  packCards.forEach(card => {
+    card.classList.remove("active-choice");
+    if(Number(card.dataset.pack) === qty){
+      card.classList.add("active-choice");
+    }
+  });
+  buyerQty.value = qty;
+  updateSummary();
+  document.getElementById("buySection").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function disablePurchase(message, type, label){
+  packCards.forEach(pack => pack.classList.add("disabled"));
+  statusBadge.className = `badge ${type}`;
+  statusBadge.textContent = label;
+  raffleNotice.style.display = "block";
+  raffleNotice.textContent = message;
+  buyBtn.disabled = true;
+}
+
+function enablePurchase(){
+  packCards.forEach(pack => pack.classList.remove("disabled"));
+  buyBtn.disabled = false;
+  raffleNotice.style.display = "none";
+}
+
+function showAlert(percent, rest, sold){
+  alertBox.style.display = "block";
+
+  if (percent >= 85) {
+    alertBox.className = "alert-box red";
+    alertBox.textContent = `Atenção: restam apenas ${rest} bilhetes.`;
+    return;
+  }
+
+  if (percent >= 60) {
+    alertBox.className = "alert-box orange";
+    alertBox.textContent = `Mais de ${percent.toFixed(0)}% dos bilhetes já foram vendidos.`;
+    return;
+  }
+
+  alertBox.className = "alert-box green";
+  alertBox.textContent = `O sorteio está ativo e já conta com ${sold} bilhetes vendidos.`;
+}
+
+function showProof(sold, total, rest, percent){
+  const participants = Math.max(1, Math.ceil(sold / 2.4));
+  proof1.innerHTML = `<b>${participants}</b> participantes estimados já entraram neste sorteio.`;
+
+  if (percent >= 80) {
+    proof2.innerHTML = `Fase final: <b>${rest}</b> bilhetes restantes.`;
+  } else if (percent >= 50) {
+    proof2.innerHTML = `Sorteio em forte progressão: <b>${percent.toFixed(0)}%</b> vendido.`;
+  } else {
+    proof2.innerHTML = `Ainda existem <b>${rest}</b> bilhetes disponíveis.`;
+  }
+}
 
 async function loadRaffle(){
+  try{
+    const raffle = await getExactRaffle();
 
-const raffleRef = doc(db,"raffles",raffleId)
-const snap = await getDoc(raffleRef)
+    if(!raffle){
+      raffleTitle.textContent = "Sorteio indisponível";
+      raffleText.textContent = "Nenhum sorteio foi encontrado.";
+      alertBox.style.display = "none";
+      disablePurchase("Nenhum sorteio encontrado.", "closed", "Indisponível");
+      return;
+    }
 
-if(!snap.exists()) return
+    currentRaffle = raffle;
 
-const raffle = snap.data()
+    raffleTitle.textContent = raffle.title || raffle.id;
+    rafflePrice.textContent = formatCurrency(raffle.price);
+    raffleTotal.textContent = raffle.tickets_total ?? 0;
+    raffleSold.textContent = raffle.tickets_sold ?? 0;
 
-document.getElementById("raffleImage").src = raffle.image
+    if (raffle.image) raffleImage.src = raffle.image;
 
+    const unit = Number(raffle.price || 0);
+    const sold = Number(raffle.tickets_sold || 0);
+    const total = Number(raffle.tickets_total || 0);
+    const rest = Math.max(0, total - sold);
+    const percent = total > 0 ? Math.min((sold / total) * 100, 100) : 0;
+
+    raffleRemaining.textContent = rest;
+
+    price1.textContent = formatCurrency(unit);
+    price5.textContent = "10€";
+    price15.textContent = "25€";
+
+    progressBar.style.width = `${percent}%`;
+    progressPercent.textContent = `${percent.toFixed(2)}%`;
+    progressText.textContent = `${sold} / ${total} vendidos`;
+
+    showAlert(percent, rest, sold);
+    showProof(sold, total, rest, percent);
+    updateSummary();
+
+    if (raffle.status === "closed") {
+      raffleText.textContent = "Este sorteio foi encerrado.";
+      alertBox.style.display = "none";
+      disablePurchase("Este sorteio foi encerrado.", "closed", "Encerrado");
+      return;
+    }
+
+    if (raffle.status === "sold_out") {
+      raffleText.textContent = "Todos os bilhetes deste sorteio foram vendidos.";
+      alertBox.style.display = "none";
+      disablePurchase("Todos os bilhetes foram vendidos.", "soldout", "Esgotado");
+      return;
+    }
+
+    if (total > 0 && sold >= total) {
+      raffleText.textContent = "O limite máximo de participantes foi atingido.";
+      alertBox.style.display = "none";
+      disablePurchase("O limite máximo de participantes foi atingido.", "soldout", "Completo");
+      return;
+    }
+
+    statusBadge.className = "badge active";
+    statusBadge.textContent = "Ativo";
+    raffleText.textContent = "Escolha o pack que preferir e participe diretamente no sorteio ativo da plataforma.";
+    enablePurchase();
+  } catch(error){
+    console.error(error);
+    raffleTitle.textContent = "Erro ao carregar";
+    raffleText.textContent = "Ocorreu um erro ao carregar o sorteio.";
+    alertBox.style.display = "none";
+    disablePurchase("Erro ao carregar o sorteio.", "closed", "Erro");
+  }
 }
 
-loadRaffle()
+async function createTicketsAndOrder(){
+  hideResult();
 
-async function buyTickets(){
+  if(!currentRaffle){
+    showResult("O sorteio não está carregado.", "err");
+    return;
+  }
 
-const name = document.getElementById("name").value
-const email = document.getElementById("email").value
-const phone = document.getElementById("phone").value
-const city = document.getElementById("city").value
-const qty = Number(document.getElementById("qty").value)
+  const name = buyerName.value.trim();
+  const email = buyerEmail.value.trim();
+  const phone = buyerPhone.value.trim();
+  const city = buyerCity.value.trim();
+  const qty = Math.max(1, Number(buyerQty.value || 1));
 
-try{
+  if(!name || !email || !phone || !city){
+    showResult("Preencha todos os campos antes de confirmar a participação.", "err");
+    return;
+  }
 
-const ticketsRef = collection(db,"tickets")
-const ordersRef = collection(db,"orders")
-const raffleRef = doc(db,"raffles",raffleId)
+  const currentSold = Number(currentRaffle.tickets_sold || 0);
+  const currentTotal = Number(currentRaffle.tickets_total || 0);
 
-const snapshot = await getDocs(ticketsRef)
+  if(currentSold + qty > currentTotal){
+    showResult("A quantidade escolhida ultrapassa o número de bilhetes restantes.", "err");
+    return;
+  }
 
-let maxTicket = 0
+  buyBtn.disabled = true;
+  buyBtn.textContent = "A processar...";
 
-snapshot.forEach(t=>{
-const n = Number(t.data().ticket_number)
-if(n > maxTicket) maxTicket = n
-})
+  try{
+    const ticketsRef = collection(db, "tickets");
+    const ordersRef = collection(db, "orders");
+    const raffleRef = doc(db, "raffles", currentRaffle.id);
 
-const createdTickets = []
+    const ticketsSnapshot = await getDocs(ticketsRef);
 
-for(let i=1;i<=qty;i++){
+    let maxTicket = 0;
+    ticketsSnapshot.forEach(ticketDoc => {
+      const number = Number(ticketDoc.data().ticket_number || 0);
+      if(number > maxTicket) maxTicket = number;
+    });
 
-const number = maxTicket + i
+    const createdTickets = [];
 
-await addDoc(ticketsRef,{
-raffle_id:raffleId,
-buyer:name,
-buyer_email:email,
-buyer_phone:phone,
-buyer_city:city,
-ticket_number:number,
-created:serverTimestamp()
-})
+    for(let i = 1; i <= qty; i++){
+      const ticketNumber = maxTicket + i;
 
-createdTickets.push(number)
+      await addDoc(ticketsRef, {
+        raffle_id: currentRaffle.id,
+        raffle_title: currentRaffle.title || currentRaffle.id,
+        buyer: name,
+        buyer_email: email,
+        buyer_phone: phone,
+        buyer_city: city,
+        ticket_number: ticketNumber,
+        created: serverTimestamp()
+      });
 
+      createdTickets.push(ticketNumber);
+    }
+
+    await addDoc(ordersRef, {
+      buyer: name,
+      buyer_email: email,
+      buyer_phone: phone,
+      buyer_city: city,
+      raffle_id: currentRaffle.id,
+      raffle_title: currentRaffle.title || currentRaffle.id,
+      qty: qty,
+      total: getPackTotal(qty, currentRaffle.price),
+      tickets: createdTickets,
+      created: serverTimestamp()
+    });
+
+    await updateDoc(raffleRef, {
+      tickets_sold: increment(qty)
+    });
+
+    showResult(
+      `Participação confirmada com sucesso.<br><b>Bilhetes:</b> ${createdTickets.join(", ")}`,
+      "ok"
+    );
+
+    buyerName.value = "";
+    buyerEmail.value = "";
+    buyerPhone.value = "";
+    buyerCity.value = "";
+    buyerQty.value = 1;
+    setActivePack(1);
+
+    await loadRaffle();
+  } catch(error){
+    console.error(error);
+    showResult("Erro ao guardar no Firebase. Verifica as regras e o nome do sorteio.", "err");
+  } finally {
+    buyBtn.disabled = false;
+    buyBtn.textContent = "Confirmar participação";
+  }
 }
 
-await addDoc(ordersRef,{
-buyer:name,
-buyer_email:email,
-buyer_phone:phone,
-buyer_city:city,
-raffle_id:raffleId,
-qty:qty,
-tickets:createdTickets,
-created:serverTimestamp()
-})
+packCards.forEach(card => {
+  card.addEventListener("click", () => {
+    if(card.classList.contains("disabled")) return;
+    setActivePack(Number(card.dataset.pack));
+  });
+});
 
-await updateDoc(raffleRef,{
-tickets_sold:increment(qty)
-})
+buyerQty.addEventListener("input", updateSummary);
+buyBtn.addEventListener("click", createTicketsAndOrder);
 
-alert("Bilhetes comprados: "+createdTickets.join(", "))
-
-}catch(error){
-
-console.error(error)
-alert("Erro ao guardar no Firebase")
-
-}
-
-}
-
-window.buyTickets = buyTickets
-
+loadRaffle();
 </script>
 
 </body>
