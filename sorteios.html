@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sorteios - CarSorte</title>
+
+<style>
+
+body{
+background:#050505;
+color:white;
+font-family:Arial;
+margin:0;
+padding:20px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#d4a017;
+}
+
+.menu a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+h1{
+text-align:center;
+margin-bottom:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.card{
+background:#0f0f0f;
+border-radius:20px;
+padding:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+.card img{
+width:100%;
+border-radius:15px;
+}
+
+.title{
+font-size:24px;
+margin-top:12px;
+color:#d4a017;
+}
+
+.desc{
+margin-top:8px;
+color:#ccc;
+font-size:14px;
+}
+
+.info{
+display:flex;
+justify-content:space-between;
+margin-top:15px;
+font-size:16px;
+}
+
+.progress{
+height:8px;
+background:#222;
+border-radius:5px;
+margin-top:10px;
+overflow:hidden;
+}
+
+.bar{
+height:8px;
+background:#d4a017;
+}
+
+.btn{
+display:block;
+margin-top:15px;
+text-align:center;
+padding:12px;
+background:#d4a017;
+border-radius:10px;
+color:black;
+font-weight:bold;
+text-decoration:none;
+}
+
+.status{
+margin-top:10px;
+font-size:12px;
+color:#66ff99;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="logo">CarSorte</div>
+
+<div class="menu">
+<a href="index.html">Início</a>
+<a href="sorteios.html">Sorteios</a>
+<a href="winners.html">Vencedores</a>
+</div>
+
+</div>
+
+<h1>Sorteios disponíveis</h1>
+
+<div class="grid" id="raffleGrid"></div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyD59H109FhXxt3D9pDMy1fSbwPAwrfuPxo",
+authDomain: "carsorte.firebaseapp.com",
+projectId: "carsorte",
+storageBucket: "carsorte.firebasestorage.app",
+messagingSenderId: "995392174657",
+appId: "1:995392174657:web:df06498ea382e92e6ae4c0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const grid = document.getElementById("raffleGrid");
+
+async function loadRaffles(){
+
+const snapshot = await getDocs(collection(db,"raffles"));
+
+snapshot.forEach(doc => {
+
+const r = doc.data();
+
+if(r.status !== "active") return;
+
+let percent = 0;
+
+if(r.tickets_total > 0){
+percent = (r.tickets_sold / r.tickets_total) * 100;
+}
+
+const card = document.createElement("div");
+card.className="card";
+
+card.innerHTML = `
+
+<img src="${r.image}">
+
+<div class="title">${r.title}</div>
+
+<div class="desc">
+Participe no sorteio e tenha a chance de ganhar este veículo incrível.
+</div>
+
+<div class="info">
+<div>${r.price}€ / bilhete</div>
+<div>${r.tickets_sold}/${r.tickets_total}</div>
+</div>
+
+<div class="progress">
+<div class="bar" style="width:${percent}%"></div>
+</div>
+
+<div class="status">
+${percent.toFixed(2)}% vendidos
+</div>
+
+<a class="btn" href="raffle.html">
+Participar
+</a>
+
+`;
+
+grid.appendChild(card);
+
+});
+
+}
+
+loadRaffles();
+
+</script>
+
+</body>
+</html>
